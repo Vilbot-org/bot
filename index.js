@@ -1,10 +1,14 @@
 // Require the necessary discord.js classes
-const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const { Client, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
 
-//Enviroment variables
+//Enviroment variables and configs
 const dotenv = require("dotenv");
-
 dotenv.config();
+
+const configs = require("./config.json");
+
+const fs = require("node:fs");
+const path = require("node:path");
 
 // Create a new client instance
 const intents = [
@@ -18,39 +22,56 @@ const client = new Client({
 	intents: intents,
 });
 
+//Read commands folder
+const commandsPath = path.join(__dirname, "commands");
+const commandsFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
+//Load commands to the bot
+client.commands = new Collection();
+
+commandsFiles.forEach(file => {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+
+	client.commands.set(command.data.name, command);
+});
+
 // When the client is ready, run this code (only once)
 client.once("ready", () => {
 	console.log(`Bot listo como: ${client.user.tag}`);
 });
 
-//To read commands
+//================================================
+//						Read chat commands
+//================================================
 client.on("messageCreate", async message => {
 	if (message.author.bot || !message.guild) return;
+	if (!message.content.startsWith(configs.prefix)) return;
 
-	const command = message.content;
-
-	if (command == "ping") {
-		const embed = new EmbedBuilder()
-			.setTitle("Pong")
-			.setDescription(`Ping es de ${client.ws.ping}ms`)
-			.setColor("02fef7");
-		message.channel.send({ embeds: [embed] });
+	//Select command dynamically
+	const command = message.content.split(".")[1].split(" ")[0];
+	const args = message.content.split(" ").slice(1);
+	try {
+		const commandFile = require(`./commands/info/${command}`);
+		return commandFile.run(message, args);
+	} catch (error) {
+		console.error(error);
 	}
 });
 
+//================================================
+//						Read slash commands
+//================================================
 client.on("interactionCreate", async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	const { commandName } = interaction;
+	const command = interaction.client.commands.get(interaction.commandName);
 
-	if (commandName === "ping") {
-		await interaction.reply("Pong!");
-	} else if (commandName === "server") {
-		await interaction.reply(
-			`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`
-		);
-	} else if (commandName === "user") {
-		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
 	}
 });
 
