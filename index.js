@@ -1,5 +1,6 @@
 // Require the necessary discord.js classes
-const { Client, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const { joinVoiceChannel } = require("@discordjs/voice");
 
 //Enviroment variables and configs
 const dotenv = require("dotenv");
@@ -16,6 +17,7 @@ const intents = [
 	GatewayIntentBits.GuildMembers,
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.MessageContent,
+	GatewayIntentBits.GuildVoiceStates,
 ];
 
 const client = new Client({
@@ -48,10 +50,11 @@ client.on("messageCreate", async message => {
 	if (!message.content.startsWith(configs.prefix)) return;
 
 	//Select command dynamically
-	const command = message.content.split(".")[1].split(" ")[0];
-	const args = message.content.split(" ").slice(1);
+	const commandType = message.content.split(".")[1].split(" ")[0];
+	const command = message.content.split(" ")[1];
+	const args = message.content.split(" ").slice(2);
 	try {
-		const commandFile = require(`./commands/info/${command}`);
+		const commandFile = require(`./commands/${commandType}/${command}`);
 		return commandFile.run(message, args);
 	} catch (error) {
 		console.error(error);
