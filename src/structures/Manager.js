@@ -5,11 +5,12 @@ module.exports = client => {
 		nodes: [
 			{
 				host: "localhost",
-				password: "P@ssword",
+				password: "P@ssw0rd",
 				port: 2333,
 				retryDelay: 5000,
 			},
 		],
+		autoPlay: true,
 		send: (id, payload) => {
 			const guild = client.guilds.cache.get(id);
 			if (guild) guild.shard.send(payload);
