@@ -1,15 +1,26 @@
 // Require the necessary discord.js classes
-const { Client, GatewayIntentBits, Collection } = require("discord.js");
-const { joinVoiceChannel } = require("@discordjs/voice");
+/* const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const { joinVoiceChannel } = require("@discordjs/voice"); */
 
 //Enviroment variables and configs
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
+
+const Client = require("./src/structures/Client");
+
+const client = new Client({
+	intents: ["Guilds", "GuildMessages", "GuildMessageReactions", "GuildVoiceStates"],
+});
+
+client.login(process.env.DISCORD_TOKEN);
+
+/* 
 
 const configs = require("./config.json");
 
 const fs = require("node:fs");
 const path = require("node:path");
+
+const erelaManager = require("./structures/manager");
 
 // Create a new client instance
 const intents = [
@@ -80,3 +91,4 @@ client.on("interactionCreate", async interaction => {
 
 // Login to Discord with your client's token
 client.login(process.env.DISCORD_TOKEN);
+ */
