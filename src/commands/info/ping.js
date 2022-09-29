@@ -2,7 +2,10 @@ const Command = require("../../structures/Command");
 
 module.exports = class PingCommand extends Command {
 	constructor(client) {
-		super(client, { name: "ping", description: "Replies with Pong!" });
+		super(client, {
+			name: "ping",
+			description: "Replies with Pong!",
+		});
 	}
 
 	run = interaction => {

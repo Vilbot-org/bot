@@ -1,4 +1,4 @@
-const axios = require("axios");
+/* const axios = require("axios");
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
@@ -31,4 +31,38 @@ module.exports = {
 				}
 			});
 	},
+};
+
+
+ */
+
+const SubCommand = require("../../structures/SubCommand");
+
+module.exports = class LolCommand extends SubCommand {
+	constructor(client) {
+		super(client, {
+			name: "lol",
+			description: "Look LoL info!",
+			options: [
+				{
+					name: "stats",
+					description: "See a stats of a specific summoner!",
+					type: 1,
+					required: true,
+					options: [
+						{
+							name: "summoner",
+							description: "The summoner name!",
+							type: 3,
+							required: true,
+						},
+					],
+				},
+			],
+		});
+	}
+
+	run = interaction => {
+		interaction.replay("lol");
+	};
 };
