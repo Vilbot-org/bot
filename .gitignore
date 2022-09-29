@@ -1,2 +1,4 @@
 node_modules/
 .env
+lavalink/logs/spring.log
+lavalink/Lavalink.jar

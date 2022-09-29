@@ -40,3 +40,644 @@
 2022-09-29 10:57:18.355  INFO 10188 --- [main] lavalink.server.Launcher                 : Started Launcher in 21.339 seconds (JVM running for 24.409)
 2022-09-29 13:39:02.584  INFO 10188 --- [SpringApplicationShutdownHook] io.undertow                              : stopping server: Undertow - 2.2.9.Final
 2022-09-29 13:39:02.661  INFO 10188 --- [SpringApplicationShutdownHook] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2022-09-29 14:48:35.064  INFO 13764 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        df046f418b361af17e244536a670cc969eb60fba-SNAPSHOT
+	Build:          Unofficial
+	Build time:     16.08.2021 16:06:26 UTC
+	Branch:         dev
+	Commit:         df046f4
+	Commit time:    16.08.2021 16:00:50 UTC
+	Kotlin:         1.5.21
+	JVM:            11.0.16
+	Lavaplayer:     1.3.92
+
+2022-09-29 14:48:35.625  INFO 13764 --- [main] lavalink.server.Launcher                 : Starting Launcher using Java 11.0.16 on IND100DK with PID 13764 (C:\Users\gabriel.chicaiza\Documents\GFrancV\projects\vilbot\lavalink\Lavalink.jar started by gabriel.chicaiza in C:\Users\gabriel.chicaiza\Documents\GFrancV\projects\vilbot\lavalink)
+2022-09-29 14:48:35.628  INFO 13764 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2022-09-29 14:48:42.096  WARN 13764 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2022-09-29 14:48:42.308  INFO 13764 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2022-09-29 14:48:42.321  INFO 13764 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6304 ms
+2022-09-29 14:48:43.750  INFO 13764 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2022-09-29 14:48:44.681  INFO 13764 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 11, Arch: amd64
+2022-09-29 14:48:44.683  WARN 13764 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
+2022-09-29 14:48:44.720  INFO 13764 --- [main] lavalink.server.config.KoeConfiguration  : Using the 'default' byte buf allocator
+2022-09-29 14:48:44.766  INFO 13764 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library timescale: loading with parts [Part{feature=X86.avx2, part=avx2}]
+2022-09-29 14:48:44.786  INFO 13764 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library detector: loading with parts []
+2022-09-29 14:48:44.817  INFO 13764 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library detector: successfully loaded.
+2022-09-29 14:48:44.868  INFO 13764 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library timescale: successfully loaded.
+2022-09-29 14:48:44.874  INFO 13764 --- [main] lavalink.server.io.SocketServer          : Timescale natives loaded successfully.
+2022-09-29 14:48:44.923  WARN 13764 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2022-09-29 14:48:47.116  INFO 13764 --- [main] io.undertow                              : starting server: Undertow - 2.2.9.Final
+2022-09-29 14:48:47.180  INFO 13764 --- [main] org.xnio                                 : XNIO version 3.8.4.Final
+2022-09-29 14:48:47.250  INFO 13764 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.4.Final
+2022-09-29 14:48:47.706  INFO 13764 --- [main] org.jboss.threads                        : JBoss Threads version 3.1.0.Final
+2022-09-29 14:48:47.898  INFO 13764 --- [main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 2333 (http)
+2022-09-29 14:48:48.118  INFO 13764 --- [main] lavalink.server.Launcher                 : Started Launcher in 15.117 seconds (JVM running for 17.383)
+2022-09-29 14:49:07.442  INFO 13764 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-29 14:49:07.447  INFO 13764 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-09-29 14:49:07.451  INFO 13764 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2022-09-29 14:49:07.524 ERROR 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Authentication failed from /127.0.0.1:54424
+2022-09-29 14:49:12.574 ERROR 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Authentication failed from /127.0.0.1:54427
+2022-09-29 14:49:17.591 ERROR 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Authentication failed from /127.0.0.1:54430
+2022-09-29 14:49:22.615 ERROR 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Authentication failed from /127.0.0.1:54434
+2022-09-29 14:49:27.631 ERROR 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Authentication failed from /127.0.0.1:54436
+2022-09-29 14:49:43.355  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54444
+2022-09-29 14:49:43.516  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:52:37.896  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54444 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:52:37.928  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:52:48.995  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54525
+2022-09-29 14:52:49.001  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:52:49.235  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54525 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:52:49.236  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:53:07.868  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54534
+2022-09-29 14:53:07.877  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:54:14.772  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54534 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:54:14.789  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:54:18.162  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54554
+2022-09-29 14:54:18.170  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:54:18.393  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54554 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:54:18.394  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:54:46.447  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54569
+2022-09-29 14:54:46.456  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:55:58.693  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54569 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:55:58.731  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:56:01.539  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54604
+2022-09-29 14:56:01.546  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:56:51.928  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54604 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:56:51.930  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:56:55.345  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54631
+2022-09-29 14:56:55.354  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:57:38.480  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54631 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:57:38.483  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:57:41.688  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54649
+2022-09-29 14:57:41.695  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 14:58:52.113  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54649 -- CloseStatus[code=1006, reason=]
+2022-09-29 14:58:52.115  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 14:58:55.324  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54677
+2022-09-29 14:58:55.333  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:00:21.005  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54677 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:00:21.018  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:00:23.803  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54718
+2022-09-29 15:00:23.812  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:00:47.530  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54718 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:00:47.531  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:00:50.197  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54730
+2022-09-29 15:00:50.206  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:01:33.099  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54730 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:01:33.100  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:01:36.804  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54748
+2022-09-29 15:01:36.816  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:02:44.528  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54748 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:02:44.529  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:02:47.896  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54771
+2022-09-29 15:02:47.907  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:04:20.301  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54771 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:04:20.303  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:04:23.278  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54812
+2022-09-29 15:04:23.298  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:06:47.959  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54812 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:06:47.961  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:06:50.687  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54872
+2022-09-29 15:06:50.696  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:06:58.947  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54872 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:06:58.950  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:07:01.621  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54877
+2022-09-29 15:07:01.634  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:07:37.599  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54877 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:07:37.600  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:09:30.700  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54899
+2022-09-29 15:09:30.706  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:09:42.491  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54899 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:09:42.493  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:11:29.954  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54935
+2022-09-29 15:11:29.961  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:11:32.121  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54935 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:11:32.121  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:11:40.143  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54940
+2022-09-29 15:11:40.151  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:11:58.145  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54940 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:11:58.146  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:12:00.862  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54951
+2022-09-29 15:12:00.868  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:12:39.918  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54951 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:12:39.919  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:12:42.320  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54970
+2022-09-29 15:12:42.329  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:12:48.788  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54970 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:12:48.789  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:12:55.109  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54977
+2022-09-29 15:12:55.115  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:13:01.593  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54977 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:13:01.597  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:14:26.279  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54998
+2022-09-29 15:14:26.284  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:14:39.700  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:14:41.317  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:14:42.225  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54998 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:14:42.226  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:16:11.268  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55018
+2022-09-29 15:16:11.276  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:16:33.933  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:16:34.560  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:16:35.350  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55018 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:16:35.353  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:17:41.743  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55028
+2022-09-29 15:17:41.754  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:17:48.267  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:06.18.18"
+2022-09-29 15:17:48.784  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:17:49.523  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55028 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:17:49.524  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:21:09.187  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55084
+2022-09-29 15:21:09.202  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:21:28.771  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55084 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:21:28.773  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:21:31.318  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55092
+2022-09-29 15:21:31.323  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:21:41.172  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:21:41.799  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:21:54.198  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy imagine dragons"
+2022-09-29 15:21:54.806  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:22:20.021  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=Mh-7uPG04Bo"
+2022-09-29 15:22:20.883  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Lavalink Music Bot Tutorial | Discord.js v12
+2022-09-29 15:22:57.737  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 15:22:57.870  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 15:24:00.764  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55092 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:24:00.766  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:24:03.625  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55138
+2022-09-29 15:24:03.633  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:24:11.319  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55138 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:24:11.320  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:24:13.379  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55144
+2022-09-29 15:24:13.384  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:24:20.395  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:xd"
+2022-09-29 15:24:20.934  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:24:52.490  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55144 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:24:52.490  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:24:55.026  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55158
+2022-09-29 15:24:55.031  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:25:07.504  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:25:08.182  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:25:40.748  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55158 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:25:40.749  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:25:42.741  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55173
+2022-09-29 15:25:42.747  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:25:48.481  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:25:49.100  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:28:42.067  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55173 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:28:42.069  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:28:53.701  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55206
+2022-09-29 15:28:53.713  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:29:11.585  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55206 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:29:11.586  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:29:13.905  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55218
+2022-09-29 15:29:13.911  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:29:27.866  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:29:27.873  INFO 13764 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:29:28.581  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:29:28.604  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55218 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:29:28.607  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:29:29.237  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:29:58.917  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55233
+2022-09-29 15:29:58.929  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:30:06.243  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:30:06.918  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:30:09.730  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55233 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:30:09.730  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:30:17.061  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55241
+2022-09-29 15:30:17.066  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:30:23.100  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:30:23.648  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:30:48.401  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55241 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:30:48.402  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:30:50.650  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55253
+2022-09-29 15:30:50.658  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:31:10.552  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 15:31:10.828  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 15:31:10.865  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55253 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:31:10.869  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:34:21.212  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55293
+2022-09-29 15:34:21.223  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:34:31.016  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:34:31.026  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:34:31.276  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"686134e6077c5f5f92c93b26612b6580","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:34:31.754  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:34:31.876  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55293 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:34:31.893  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:35:16.547  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55304
+2022-09-29 15:35:16.555  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:35:26.543  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:35:26.583  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:35:26.809  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"5f12d168a6c8d7c911cbdec8dfd191e8","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:35:27.207  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:35:27.270  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55304 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:35:27.271  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:35:43.746  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55316
+2022-09-29 15:35:43.759  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:35:53.435  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:35:53.448  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:35:53.704  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : {"sessionId":"d96b713916ed48696ede660f8f7fc081","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:35:54.098  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:35:54.203  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55316 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:35:54.214  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:36:47.725  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55333
+2022-09-29 15:36:47.733  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:37:26.887  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55333 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:37:26.888  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:37:29.339  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55349
+2022-09-29 15:37:29.346  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:37:33.615  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:37:33.634  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:37:33.882  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"015395cec94f4626df5688dc5f94292b","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:37:34.230  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:37:50.341  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55349 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:37:50.343  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:37:52.911  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55358
+2022-09-29 15:37:52.916  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:37:57.947  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:37:57.964  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:37:58.219  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"738a78cbb4ec1f7f042355a3ec3827d2","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:37:58.596  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:39:00.328  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55358 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:39:00.329  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:39:03.246  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55376
+2022-09-29 15:39:03.252  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:39:13.335  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55376 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:39:13.336  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:39:15.756  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55382
+2022-09-29 15:39:15.761  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:39:23.162  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:39:23.175  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:39:23.439  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"d4e4c99e40960b7a41fae56cd53d94a4","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:39:23.756  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:39:40.955  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 15:39:41.174  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 15:39:57.725  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55382 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:39:57.728  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:40:00.827  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55397
+2022-09-29 15:40:00.833  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:40:05.644  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:40:05.657  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 15:40:05.789  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 15:40:05.941  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : {"sessionId":"41a9501cdf40aca23c3f9631f9216300","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"37e1ab8a28f23a43","guild_id":"710627596769165333","endpoint":"milan3205.discord.media:443"}}
+2022-09-29 15:40:23.710  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55397 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:40:23.711  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:40:26.237  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55415
+2022-09-29 15:40:26.241  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:41:57.918  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55415 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:41:57.919  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:42:00.061  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55439
+2022-09-29 15:42:00.068  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:42:15.193  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:42:15.205  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 15:42:15.342  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 15:42:15.390  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55439 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:42:15.392  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:55:15.346  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55679
+2022-09-29 15:55:15.354  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:56:13.624  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:56:13.637  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:56:13.911  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"5ac75fd6ae785bee0019a7024a683326","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"7ba11d42176cdca8","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 15:56:14.297  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 15:56:14.394  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55679 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:56:14.416  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:58:05.822  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55710
+2022-09-29 15:58:05.841  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:58:58.214  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55710 -- CloseStatus[code=1006, reason=]
+2022-09-29 15:58:58.215  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 15:59:21.157  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55739
+2022-09-29 15:59:21.162  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 15:59:30.253  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 15:59:30.267  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 15:59:30.526  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"0679a7e558fa84b751ad4791a5ec659c","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 15:59:30.995  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:00:04.753  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:00:05.034  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:01:07.065  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55739 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:01:07.066  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:01:47.629  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55803
+2022-09-29 16:01:47.651  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:01:51.534  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:01:51.547  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:01:51.794  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"b21d06c5183514fc6ba2d610377e3fa0","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:01:52.241  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:02:12.483  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55803 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:02:12.484  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:02:14.773  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55816
+2022-09-29 16:02:14.777  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:02:22.792  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:02:22.807  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:02:22.950  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:02:23.047  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"650ba2ae6581d177f7f21348241c36fe","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:02:36.663  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55816 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:02:36.664  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:02:39.289  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55829
+2022-09-29 16:02:39.303  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:02:47.262  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:02:47.275  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:02:47.525  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"aa68c70964ef63b8a22a5d3586823ad3","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:02:48.136  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:02:59.742  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55829 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:02:59.743  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:03:01.815  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55839
+2022-09-29 16:03:01.819  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:03:10.556  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:03:10.570  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:03:10.817  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"17fc17d7016047056e8967cd617319ef","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:03:11.333  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:03:57.807  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55839 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:03:57.809  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:04:00.355  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55851
+2022-09-29 16:04:00.366  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:04:04.730  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:04:04.767  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:04:04.992  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"88e0f0c0b9013dbe33b8569b8a93565d","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:04:05.389  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:04:13.884  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55851 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:04:13.892  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:04:17.076  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55860
+2022-09-29 16:04:17.085  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:04:19.889  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:04:19.922  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:04:20.435  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"033b8691c1400887384a5f04f6ffe6be","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:04:20.627  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:04:39.421  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55860 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:04:39.423  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:04:42.020  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55872
+2022-09-29 16:04:42.027  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:04:45.708  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:04:45.719  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:04:45.977  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"sessionId":"96b493b0e7013c9eadaae442da82fe63","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:04:46.369  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:05:09.573  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55872 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:05:09.574  INFO 13764 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:05:12.119  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55883
+2022-09-29 16:05:12.126  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:05:17.327  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:05:17.339  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:05:17.597  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"66e80dd04a02c44571aa8a895a1454a5","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"4f18bca274a46ccf","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:05:18.016  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:05:18.136  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55883 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:05:18.137  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:09:32.583  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:55949
+2022-09-29 16:09:32.589  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:09:38.719  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:09:38.760  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:09:38.981  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"sessionId":"52724466ad7dcb2d497fedfe19cadedd","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"7497015e8a9c89b7","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:09:39.597  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:22:27.824  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:55949 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:22:27.825  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:22:30.279  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56043
+2022-09-29 16:22:30.297  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:22:59.753  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56043 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:22:59.754  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:23:02.100  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56053
+2022-09-29 16:23:02.106  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:23:10.003  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:23:10.047  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:23:10.272  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"sessionId":"e3c10f50b857f2ef9cd3ca4a396290c9","op":"voiceUpdate","guildId":"710627596769165333","event":{"token":"7497015e8a9c89b7","guild_id":"710627596769165333","endpoint":"milan2344.discord.media:443"}}
+2022-09-29 16:23:10.829  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:24:22.933  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56053 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:24:22.934  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:24:42.860  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56090
+2022-09-29 16:24:42.865  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:24:52.818  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:24:53.538  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:25:41.821  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56090 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:25:41.823  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:25:44.100  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56108
+2022-09-29 16:25:44.105  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:25:50.501  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56108 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:25:50.502  INFO 13764 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:25:52.930  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56114
+2022-09-29 16:25:52.950  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:25:55.571  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56114 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:25:55.572  INFO 13764 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:26:00.323  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56120
+2022-09-29 16:26:00.331  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:26:18.403  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56120 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:26:18.404  INFO 13764 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:26:21.887  INFO 13764 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56129
+2022-09-29 16:26:21.892  INFO 13764 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:26:30.791  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:26:31.462  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:26:58.582  INFO 13764 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:26:58.835  INFO 13764 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:28:22.908  INFO 13764 --- [SpringApplicationShutdownHook] io.undertow                              : stopping server: Undertow - 2.2.9.Final
+2022-09-29 16:28:22.932 ERROR 13764 --- [XNIO-1 I/O-2] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
+
+java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
+	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:620) ~[xnio-nio-3.8.4.Final.jar!/:3.8.4.Final]
+	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.2.9.Final.jar!/:2.2.9.Final]
+	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.2.9.Final.jar!/:2.2.9.Final]
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.8.4.Final.jar!/:3.8.4.Final]
+	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1075) ~[undertow-core-2.2.9.Final.jar!/:2.2.9.Final]
+	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:990) ~[undertow-core-2.2.9.Final.jar!/:2.2.9.Final]
+	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:204) ~[xnio-nio-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:193) ~[xnio-nio-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:198) ~[xnio-nio-3.8.4.Final.jar!/:3.8.4.Final]
+	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.2.9.Final.jar!/:2.2.9.Final]
+	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.IoUtils.safeClose(IoUtils.java:152) ~[xnio-api-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:108) ~[xnio-nio-3.8.4.Final.jar!/:3.8.4.Final]
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:507) ~[xnio-nio-3.8.4.Final.jar!/:3.8.4.Final]
+
+2022-09-29 16:28:22.930  INFO 13764 --- [SpringApplicationShutdownHook] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2022-09-29 16:28:22.962  INFO 13764 --- [SpringApplicationShutdownHook] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2022-09-29 16:30:04.921  INFO 9428 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        df046f418b361af17e244536a670cc969eb60fba-SNAPSHOT
+	Build:          Unofficial
+	Build time:     16.08.2021 16:06:26 UTC
+	Branch:         dev
+	Commit:         df046f4
+	Commit time:    16.08.2021 16:00:50 UTC
+	Kotlin:         1.5.21
+	JVM:            11.0.16
+	Lavaplayer:     1.3.92
+
+2022-09-29 16:30:05.309  INFO 9428 --- [main] lavalink.server.Launcher                 : Starting Launcher using Java 11.0.16 on IND100DK with PID 9428 (C:\Users\gabriel.chicaiza\Documents\GFrancV\projects\vilbot\lavalink\Lavalink.jar started by gabriel.chicaiza in C:\Users\gabriel.chicaiza\Documents\GFrancV\projects\vilbot\lavalink)
+2022-09-29 16:30:05.311  INFO 9428 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2022-09-29 16:30:10.698  WARN 9428 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2022-09-29 16:30:10.834  INFO 9428 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2022-09-29 16:30:10.835  INFO 9428 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5259 ms
+2022-09-29 16:30:11.712  INFO 9428 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2022-09-29 16:30:12.177  INFO 9428 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 11, Arch: amd64
+2022-09-29 16:30:12.179  WARN 9428 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
+2022-09-29 16:30:12.190  INFO 9428 --- [main] lavalink.server.config.KoeConfiguration  : Using the 'default' byte buf allocator
+2022-09-29 16:30:12.237  INFO 9428 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library timescale: loading with parts [Part{feature=X86.avx2, part=avx2}]
+2022-09-29 16:30:12.246  INFO 9428 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library detector: loading with parts []
+2022-09-29 16:30:12.281  INFO 9428 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library detector: successfully loaded.
+2022-09-29 16:30:12.305  INFO 9428 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library timescale: successfully loaded.
+2022-09-29 16:30:12.308  INFO 9428 --- [main] lavalink.server.io.SocketServer          : Timescale natives loaded successfully.
+2022-09-29 16:30:12.345  WARN 9428 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2022-09-29 16:30:14.047  INFO 9428 --- [main] io.undertow                              : starting server: Undertow - 2.2.9.Final
+2022-09-29 16:30:14.109  INFO 9428 --- [main] org.xnio                                 : XNIO version 3.8.4.Final
+2022-09-29 16:30:14.215  INFO 9428 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.4.Final
+2022-09-29 16:30:14.574  INFO 9428 --- [main] org.jboss.threads                        : JBoss Threads version 3.1.0.Final
+2022-09-29 16:30:14.787  INFO 9428 --- [main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 2333 (http)
+2022-09-29 16:30:14.844  INFO 9428 --- [main] lavalink.server.Launcher                 : Started Launcher in 11.92 seconds (JVM running for 13.494)
+2022-09-29 16:30:42.985  INFO 9428 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-29 16:30:42.995  INFO 9428 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-09-29 16:30:43.002  INFO 9428 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2022-09-29 16:30:43.073  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56243
+2022-09-29 16:30:43.229  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:30:51.239  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:30:53.031  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:31:16.487  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56243 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:31:16.510  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:31:18.463  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56259
+2022-09-29 16:31:18.471  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:31:28.751  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56259 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:31:28.759  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:32:28.219  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56280
+2022-09-29 16:32:28.237  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:32:46.149  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 16:32:46.169  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56280 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:32:46.170  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:33:12.466  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56292
+2022-09-29 16:33:12.474  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:33:21.281  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:33:21.915  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:33:36.682  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:33:37.438  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:35:54.320  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:35:54.472  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:36:20.312  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56292 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:36:20.313  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:36:22.660  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56323
+2022-09-29 16:36:22.667  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:36:37.904  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:36:38.033  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:36:51.266  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56323 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:36:51.267  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:36:53.670  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56332
+2022-09-29 16:36:53.681  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:37:03.968  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:37:04.097  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:37:04.131  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56332 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:37:04.132  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:37:50.913  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56344
+2022-09-29 16:37:50.918  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:38:02.740  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:38:02.882  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:38:02.947  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56344 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:38:02.948  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:46:24.006  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56646
+2022-09-29 16:46:24.017  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:47:16.547  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:47:17.365  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:47:17.504  INFO 9428 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56646 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:47:17.505  INFO 9428 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:52:52.759  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56734
+2022-09-29 16:52:52.769  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:53:24.431  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:53:25.201  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:53:25.242  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56734 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:53:25.261  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:56:43.365  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56779
+2022-09-29 16:56:43.378  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:56:51.219  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:enemy"
+2022-09-29 16:56:51.786  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : No matches found
+2022-09-29 16:56:51.808  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56779 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:56:51.810  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:57:17.825  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56796
+2022-09-29 16:57:17.831  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:57:22.054  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56796 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:57:22.055  INFO 9428 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:58:05.460  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56815
+2022-09-29 16:58:05.467  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 16:58:10.680  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 16:58:10.934  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 16:58:10.995  INFO 9428 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56815 -- CloseStatus[code=1006, reason=]
+2022-09-29 16:58:10.996  INFO 9428 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 16:58:23.274  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56823
+2022-09-29 16:58:23.283  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 17:01:32.834  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56823 -- CloseStatus[code=1006, reason=]
+2022-09-29 17:01:32.835  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 17:01:36.985  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56852
+2022-09-29 17:01:36.996  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 17:01:43.059  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 17:01:43.222  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 17:01:43.278  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56852 -- CloseStatus[code=1006, reason=]
+2022-09-29 17:01:43.280  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 17:04:41.756  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56886
+2022-09-29 17:04:41.767  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 17:05:11.978  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56886 -- CloseStatus[code=1006, reason=]
+2022-09-29 17:05:11.987  INFO 9428 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 17:05:23.880  INFO 9428 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56910
+2022-09-29 17:05:23.888  INFO 9428 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 17:05:34.801  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 17:05:34.815  INFO 9428 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 17:05:34.958  INFO 9428 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 17:05:34.985  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56910 -- CloseStatus[code=1006, reason=]
+2022-09-29 17:05:34.987  INFO 9428 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2022-09-29 17:06:11.842  INFO 9428 --- [SpringApplicationShutdownHook] io.undertow                              : stopping server: Undertow - 2.2.9.Final
+2022-09-29 17:06:11.856  INFO 9428 --- [SpringApplicationShutdownHook] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2022-09-29 17:06:11.863  INFO 9428 --- [SpringApplicationShutdownHook] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
+2022-09-29 17:07:52.224  INFO 11676 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        df046f418b361af17e244536a670cc969eb60fba-SNAPSHOT
+	Build:          Unofficial
+	Build time:     16.08.2021 16:06:26 UTC
+	Branch:         dev
+	Commit:         df046f4
+	Commit time:    16.08.2021 16:00:50 UTC
+	Kotlin:         1.5.21
+	JVM:            19
+	Lavaplayer:     1.3.92
+
+2022-09-29 17:07:52.586  INFO 11676 --- [main] lavalink.server.Launcher                 : Starting Launcher using Java 19 on IND100DK with PID 11676 (C:\Users\gabriel.chicaiza\Documents\GFrancV\projects\vilbot\lavalink\Lavalink.jar started by gabriel.chicaiza in C:\Users\gabriel.chicaiza\Documents\GFrancV\projects\vilbot\lavalink)
+2022-09-29 17:07:52.589  INFO 11676 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2022-09-29 17:07:58.703  WARN 11676 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2022-09-29 17:07:58.831  INFO 11676 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2022-09-29 17:07:58.832  INFO 11676 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5874 ms
+2022-09-29 17:07:59.917  INFO 11676 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2022-09-29 17:08:00.794  INFO 11676 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 11, Arch: amd64
+2022-09-29 17:08:00.805  WARN 11676 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
+2022-09-29 17:08:00.819  INFO 11676 --- [main] lavalink.server.config.KoeConfiguration  : Using the 'default' byte buf allocator
+2022-09-29 17:08:00.861  INFO 11676 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library timescale: loading with parts [Part{feature=X86.avx2, part=avx2}]
+2022-09-29 17:08:00.906  INFO 11676 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library detector: loading with parts []
+2022-09-29 17:08:00.921  INFO 11676 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library detector: successfully loaded.
+2022-09-29 17:08:00.974  INFO 11676 --- [main] c.g.n.nativeloader.NativeLibLoader       : Native library timescale: successfully loaded.
+2022-09-29 17:08:00.979  INFO 11676 --- [main] lavalink.server.io.SocketServer          : Timescale natives loaded successfully.
+2022-09-29 17:08:01.050  WARN 11676 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2022-09-29 17:08:03.351  INFO 11676 --- [main] io.undertow                              : starting server: Undertow - 2.2.9.Final
+2022-09-29 17:08:03.389  INFO 11676 --- [main] org.xnio                                 : XNIO version 3.8.4.Final
+2022-09-29 17:08:03.456  INFO 11676 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.4.Final
+2022-09-29 17:08:04.085  INFO 11676 --- [main] org.jboss.threads                        : JBoss Threads version 3.1.0.Final
+2022-09-29 17:08:04.310  INFO 11676 --- [main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 2333 (http)
+2022-09-29 17:08:04.347  INFO 11676 --- [main] lavalink.server.Launcher                 : Started Launcher in 14.73 seconds (JVM running for 16.681)
+2022-09-29 17:08:22.092  INFO 11676 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-09-29 17:08:22.095  INFO 11676 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-09-29 17:08:22.100  INFO 11676 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2022-09-29 17:08:22.194  INFO 11676 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:56965
+2022-09-29 17:08:22.523  INFO 11676 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from erela.js
+2022-09-29 17:08:34.600  INFO 11676 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op":"volume","guildId":"710627596769165333","volume":100}
+2022-09-29 17:08:34.731  INFO 11676 --- [XNIO-1 task-1] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=D9G1VOjN_84"
+2022-09-29 17:08:36.735  INFO 11676 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Imagine Dragons x J.I.D - Enemy (from the series Arcane League of Legends)
+2022-09-29 17:08:36.875  INFO 11676 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:56965 -- CloseStatus[code=1006, reason=]
+2022-09-29 17:08:36.876  INFO 11676 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
