@@ -6,10 +6,10 @@ module.exports = class extends Event {
 	}
 
 	run = interaction => {
-		if (interaction.isCommand()) {
-			const command = this.client.commands.find(cmd => cmd.name === interaction.commandName);
+		if (!interaction.isChatInputCommand()) return;
 
-			if (command) command.run(interaction);
-		}
+		const command = this.client.commands.find(cmd => cmd.name === interaction.commandName);
+
+		if (command) command.run(interaction);
 	};
 };

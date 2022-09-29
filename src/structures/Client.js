@@ -2,6 +2,8 @@ const { Client } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
 
+require("dotenv").config();
+
 module.exports = class extends Client {
 	constructor(options) {
 		super(options);
@@ -11,7 +13,7 @@ module.exports = class extends Client {
 		this.loadEvents();
 	}
 
-	/* 	loadCommands(path = "./src/commands") {
+	loadCommands(path = "./src/commands") {
 		const categories = readdirSync(path);
 		//Read the categories of the commands (folders inside commands)
 		for (const category of categories) {
@@ -26,7 +28,7 @@ module.exports = class extends Client {
 				console.log(`Command ${command} of the category ${category} are load! (${cmd.name})`);
 			}
 		}
-	} */
+	}
 
 	loadEvents(path = "src/events") {
 		const categories = readdirSync(path);
@@ -46,17 +48,8 @@ module.exports = class extends Client {
 	}
 
 	registerCommands() {
-		this.guilds.cache.get("710627596769165333").commands.set(this.commands);
+		this.guilds.cache.get(process.env.GUILD_ID).commands.set(this.commands);
 		//In production mode
 		//this.application.commands.set(this.commands)
-	}
-
-	loadCommands(path = "./src/commands") {
-		//Create new commands
-		const PingCommand = require("../commands/info/ping");
-		const cmd = new PingCommand(this);
-
-		this.commands.push(cmd);
-		console.log(`Command ${cmd.name} are load! `);
 	}
 };
