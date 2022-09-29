@@ -38,3 +38,5 @@
 2022-09-29 10:57:17.987  INFO 10188 --- [main] org.jboss.threads                        : JBoss Threads version 3.1.0.Final
 2022-09-29 10:57:18.281  INFO 10188 --- [main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 2333 (http)
 2022-09-29 10:57:18.355  INFO 10188 --- [main] lavalink.server.Launcher                 : Started Launcher in 21.339 seconds (JVM running for 24.409)
+2022-09-29 13:39:02.584  INFO 10188 --- [SpringApplicationShutdownHook] io.undertow                              : stopping server: Undertow - 2.2.9.Final
+2022-09-29 13:39:02.661  INFO 10188 --- [SpringApplicationShutdownHook] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
