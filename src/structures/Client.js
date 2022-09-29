@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 const { Client } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
 
-require("dotenv").config();
+const erelaManager = require("./Manager");
 
 module.exports = class extends Client {
 	constructor(options) {
@@ -11,6 +13,9 @@ module.exports = class extends Client {
 		this.commands = [];
 		this.loadCommands();
 		this.loadEvents();
+
+		//Music
+		this.manager = erelaManager(this);
 	}
 
 	loadCommands(path = "./src/commands") {
