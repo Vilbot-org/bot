@@ -25,6 +25,11 @@ module.exports = class extends Command {
 					description: "See the queue of the bot!",
 					type: 1,
 				},
+				{
+					name: "skip",
+					description: "Skip the current song!",
+					type: 1,
+				},
 			],
 		});
 	}
