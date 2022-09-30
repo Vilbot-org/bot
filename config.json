@@ -1,3 +1,6 @@
 {
-	"prefix": "v."
+	"colors": {
+		"success": "01feff",
+		"danger": "ff0201"
+	}
 }
