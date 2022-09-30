@@ -13,13 +13,17 @@ module.exports = class extends Command {
 					type: 1,
 					options: [
 						{
-							name: "track",
-							name: "track",
-							description: "The name of the track that you want to play!",
+							name: "song",
+							description: "Enter the name of the song  or the URL.",
 							type: 3,
 							required: true,
 						},
 					],
+				},
+				{
+					name: "queue",
+					description: "See the queue of the bot!",
+					type: 1,
 				},
 			],
 		});
