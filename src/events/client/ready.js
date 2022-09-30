@@ -8,6 +8,5 @@ module.exports = class extends Event {
 	run = () => {
 		console.log(`${this.client.user.tag} are ready`);
 		this.client.registerCommands();
-		this.client.manager.init(this.client.user.id);
 	};
 };
