@@ -4,14 +4,6 @@ const { EmbedBuilder } = require("discord.js");
 const configs = require("../../../../config.json");
 
 module.exports = async (client, interaction) => {
-	if (!interaction.member.voice.channel)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder().setColor(configs.colors.danger).setTitle("You need to be in a voice channel!"),
-			],
-			ephemeral: true,
-		});
-
 	const embedMsg = new EmbedBuilder();
 
 	const queue = await client.player.createQueue(interaction.guild);
