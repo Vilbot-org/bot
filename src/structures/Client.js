@@ -4,7 +4,6 @@ const { Client } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
 
-const erelaManager = require("./Manager");
 const player = require("./Player");
 
 module.exports = class extends Client {
@@ -16,7 +15,6 @@ module.exports = class extends Client {
 		this.loadEvents();
 
 		//Music
-		this.manager = erelaManager(this);
 		this.player = player(this);
 	}
 
