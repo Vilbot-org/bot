@@ -1,6 +1,7 @@
 {
 	"colors": {
 		"success": "01feff",
-		"danger": "ff0201"
+		"danger": "ff0201",
+		"info": "8101ff"
 	}
 }
