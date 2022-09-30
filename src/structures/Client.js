@@ -22,7 +22,7 @@ module.exports = class extends Client {
 		const categories = readdirSync(path);
 		//Read the categories of the commands (folders inside commands)
 		for (const category of categories) {
-			const commands = readdirSync(`${path}/${category}`);
+			const commands = readdirSync(`${path}/${category}`).filter(file => file.endsWith(".js"));
 			//Read all the comands in the category (js files)
 			for (const command of commands) {
 				//Create new commands
