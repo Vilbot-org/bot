@@ -18,10 +18,14 @@ module.exports = async (client, interaction) => {
 	});
 	//If the bot does not find songs by name, it proceeds to search by url
 	if (result.tracks.length === 0) {
-		result = await client.player.search(query, {
-			requestedBy: interaction.user,
-			searchEngine: QueryType.YOUTUBE_VIDEO,
-		});
+		result = await client.player
+			.search(query, {
+				requestedBy: interaction.user,
+				searchEngine: QueryType.YOUTUBE_VIDEO,
+			})
+			.catch(err => {
+				console.log(err);
+			});
 		if (result.tracks.length === 0) {
 			embedMsg
 				.setColor(configs.colors.danger)
