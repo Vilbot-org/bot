@@ -33,6 +33,11 @@ module.exports = class extends Command {
 					description: "Skip the current song!",
 					type: 1,
 				},
+				{
+					name: "fskip",
+					description: "Force the skip (no votation).",
+					type: 1,
+				},
 			],
 		});
 	}
