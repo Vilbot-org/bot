@@ -5,12 +5,12 @@ const configs = require("../../../../config.json");
 module.exports = async (client, interaction) => {
 	const embedMsg = new EmbedBuilder().setTitle("Music queue!");
 
-	const queue = client.player.getQueue(interaction.guildId);
+	const queue = await client.player.getQueue(interaction.guildId);
 
 	if (!queue || !queue.playing) {
 		embedMsg.setColor(configs.colors.danger).setDescription(":x: No songs in the queue!");
 
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [embedMsg],
 		});
 	}
@@ -37,7 +37,7 @@ module.exports = async (client, interaction) => {
 
 	embedMsg.addFields(embedFields).setFooter({ text: `There are ${queue.tracks.length} songs in the queue` });
 
-	interaction.reply({
+	return await interaction.reply({
 		embeds: [embedMsg],
 	});
 };

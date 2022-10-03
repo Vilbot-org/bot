@@ -24,6 +24,19 @@ module.exports = class extends Command {
 					],
 				},
 				{
+					name: "playlist",
+					description: "Play a playlist in the voice channel!",
+					type: 1,
+					options: [
+						{
+							name: "playlist",
+							description: "Enter the URL of the playlist.",
+							type: 3,
+							required: true,
+						},
+					],
+				},
+				{
 					name: "queue",
 					description: "See the queue of the bot!",
 					type: 1,
@@ -59,7 +72,7 @@ module.exports = class extends Command {
 
 	run = async interaction => {
 		if (!interaction.member.voice.channel)
-			return interaction.reply({
+			return await interaction.reply({
 				embeds: [
 					new EmbedBuilder().setColor(configs.colors.danger).setTitle("You need to be in a voice channel!"),
 				],
@@ -68,6 +81,6 @@ module.exports = class extends Command {
 
 		const subCommand = interaction.options.getSubcommand();
 
-		require(`./subcommands/${subCommand}`)(this.client, interaction);
+		await require(`./subcommands/${subCommand}`)(this.client, interaction);
 	};
 };
