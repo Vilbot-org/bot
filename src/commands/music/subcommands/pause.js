@@ -10,7 +10,7 @@ module.exports = async (client, interaction) => {
 			ephemeral: true,
 		});
 
-	queue.setPaused(true);
+	await queue.setPaused(true);
 	return await interaction.reply({
 		embeds: [new EmbedBuilder().setColor(colors.success).setTitle(":pause_button: The music has paused!")],
 	});
