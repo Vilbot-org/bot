@@ -43,6 +43,11 @@ module.exports = class extends Command {
 					description: "Pause the music!",
 					type: 1,
 				},
+				{
+					name: "resume",
+					description: "Resume the music!",
+					type: 1,
+				},
 			],
 		});
 	}
