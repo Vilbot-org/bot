@@ -13,6 +13,7 @@ module.exports = async (client, interaction) => {
 
 		return await interaction.reply({
 			embeds: [embedMsg],
+			ephemeral: true,
 		});
 	}
 
