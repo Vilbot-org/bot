@@ -41,7 +41,4 @@ module.exports = async (client, interaction) => {
 			ephemeral: true,
 		});
 	}
-
-	//console.log(interaction.member.roles.cache.at(0).permissions.bitfield);
-	//console.log(interaction.member.permissions.toArray());
 };
