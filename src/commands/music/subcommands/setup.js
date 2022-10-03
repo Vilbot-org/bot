@@ -49,7 +49,8 @@ module.exports = async (client, interaction) => {
 				.setColor(colors.green)
 				.setTitle(":white_check_mark: New channel create with successful!")
 				.setDescription(
-					`View the [official site](${siteURL}) of the bot or execute` + "`/help` command to show more info."
+					`View the [official site](${siteURL}) of the bot or execute` +
+						"`/help` or `/music help` command to show more info."
 				),
 		],
 	});
