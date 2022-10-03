@@ -66,6 +66,11 @@ module.exports = class extends Command {
 					description: "Disconnect the bot of music!",
 					type: 1,
 				},
+				{
+					name: "setup",
+					description: "Run this command to setup the bot!",
+					type: 1,
+				},
 			],
 		});
 	}

@@ -1,8 +1,10 @@
 {
+	"botName": "Vilbot",
 	"colors": {
 		"success": "01feff",
 		"danger": "ff0201",
 		"info": "8101ff",
 		"green": "7FFF01"
-	}
+	},
+	"siteURL": "https://gfrancv.github.io/vilbot"
 }
