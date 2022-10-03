@@ -38,6 +38,11 @@ module.exports = class extends Command {
 					description: "Force the skip (no votation).",
 					type: 1,
 				},
+				{
+					name: "pause",
+					description: "Pause the music!",
+					type: 1,
+				},
 			],
 		});
 	}
