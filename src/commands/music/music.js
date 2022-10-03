@@ -76,6 +76,25 @@ module.exports = class extends Command {
 					description: "Info about the current song!",
 					type: 1,
 				},
+				{
+					name: "previous",
+					description: "Play the previous song!",
+					type: 1,
+				},
+				{
+					name: "clear",
+					description: "Remove music messages from the bot on this channel!",
+					type: 1,
+					options: [
+						{
+							name: "amount",
+							description:
+								"Number of music bot messages you want to delete (by defaul the command clear 10 messages).",
+							type: 4,
+							required: false,
+						},
+					],
+				},
 			],
 		});
 	}
