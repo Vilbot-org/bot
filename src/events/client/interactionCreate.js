@@ -1,7 +1,5 @@
 const Event = require("../../structures/Event");
 
-const { botName } = require("../../../config.json");
-
 module.exports = class extends Event {
 	constructor(client) {
 		super(client, { name: "interactionCreate" });
@@ -11,7 +9,7 @@ module.exports = class extends Event {
 		//If the interaction is a button
 		if (interaction.isButton()) {
 			//If the author of this interaction is our bot
-			if (interaction.client.user.username == botName) {
+			if (interaction.client.user.id == this.client.user.id) {
 				const commandType = interaction.customId.substring(
 					interaction.customId.length - 6,
 					interaction.customId.length
