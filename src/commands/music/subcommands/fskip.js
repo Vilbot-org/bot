@@ -2,15 +2,15 @@ const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
 const { colors } = require("../../../../config.json");
 
-module.exports = (client, interaction) => {
+module.exports = async (client, interaction) => {
 	const embedMsg = new EmbedBuilder().setTitle("Music queue!");
 
-	const queue = client.player.getQueue(interaction.guildId);
+	const queue = await client.player.getQueue(interaction.guildId);
 
 	if (!queue || !queue.playing) {
 		embedMsg.setColor(colors.danger).setDescription(":x: No songs in the queue!");
 
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [embedMsg],
 			ephemeral: true,
 		});
@@ -29,12 +29,12 @@ module.exports = (client, interaction) => {
 
 		queue.skip();
 
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [skipingMessage],
 			ephemeral: true,
 		});
 	} else {
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
 			],

@@ -58,7 +58,7 @@ module.exports = async (client, interaction) => {
 		.setFooter({ text: `Next song in the queue: ${queue.tracks[0].title}` });
 
 	if (!queue.playing) await queue.play();
-	await interaction.reply({
+	return await interaction.reply({
 		embeds: [embedMsg],
 	});
 };

@@ -1,11 +1,11 @@
 const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 const { colors } = require("../../../../config.json");
 
-module.exports = (client, interaction) => {
-	const queue = client.player.getQueue(interaction.guildId);
+module.exports = async (client, interaction) => {
+	const queue = await client.player.getQueue(interaction.guildId);
 
 	if (!queue)
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not playing!")],
 			ephemeral: true,
 		});
@@ -13,7 +13,7 @@ module.exports = (client, interaction) => {
 	//Check if the user can moderate
 	if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
 		queue.destroy();
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(colors.success)
@@ -22,7 +22,7 @@ module.exports = (client, interaction) => {
 			],
 		});
 	} else
-		return interaction.reply({
+		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
 			],
