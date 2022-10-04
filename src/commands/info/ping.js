@@ -1,18 +1,24 @@
+const { EmbedBuilder } = require("discord.js");
 const Command = require("../../structures/Command");
+
+const { colors } = require("../../../config.json");
 
 module.exports = class PingCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: "ping",
-			description: "Replies with Pong!",
+			description: "Replies with the ping of the bot!",
 		});
 	}
 
-	run = interaction => {
-		interaction.reply(`The ping of the bot are ${this.client.ws.ping}ms`);
-		/* interaction.reply({
-			content: `The ping of the bot are: ${this.client.ws.ping}ms`,
-			ephemeral: true,
-		}); */
+	run = async interaction => {
+		await interaction.reply({
+			embeds: [
+				new EmbedBuilder()
+					.setColor(colors.green)
+					.setAuthor({ name: "Pong!" })
+					.setTitle(`:ping_pong: The ping of the bot are ${this.client.ws.ping}ms`),
+			],
+		});
 	};
 };

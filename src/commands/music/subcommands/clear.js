@@ -3,9 +3,8 @@ const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 const { colors } = require("../../../../config.json");
 
 module.exports = async (client, interaction) => {
-	const nMsgs = interaction.options.getInteger("amount") ? interaction.options.getInteger("amount") : 10;
-	//Check if the user can moderate
-	if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers))
+	//Check if the user can manage messages
+	if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages))
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
@@ -13,8 +12,10 @@ module.exports = async (client, interaction) => {
 			ephemeral: true,
 		});
 
+	const nMsgs = interaction.options.getInteger("amount") ? interaction.options.getInteger("amount") : 10;
 	let allMsgs = [];
 	let msgsToDelete = [];
+
 	await interaction.channel.messages
 		.fetch({ limit: nMsgs, cache: false })
 		.then(messages => (allMsgs = messages))
@@ -26,7 +27,8 @@ module.exports = async (client, interaction) => {
 
 	if (msgsToDelete.length == 0) {
 		return await interaction.reply({
-			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(`:x: there are no messages to delete!`)],
+			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(`:x: There are no messages to delete!`)],
+			ephemeral: true,
 		});
 	}
 
@@ -35,7 +37,8 @@ module.exports = async (client, interaction) => {
 		embeds: [
 			new EmbedBuilder()
 				.setColor(colors.success)
-				.setTitle(`:white_check_mark: ${nMsgs} have been successfully deleted!`),
+				.setTitle(`:white_check_mark: ${msgsToDelete.length} messages have been successfully deleted!`),
 		],
+		ephemeral: true,
 	});
 };

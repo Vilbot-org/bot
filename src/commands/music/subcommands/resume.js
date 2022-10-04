@@ -16,7 +16,7 @@ module.exports = async (client, interaction) => {
 			ephemeral: true,
 		});
 
-	queue.setPaused(false);
+	await queue.setPaused(false);
 	return await interaction.reply({
 		embeds: [new EmbedBuilder().setColor(colors.success).setTitle(":arrow_forward: Resume the music!")],
 	});

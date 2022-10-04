@@ -12,7 +12,7 @@ module.exports = async (client, interaction) => {
 
 	//Check if the user can moderate
 	if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
-		queue.destroy();
+		await queue.destroy();
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()

@@ -7,31 +7,29 @@ module.exports = async (client, interaction) => {
 
 	const queue = await client.player.getQueue(interaction.guildId);
 
-	if (!queue || !queue.playing) {
-		embedMsg.setColor(colors.danger).setDescription(":x: No songs in the queue!");
-
+	if (!queue || !queue.playing)
 		return await interaction.reply({
-			embeds: [embedMsg],
+			embeds: [embedMsg.setColor(colors.danger).setDescription(":x: No songs in the queue!")],
 			ephemeral: true,
 		});
-	}
 
 	//Check if the user can moderate
 	if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
 		const skipingMessage = new EmbedBuilder()
 			.setColor(colors.success)
-			.setTitle(":track_next: Forcing the skip of the song")
+			.setAuthor({ name: "Forcing the skip of the song" })
+			.setTitle(`:track_next: ${queue.tracks[0].title}`)
+			.setURL(`${queue.tracks[0].url}`)
 			.setDescription(
-				queue.tracks.length > 0
-					? `The next song is ${queue.tracks[0].title}`
+				queue.tracks[1]
+					? `The next song is:  [${queue.tracks[1].title}](${queue.tracks[1].url})`
 					: "There are no more songs in the queue!"
 			);
 
-		queue.skip();
+		await queue.skip();
 
 		return await interaction.reply({
 			embeds: [skipingMessage],
-			ephemeral: true,
 		});
 	} else {
 		return await interaction.reply({
