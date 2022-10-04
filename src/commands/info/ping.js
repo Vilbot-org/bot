@@ -17,7 +17,7 @@ module.exports = class PingCommand extends Command {
 				new EmbedBuilder()
 					.setColor(colors.green)
 					.setAuthor({ name: "Pong!" })
-					.setTitle(`:ping_pong: The ping of the bot are ${this.client.ws.ping}ms`),
+					.setTitle(":ping_pong: The ping of the bot are" + "`" + `${this.client.ws.ping}` + "ms`"),
 			],
 		});
 	};
