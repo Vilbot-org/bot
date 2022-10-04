@@ -24,7 +24,7 @@ module.exports = async (client, interaction) => {
 	let queuePosition = 0;
 	for (const track of queue.tracks) {
 		let queueSong = {
-			name: `${++queuePosition}. [${track.title}](${track.url})`,
+			name: `${++queuePosition}. ${track.title}`,
 			value: "\u200B",
 			inline: true,
 		};

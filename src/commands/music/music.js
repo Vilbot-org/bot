@@ -95,6 +95,11 @@ module.exports = class extends Command {
 						},
 					],
 				},
+				{
+					name: "help",
+					description: "See the main commands and aditional info!",
+					type: 1,
+				},
 			],
 		});
 	}
@@ -102,7 +107,12 @@ module.exports = class extends Command {
 	run = async interaction => {
 		const subCommand = interaction.options.getSubcommand();
 
-		if (!interaction.member.voice.channel && subCommand != "setup" && subCommand != "clear")
+		if (
+			!interaction.member.voice.channel &&
+			subCommand != "setup" &&
+			subCommand != "clear" &&
+			subCommand != "help"
+		)
 			return await interaction.reply({
 				embeds: [
 					new EmbedBuilder().setColor(configs.colors.danger).setTitle("You need to be in a voice channel!"),
