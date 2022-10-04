@@ -100,15 +100,15 @@ module.exports = class extends Command {
 	}
 
 	run = async interaction => {
-		if (!interaction.member.voice.channel)
+		const subCommand = interaction.options.getSubcommand();
+
+		if (!interaction.member.voice.channel && subCommand != "setup" && subCommand != "clear")
 			return await interaction.reply({
 				embeds: [
 					new EmbedBuilder().setColor(configs.colors.danger).setTitle("You need to be in a voice channel!"),
 				],
 				ephemeral: true,
 			});
-
-		const subCommand = interaction.options.getSubcommand();
 
 		await require(`./subcommands/${subCommand}`)(this.client, interaction);
 	};

@@ -1,7 +1,7 @@
 const { QueryType } = require("discord-player");
 const { EmbedBuilder } = require("discord.js");
 
-const configs = require("../../../../config.json");
+const { colors } = require("../../../../config.json");
 
 module.exports = async (client, interaction) => {
 	const embedMsg = new EmbedBuilder();
@@ -11,31 +11,27 @@ module.exports = async (client, interaction) => {
 	if (!queue.connection) await queue.connect(interaction.member.voice.channel);
 
 	let query = interaction.options.getString("song");
-	//Serch with the search term first
+	//Serch with  by url first
 	let result = await client.player.search(query, {
 		requestedBy: interaction.user,
-		searchEngine: QueryType.AUTO,
+		searchEngine: QueryType.YOUTUBE_VIDEO,
 	});
-	//If the bot does not find songs by name, it proceeds to search by url
+	//If the bot does not find songs by url, it proceeds to search by search term
 	if (result.tracks.length === 0) {
-		result = await client.player
-			.search(query, {
-				requestedBy: interaction.user,
-				searchEngine: QueryType.YOUTUBE_VIDEO,
-			})
-			.catch(err => {
-				console.log(err);
-			});
-		if (result.tracks.length === 0) {
-			embedMsg
-				.setColor(configs.colors.danger)
-				.setTitle("No songs found!")
-				.setDescription("Try another song or adding additional information!");
-
+		result = await client.player.search(query, {
+			requestedBy: interaction.user,
+			searchEngine: QueryType.AUTO,
+		});
+		if (result.tracks.length === 0)
 			return await interaction.reply({
-				embeds: [embedMsg],
+				embeds: [
+					embedMsg
+						.setColor(colors.danger)
+						.setTitle("No songs found!")
+						.setDescription("Try another song or adding additional information!"),
+				],
+				ephemeral: true,
 			});
-		}
 	}
 
 	const song = result.tracks[0];
@@ -46,7 +42,7 @@ module.exports = async (client, interaction) => {
 	});
 
 	embedMsg
-		.setColor(configs.colors.success)
+		.setColor(colors.success)
 		.setAuthor({ name: "Add to the queue" })
 		.setTitle(`${result.tracks[0].title}`)
 		.setURL(`${result.tracks[0].url}`)

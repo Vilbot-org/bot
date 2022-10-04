@@ -10,7 +10,7 @@ module.exports = async (client, interaction) => {
 			ephemeral: true,
 		});
 
-	const progressBar = queue.createProgressBar({
+	const progressBar = await queue.createProgressBar({
 		queue: false,
 		length: 20,
 	});

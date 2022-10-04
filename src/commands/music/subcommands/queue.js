@@ -1,33 +1,30 @@
 const { EmbedBuilder } = require("discord.js");
 
-const configs = require("../../../../config.json");
+const { colors } = require("../../../../config.json");
 
 module.exports = async (client, interaction) => {
-	const embedMsg = new EmbedBuilder().setTitle("Music queue!");
+	const embedMsg = new EmbedBuilder().setAuthor({ name: "Music queue!" }).setTitle("Current song:");
 
 	const queue = await client.player.getQueue(interaction.guildId);
 
-	if (!queue || !queue.playing) {
-		embedMsg.setColor(configs.colors.danger).setDescription(":x: No songs in the queue!");
-
+	if (!queue || !queue.playing)
 		return await interaction.reply({
-			embeds: [embedMsg],
+			embeds: [embedMsg.setColor(colors.danger).setDescription(":x: No songs in the queue!")],
+			ephemeral: true,
 		});
-	}
 
 	const currentSong = queue.current;
 
-	embedMsg.setColor(configs.colors.success).setThumbnail(currentSong.thumbnail);
+	embedMsg
+		.setColor(colors.success)
+		.setThumbnail(currentSong.thumbnail)
+		.setDescription(`[${currentSong.title}](${currentSong.url})`);
 
-	let embedFields = [
-		{ name: "Current song: ", value: `${currentSong.title}` },
-		{ name: "Queue", value: "\u200B" },
-	];
-
-	let auxIndex = 0;
+	let embedFields = [];
+	let queuePosition = 0;
 	for (const track of queue.tracks) {
 		let queueSong = {
-			name: `${++auxIndex}. ${track.title}`,
+			name: `${++queuePosition}. [${track.title}](${track.url})`,
 			value: "\u200B",
 			inline: true,
 		};

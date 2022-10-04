@@ -13,7 +13,7 @@ module.exports = async (client, interaction) => {
 		searchEngine: QueryType.YOUTUBE_PLAYLIST,
 	});
 
-	if (results.tracks.length === 0)
+	if (results.tracks.length == 0)
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
@@ -21,7 +21,7 @@ module.exports = async (client, interaction) => {
 					.setTitle(":x: No songs found!")
 					.setDescription("Verify if the provides URL are correctly or try with other playlist."),
 			],
-			ephimeral: true,
+			ephemeral: true,
 		});
 
 	const playlist = results.playlist;
