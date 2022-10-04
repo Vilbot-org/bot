@@ -1,3 +1,4 @@
+const { ActivityType } = require("discord.js");
 const Event = require("../../structures/Event");
 
 module.exports = class extends Event {
@@ -8,5 +9,6 @@ module.exports = class extends Event {
 	run = () => {
 		console.log(`${this.client.user.tag} are ready`);
 		this.client.registerCommands();
+		this.client.user.setActivity("/help", { type: ActivityType.Listening });
 	};
 };
