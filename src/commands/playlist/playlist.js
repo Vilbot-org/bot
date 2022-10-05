@@ -40,11 +40,10 @@ module.exports = class extends Command {
 					description: "List your saved playlists.",
 					type: 1,
 				},
-				/*
 				{
 					name: "show",
 					description: "Display the songs in a playlist.",
-					tpye: 1,
+					type: 1,
 					options: [
 						{
 							name: "name",
@@ -73,6 +72,7 @@ module.exports = class extends Command {
 						},
 					],
 				},
+				/*
 				{
 					name: "remove",
 					description: "Remove a song in your playlist.",
