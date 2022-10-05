@@ -39,7 +39,9 @@ module.exports = async (client, interaction, snipe) => {
 				.setAuthor({ name: "Create a new playlist" })
 				.setTitle(`A playlist '${playlistName}' has been created sucessfully!`)
 				.setDescription(
-					"Now you can add new song in your playlist with the command: `/playlist add [song] <playlist-name>`"
+					"Now you can add new song in your playlist with the command: `/playlist add [song] " +
+						playlistName +
+						"`"
 				)
 				.setFooter({ text: "Type `/playlist help` to display more info" })
 		)
