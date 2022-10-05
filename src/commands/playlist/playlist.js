@@ -1,5 +1,7 @@
 const Command = require("../../structures/Command");
 
+const snipe = require("../../schemas/UsersPlaylistsSchema");
+
 module.exports = class extends Command {
 	constructor(client) {
 		super(client, {
@@ -20,7 +22,7 @@ module.exports = class extends Command {
 						},
 					],
 				},
-				/* 	{
+				{
 					name: "delete",
 					description: "Delete a specific playlist.",
 					type: 1,
@@ -33,6 +35,7 @@ module.exports = class extends Command {
 						},
 					],
 				},
+				/*
 				{
 					name: "list",
 					description: "List your saved playlists.",
@@ -96,6 +99,6 @@ module.exports = class extends Command {
 	run = async interaction => {
 		const subCommand = interaction.options.getSubcommand();
 
-		await require(`./subcommands/${subCommand}`)(this.client, interaction);
+		await require(`./subcommands/${subCommand}`)(this.client, interaction, snipe);
 	};
 };
