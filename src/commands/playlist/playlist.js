@@ -35,12 +35,12 @@ module.exports = class extends Command {
 						},
 					],
 				},
-				/*
 				{
 					name: "list",
 					description: "List your saved playlists.",
-					tpye: 1,
+					type: 1,
 				},
+				/*
 				{
 					name: "show",
 					description: "Display the songs in a playlist.",
