@@ -2,13 +2,12 @@ const { EmbedBuilder } = require("discord.js");
 
 const { colors } = require("../../../../config.json");
 
-module.exports = async (client, interaction) => {
+module.exports = async (client, interaction, snipe) => {
 	const playlistName = interaction.options.getString("name")
 		? interaction.options.getString("name")
 		: `${interaction.user.username}-playlist`;
 
 	//Check if this playlist already exist
-	const snipe = require("../../../schemas/UsersPlaylistsSchema");
 	const data = await snipe.findOne({ userId: interaction.user.id, playlistName: playlistName });
 	if (data)
 		return await interaction.reply({
@@ -38,11 +37,11 @@ module.exports = async (client, interaction) => {
 			embedMsg
 				.setColor(colors.green)
 				.setAuthor({ name: "Create a new playlist" })
-				.setTitle(`A playlist '${playlistName}' has been created sucessfully! `)
+				.setTitle(`A playlist '${playlistName}' has been created sucessfully!`)
 				.setDescription(
 					"Now you can add new song in your playlist with the command: `/playlist add [song] <playlist-name>`"
 				)
-				.setFooter({ text: "If you need help use `/playlist help` to display more info" })
+				.setFooter({ text: "Type `/playlist help` to display more info" })
 		)
 		.catch(error => {
 			embedMsg
