@@ -3,6 +3,7 @@ require("dotenv").config();
 const { Client } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
+const { connect } = require("mongoose");
 
 const player = require("./Player");
 
@@ -56,5 +57,13 @@ module.exports = class extends Client {
 		this.guilds.cache.get(process.env.GUILD_ID).commands.set(this.commands);
 		//In production mode
 		//this.application.commands.set(this.commands)
+	}
+
+	async databaseConnection() {
+		const connection = await connect(process.env.CONNECTION_DB);
+
+		console.log("Success DB connection");
+
+		this.db = { connection };
 	}
 };
