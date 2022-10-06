@@ -60,10 +60,10 @@ module.exports = class extends Client {
 	}
 
 	async databaseConnection() {
-		const connection = await connect(process.env.CONNECTION_DB, { dbName: "vilbot" });
+		await connect(process.env.CONNECTION_DB, { dbName: "vilbot" });
 
 		console.log("Success DB connection");
 
-		this.db = { connection };
+		this.db = { connect };
 	}
 };
