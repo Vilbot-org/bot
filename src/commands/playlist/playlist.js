@@ -72,7 +72,6 @@ module.exports = class extends Command {
 						},
 					],
 				},
-				/*
 				{
 					name: "remove",
 					description: "Remove a song in your playlist.",
@@ -81,7 +80,7 @@ module.exports = class extends Command {
 						{
 							name: "song",
 							description: "The position of the song in your playlist.",
-							type: 4,
+							type: 3,
 							required: true,
 						},
 						{
@@ -91,7 +90,7 @@ module.exports = class extends Command {
 							required: false,
 						},
 					],
-				}, */
+				},
 			],
 		});
 	}

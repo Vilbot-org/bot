@@ -33,7 +33,7 @@ module.exports = async (client, interaction, snipe) => {
 		for (const [i, playlist] of data.playlist.entries()) {
 			embedFields.push({
 				name: `${i + 1}. `,
-				value: playlist,
+				value: `[${playlist.title}](${playlist.url})`,
 			});
 		}
 		embedMsg.addFields(embedFields);

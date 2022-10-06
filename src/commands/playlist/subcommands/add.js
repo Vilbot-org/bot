@@ -1,3 +1,4 @@
+const { QueryType } = require("discord-player");
 const { EmbedBuilder } = require("discord.js");
 const { colors } = require("../../../../config.json");
 
@@ -23,9 +24,15 @@ module.exports = async (client, interaction, snipe) => {
 		});
 	}
 
+	const result = await client.player.search(songToAdd, {
+		requestedBy: interaction.user,
+		searchEngine: QueryType.AUTO,
+	});
+	const song = result.tracks[0];
+
 	const userPlaylist = await snipe.findOneAndUpdate(
 		{ userId: interaction.user.id, playlistName: playlist },
-		{ $push: { playlist: songToAdd } }
+		{ $push: { playlist: song } }
 	);
 
 	if (!userPlaylist)
