@@ -15,12 +15,11 @@ module.exports = async (client, interaction, snipe) => {
 		});
 	}
 
-	const userPlaylist = await snipe
-		.findOneAndUpdate(
-			{ userId: interaction.user.id, playlistName: playlist },
-			{ $pull: { playlist: { id: songToRemove } } }
-		)
-		.catch(err => {});
+	const userPlaylist = await snipe.findOneAndUpdate(
+		{ userId: interaction.user.id, playlistName: playlist },
+		{ $pull: { playlist: { id: songToRemove } } },
+		{ multi: true }
+	);
 
 	if (!userPlaylist)
 		return await interaction.reply({

@@ -30,9 +30,9 @@ module.exports = async (client, interaction, snipe) => {
 
 	if (data.playlist.length > 0) {
 		const embedFields = [];
-		for (const [i, playlist] of data.playlist.entries()) {
+		for (const playlist of data.playlist) {
 			embedFields.push({
-				name: `${i + 1}. `,
+				name: `ID: ${playlist.id}`,
 				value: `[${playlist.title}](${playlist.url})`,
 			});
 		}
