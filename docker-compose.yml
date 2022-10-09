@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  bot:
+    container_name: vilbot
+    restart: always
+    build: .
+    links:
+      - mongoDB
+  mongoDB:
+    container_name: vilbot_db
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Passw0rd
+  mongo-express:
+    container_name: mongo_dashboard
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: P@ssw0rd
+      ME_CONFIG_MONGODB_URL: mongodb://root:Passw0rd@mongoDB
