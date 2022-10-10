@@ -1,3 +1,14 @@
+# Node files
 node_modules
+
+# Git files
 .gitignore
 README.md
+
+# Example files
+.env.example
+
+# Docker files
+.dockerignore
+dockerfile
+docker-compose.yml
