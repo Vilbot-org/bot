@@ -16,7 +16,11 @@ module.exports = async (client, interaction, snipe) => {
 	}
 
 	const userPlaylist = await snipe.findOneAndUpdate(
-		{ userId: interaction.user.id, playlistName: playlist },
+		{
+			userId: interaction.user.id,
+			playlistName: playlist,
+			"playlist.id": songToRemove,
+		},
 		{ $pull: { playlist: { id: songToRemove } } },
 		{ multi: true }
 	);
