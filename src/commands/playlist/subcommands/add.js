@@ -26,13 +26,13 @@ module.exports = async (client, interaction, snipe) => {
 
 	const result = await client.player.search(songToAdd, {
 		requestedBy: interaction.user,
-		searchEngine: QueryType.AUTO,
+		searchEngine: QueryType.YOUTUBE_VIDEO,
 	});
 	const song = result.tracks[0];
 
 	const userPlaylist = await snipe.findOneAndUpdate(
 		{ userId: interaction.user.id, playlistName: playlist },
-		{ $push: { playlist: song } }
+		{ $push: { playlist: { id: song.id, title: song.title, url: song.url } } }
 	);
 
 	if (!userPlaylist)
@@ -55,7 +55,7 @@ module.exports = async (client, interaction, snipe) => {
 			new EmbedBuilder()
 				.setColor(colors.green)
 				.setAuthor({ name: "Add new song to playlist" })
-				.setTitle(`New song was added to the **${playlist}** playlist`)
+				.setTitle(`${song.title} added to the **${playlist}** playlist`)
 				.setDescription(
 					"Song added successfully.\nType `/music playlist " + playlist + "` to play your playlist."
 				),

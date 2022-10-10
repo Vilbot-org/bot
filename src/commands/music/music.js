@@ -30,9 +30,9 @@ module.exports = class extends Command {
 					options: [
 						{
 							name: "playlist",
-							description: "Enter the URL of the playlist.",
+							description: "Enter the name of your playlist.",
 							type: 3,
-							required: true,
+							required: false,
 						},
 					],
 				},
