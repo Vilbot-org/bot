@@ -1,19 +1,25 @@
 version: "3.9"
 services:
   bot:
-    container_name: vilbot
+    container_name: "${APP_NAME}"
     restart: always
     build: .
     links:
       - mongoDB
+    depends_on:
+      - mongoDB
+  # MongoDB services
   mongoDB:
-    container_name: vilbot_db
+    container_name: "${APP_NAME}_db"
     image: mongo
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${DB_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${DB_PASSWORD}"
   mongo-express:
     container_name: mongo_dashboard
     image: mongo-express
@@ -21,4 +27,9 @@ services:
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://mongoDB
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "${DB_USERNAME}"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "${DB_PASSWORD}"
+      ME_CONFIG_BASICAUTH: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: "${DASHBOARD_DB_USERNAME}"
+      ME_CONFIG_BASICAUTH_PASSWORD: "${DASHBOARD_DB_PASSWORD}"
+      ME_CONFIG_MONGODB_URL: "mongodb://${DB_USERNAME}:${DB_PASSWORD}@mongoDB"
