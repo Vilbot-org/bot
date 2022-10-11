@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { botName, siteURL, colors } = require("../../../../config.json");
+const { botName, siteURL, colors } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
 	return await interaction.reply({

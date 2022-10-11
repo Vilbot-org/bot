@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 
-const { colors } = require("../../../../config.json");
+const { colors } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
 	const embedMsg = new EmbedBuilder().setAuthor({ name: "Music queue!" }).setTitle("Current song:");

@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const Command = require("../../structures/Command");
 
-const { botName, colors, siteURL } = require("../../../config.json");
+const { botName, colors, siteURL } = require("../../config.json");
 
 module.exports = class extends Command {
 	constructor(client) {

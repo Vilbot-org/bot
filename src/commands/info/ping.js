@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const Command = require("../../structures/Command");
 
-const { colors } = require("../../../config.json");
+const { colors } = require("../../config.json");
 
 module.exports = class PingCommand extends Command {
 	constructor(client) {

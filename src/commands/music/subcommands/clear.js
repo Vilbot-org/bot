@@ -1,6 +1,6 @@
 const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
-const { colors } = require("../../../../config.json");
+const { colors } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
 	//Check if the user can manage messages
