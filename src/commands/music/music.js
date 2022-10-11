@@ -1,7 +1,7 @@
 const Command = require("../../structures/Command");
 const { EmbedBuilder } = require("discord.js");
 
-const configs = require("../../../config.json");
+const configs = require("../../config.json");
 
 module.exports = class extends Command {
 	constructor(client) {

@@ -1,7 +1,7 @@
 const { ButtonBuilder } = require("@discordjs/builders");
 const { EmbedBuilder, ActionRowBuilder, ButtonStyle, PermissionsBitField } = require("discord.js");
 
-const { botName, colors, siteURL } = require("../../../../config.json");
+const { botName, colors, siteURL } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
 	//Check if the user can moderate

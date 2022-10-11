@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 
-const { colors } = require("../../config.json");
+const { colors } = require("../config.json");
 
 module.exports = async (client, interaction) => {
 	//Notify to the user and delete the message

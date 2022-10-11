@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { colors } = require("../../../../config.json");
+const { colors } = require("../../../config.json");
 
 module.exports = async (client, interaction, snipe) => {
 	const playlistName = interaction.options.getString("name")

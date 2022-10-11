@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { QueryType } = require("discord-player");
-const { colors } = require("../../../../config.json");
+const { colors } = require("../../../config.json");
 
 const snipe = require("../../../schemas/UsersPlaylistsSchema");
 
