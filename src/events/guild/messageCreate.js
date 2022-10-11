@@ -1,6 +1,6 @@
 const Event = require("../../structures/Event");
 
-const { botName } = require("../../../config.json");
+const { botName } = require("../../config.json");
 
 module.exports = class extends Event {
 	constructor(client) {

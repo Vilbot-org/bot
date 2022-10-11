@@ -2,7 +2,7 @@ const axios = require("axios");
 const { EmbedBuilder } = require("discord.js");
 require("dotenv").config();
 
-const { colors } = require("../../../../config.json");
+const { colors } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
 	axios.defaults.headers.get["X-Riot-Token"] = process.env.RIOT_TOKEN;
