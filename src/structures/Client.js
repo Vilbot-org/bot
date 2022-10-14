@@ -17,6 +17,7 @@ module.exports = class extends Client {
 
 		//Music
 		this.player = player(this);
+		//Languages
 	}
 
 	loadCommands(path = "./src/commands") {

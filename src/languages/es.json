@@ -1,3 +1,6 @@
 {
-	"fullName": "Español"
+	"fullName": "Español",
+
+	"config.language.success": "Se establecio el lenguage con exito",
+	"config.language.set": "Lenguage establecido en **%VAR%** con exito"
 }
