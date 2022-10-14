@@ -1,5 +1,6 @@
 const { ActivityType } = require("discord.js");
 const Event = require("../../structures/Event");
+const { loadLanguages } = require("../../structures/Language");
 
 module.exports = class extends Event {
 	constructor(client) {
@@ -13,5 +14,8 @@ module.exports = class extends Event {
 
 		this.client.registerCommands();
 		await this.client.databaseConnection();
+
+		//Load languages
+		await loadLanguages(this.client);
 	};
 };
