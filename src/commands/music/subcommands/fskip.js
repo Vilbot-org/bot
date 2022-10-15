@@ -14,10 +14,20 @@ module.exports = async (client, interaction) => {
 		});
 
 	//Check if the user can moderate
-	if (interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) {
-		const skipingMessage = new EmbedBuilder()
-			.setColor(colors.success)
-			.setAuthor({ name: "Forcing the skip of the song" })
+	if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers))
+		return await interaction.reply({
+			embeds: [
+				new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
+			],
+			ephemeral: true,
+		});
+
+	let skipingMessage = new EmbedBuilder()
+		.setColor(colors.success)
+		.setAuthor({ name: "Forcing the skip of the song" });
+
+	if (queue.tracks.length > 0) {
+		skipingMessage
 			.setTitle(`:track_next: ${queue.tracks[0].title}`)
 			.setURL(`${queue.tracks[0].url}`)
 			.setDescription(
@@ -25,18 +35,13 @@ module.exports = async (client, interaction) => {
 					? `The next song is:  [${queue.tracks[1].title}](${queue.tracks[1].url})`
 					: "There are no more songs in the queue!"
 			);
-
-		await queue.skip();
-
-		return await interaction.reply({
-			embeds: [skipingMessage],
-		});
 	} else {
-		return await interaction.reply({
-			embeds: [
-				new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
-			],
-			ephemeral: true,
-		});
+		skipingMessage.setTitle(":wave: Bye bye!").setDescription("No more songs in the queue");
 	}
+
+	await queue.skip();
+
+	return await interaction.reply({
+		embeds: [skipingMessage],
+	});
 };
