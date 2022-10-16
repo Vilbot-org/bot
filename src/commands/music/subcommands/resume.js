@@ -10,7 +10,7 @@ module.exports = async (client, interaction) => {
 			ephemeral: true,
 		});
 
-	if (!queue.connection.paused)
+	if (!(await queue.connection.paused))
 		return await interaction.reply({
 			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not paused!")],
 			ephemeral: true,
