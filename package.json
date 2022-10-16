@@ -8,7 +8,7 @@
 		"dev": "npx nodemon index.js"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "GFrancV",
 	"license": "ISC",
 	"dependencies": {
 		"@discordjs/builders": "^1.2.0",

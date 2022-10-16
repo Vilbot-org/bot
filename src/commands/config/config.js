@@ -1,10 +1,8 @@
-const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const { PermissionFlagsBits } = require("discord.js");
 const Command = require("../../structures/Command");
 const { readdirSync } = require("fs");
 
 const snipe = require("../../schemas/GuildsConfigsSchema");
-
-const { colors } = require("../../config.json");
 
 module.exports = class extends Command {
 	constructor(client) {
@@ -38,19 +36,11 @@ module.exports = class extends Command {
 					],
 				},
 			],
+			default_member_permissions: PermissionFlagsBits.ManageGuild,
 		});
 	}
 
 	run = async interaction => {
-		//Check if the user can execute this command
-		if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers))
-			return await interaction.reply({
-				embeds: [
-					new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
-				],
-				ephemeral: true,
-			});
-
 		const subCommand = interaction.options.getSubcommand();
 
 		await require(`./submcommands/${subCommand}`)(this.client, interaction, snipe);

@@ -1,14 +1,14 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const Command = require("../../structures/Command");
 
 const { botName, colors, siteURL } = require("../../config.json");
 
 module.exports = class extends Command {
 	constructor(client) {
-		super(client, {
-			name: "help",
-			description: "Display more information about the bot!",
-		});
+		super(
+			client,
+			new SlashCommandBuilder().setName("help").setDescription("Display more information about the bot!")
+		);
 	}
 
 	run = async interaction => {
@@ -18,7 +18,8 @@ module.exports = class extends Command {
 					.setColor(colors.info)
 					.setTitle(`${botName} help`)
 					.setThumbnail(this.client.user.avatarURL())
-					.setDescription(`Hi! I'm ${botName} a simple discord bot.`)
+					.setAuthor({ name: "Vilbot help command" })
+					.setDescription(`Hi! I'm ${botName} a awesome discord bot.`)
 					.addFields(
 						{
 							name: "Full command list",
@@ -44,8 +45,14 @@ module.exports = class extends Command {
 							value:
 								"Commands to view League of Legends info.\n`/lol stats` to view a stats of a specific summoner.\n`/lol help` to display more info.",
 							inline: true,
+						},
+						{
+							name: "Utils commands",
+							value: "Usefull commands.\n`/clear` to clear the bot messages.",
+							inline: true,
 						}
-					),
+					)
+					.setFooter({ text: `${siteURL} by GFrancv` }),
 			],
 		});
 	};
