@@ -4,13 +4,12 @@ const { EmbedBuilder } = require("discord.js");
 const { colors } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
-	const embedMsg = new EmbedBuilder();
+	let query = interaction.options.getString("song");
 
 	const queue = await client.player.createQueue(interaction.guild);
 
 	if (!queue.connection) await queue.connect(interaction.member.voice.channel);
 
-	let query = interaction.options.getString("song");
 	//Serch with  by url first
 	let result = await client.player.search(query, {
 		requestedBy: interaction.user,
@@ -25,7 +24,7 @@ module.exports = async (client, interaction) => {
 		if (result.tracks.length === 0)
 			return await interaction.reply({
 				embeds: [
-					embedMsg
+					new EmbedBuilder()
 						.setColor(colors.danger)
 						.setTitle("No songs found!")
 						.setDescription("Try another song or adding additional information!"),
@@ -41,20 +40,24 @@ module.exports = async (client, interaction) => {
 		return track.id == result.tracks[0].id;
 	});
 
-	embedMsg
-		.setColor(colors.success)
-		.setAuthor({ name: "Add to the queue" })
-		.setTitle(`${result.tracks[0].title}`)
-		.setURL(`${result.tracks[0].url}`)
-		.setThumbnail(`${result.tracks[0].thumbnail}`)
-		.setFields(
-			{ name: "Duration", value: `${result.tracks[0].duration}`, inline: true },
-			{ name: "Position in the queue", value: `${positionQueue + 1}`, inline: true }
-		)
-		.setFooter({ text: `Next song in the queue: ${queue.tracks[0].title}` });
+	console.log(queue.tracks[0].title);
 
 	if (!queue.playing) await queue.play();
 	return await interaction.reply({
-		embeds: [embedMsg],
+		embeds: [
+			new EmbedBuilder()
+				.setColor(colors.success)
+				.setAuthor({ name: "Add to the queue" })
+				.setTitle(`${song.title}`)
+				.setURL(`${song.url}`)
+				.setThumbnail(`${song.thumbnail}`)
+				.setFields(
+					{ name: "Duration", value: `${song.duration}`, inline: true },
+					{ name: "Position in the queue", value: `${positionQueue + 1}`, inline: true }
+				)
+				.setFooter({
+					text: queue.tracks.length >= 2 ? `Next song in the queue: ${queue.tracks[0].title}` : "",
+				}),
+		],
 	});
 };
