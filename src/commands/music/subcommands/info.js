@@ -6,7 +6,7 @@ module.exports = async (client, interaction) => {
 
 	if (!queue)
 		return await interaction.reply({
-			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not playing!")],
+			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music is not playing!")],
 			ephemeral: true,
 		});
 

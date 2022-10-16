@@ -15,7 +15,7 @@ module.exports = async (client, interaction) => {
 					},
 					{
 						name: "Play your favorite playlist in the voice channel.",
-						value: "`/music playlist <url>`",
+						value: "`/music playlist <playlist-name>`",
 					},
 					{
 						name: "Display the info of the currently playin song.",
