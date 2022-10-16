@@ -1,5 +1,5 @@
 const Command = require("../../structures/Command");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 
 const configs = require("../../config.json");
 
@@ -50,6 +50,7 @@ module.exports = class extends Command {
 					name: "fskip",
 					description: "Force the skip (no votation).",
 					type: 1,
+					default_member_permissions: PermissionFlagsBits.ManageMessages,
 				},
 				{
 					name: "pause",
@@ -70,6 +71,7 @@ module.exports = class extends Command {
 					name: "setup",
 					description: "Run this command to setup the bot!",
 					type: 1,
+					default_member_permissions: PermissionFlagsBits.ManageGuild,
 				},
 				{
 					name: "info",
@@ -80,20 +82,6 @@ module.exports = class extends Command {
 					name: "previous",
 					description: "Play the previous song!",
 					type: 1,
-				},
-				{
-					name: "clear",
-					description: "Remove music messages from the bot on this channel!",
-					type: 1,
-					options: [
-						{
-							name: "amount",
-							description:
-								"Number of music bot messages you want to delete (by defaul the command clear 10 messages).",
-							type: 4,
-							required: false,
-						},
-					],
 				},
 				{
 					name: "help",

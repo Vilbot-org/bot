@@ -5,10 +5,7 @@ const { colors } = require("../../config.json");
 
 module.exports = class PingCommand extends Command {
 	constructor(client) {
-		super(client, {
-			name: "ping",
-			description: "Replies with the ping of the bot!",
-		});
+		super(client, { name: "ping", description: "Replies with the ping of the bot!" });
 	}
 
 	run = async interaction => {
