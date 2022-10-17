@@ -5,12 +5,16 @@ const { botName, colors, siteURL } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
 	//Check if the user can moderate
-	if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers))
+	if (
+		!interaction.member.permissions.has(
+			PermissionsBitField.Flags.ModerateMembers | PermissionsBitField.Flags.ManageChannels
+		)
+	)
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
 			],
-			ephimeral: true,
+			ephemeral: true,
 		});
 
 	const channels = await interaction.guild.channels.fetch();
@@ -29,7 +33,7 @@ module.exports = async (client, interaction) => {
 						`If you want to reset the bot channel please delete the '${botName}-music' text channel and run this command again.`
 					),
 			],
-			ephimeral: true,
+			ephemeral: true,
 		});
 
 	const musicChannel = await interaction.guild.channels
@@ -50,7 +54,7 @@ module.exports = async (client, interaction) => {
 					.setTitle(":x: An error occurred while creating the channel")
 					.setDescription("Check the permissions and try again."),
 			],
-			ephimeral: true,
+			ephemeral: true,
 		});
 
 	await interaction.reply({
