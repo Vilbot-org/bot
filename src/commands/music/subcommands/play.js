@@ -16,12 +16,12 @@ module.exports = async (client, interaction) => {
 		searchEngine: QueryType.YOUTUBE_VIDEO,
 	});
 	//If the bot does not find songs by url, it proceeds to search by search term
-	if (result.tracks.length === 0) {
+	if (result.tracks.length == 0) {
 		result = await client.player.search(query, {
 			requestedBy: interaction.user,
 			searchEngine: QueryType.AUTO,
 		});
-		if (result.tracks.length === 0)
+		if (result.tracks.length == 0)
 			return await interaction.reply({
 				embeds: [
 					new EmbedBuilder()
@@ -40,8 +40,6 @@ module.exports = async (client, interaction) => {
 		return track.id == result.tracks[0].id;
 	});
 
-	console.log(queue.tracks[0].title);
-
 	if (!queue.playing) await queue.play();
 	return await interaction.reply({
 		embeds: [
@@ -56,7 +54,10 @@ module.exports = async (client, interaction) => {
 					{ name: "Position in the queue", value: `${positionQueue + 1}`, inline: true }
 				)
 				.setFooter({
-					text: queue.tracks.length >= 2 ? `Next song in the queue: ${queue.tracks[0].title}` : "",
+					text:
+						queue.tracks.length >= 1
+							? `Next song in the queue: ${queue.tracks[0].title}`
+							: "This is the first song.",
 				}),
 		],
 	});
