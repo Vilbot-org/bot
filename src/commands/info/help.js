@@ -5,10 +5,7 @@ const { botName, colors, siteURL } = require("../../config.json");
 
 module.exports = class extends Command {
 	constructor(client) {
-		super(
-			client,
-			new SlashCommandBuilder().setName("help").setDescription("Display more information about the bot!")
-		);
+		super(client, { name: "help", description: "Display more information about the bot!" });
 	}
 
 	run = async interaction => {

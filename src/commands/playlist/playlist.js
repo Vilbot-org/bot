@@ -60,7 +60,7 @@ module.exports = class extends Command {
 					options: [
 						{
 							name: "song",
-							description: "The URL of the song.",
+							description: "The URL of the song to add.",
 							type: 3,
 							required: true,
 						},
@@ -90,6 +90,11 @@ module.exports = class extends Command {
 							required: false,
 						},
 					],
+				},
+				{
+					name: "help",
+					description: "Display help about this command.",
+					type: 1,
 				},
 			],
 		});
