@@ -1,6 +1,0 @@
-{
-	"fullName": "English",
-
-	"config.language.success": "Successfully established language",
-	"config.language.set": "Language set to **%VAR%** successfully"
-}

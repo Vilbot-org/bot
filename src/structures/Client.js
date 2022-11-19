@@ -54,9 +54,10 @@ module.exports = class extends Client {
 	}
 
 	registerCommands() {
-		this.guilds.cache.get(process.env.GUILD_ID).commands.set(this.commands);
 		//In production mode
-		//this.application.commands.set(this.commands)
+		this.application.commands.set(this.commands);
+		//In dev mode
+		//this.guilds.cache.get(process.env.GUILD_ID).commands.set(this.commands);
 	}
 
 	async databaseConnection() {

@@ -38,12 +38,6 @@ module.exports = class extends Command {
 								"Useful commands with information about me.\n `/ping` to see the ping of the bot\n`/help` to show more info about me.",
 						},
 						{
-							name: "LoL commands",
-							value:
-								"Commands to view League of Legends info.\n`/lol stats` to view a stats of a specific summoner.\n`/lol help` to display more info.",
-							inline: true,
-						},
-						{
 							name: "Utils commands",
 							value: "Usefull commands.\n`/clear` to clear the bot messages.",
 							inline: true,
