@@ -9,7 +9,7 @@
 	},
 	"keywords": [],
 	"author": "GFrancV",
-	"license": "ISC",
+	"license": "MIT",
 	"dependencies": {
 		"@discordjs/builders": "^1.2.0",
 		"@discordjs/opus": "^0.8.0",
