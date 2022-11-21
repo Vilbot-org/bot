@@ -36,7 +36,7 @@ This bot and the code is free for everyone and you can invite the bot to your Di
 If you like this project and would like to show your support to the project can you give can you give us a [Ko-fi](https://ko-fi.com/GFrancV).
 
 <div align="center">
-	<a src="https://discord.com/oauth2/authorize?client_id=1024599953387044904&permissions=8&scope=bot">
+	<a href="https://discord.com/oauth2/authorize?client_id=1024599953387044904&permissions=8&scope=bot">
 			<img src="https://user-images.githubusercontent.com/35277540/202934244-7297631c-8429-4fe2-8158-a1f64c2bb9cb.png" alt="join-btn" width="250">
 	</a>
 </div>
