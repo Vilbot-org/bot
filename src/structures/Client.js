@@ -3,7 +3,7 @@ require("dotenv").config();
 const { Client } = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
-const { connect } = require("mongoose");
+const mongoose = require("mongoose");
 
 const player = require("./Player");
 
@@ -61,10 +61,9 @@ module.exports = class extends Client {
 	}
 
 	async databaseConnection() {
-		await connect(process.env.CONNECTION_DB, { dbName: "vilbot" });
+		mongoose.set("strictQuery", true);
+		this.db = await mongoose.connect(process.env.CONNECTION_DB, { dbName: "vilbot" });
 
-		console.log("Success DB connection");
-
-		this.db = { connect };
+		console.log(`Success connection to ${this.db.connection.name} DB`);
 	}
 };

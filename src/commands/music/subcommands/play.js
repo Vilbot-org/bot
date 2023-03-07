@@ -1,64 +1,46 @@
-const { QueryType } = require("discord-player");
 const { EmbedBuilder } = require("discord.js");
 
 const { colors } = require("../../../config.json");
 
 module.exports = async (client, interaction) => {
-	let query = interaction.options.getString("song");
+	const query = interaction.options.getString("song");
+	const channel = interaction.member.voice.channel;
 
-	const queue = await client.player.createQueue(interaction.guild);
+	await interaction.deferReply();
 
-	if (!queue.connection) await queue.connect(interaction.member.voice.channel);
-
-	//Serch with  by url first
-	let result = await client.player.search(query, {
-		requestedBy: interaction.user,
-		searchEngine: QueryType.YOUTUBE_VIDEO,
-	});
-	//If the bot does not find songs by url, it proceeds to search by search term
-	if (result.tracks.length == 0) {
-		result = await client.player.search(query, {
-			requestedBy: interaction.user,
-			searchEngine: QueryType.AUTO,
+	try {
+		const { queue, track } = await client.player.play(channel, query, {
+			nodeOptions: {
+				metadata: interaction,
+				volume: 40,
+			},
 		});
-		if (result.tracks.length == 0)
-			return await interaction.reply({
-				embeds: [
-					new EmbedBuilder()
-						.setColor(colors.danger)
-						.setTitle("No songs found!")
-						.setDescription("Try another song or adding additional information!"),
-				],
-				ephemeral: true,
-			});
+
+		return interaction.followUp({
+			embeds: [
+				new EmbedBuilder()
+					.setColor(colors.success)
+					.setAuthor({ name: "Add to the queue" })
+					.setTitle(`${track.title}`)
+					.setURL(`${track.url}`)
+					.setThumbnail(`${track.thumbnail}`)
+					.setFields(
+						{ name: "Duration", value: `${track.duration}`, inline: true },
+						{
+							name: "Position in the queue",
+							value: `${queue.getSize() > 0 ? queue.getSize() : "Playing now"}`,
+							inline: true,
+						}
+					)
+					.setFooter({
+						text:
+							queue.getSize() >= 1
+								? `Next song in the queue: ${queue.tracks.at(0).title}`
+								: "This is the first song in the queue.",
+					}),
+			],
+		});
+	} catch (e) {
+		return interaction.followUp(`Something went wrong: ${e}`);
 	}
-
-	const song = result.tracks[0];
-	await queue.addTrack(song);
-
-	let positionQueue = queue.tracks.findIndex(track => {
-		return track.id == result.tracks[0].id;
-	});
-
-	if (!queue.playing) await queue.play();
-	return await interaction.reply({
-		embeds: [
-			new EmbedBuilder()
-				.setColor(colors.success)
-				.setAuthor({ name: "Add to the queue" })
-				.setTitle(`${song.title}`)
-				.setURL(`${song.url}`)
-				.setThumbnail(`${song.thumbnail}`)
-				.setFields(
-					{ name: "Duration", value: `${song.duration}`, inline: true },
-					{ name: "Position in the queue", value: `${positionQueue + 1}`, inline: true }
-				)
-				.setFooter({
-					text:
-						queue.tracks.length >= 1
-							? `Next song in the queue: ${queue.tracks[0].title}`
-							: "This is the first song.",
-				}),
-		],
-	});
 };
