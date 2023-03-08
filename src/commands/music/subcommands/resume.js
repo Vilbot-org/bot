@@ -1,23 +1,27 @@
 const { EmbedBuilder } = require("discord.js");
 const { colors } = require("../../../config.json");
 
-module.exports = async (client, interaction) => {
-	const queue = await client.player.getQueue(interaction.guildId);
-
+module.exports = async (client, interaction, queue) => {
 	if (!queue)
 		return await interaction.reply({
 			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not playing!")],
 			ephemeral: true,
 		});
 
-	if (!(await queue.connection.paused))
-		return await interaction.reply({
-			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not paused!")],
-			ephemeral: true,
-		});
+	try {
+		const isPaused = await queue.node.isPaused();
 
-	await queue.setPaused(false);
-	return await interaction.reply({
-		embeds: [new EmbedBuilder().setColor(colors.success).setTitle(":arrow_forward: Resume the music!")],
-	});
+		if (!isPaused)
+			return await interaction.reply({
+				embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not paused!")],
+				ephemeral: true,
+			});
+
+		await queue.node.resume();
+		return await interaction.reply({
+			embeds: [new EmbedBuilder().setColor(colors.success).setTitle(":arrow_forward: Resume the music!")],
+		});
+	} catch (e) {
+		return interaction.followUp(`Something went wrong: ${e}`);
+	}
 };

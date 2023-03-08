@@ -79,11 +79,6 @@ module.exports = class extends Command {
 					type: 1,
 				},
 				{
-					name: "previous",
-					description: "Play the previous song!",
-					type: 1,
-				},
-				{
 					name: "help",
 					description: "See the main commands and aditional info!",
 					type: 1,
@@ -108,6 +103,8 @@ module.exports = class extends Command {
 				ephemeral: true,
 			});
 
-		await require(`./subcommands/${subCommand}`)(this.client, interaction);
+		const queue = await this.client.player.nodes.get(interaction.guildId);
+
+		await require(`./subcommands/${subCommand}`)(this.client, interaction, queue);
 	};
 };

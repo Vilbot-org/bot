@@ -71,9 +71,6 @@ module.exports = async (client, interaction) => {
 
 	const quickControls = new ActionRowBuilder()
 		.addComponents(
-			new ButtonBuilder().setCustomId("previousPlayer").setEmoji({ name: "⏮️" }).setStyle(ButtonStyle.Primary)
-		)
-		.addComponents(
 			new ButtonBuilder().setCustomId("pausePlayer").setEmoji({ name: "⏸️" }).setStyle(ButtonStyle.Primary)
 		)
 		.addComponents(

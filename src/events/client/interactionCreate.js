@@ -16,8 +16,10 @@ module.exports = class extends Event {
 				);
 				const command = interaction.customId.substring(0, interaction.customId.length - 6);
 
-				if (commandType == "Player")
-					require(`../../commands/music/subcommands/${command}`)(this.client, interaction);
+				if (commandType == "Player") {
+					const queue = this.client.player.nodes.get(interaction.guildId);
+					require(`../../commands/music/subcommands/${command}`)(this.client, interaction, queue);
+				}
 			}
 		}
 		if (interaction.isChatInputCommand()) {

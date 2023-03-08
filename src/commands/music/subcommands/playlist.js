@@ -1,99 +1,75 @@
 const { EmbedBuilder } = require("discord.js");
-const { QueryType } = require("discord-player");
+const { Track } = require("discord-player");
 const { colors } = require("../../../config.json");
 
 const snipe = require("../../../schemas/UsersPlaylistsSchema");
 
 module.exports = async (client, interaction) => {
-	const queue = await client.player.createQueue(interaction.guild);
-
-	if (!queue.connection) await queue.connect(interaction.member.voice.channel);
-
-	//const playlistQuery = await interaction.options.getString("playlist");
-
+	const channel = interaction.member.voice.channel;
 	const playlistQuery = interaction.options.getString("playlist")
 		? interaction.options.getString("playlist")
 		: `${interaction.user.username}-playlist`;
 
-	const playlist = await snipe.findOne({ userId: interaction.user.id, playlistName: playlistQuery });
+	await interaction.deferReply();
 
-	if (playlist.playlist.length == 0)
-		return await interaction.reply({
+	try {
+		let playlist = await snipe.findOne({ userId: interaction.user.id, playlistName: playlistQuery });
+		if (!playlist)
+			return await interaction.reply({
+				embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: This playlist don't exist!")],
+				ephemeral: true,
+			});
+
+		playlist = playlist.playlist;
+
+		if (playlist.length == 0)
+			return await interaction.reply({
+				embeds: [
+					new EmbedBuilder()
+						.setColor(colors.danger)
+						.setTitle(":x: This playlist don't have songs!")
+						.setDescription(
+							"You can add songs to this playlist with the following command: `/playlist add <song> " +
+								playlistQuery +
+								"`\nAdd songs and try again!"
+						),
+				],
+				ephemeral: true,
+			});
+
+		const getSearchResults = async track => {
+			const searchResult = await client.player.search(track.title);
+			return searchResult.tracks[0];
+		};
+
+		const tracks = await Promise.all(
+			playlist.map(async track => {
+				return getSearchResults(track);
+			})
+		);
+
+		const { queue } = await client.player.play(channel, tracks[0], {
+			nodeOptions: {
+				metadata: interaction,
+				volume: 40,
+			},
+		});
+
+		tracks.map(track => {
+			queue.insertTrack(track, queue.getSize());
+		});
+
+		return interaction.followUp({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
-					.setTitle(":x: This playlist don't have songs!")
-					.setDescription(
-						"You can add songs to this playlist with the following command: `/playlist add <song> " +
-							playlistQuery +
-							"`\nAdd songs and try again!"
-					),
+					.setColor(colors.success)
+					.setAuthor({ name: "Add to the queue" })
+					.setTitle(`The ${playlistQuery} playlist`)
+					.setThumbnail(interaction.user.avatarURL())
+					.setFooter({ text: `${playlist.length} songs add.` }),
 			],
-			ephemeral: true,
 		});
-
-	const songs = [];
-	let totalDuration = 0;
-	for (const song of playlist.playlist) {
-		const result = await client.player.search(song.url, {
-			requestedBy: interaction.user,
-			searchEngine: QueryType.YOUTUBE_VIDEO,
-		});
-
-		totalDuration += parseFloat(result.tracks[0].duration);
-		songs.push(result.tracks[0]);
+	} catch (e) {
+		return interaction.followUp(`Something went wrong: ${e}`);
 	}
-
-	await queue.addTracks(songs);
-	if (!queue.playing) await queue.play();
-
-	return await interaction.reply({
-		embeds: [
-			new EmbedBuilder()
-				.setColor(colors.success)
-				.setAuthor({ name: "Add to the queue" })
-				.setTitle(`The ${playlistQuery} playlist`)
-				.setThumbnail(interaction.user.avatarURL())
-				.setFields({ name: "Duration", value: `${totalDuration}min aprox`, inline: true })
-				.setFooter({ text: `${songs.length} songs add.` }),
-		],
-	});
-	/*const results = await client.player.search(playlistUrl, {
-		requestedBy: interaction.user,
-		searchEngine: QueryType.YOUTUBE_PLAYLIST,
-	});
-
-	 if (results.tracks.length == 0)
-		return await interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(colors.danger)
-					.setTitle(":x: No songs found!")
-					.setDescription("Verify if the provides URL are correctly or try with other playlist."),
-			],
-			ephemeral: true,
-		});
-
-	const playlist = results.playlist;
-	await queue.addTracks(results.tracks);
-
-	if (!queue.playing) await queue.play();
-
-	let totalDuration = 0;
-	for (const track of playlist.tracks) {
-		totalDuration += parseFloat(track.duration);
-	}
-
-	return await interaction.reply({
-		embeds: [
-			new EmbedBuilder()
-				.setColor(colors.success)
-				.setAuthor({ name: "Add to the queue" })
-				.setTitle(`The ${playlist.title} playlist`)
-				.setURL(playlist.url)
-				.setThumbnail(playlist.thumbnail.url)
-				.setFields({ name: "Duration", value: `${totalDuration}min aprox`, inline: true })
-				.setFooter({ text: `${results.tracks.length} songs add.` }),
-		],
-	}); */
 };

@@ -2,39 +2,35 @@ const { EmbedBuilder } = require("discord.js");
 
 const { colors } = require("../../../config.json");
 
-module.exports = async (client, interaction) => {
+module.exports = async (client, interaction, queue) => {
 	const embedMsg = new EmbedBuilder().setAuthor({ name: "Music queue!" }).setTitle("Current song:");
 
-	const queue = await client.player.getQueue(interaction.guildId);
-
-	if (!queue || !queue.playing)
+	if (!queue)
 		return await interaction.reply({
 			embeds: [embedMsg.setColor(colors.danger).setDescription(":x: No songs in the queue!")],
 			ephemeral: true,
 		});
 
-	const currentSong = queue.current;
+	try {
+		embedMsg
+			.setColor(colors.success)
+			.setThumbnail(queue.currentTrack.thumbnail)
+			.setDescription(`[${queue.currentTrack.title}](${queue.currentTrack.url})`)
+			.setFooter({ text: `There are ${queue.getSize()} songs in the queue` });
 
-	embedMsg
-		.setColor(colors.success)
-		.setThumbnail(currentSong.thumbnail)
-		.setDescription(`[${currentSong.title}](${currentSong.url})`);
+		if (!queue.isEmpty())
+			embedMsg.addFields(
+				queue.tracks.map((track, key) => ({
+					name: `${key + 1}. ${track.title}`,
+					value: "\u200B",
+					inline: true,
+				}))
+			);
 
-	let embedFields = [];
-	let queuePosition = 0;
-	for (const track of queue.tracks) {
-		let queueSong = {
-			name: `${++queuePosition}. ${track.title}`,
-			value: "\u200B",
-			inline: true,
-		};
-
-		embedFields.push(queueSong);
+		return await interaction.reply({
+			embeds: [embedMsg],
+		});
+	} catch (e) {
+		return await interaction.reply(`Something went wrong: ${e}`);
 	}
-
-	embedMsg.addFields(embedFields).setFooter({ text: `There are ${queue.tracks.length} songs in the queue` });
-
-	return await interaction.reply({
-		embeds: [embedMsg],
-	});
 };
