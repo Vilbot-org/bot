@@ -8,4 +8,4 @@ RUN npm install --omit=dev
 
 COPY . .
 
-CMD ["node", "index.js"]
+CMD ["npm", "run", "start"]
