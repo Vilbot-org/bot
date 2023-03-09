@@ -1,9 +1,9 @@
-const Command = require("../../structures/Command");
-const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+import Command from "../../structures/Command.js";
+import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-const configs = require("../../config.json");
+import configs from "../../config.json";
 
-module.exports = class extends Command {
+export default class extends Command {
 	constructor(client) {
 		super(client, {
 			name: "music",
@@ -107,4 +107,4 @@ module.exports = class extends Command {
 
 		await require(`./subcommands/${subCommand}`)(this.client, interaction, queue);
 	};
-};
+}

@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require("discord.js");
-const Command = require("../../structures/Command");
+import { EmbedBuilder } from "discord.js";
+import Command from "../../structures/Command.js";
 
-const { colors } = require("../../config.json");
+import config from "../../app.config.js";
 
-module.exports = class PingCommand extends Command {
+export default class PingCommand extends Command {
 	constructor(client) {
 		super(client, { name: "ping", description: "Replies with the ping of the bot!" });
 	}
@@ -12,10 +12,10 @@ module.exports = class PingCommand extends Command {
 		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.green)
+					.setColor(config.colors.green)
 					.setAuthor({ name: "Pong!" })
 					.setTitle(":ping_pong: The ping of the bot are" + "`" + `${this.client.ws.ping}` + "ms`"),
 			],
 		});
 	};
-};
+}

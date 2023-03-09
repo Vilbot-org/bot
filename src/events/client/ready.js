@@ -1,7 +1,7 @@
-const { ActivityType } = require("discord.js");
-const Event = require("../../structures/Event");
+import { ActivityType } from "discord.js";
+import Event from "../../structures/Event.js";
 
-module.exports = class extends Event {
+export default class extends Event {
 	constructor(client) {
 		super(client, { name: "ready" });
 	}
@@ -14,4 +14,4 @@ module.exports = class extends Event {
 		this.client.registerCommands();
 		await this.client.databaseConnection();
 	};
-};
+}

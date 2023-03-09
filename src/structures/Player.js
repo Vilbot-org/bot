@@ -1,6 +1,6 @@
-const { Player } = require("discord-player");
+import { Player } from "discord-player";
 
-module.exports = client => {
+export default client => {
 	return Player.singleton(client, {
 		ytdlOptions: {
 			quality: "highestaudio",

@@ -1,9 +1,9 @@
-const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
-const Command = require("../../structures/Command");
+import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } from "discord.js";
+import Command from "../../structures/Command.js";
 
-const { colors } = require("../../config.json");
+import { colors } from "../../config.json";
 
-module.exports = class extends Command {
+export default class extends Command {
 	constructor(client) {
 		super(
 			client,
@@ -55,4 +55,4 @@ module.exports = class extends Command {
 			ephemeral: true,
 		});
 	};
-};
+}

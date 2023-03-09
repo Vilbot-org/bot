@@ -1,7 +1,6 @@
 //Enviroment variables and configs
-require("dotenv").config();
-
-const Client = require("./src/structures/Client");
+import "dotenv/config";
+import Client from "./src/structures/Client.js";
 
 const client = new Client({
 	intents: [

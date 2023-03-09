@@ -1,9 +1,9 @@
-const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
-const Command = require("../../structures/Command");
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import Command from "../../structures/Command.js";
 
-const { botName, colors, siteURL } = require("../../config.json");
+import config from "../../app.config.js";
 
-module.exports = class extends Command {
+export default class extends Command {
 	constructor(client) {
 		super(client, { name: "help", description: "Display more information about the bot!" });
 	}
@@ -12,17 +12,17 @@ module.exports = class extends Command {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.info)
-					.setTitle(`${botName} help`)
+					.setColor(config.colors.info)
+					.setTitle(`${config.botName} help`)
 					.setThumbnail(this.client.user.avatarURL())
 					.setAuthor({ name: "Vilbot help command" })
-					.setDescription(`Hi! I'm ${botName} a awesome discord bot.`)
+					.setDescription(`Hi! I'm ${config.botName} a awesome discord bot.`)
 					.addFields(
 						{
 							name: "Full command list",
 							value:
 								"To view full commands list type `/` or visit the [oficial site](" +
-								siteURL +
+								config.siteURL +
 								") to view a detailed description of all commands.",
 						},
 						{ name: "Categories", value: "\u200B" },
@@ -43,8 +43,8 @@ module.exports = class extends Command {
 							inline: true,
 						}
 					)
-					.setFooter({ text: `${siteURL} by GFrancv` }),
+					.setFooter({ text: `${config.siteURL} by GFrancv` }),
 			],
 		});
 	};
-};
+}

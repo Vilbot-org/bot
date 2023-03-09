@@ -1,4 +1,4 @@
-module.exports = class Command {
+export default class Command {
 	constructor(client, options) {
 		this.client = client;
 		this.options = options;
@@ -7,4 +7,4 @@ module.exports = class Command {
 		this.options = options.options;
 		this.default_member_permissions = options.default_member_permissions;
 	}
-};
+}

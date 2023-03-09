@@ -1,8 +1,8 @@
-const Command = require("../../structures/Command");
+import Command from "../../structures/Command.js";
 
-const snipe = require("../../schemas/UsersPlaylistsSchema");
+import snipe from "../../schemas/UsersPlaylistsSchema.js";
 
-module.exports = class extends Command {
+export default class extends Command {
 	constructor(client) {
 		super(client, {
 			name: "playlist",
@@ -105,4 +105,4 @@ module.exports = class extends Command {
 
 		await require(`./subcommands/${subCommand}`)(this.client, interaction, snipe);
 	};
-};
+}
