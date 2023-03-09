@@ -1,5 +1,6 @@
-const { EmbedBuilder } = require("discord.js");
-const { colors } = require("../../../config.json");
+import { EmbedBuilder } from "discord.js";
+
+import config from "../../../app.config";
 
 module.exports = async (client, interaction, snipe) => {
 	const songToRemove = interaction.options.getString("song");
@@ -10,7 +11,9 @@ module.exports = async (client, interaction, snipe) => {
 	//Check if the number is valid
 	if (songToRemove <= 0) {
 		return await interaction.reply({
-			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Please enter a valit number song.")],
+			embeds: [
+				new EmbedBuilder().setColor(config.colors.danger).setTitle(":x: Please enter a valit number song."),
+			],
 			ephemeral: true,
 		});
 	}
@@ -29,7 +32,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setTitle(`:x: The song you have indicated does not exist in the playlist!`)
 					.setDescription("Please check the song and try again."),
 			],
@@ -39,7 +42,7 @@ module.exports = async (client, interaction, snipe) => {
 	return await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(colors.green)
+				.setColor(config.colors.green)
 				.setAuthor({ name: "Remove song to playlist" })
 				.setTitle(`The song has been success removed to the **${playlist}** playlist`),
 		],

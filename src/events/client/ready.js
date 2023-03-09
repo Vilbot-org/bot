@@ -1,5 +1,5 @@
 import { ActivityType } from "discord.js";
-import Event from "../../structures/Event.js";
+import Event from "../../structures/Event";
 
 export default class extends Event {
 	constructor(client) {

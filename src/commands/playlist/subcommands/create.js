@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
-const { colors } = require("../../../config.json");
+import config from "../../../app.config";
 
-module.exports = async (client, interaction, snipe) => {
+export default async (client, interaction, snipe) => {
 	const playlistName = interaction.options.getString("name")
 		? interaction.options.getString("name")
 		: `${interaction.user.username}-playlist`;
@@ -13,7 +13,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setTitle(
 						interaction.options.getString("name")
 							? ":x: A playlist with that name already exists!"
@@ -35,7 +35,7 @@ module.exports = async (client, interaction, snipe) => {
 		.save()
 		.then(
 			embedMsg
-				.setColor(colors.green)
+				.setColor(config.colors.green)
 				.setAuthor({ name: "Create a new playlist" })
 				.setTitle(`A playlist '${playlistName}' has been created sucessfully!`)
 				.setDescription(
@@ -47,7 +47,7 @@ module.exports = async (client, interaction, snipe) => {
 		)
 		.catch(error => {
 			embedMsg
-				.setColor(colors.danger)
+				.setColor(config.colors.danger)
 				.setAuthor({ name: "Error!" })
 				.setTitle(":x: An error occurred while creating your playlist")
 				.setDescription("Please wait a moment and try again.");

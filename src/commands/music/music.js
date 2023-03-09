@@ -1,7 +1,7 @@
 import Command from "../../structures/Command.js";
 import { EmbedBuilder, PermissionFlagsBits } from "discord.js";
 
-import configs from "../../config.json";
+import configs from "../../app.config.js";
 
 export default class extends Command {
 	constructor(client) {
@@ -105,6 +105,7 @@ export default class extends Command {
 
 		const queue = await this.client.player.nodes.get(interaction.guildId);
 
-		await require(`./subcommands/${subCommand}`)(this.client, interaction, queue);
+		const { default: subCommandFunction } = await import(`./subcommands/${subCommand}`);
+		await subCommandFunction(this.client, interaction, queue);
 	};
 }

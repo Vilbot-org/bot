@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } from "discord.js";
-import Command from "../../structures/Command.js";
+import Command from "../../structures/Command";
 
-import { colors } from "../../config.json";
+import config from "../../app.config";
 
 export default class extends Command {
 	constructor(client) {
@@ -11,21 +11,11 @@ export default class extends Command {
 				.setName("clear")
 				.setDescription("Remove messages from the bot on this channel!")
 				.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-				.addNumberOption(option =>
-					option
-						.setName("amount")
-						.setDescription(
-							"Number of bot messages you want to delete (by defaul the command clear 10 messages)."
-						)
-						.setRequired(false)
-				)
 		);
 	}
 
 	run = async interaction => {
-		const amountOfMessages = interaction.options.getInteger("amount")
-			? interaction.options.getInteger("amount")
-			: 10;
+		const amountOfMessages = 10;
 		let allMsgs = [];
 		let msgsToDelete = [];
 
@@ -40,7 +30,9 @@ export default class extends Command {
 
 		if (msgsToDelete.length == 0) {
 			return await interaction.reply({
-				embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(`:x: There are no messages to delete!`)],
+				embeds: [
+					new EmbedBuilder().setColor(config.colors.danger).setTitle(`:x: There are no messages to delete!`),
+				],
 				ephemeral: true,
 			});
 		}
@@ -49,7 +41,7 @@ export default class extends Command {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.success)
+					.setColor(config.colors.success)
 					.setTitle(`:white_check_mark: ${msgsToDelete.length} messages have been successfully deleted!`),
 			],
 			ephemeral: true,

@@ -1,10 +1,10 @@
-const { EmbedBuilder, PermissionsBitField } = require("discord.js");
-const { colors } = require("../../../config.json");
+import { EmbedBuilder, PermissionsBitField } from "discord.js";
+import config from "../../../app.config";
 
-module.exports = async (client, interaction, queue) => {
+export default async (client, interaction, queue) => {
 	if (!queue)
 		return await interaction.reply({
-			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music in not playing!")],
+			embeds: [new EmbedBuilder().setColor(config.colors.danger).setTitle(":x: Music in not playing!")],
 			ephemeral: true,
 		});
 
@@ -15,7 +15,7 @@ module.exports = async (client, interaction, queue) => {
 			return await interaction.reply({
 				embeds: [
 					new EmbedBuilder()
-						.setColor(colors.success)
+						.setColor(config.colors.success)
 						.setTitle(":wave: The bot has been disconnected!")
 						.setDescription("Bye, bye!"),
 				],
@@ -23,7 +23,9 @@ module.exports = async (client, interaction, queue) => {
 		} else
 			return await interaction.reply({
 				embeds: [
-					new EmbedBuilder().setColor(colors.danger).setTitle(":x: You don't have permission to do that!"),
+					new EmbedBuilder()
+						.setColor(config.colors.danger)
+						.setTitle(":x: You don't have permission to do that!"),
 				],
 				ephemeral: true,
 			});

@@ -1,6 +1,6 @@
-import Command from "../../structures/Command.js";
+import Command from "../../structures/Command";
 
-import snipe from "../../schemas/UsersPlaylistsSchema.js";
+import snipe from "../../schemas/UsersPlaylistsSchema";
 
 export default class extends Command {
 	constructor(client) {
@@ -103,6 +103,7 @@ export default class extends Command {
 	run = async interaction => {
 		const subCommand = interaction.options.getSubcommand();
 
-		await require(`./subcommands/${subCommand}`)(this.client, interaction, snipe);
+		const { default: subCommandFunction } = await import(`./subcommands/${subCommand}`);
+		await subCommandFunction(this.client, interaction, snipe);
 	};
 }

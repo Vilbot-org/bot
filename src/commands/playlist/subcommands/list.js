@@ -1,10 +1,11 @@
-const { EmbedBuilder } = require("discord.js");
-const { colors } = require("../../../config.json");
+import { EmbedBuilder } from "discord.js";
 
-module.exports = async (client, interaction, snipe) => {
+import config from "../../../app.config";
+
+export default async (client, interaction, snipe) => {
 	const playlists = await snipe.find({ userId: interaction.user.id });
 	const embedMsg = new EmbedBuilder()
-		.setColor(colors.info)
+		.setColor(config.colors.info)
 		.setAuthor({ name: "List of playlist" })
 		.setTitle(`${interaction.user.username} playlists:`)
 		.setThumbnail(interaction.user.avatarURL())

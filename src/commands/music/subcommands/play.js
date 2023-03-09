@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
-const { colors } = require("../../../config.json");
+import config from "../../../app.config";
 
-module.exports = async (client, interaction) => {
+export default async (client, interaction) => {
 	const query = interaction.options.getString("song");
 	const channel = interaction.member.voice.channel;
 
@@ -19,7 +19,7 @@ module.exports = async (client, interaction) => {
 		return interaction.followUp({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.success)
+					.setColor(config.colors.success)
 					.setAuthor({ name: "Add to the queue" })
 					.setTitle(`${track.title}`)
 					.setURL(`${track.url}`)

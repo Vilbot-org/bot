@@ -1,5 +1,6 @@
-const { EmbedBuilder } = require("discord.js");
-const { colors } = require("../../../config.json");
+import { EmbedBuilder } from "discord.js";
+
+import config from "../../../app.config";
 
 module.exports = async (client, interaction, snipe) => {
 	const playlistName = interaction.options.getString("name")
@@ -12,7 +13,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setTitle(":x: You don't have playlist with that name!")
 					.setDescription(
 						"Please check the name and try again or create a playlist with that name typing `/playlist create " +
@@ -24,7 +25,7 @@ module.exports = async (client, interaction, snipe) => {
 		});
 
 	const embedMsg = new EmbedBuilder()
-		.setColor(colors.success)
+		.setColor(config.colors.success)
 		.setAuthor({ name: "Songs list" })
 		.setTitle(data.playlistName);
 

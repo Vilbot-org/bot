@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require("discord.js");
-const { Track } = require("discord-player");
-const { colors } = require("../../../config.json");
+import { EmbedBuilder } from "discord.js";
 
-const snipe = require("../../../schemas/UsersPlaylistsSchema");
+import config from "../../../app.config";
+
+import snipe from "../../../schemas/UsersPlaylistsSchema";
 
 module.exports = async (client, interaction) => {
 	const channel = interaction.member.voice.channel;
@@ -16,7 +16,9 @@ module.exports = async (client, interaction) => {
 		let playlist = await snipe.findOne({ userId: interaction.user.id, playlistName: playlistQuery });
 		if (!playlist)
 			return await interaction.reply({
-				embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: This playlist don't exist!")],
+				embeds: [
+					new EmbedBuilder().setColor(config.colors.danger).setTitle(":x: This playlist don't exist!"),
+				],
 				ephemeral: true,
 			});
 
@@ -26,7 +28,7 @@ module.exports = async (client, interaction) => {
 			return await interaction.reply({
 				embeds: [
 					new EmbedBuilder()
-						.setColor(colors.danger)
+						.setColor(config.colors.danger)
 						.setTitle(":x: This playlist don't have songs!")
 						.setDescription(
 							"You can add songs to this playlist with the following command: `/playlist add <song> " +
@@ -62,7 +64,7 @@ module.exports = async (client, interaction) => {
 		return interaction.followUp({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.success)
+					.setColor(config.colors.success)
 					.setAuthor({ name: "Add to the queue" })
 					.setTitle(`The ${playlistQuery} playlist`)
 					.setThumbnail(interaction.user.avatarURL())

@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
-const { colors } = require("../../../config.json");
+import config from "../../../app.config";
 
-module.exports = async (client, interaction, snipe) => {
+export default async (client, interaction, snipe) => {
 	const playlistName = interaction.options.getString("name");
 
 	//If you try to delete the default playlist
@@ -10,7 +10,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setTitle(":x: You can't delete the default playlist!")
 					.setDescription("Please try with another playlist."),
 			],
@@ -27,7 +27,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.green)
+					.setColor(config.colors.green)
 					.setAuthor({ name: "Delete the playlist" })
 					.setTitle(`A playlist '${playlistName}' has been deleted sucessfully!`)
 					.setFooter({ text: "Type `/playlist help` to display more info" }),
@@ -38,7 +38,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setAuthor({ name: "Error" })
 					.setTitle("You don't have any playlist with this name!")
 					.setDescription("Please check the name with the command `/playlist list` and try again")

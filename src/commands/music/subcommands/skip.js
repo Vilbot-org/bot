@@ -1,15 +1,15 @@
-const { ButtonBuilder } = require("@discordjs/builders");
-const { EmbedBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+import { ButtonBuilder } from "@discordjs/builders";
+import { EmbedBuilder, ActionRowBuilder, ButtonStyle } from "discord.js";
 
-const { colors } = require("../../../config.json");
+import config from "../../../app.config";
 
-module.exports = async (client, interaction, queue) => {
+export default async (client, interaction, queue) => {
 	if (!queue || queue.isEmpty())
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setTitle("Music queue!")
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setDescription(":x: No songs in the queue!"),
 			],
 			ephemeral: true,
@@ -17,7 +17,7 @@ module.exports = async (client, interaction, queue) => {
 
 	try {
 		const skipingMessage = new EmbedBuilder()
-			.setColor(colors.success)
+			.setColor(config.colors.success)
 			.setAuthor({ name: "Skipping the song" })
 			.setTitle(`:track_next: ${queue.tracks.at(0).title}`)
 			.setURL(`${queue.tracks.at(0).url}`);
@@ -44,7 +44,7 @@ module.exports = async (client, interaction, queue) => {
 		const votingMessage = await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.info)
+					.setColor(config.colors.info)
 					.setTitle("Votation to skip the current song")
 					.setDescription(`Do you want to skip the current song?`),
 			],
@@ -67,7 +67,7 @@ module.exports = async (client, interaction, queue) => {
 				await i.reply({
 					embeds: [
 						new EmbedBuilder()
-							.setColor(colors.danger)
+							.setColor(config.colors.danger)
 							.setTitle(":x: You need to be in voice channel to vote!"),
 					],
 					ephemeral: true,
@@ -75,7 +75,7 @@ module.exports = async (client, interaction, queue) => {
 			//Check if the user already voted
 			if (memberAlreadyVoted)
 				await i.reply({
-					embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: You have already voted!")],
+					embeds: [new EmbedBuilder().setColor(config.colors.danger).setTitle(":x: You have already voted!")],
 					ephemeral: true,
 				});
 
@@ -91,7 +91,7 @@ module.exports = async (client, interaction, queue) => {
 			}
 
 			await i.reply({
-				embeds: [new EmbedBuilder().setColor(colors.info).setTitle("Thanks for voting!")],
+				embeds: [new EmbedBuilder().setColor(config.colors.info).setTitle("Thanks for voting!")],
 				ephemeral: true,
 			});
 
@@ -108,7 +108,7 @@ module.exports = async (client, interaction, queue) => {
 				await interaction.channel.send({
 					embeds: [
 						new EmbedBuilder()
-							.setColor(colors.success)
+							.setColor(config.colors.success)
 							.setAuthor({ name: "Skiping the song" })
 
 							.setTitle(`:track_next: ${queue.tracks.at(0).title}`)

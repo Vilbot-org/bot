@@ -1,7 +1,7 @@
 import { EmbedBuilder } from "discord.js";
-import Command from "../../structures/Command.js";
+import Command from "../../structures/Command";
 
-import config from "../../app.config.js";
+import config from "../../app.config";
 
 export default class PingCommand extends Command {
 	constructor(client) {

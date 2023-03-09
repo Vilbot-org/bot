@@ -1,7 +1,8 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import Command from "../../structures/Command.js";
+import Command from "../../structures/Command";
 
-import config from "../../app.config.js";
+import config from "../../app.config";
+import packageInfo from "../../../package.json";
 
 export default class extends Command {
 	constructor(client) {
@@ -16,7 +17,9 @@ export default class extends Command {
 					.setTitle(`${config.botName} help`)
 					.setThumbnail(this.client.user.avatarURL())
 					.setAuthor({ name: "Vilbot help command" })
-					.setDescription(`Hi! I'm ${config.botName} a awesome discord bot.`)
+					.setDescription(
+						`Hi! I'm ${config.botName} a awesome discord bot. Current version: v${packageInfo.version}`
+					)
 					.addFields(
 						{
 							name: "Full command list",
@@ -43,7 +46,7 @@ export default class extends Command {
 							inline: true,
 						}
 					)
-					.setFooter({ text: `${config.siteURL} by GFrancv` }),
+					.setFooter({ text: `${config.siteURL} by ${packageInfo.author}` }),
 			],
 		});
 	};

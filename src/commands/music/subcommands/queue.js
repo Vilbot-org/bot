@@ -1,19 +1,19 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
-const { colors } = require("../../../config.json");
+import config from "../../../app.config";
 
-module.exports = async (client, interaction, queue) => {
+export default async (client, interaction, queue) => {
 	const embedMsg = new EmbedBuilder().setAuthor({ name: "Music queue!" }).setTitle("Current song:");
 
 	if (!queue)
 		return await interaction.reply({
-			embeds: [embedMsg.setColor(colors.danger).setDescription(":x: No songs in the queue!")],
+			embeds: [embedMsg.setColor(config.colors.danger).setDescription(":x: No songs in the queue!")],
 			ephemeral: true,
 		});
 
 	try {
 		embedMsg
-			.setColor(colors.success)
+			.setColor(config.colors.success)
 			.setThumbnail(queue.currentTrack.thumbnail)
 			.setDescription(`[${queue.currentTrack.title}](${queue.currentTrack.url})`)
 			.setFooter({ text: `There are ${queue.getSize()} songs in the queue` });

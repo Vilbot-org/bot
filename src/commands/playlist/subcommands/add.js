@@ -1,8 +1,8 @@
-const { QueryType } = require("discord-player");
-const { EmbedBuilder } = require("discord.js");
-const { colors } = require("../../../config.json");
+import { QueryType } from "discord-player";
+import { EmbedBuilder } from "discord.js";
+import config from "../../../app.config";
 
-module.exports = async (client, interaction, snipe) => {
+export default async (client, interaction, snipe) => {
 	const songToAdd = interaction.options.getString("song");
 	const playlist = interaction.options.getString("playlist")
 		? interaction.options.getString("playlist")
@@ -17,7 +17,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setDescription(":x: The song need to be a valid Youtube URL!"),
 			],
 			ephemeral: true,
@@ -39,7 +39,7 @@ module.exports = async (client, interaction, snipe) => {
 		return await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setColor(colors.danger)
+					.setColor(config.colors.danger)
 					.setTitle(`:x: No playlist with that name found!`)
 					.setDescription(
 						"Create the playlist first with `/playlist create " +
@@ -53,7 +53,7 @@ module.exports = async (client, interaction, snipe) => {
 	return await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(colors.green)
+				.setColor(config.colors.green)
 				.setAuthor({ name: "Add new song to playlist" })
 				.setTitle(`${song.title} added to the **${playlist}** playlist`)
 				.setDescription(

@@ -1,10 +1,10 @@
-const { EmbedBuilder } = require("discord.js");
-const { colors } = require("../../../config.json");
+import { EmbedBuilder } from "discord.js";
+import config from "../../../app.config";
 
 module.exports = async (client, interaction, queue) => {
 	if (!queue)
 		return await interaction.reply({
-			embeds: [new EmbedBuilder().setColor(colors.danger).setTitle(":x: Music is not playing!")],
+			embeds: [new EmbedBuilder().setColor(config.colors.danger).setTitle(":x: Music is not playing!")],
 			ephemeral: true,
 		});
 
@@ -16,7 +16,7 @@ module.exports = async (client, interaction, queue) => {
 	return await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(colors.success)
+				.setColor(config.colors.success)
 				.setAuthor({ name: "Current song info" })
 				.setTitle(`${queue.currentTrack.title}`)
 				.setURL(`${queue.currentTrack.url}`)

@@ -1,3 +1,3 @@
 {
-	"conventionalCommits.scopes": ["music.play", "commands-music", "music-commands"]
+	"conventionalCommits.scopes": ["music.play", "commands-music", "music-commands", "es6"]
 }

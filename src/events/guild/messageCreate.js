@@ -1,8 +1,8 @@
-const Event = require("../../structures/Event");
+import Event from "../../structures/Event.js";
 
-const { botName } = require("../../config.json");
+import config from "../../app.config.js";
 
-module.exports = class extends Event {
+export default class extends Event {
 	constructor(client) {
 		super(client, { name: "messageCreate" });
 	}
@@ -10,9 +10,12 @@ module.exports = class extends Event {
 	run = async interaction => {
 		//If the user send a message in the music boy channel and this message is not a command
 		if (
-			interaction.channel.name == `「🎵」${botName.charAt(0).toLowerCase() + botName.slice(1)}-music` &&
+			interaction.channel.name ==
+				`「🎵」${config.botName.charAt(0).toLowerCase() + config.botName.slice(1)}-music` &&
 			interaction.member.user.id != this.client.user.id
-		)
-			await require("../../functions/exclusiveChannel")(this.client, interaction);
+		) {
+			const { default: exclusiveChannelFunction } = await import("../../functions/exclusiveChannel");
+			await exclusiveChannelFunction(this.client, interaction);
+		}
 	};
-};
+}

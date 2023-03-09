@@ -1,11 +1,11 @@
-import Event from "../../structures/Event.js";
+import Event from "../../structures/Event";
 
 export default class extends Event {
 	constructor(client) {
 		super(client, { name: "interactionCreate" });
 	}
 
-	run = interaction => {
+	run = async interaction => {
 		//If the interaction is a button
 		if (interaction.isButton()) {
 			//If the author of this interaction is our bot
@@ -18,7 +18,9 @@ export default class extends Event {
 
 				if (commandType == "Player") {
 					const queue = this.client.player.nodes.get(interaction.guildId);
-					require(`../../commands/music/subcommands/${command}`)(this.client, interaction, queue);
+
+					const { default: subCommandFunction } = await import(`../../commands/music/subcommands/${command}`);
+					await subCommandFunction(this.client, interaction, queue);
 				}
 			}
 		}

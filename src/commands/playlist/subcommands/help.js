@@ -1,17 +1,17 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
-const { colors, siteURL } = require("../../../config.json");
+import config from "../../../app.config";
 
-module.exports = async (client, interaction) => {
+export default async (client, interaction) => {
 	return await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(colors.info)
+				.setColor(config.colors.info)
 				.setAuthor({ name: "Vilbot help command" })
 				.setTitle("Playlist help")
 				.setThumbnail(client.user.avatarURL())
 				.setDescription(
-					`With this command you can create awesome playlists with your favortie songs!\nFor more detailed information [visit the website](${siteURL}). `
+					`With this command you can create awesome playlists with your favortie songs!\nFor more detailed information [visit the website](${config.siteURL}). `
 				)
 				.addFields(
 					{

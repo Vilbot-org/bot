@@ -1,14 +1,11 @@
 import "dotenv/config";
 
 import { Client } from "discord.js";
-import fs from "fs/promises";
-import path from "path";
+import { readdirSync } from "fs";
+import { join } from "path";
 import mongoose from "mongoose";
 
-import player from "./Player.js";
-
-import commands from "../commands/index.js";
-import events from "../events/index.js";
+import player from "./Player";
 
 export default class extends Client {
 	constructor(options) {
@@ -22,70 +19,39 @@ export default class extends Client {
 		this.player = player(this);
 	}
 
-	async loadCommands() {
-		/* 	const categories = await readdir(path);
-
+	async loadCommands(path = "./src/commands") {
+		const categories = readdirSync(path);
+		//Read the categories of the commands (folders inside commands)
 		for (const category of categories) {
-			const commands = await readdir(`${path}/${category}`);
+			const commands = readdirSync(`${path}/${category}`).filter(file => file.endsWith(".js"));
+			//Read all the comands in the category (js files)
+			for (const command of commands) {
+				//Create new commands
+				const commandClass = (await import(`${join(process.cwd(), path, category, command)}`)).default;
 
-			for (const command of commands.filter(file => file.endsWith(".js"))) {
-				const CommandClass = await import(`${path}/${category}/${command}`);
-				const cmd = new CommandClass(this);
+				const cmd = new commandClass(this);
 
 				this.commands.push(cmd);
 				console.log(`Command ${command} of the category ${category} are load! (${cmd.name})`);
 			}
-		} */
-
-		/* const importDirectory = async directoryPath => {
-			const files = await fs.readdir(directoryPath);
-			const modules = [];
-
-			for (const file of files) {
-				if (file.endsWith(".js")) {
-					const filePath = path.join(directoryPath, file);
-					const importedModule = await import(filePath);
-					modules.push(importedModule);
-				}
-			}
-
-			return modules;
-		};
-
-		const modules = await importDirectory("./src/commands/info");
-
-		console.log(modules); */
-
-		this.commands = commands.map(command => {
-			const cmd = new command(this);
-			console.log(`Command are load! (${cmd.name})`);
-
-			return cmd;
-		});
+		}
 	}
 
-	async loadEvents() {
-		/* const categories = readdirSync(path);
+	async loadEvents(path = "src/events") {
+		const categories = readdirSync(path);
 		//Read the categories of the commands (folders inside commands)
 		for (const category of categories) {
 			const events = readdirSync(`${path}/${category}`);
 			//Read all the comands in the category (js files)
 			for (const event of events) {
 				//Create new commands
-				const eventClass = await import(`${join(process.cwd(), `${path}/${category}/${event}`)}`);
+				const eventClass = (await import(`${join(process.cwd(), path, category, event)}`)).default;
 				const evnt = new eventClass(this);
 
 				this.on(evnt.name, evnt.run);
 				console.log(`Command ${event} of the category ${category} are load! (${evnt.name})`);
 			}
-		} */
-
-		events.map(event => {
-			const evnt = new event(this);
-
-			this.on(evnt.name, evnt.run);
-			console.log(`Event are load! (${evnt.name})`);
-		});
+		}
 	}
 
 	registerCommands() {
@@ -95,6 +61,7 @@ export default class extends Client {
 
 	async databaseConnection() {
 		mongoose.set("strictQuery", true);
+		1;
 		this.db = await mongoose.connect(process.env.CONNECTION_DB, { dbName: "vilbot" });
 
 		console.log(`Success connection to ${this.db.connection.name} DB`);

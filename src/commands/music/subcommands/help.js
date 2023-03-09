@@ -1,12 +1,13 @@
-const { EmbedBuilder } = require("discord.js");
-const { botName, siteURL, colors } = require("../../../config.json");
+import { EmbedBuilder } from "discord.js";
 
-module.exports = async (client, interaction) => {
+import config from "../../../app.config";
+
+export default async (client, interaction) => {
 	return await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(colors.info)
-				.setTitle(`${botName} music help`)
+				.setColor(config.colors.info)
+				.setTitle(`${config.botName} music help`)
 				.setDescription("Main command list:")
 				.addFields(
 					{
@@ -33,12 +34,12 @@ module.exports = async (client, interaction) => {
 						name: "All the commands",
 						value:
 							"To view the full list of music commands type `/music` or visit the [oficial site](" +
-							siteURL +
+							config.siteURL +
 							").",
 					}
 				)
 				.setFooter({
-					text: botName,
+					text: config.botName,
 				})
 				.setThumbnail(client.user.avatarURL()),
 		],
