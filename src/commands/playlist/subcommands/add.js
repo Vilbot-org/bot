@@ -1,32 +1,33 @@
-import { QueryType } from "discord-player";
-import { EmbedBuilder } from "discord.js";
-import config from "../../../app.config";
+import { QueryType } from 'discord-player';
+import { EmbedBuilder } from 'discord.js';
+import config from '../../../app.config';
 
 export default async (client, interaction, snipe) => {
-	const songToAdd = interaction.options.getString("song");
-	const playlist = interaction.options.getString("playlist")
-		? interaction.options.getString("playlist")
+	const songToAdd = interaction.options.getString('song');
+	const playlist = interaction.options.getString('playlist')
+		? interaction.options.getString('playlist')
 		: `${interaction.user.username}-playlist`;
 
 	//Check if the song is a Youtube URL
 	try {
-		let urlSong = new URL(songToAdd);
+		const urlSong = new URL(songToAdd);
 		//If the host is not youtube generate a error
-		if (urlSong.hostname != "www.youtube.com") throw new SyntaxError("It's not a Youtube URL");
+		if (urlSong.hostname !== 'www.youtube.com')
+			throw new SyntaxError("It's not a Youtube URL");
 	} catch (error) {
-		return await interaction.reply({
+		return interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.danger)
-					.setDescription(":x: The song need to be a valid Youtube URL!"),
+					.setDescription(':x: The song need to be a valid Youtube URL!')
 			],
-			ephemeral: true,
+			ephemeral: true
 		});
 	}
 
 	const result = await client.player.search(songToAdd, {
 		requestedBy: interaction.user,
-		searchEngine: QueryType.YOUTUBE_VIDEO,
+		searchEngine: QueryType.YOUTUBE_VIDEO
 	});
 	const song = result.tracks[0];
 
@@ -36,30 +37,28 @@ export default async (client, interaction, snipe) => {
 	);
 
 	if (!userPlaylist)
-		return await interaction.reply({
+		return interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.danger)
 					.setTitle(`:x: No playlist with that name found!`)
 					.setDescription(
-						"Create the playlist first with `/playlist create " +
-							playlist +
-							"` command and then add your songs!"
-					),
+						`Create the playlist first with \`/playlist create ${playlist}\` command and then add your songs!`
+					)
 			],
-			ephemeral: true,
+			ephemeral: true
 		});
 
-	return await interaction.reply({
+	return interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)
-				.setAuthor({ name: "Add new song to playlist" })
+				.setAuthor({ name: 'Add new song to playlist' })
 				.setTitle(`${song.title} added to the **${playlist}** playlist`)
 				.setDescription(
-					"Song added successfully.\nType `/music playlist " + playlist + "` to play your playlist."
-				),
+					`Song added successfully.\nType \`/music playlist ${playlist}\` to play your playlist.`
+				)
 		],
-		ephemeral: true,
+		ephemeral: true
 	});
 };

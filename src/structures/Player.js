@@ -1,10 +1,10 @@
-import { Player } from "discord-player";
+import { Player } from 'discord-player';
 
-export default client => {
+export default (client) => {
 	return Player.singleton(client, {
 		ytdlOptions: {
-			quality: "highestaudio",
-			highWaterMark: 1 << 25,
-		},
+			quality: 'highestaudio',
+			highWaterMark: 1 < 25
+		}
 	});
 };

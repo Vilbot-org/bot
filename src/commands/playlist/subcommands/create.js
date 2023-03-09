@@ -1,57 +1,58 @@
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder } from 'discord.js';
 
-import config from "../../../app.config";
+import config from '../../../app.config';
 
-export default async (client, interaction, snipe) => {
-	const playlistName = interaction.options.getString("name")
-		? interaction.options.getString("name")
+export default async (client, interaction, Snipe) => {
+	const playlistName = interaction.options.getString('name')
+		? interaction.options.getString('name')
 		: `${interaction.user.username}-playlist`;
 
 	//Check if this playlist already exist
-	const data = await snipe.findOne({ userId: interaction.user.id, playlistName: playlistName });
+	const data = await Snipe.findOne({
+		userId: interaction.user.id,
+		playlistName
+	});
 	if (data)
-		return await interaction.reply({
+		return interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.danger)
 					.setTitle(
-						interaction.options.getString("name")
-							? ":x: A playlist with that name already exists!"
-							: ":x: You already have your default playlist created"
-					),
+						interaction.options.getString('name')
+							? ':x: A playlist with that name already exists!'
+							: ':x: You already have your default playlist created'
+					)
 			],
-			ephemeral: true,
+			ephemeral: true
 		});
 
-	let embedMsg = new EmbedBuilder();
+	const embedMsg = new EmbedBuilder();
 	//Create new playlist if the user don't have a playlist with that name
-	const newPlaylist = new snipe({
+	const newPlaylist = new Snipe({
 		userId: interaction.user.id,
-		playlistName: playlistName,
+		playlistName,
 		public: true,
-		playlist: [],
+		playlist: []
 	});
 	await newPlaylist
 		.save()
 		.then(
 			embedMsg
 				.setColor(config.colors.green)
-				.setAuthor({ name: "Create a new playlist" })
+				.setAuthor({ name: 'Create a new playlist' })
 				.setTitle(`A playlist '${playlistName}' has been created sucessfully!`)
 				.setDescription(
-					"Now you can add new song in your playlist with the command: `/playlist add [song] " +
-						playlistName +
-						"`"
+					`Now you can add new song in your playlist with the command: \`/playlist add [song] ${playlistName}\`.`
 				)
-				.setFooter({ text: "Type `/playlist help` to display more info" })
+				.setFooter({ text: 'Type `/playlist help` to display more info' })
 		)
-		.catch(error => {
+		.catch(() => {
 			embedMsg
 				.setColor(config.colors.danger)
-				.setAuthor({ name: "Error!" })
-				.setTitle(":x: An error occurred while creating your playlist")
-				.setDescription("Please wait a moment and try again.");
+				.setAuthor({ name: 'Error!' })
+				.setTitle(':x: An error occurred while creating your playlist')
+				.setDescription('Please wait a moment and try again.');
 		});
 
-	return await interaction.reply({ embeds: [embedMsg], ephemeral: true });
+	return interaction.reply({ embeds: [embedMsg], ephemeral: true });
 };

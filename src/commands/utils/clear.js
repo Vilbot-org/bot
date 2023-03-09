@@ -1,50 +1,61 @@
-import { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } from "discord.js";
-import Command from "../../structures/Command";
+import {
+	SlashCommandBuilder,
+	PermissionFlagsBits,
+	EmbedBuilder
+} from 'discord.js';
+import Command from '../../structures/Command';
 
-import config from "../../app.config";
+import config from '../../app.config';
 
 export default class extends Command {
 	constructor(client) {
 		super(
 			client,
 			new SlashCommandBuilder()
-				.setName("clear")
-				.setDescription("Remove messages from the bot on this channel!")
+				.setName('clear')
+				.setDescription('Remove messages from the bot on this channel!')
 				.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 		);
 	}
 
-	run = async interaction => {
+	run = async (interaction) => {
 		const amountOfMessages = 10;
 		let allMsgs = [];
-		let msgsToDelete = [];
+		const msgsToDelete = [];
 
 		await interaction.channel.messages
 			.fetch({ limit: amountOfMessages, cache: false })
-			.then(messages => (allMsgs = messages))
+			.then((messages) => {
+				allMsgs = messages;
+			})
 			.catch(console.error);
 
-		allMsgs.map(msg => {
-			if (msg.author.id == this.client.user.id && !msg.pinned) msgsToDelete.push(msg);
+		allMsgs.forEach((msg) => {
+			if (msg.author.id === this.client.user.id && !msg.pinned)
+				msgsToDelete.push(msg);
 		});
 
-		if (msgsToDelete.length == 0) {
-			return await interaction.reply({
+		if (msgsToDelete.length === 0) {
+			return interaction.reply({
 				embeds: [
-					new EmbedBuilder().setColor(config.colors.danger).setTitle(`:x: There are no messages to delete!`),
+					new EmbedBuilder()
+						.setColor(config.colors.danger)
+						.setTitle(`:x: There are no messages to delete!`)
 				],
-				ephemeral: true,
+				ephemeral: true
 			});
 		}
 
 		await interaction.channel.bulkDelete(msgsToDelete);
-		return await interaction.reply({
+		return interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.success)
-					.setTitle(`:white_check_mark: ${msgsToDelete.length} messages have been successfully deleted!`),
+					.setTitle(
+						`:white_check_mark: ${msgsToDelete.length} messages have been successfully deleted!`
+					)
 			],
-			ephemeral: true,
+			ephemeral: true
 		});
 	};
 }
