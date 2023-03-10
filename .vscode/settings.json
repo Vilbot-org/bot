@@ -5,6 +5,7 @@
 		"music-commands",
 		"es6",
 		"devDependencies",
-		"playlist"
+		"playlist",
+		"docker"
 	]
 }
