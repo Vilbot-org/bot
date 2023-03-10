@@ -1,49 +1,46 @@
 import Command from '../../structures/Command';
 
-import snipe from '../../schemas/UsersPlaylistsSchema';
-
 export default class extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'playlist',
 			description: 'Command to manage your playlists.',
-			type: 2,
 			options: [
 				{
+					type: 1,
 					name: 'create',
 					description: 'Create a new playlist.',
-					type: 1,
 					options: [
 						{
+							type: 3,
 							name: 'name',
 							description: 'The new of your new platlist.',
-							type: 3,
 							required: false
 						}
 					]
 				},
 				{
+					type: 1,
 					name: 'delete',
 					description: 'Delete a specific playlist.',
-					type: 1,
 					options: [
 						{
+							type: 3,
 							name: 'name',
 							description: 'The name of the playlist you want to delete.',
-							type: 3,
 							required: true
 						}
 					]
 				},
 				{
+					type: 1,
 					name: 'list',
-					description: 'List your saved playlists.',
-					type: 1
+					description: 'List your saved playlists.'
 				},
 				{
+					type: 1,
 					name: 'show',
 					description: 'Display the songs in a playlist.',
-					type: 1,
 					options: [
 						{
 							name: 'name',
@@ -54,47 +51,47 @@ export default class extends Command {
 					]
 				},
 				{
+					type: 1,
 					name: 'add',
 					description: 'Add a new song in your playlist.',
-					type: 1,
 					options: [
 						{
-							name: 'song',
-							description: 'The URL of the song to add.',
 							type: 3,
+							name: 'song',
+							description: 'The name or URL of the song to add.',
 							required: true
 						},
 						{
+							type: 3,
 							name: 'playlist',
 							description: 'The playlist you want to add this song.',
-							type: 3,
 							required: false
 						}
 					]
 				},
 				{
+					type: 1,
 					name: 'remove',
 					description: 'Remove a song in your playlist.',
-					type: 1,
 					options: [
 						{
-							name: 'song',
-							description: 'The position of the song in your playlist.',
 							type: 3,
+							name: 'song',
+							description: 'The id of the song in your playlist.',
 							required: true
 						},
 						{
+							type: 3,
 							name: 'playlist',
 							description: 'The playlist you want to remove this song.',
-							type: 3,
 							required: false
 						}
 					]
 				},
 				{
+					type: 1,
 					name: 'help',
-					description: 'Display help about this command.',
-					type: 1
+					description: 'Display help about this command.'
 				}
 			]
 		});
@@ -106,6 +103,6 @@ export default class extends Command {
 		const { default: subCommandFunction } = await import(
 			`./subcommands/${subCommand}`
 		);
-		await subCommandFunction(this.client, interaction, snipe);
+		await subCommandFunction(this.client, interaction);
 	};
 }

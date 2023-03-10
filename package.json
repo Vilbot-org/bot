@@ -4,8 +4,8 @@
 	"description": "Awesome Discord bot with discord.js",
 	"main": "index.js",
 	"scripts": {
-		"start": "babel-node index.js",
-		"dev": "npx nodemon index.js --exec babel-node"
+		"start": "babel-node .",
+		"dev": "npx nodemon . --exec babel-node"
 	},
 	"keywords": [],
 	"author": "GFrancV",

@@ -1,8 +1,8 @@
 import { EmbedBuilder } from 'discord.js';
 
-import config from '../../../app.config';
+import UserPlaylistModel from '../../../models/UserPlaylistModel';
 
-import Snipe from '../../../schemas/UsersPlaylistsSchema';
+import config from '../../../app.config';
 
 export default async (client, interaction) => {
 	const { channel } = interaction.member.voice;
@@ -13,7 +13,7 @@ export default async (client, interaction) => {
 	await interaction.deferReply();
 
 	try {
-		let playlist = await Snipe.findOne({
+		let playlist = await UserPlaylistModel.findOne({
 			userId: interaction.user.id,
 			playlistName: playlistQuery
 		});
@@ -60,9 +60,10 @@ export default async (client, interaction) => {
 			}
 		});
 
-		tracks.foreach((track) => {
-			queue.insertTrack(track, queue.getSize());
-		});
+		if (tracks.length > 1)
+			tracks.forEach((track) => {
+				queue.insertTrack(track, queue.getSize());
+			});
 
 		return interaction.followUp({
 			embeds: [
@@ -71,7 +72,7 @@ export default async (client, interaction) => {
 					.setAuthor({ name: 'Add to the queue' })
 					.setTitle(`The ${playlistQuery} playlist`)
 					.setThumbnail(interaction.user.avatarURL())
-					.setFooter({ text: `${playlist.length} songs add.` })
+					.setFooter({ text: `${playlist.length} songs added.` })
 			]
 		});
 	} catch (e) {
