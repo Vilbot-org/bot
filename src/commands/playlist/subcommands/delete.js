@@ -2,12 +2,12 @@ import { EmbedBuilder } from 'discord.js';
 
 import config from '../../../app.config';
 
-export default async (client, interaction, snipe) => {
+export default async (client, interaction, UsersPlaylists) => {
 	const playlistName = interaction.options.getString('name');
 
 	//If you try to delete the default playlist
-	if (playlistName === `${interaction.user.username}-playlist`)
-		return interaction.reply({
+	if (playlistName === `${interaction.user.username}-playlist`) {
+		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.danger)
@@ -16,36 +16,23 @@ export default async (client, interaction, snipe) => {
 			],
 			ephemeral: true
 		});
+		return;
+	}
 
-	const deletePlaylist = await snipe.findOneAndDelete({
+	const deletePlaylist = await UsersPlaylists.findOneAndDelete({
 		userId: interaction.user.id,
 		playlistName
 	});
 
 	//Check if  exist this playlist
-	if (deletePlaylist)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.green)
-					.setAuthor({ name: 'Delete the playlist' })
-					.setTitle(
-						`A playlist '${playlistName}' has been deleted sucessfully!`
-					)
-					.setFooter({ text: 'Type `/playlist help` to display more info' })
-			],
-			ephemeral: true
-		});
+	if (!deletePlaylist) throw new Error('no-playlist-to-delete');
 
-	return interaction.reply({
+	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(config.colors.danger)
-				.setAuthor({ name: 'Error' })
-				.setTitle("You don't have any playlist with this name!")
-				.setDescription(
-					'Please check the name with the command `/playlist list` and try again'
-				)
+				.setColor(config.colors.green)
+				.setAuthor({ name: 'Delete the playlist' })
+				.setTitle(`A playlist '${playlistName}' has been deleted sucessfully!`)
 				.setFooter({ text: 'Type `/playlist help` to display more info' })
 		],
 		ephemeral: true

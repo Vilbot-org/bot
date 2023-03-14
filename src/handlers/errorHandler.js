@@ -54,7 +54,46 @@ const errorConfig = {
 
 	'already-vote': {
 		title: 'You have already voted!',
-		description: `Wait for the vote to be resolved.`
+		description: 'Wait for the vote to be resolved.'
+	},
+
+	'not-youtube-url': {
+		title: 'Invalid URL song!',
+		description: 'The song need to be a valid Youtube URL.'
+	},
+
+	'no-playlist-exist': {
+		title: 'No playlist with that name found!',
+		description:
+			'Create the playlist first with `/playlist create <playlist>` command and then add your songs!'
+	},
+
+	'playlist-already-exist': {
+		title:
+			'A playlist with that name already exists or you already have your default playlist created!',
+		description: 'Create a new playlist or add songs to the exist playlist!'
+	},
+
+	'no-playlist-to-delete': {
+		title: "You don't have any playlist with this name!",
+		description:
+			'Please check the name with the command `/playlist list` and try again'
+	},
+
+	'dont-have-playlist': {
+		title: "Oops! You still don't have playlists!",
+		description:
+			'Type`/playlist create <playlist-name>` to create a new playlist.'
+	},
+
+	'invalid-song-id': {
+		title: 'Invalid song to remove!',
+		description: 'Please enter a valit number song.'
+	},
+
+	'song-no-found-playlist': {
+		title: 'The song you have indicated does not exist in the playlist!',
+		description: 'Please check the song and try again.'
 	},
 
 	default: {

@@ -12,18 +12,7 @@ export default async (client, interaction, snipe) => {
 		userId: interaction.user.id,
 		playlistName
 	});
-	if (!data)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(":x: You don't have playlist with that name!")
-					.setDescription(
-						`Please check the name and try again or create a playlist with that name typing \`/playlist create ${playlistName}\`.`
-					)
-			],
-			ephemeral: true
-		});
+	if (!data) throw new Error('no-playlist-exist');
 
 	const embedMsg = new EmbedBuilder()
 		.setColor(config.colors.success)
@@ -31,15 +20,15 @@ export default async (client, interaction, snipe) => {
 		.setTitle(data.playlistName);
 
 	if (data.playlist.length > 0) {
-		const embedFields = data.playlist.map((playlist) => ({
-			name: `ID: ${playlist.id}`,
-			value: `[${playlist.title}](${playlist.url})`
-		}));
-
-		embedMsg.addFields(embedFields);
+		embedMsg.addFields(
+			data.playlist.map((playlist) => ({
+				name: `ID: ${playlist.id}`,
+				value: `[${playlist.title}](${playlist.url})`
+			}))
+		);
 	}
 
-	return interaction.reply({
+	await interaction.reply({
 		embeds: [
 			embedMsg
 				.setDescription(`This playlist have ${data.playlist.length} songs`)

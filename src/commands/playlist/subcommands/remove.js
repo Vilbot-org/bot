@@ -9,16 +9,7 @@ export default async (client, interaction, snipe) => {
 		: `${interaction.user.username}-playlist`;
 
 	//Check if the number is valid
-	if (songToRemove <= 0) {
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(':x: Please enter a valit number song.')
-			],
-			ephemeral: true
-		});
-	}
+	if (songToRemove <= 0) throw new Error('invalid-song-id');
 
 	const userPlaylist = await snipe.findOneAndUpdate(
 		{
@@ -30,20 +21,9 @@ export default async (client, interaction, snipe) => {
 		{ multi: true }
 	);
 
-	if (!userPlaylist)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(
-						`:x: The song you have indicated does not exist in the playlist!`
-					)
-					.setDescription('Please check the song and try again.')
-			],
-			ephemeral: true
-		});
+	if (!userPlaylist) throw new Error('song-no-found-playlist');
 
-	return interaction.reply({
+	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)

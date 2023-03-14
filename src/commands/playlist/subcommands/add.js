@@ -2,28 +2,17 @@ import { QueryType } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 import config from '../../../app.config';
 
-export default async (client, interaction, snipe) => {
+export default async (client, interaction, UsersPlaylists) => {
 	const songToAdd = interaction.options.getString('song');
 	const playlist = interaction.options.getString('playlist')
 		? interaction.options.getString('playlist')
 		: `${interaction.user.username}-playlist`;
 
 	//Check if the song is a Youtube URL
-	try {
-		const urlSong = new URL(songToAdd);
-		//If the host is not youtube generate a error
-		if (urlSong.hostname !== 'www.youtube.com')
-			throw new SyntaxError("It's not a Youtube URL");
-	} catch (error) {
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setDescription(':x: The song need to be a valid Youtube URL!')
-			],
-			ephemeral: true
-		});
-	}
+	const urlSong = new URL(songToAdd);
+	//If the host is not youtube generate a error
+	if (urlSong.hostname !== 'www.youtube.com')
+		throw new Error('not-youtube-url');
 
 	const result = await client.player.search(songToAdd, {
 		requestedBy: interaction.user,
@@ -31,25 +20,14 @@ export default async (client, interaction, snipe) => {
 	});
 	const song = result.tracks[0];
 
-	const userPlaylist = await snipe.findOneAndUpdate(
+	const userPlaylist = await UsersPlaylists.findOneAndUpdate(
 		{ userId: interaction.user.id, playlistName: playlist },
 		{ $push: { playlist: { id: song.id, title: song.title, url: song.url } } }
 	);
 
-	if (!userPlaylist)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(`:x: No playlist with that name found!`)
-					.setDescription(
-						`Create the playlist first with \`/playlist create ${playlist}\` command and then add your songs!`
-					)
-			],
-			ephemeral: true
-		});
+	if (!userPlaylist) throw new Error('no-playlist-exist');
 
-	return interaction.reply({
+	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)

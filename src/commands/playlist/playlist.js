@@ -1,6 +1,7 @@
 import Command from '../../structures/Command';
 
-import snipe from '../../schemas/UsersPlaylistsSchema';
+import UsersPlaylists from '../../schemas/UsersPlaylistsSchema';
+import errorHandler from '../../handlers/errorHandler';
 
 export default class extends Command {
 	constructor(client) {
@@ -103,9 +104,13 @@ export default class extends Command {
 	run = async (interaction) => {
 		const subCommand = interaction.options.getSubcommand();
 
-		const { default: subCommandFunction } = await import(
-			`./subcommands/${subCommand}`
-		);
-		await subCommandFunction(this.client, interaction, snipe);
+		try {
+			const { default: subCommandFunction } = await import(
+				`./subcommands/${subCommand}`
+			);
+			await subCommandFunction(this.client, interaction, UsersPlaylists);
+		} catch (e) {
+			errorHandler(interaction, e);
+		}
 	};
 }
