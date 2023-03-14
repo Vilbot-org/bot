@@ -11,7 +11,7 @@ export default class extends Event {
 		//Register the status of the bot
 		this.client.user.setActivity('/help', { type: ActivityType.Listening });
 
-		this.client.registerCommands();
+		//this.client.registerCommands();
 		await this.client.databaseConnection();
 	};
 }

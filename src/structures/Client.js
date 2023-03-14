@@ -44,7 +44,7 @@ export default class extends Client {
 		});
 	}
 
-	async loadEvents(path = 'src/events') {
+	loadEvents(path = 'src/events') {
 		const categories = readdirSync(path);
 
 		categories.map(async (category) => {

@@ -1,16 +1,17 @@
 //Enviroment variables and configs
+import { GatewayIntentBits } from 'discord.js';
 import 'dotenv/config';
 import Client from './src/structures/Client';
 
 const client = new Client({
 	intents: [
-		'Guilds',
-		'GuildMessages',
-		'GuildInvites',
-		'GuildMessageReactions',
-		'GuildVoiceStates',
-		'GuildMembers',
-		'GuildPresences'
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildInvites,
+		GatewayIntentBits.GuildMessageReactions,
+		GatewayIntentBits.GuildVoiceStates,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildPresences
 	]
 });
 

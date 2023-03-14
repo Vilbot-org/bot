@@ -1,4 +1,4 @@
-import { PermissionFlagsBits } from 'discord.js';
+import { ApplicationCommandOptionType, PermissionFlagsBits } from 'discord.js';
 import Command from '../../structures/Command';
 
 import errorHandler from '../../handlers/errorHandler';
@@ -8,17 +8,17 @@ export default class extends Command {
 		super(client, {
 			name: 'music',
 			description: 'Command to control the music of the bot.',
-			type: 2,
+			type: ApplicationCommandOptionType.SubcommandGroup,
 			options: [
 				{
 					name: 'play',
 					description: 'Play a song in the voice channel!',
-					type: 1,
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
 							name: 'song',
 							description: 'Enter the name of the song  or the URL.',
-							type: 3,
+							type: ApplicationCommandOptionType.String,
 							required: true
 						}
 					]
@@ -26,12 +26,12 @@ export default class extends Command {
 				{
 					name: 'playlist',
 					description: 'Play a playlist in the voice channel!',
-					type: 1,
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
 							name: 'playlist',
 							description: 'Enter the name of your playlist.',
-							type: 3,
+							type: ApplicationCommandOptionType.String,
 							required: false
 						}
 					]
@@ -39,49 +39,49 @@ export default class extends Command {
 				{
 					name: 'queue',
 					description: 'See the queue of the bot!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
 					name: 'skip',
 					description: 'Skip the current song!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
 					name: 'fskip',
 					description: 'Force the skip (no votation).',
-					type: 1,
+					type: ApplicationCommandOptionType.Subcommand,
 					default_member_permissions: PermissionFlagsBits.ManageGuild
 				},
 				{
 					name: 'pause',
 					description: 'Pause the music!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
 					name: 'resume',
 					description: 'Resume the music!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
 					name: 'quit',
 					description: 'Disconnect the bot of music!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
 					name: 'setup',
 					description: 'Run this command to setup the bot!',
-					type: 1,
+					type: ApplicationCommandOptionType.Subcommand,
 					default_member_permissions: PermissionFlagsBits.ManageGuild
 				},
 				{
 					name: 'info',
 					description: 'Info about the current song!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
 					name: 'help',
 					description: 'See the main commands and aditional info!',
-					type: 1
+					type: ApplicationCommandOptionType.Subcommand
 				}
 			]
 		});

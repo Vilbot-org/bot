@@ -1,3 +1,4 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import Command from '../../structures/Command';
 
 import errorHandler from '../../handlers/errorHandler';
@@ -7,83 +8,84 @@ export default class extends Command {
 		super(client, {
 			name: 'playlist',
 			description: 'Command to manage your playlists.',
+			type: ApplicationCommandOptionType.SubcommandGroup,
 			options: [
 				{
-					type: 1,
 					name: 'create',
 					description: 'Create a new playlist.',
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
-							type: 3,
 							name: 'name',
 							description: 'The new of your new platlist.',
+							type: ApplicationCommandOptionType.String,
 							required: false
 						}
 					]
 				},
 				{
-					type: 1,
 					name: 'delete',
 					description: 'Delete a specific playlist.',
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
-							type: 3,
 							name: 'name',
 							description: 'The name of the playlist you want to delete.',
+							type: ApplicationCommandOptionType.String,
 							required: true
 						}
 					]
 				},
 				{
-					type: 1,
 					name: 'list',
-					description: 'List your saved playlists.'
+					description: 'List your saved playlists.',
+					type: ApplicationCommandOptionType.Subcommand
 				},
 				{
-					type: 1,
 					name: 'show',
 					description: 'Display the songs in a playlist.',
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
 							name: 'name',
 							description: 'The name of the playlist to show.',
-							type: 3,
+							type: ApplicationCommandOptionType.String,
 							required: false
 						}
 					]
 				},
 				{
-					type: 1,
 					name: 'add',
 					description: 'Add a new song in your playlist.',
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
-							type: 3,
 							name: 'song',
 							description: 'The name or URL of the song to add.',
+							type: ApplicationCommandOptionType.String,
 							required: true
 						},
 						{
-							type: 3,
 							name: 'playlist',
 							description: 'The playlist you want to add this song.',
+							type: ApplicationCommandOptionType.String,
 							required: false
 						}
 					]
 				},
 				{
-					type: 1,
 					name: 'remove',
 					description: 'Remove a song in your playlist.',
+					type: ApplicationCommandOptionType.Subcommand,
 					options: [
 						{
-							type: 3,
 							name: 'song',
 							description: 'The id of the song in your playlist.',
+							type: ApplicationCommandOptionType.String,
 							required: true
 						},
 						{
-							type: 3,
+							type: ApplicationCommandOptionType.String,
 							name: 'playlist',
 							description: 'The playlist you want to remove this song.',
 							required: false
@@ -91,9 +93,9 @@ export default class extends Command {
 					]
 				},
 				{
-					type: 1,
 					name: 'help',
-					description: 'Display help about this command.'
+					description: 'Display help about this command.',
+					type: ApplicationCommandOptionType.Subcommand
 				}
 			]
 		});
