@@ -1,7 +1,7 @@
 {
 	"name": "vilbot",
 	"version": "1.0.1",
-	"description": "Awesome Discord bot with discord.js",
+	"description": "Vilbot is a awesome Discord Bot created by a passionate programmer using the discord.js library with varoious functionalities.",
 	"main": "index.js",
 	"scripts": {
 		"start": "babel-node .",

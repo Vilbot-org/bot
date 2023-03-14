@@ -8,6 +8,7 @@
 		"playlist",
 		"docker",
 		"playlist-commands",
-		"info-commands"
+		"info-commands",
+		"env-file"
 	]
 }
