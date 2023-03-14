@@ -4,6 +4,7 @@
 		"commands-music",
 		"music-commands",
 		"es6",
-		"playlist-commands"
+		"playlist-commands",
+		"info-commands"
 	]
 }

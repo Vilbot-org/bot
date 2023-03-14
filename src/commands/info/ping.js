@@ -16,12 +16,9 @@ export default class PingCommand extends Command {
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.green)
-					.setAuthor({ name: 'Pong!' })
-					.setTitle(
-						':ping_pong: The ping of the bot are' +
-							'`' +
-							`${this.client.ws.ping}` +
-							'ms`'
+					.setTitle('Pong!')
+					.setDescription(
+						`:ping_pong: The ping of the bot are \`${this.client.ws.ping}ms\``
 					)
 			]
 		});

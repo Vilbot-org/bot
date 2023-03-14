@@ -13,7 +13,7 @@ export default class extends Command {
 	}
 
 	run = async (interaction) => {
-		return interaction.reply({
+		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.info)
