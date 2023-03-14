@@ -2,38 +2,19 @@ import { EmbedBuilder } from 'discord.js';
 import config from '../../../app.config';
 
 export default async (client, interaction, queue) => {
-	if (!queue)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(':x: Music in not playing!')
-			],
-			ephemeral: true
-		});
+	if (!queue) throw new Error('no-songs-queue');
 
-	try {
-		const isPaused = await queue.node.isPaused();
+	const isPaused = await queue.node.isPaused();
 
-		if (!isPaused)
-			return await interaction.reply({
-				embeds: [
-					new EmbedBuilder()
-						.setColor(config.colors.danger)
-						.setTitle(':x: Music in not paused!')
-				],
-				ephemeral: true
-			});
+	if (!isPaused) throw new Error('music-resumed');
 
-		await queue.node.resume();
-		return await interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.success)
-					.setTitle(':arrow_forward: Resume the music!')
-			]
-		});
-	} catch (e) {
-		return interaction.followUp(`Something went wrong: ${e}`);
-	}
+	await queue.node.resume();
+
+	await interaction.reply({
+		embeds: [
+			new EmbedBuilder()
+				.setColor(config.colors.success)
+				.setTitle(':arrow_forward: Resume the music!')
+		]
+	});
 };

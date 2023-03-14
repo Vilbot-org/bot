@@ -1,7 +1,7 @@
-import { EmbedBuilder, PermissionFlagsBits } from 'discord.js';
+import { PermissionFlagsBits } from 'discord.js';
 import Command from '../../structures/Command';
 
-import configs from '../../app.config';
+import errorHandler from '../../handlers/errorHandler';
 
 export default class extends Command {
 	constructor(client) {
@@ -50,7 +50,7 @@ export default class extends Command {
 					name: 'fskip',
 					description: 'Force the skip (no votation).',
 					type: 1,
-					default_member_permissions: PermissionFlagsBits.ManageMessages
+					default_member_permissions: PermissionFlagsBits.ManageGuild
 				},
 				{
 					name: 'pause',
@@ -90,28 +90,23 @@ export default class extends Command {
 	run = async (interaction) => {
 		const subCommand = interaction.options.getSubcommand();
 
-		if (
-			!interaction.member.voice.channel &&
-			subCommand !== 'setup' &&
-			subCommand !== 'clear' &&
-			subCommand !== 'help'
-		) {
-			interaction.reply({
-				embeds: [
-					new EmbedBuilder()
-						.setColor(configs.colors.danger)
-						.setTitle('You need to be in a voice channel!')
-				],
-				ephemeral: true
-			});
-			return;
+		try {
+			if (
+				!interaction.member.voice.channel &&
+				subCommand !== 'setup' &&
+				subCommand !== 'clear' &&
+				subCommand !== 'help'
+			)
+				throw new Error('in-voice-channel');
+
+			const queue = await this.client.player.nodes.get(interaction.guildId);
+
+			const { default: subCommandFunction } = await import(
+				`./subcommands/${subCommand}`
+			);
+			await subCommandFunction(this.client, interaction, queue);
+		} catch (e) {
+			errorHandler(interaction, e);
 		}
-
-		const queue = await this.client.player.nodes.get(interaction.guildId);
-
-		const { default: subCommandFunction } = await import(
-			`./subcommands/${subCommand}`
-		);
-		await subCommandFunction(this.client, interaction, queue);
 	};
 }

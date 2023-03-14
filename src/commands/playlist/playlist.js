@@ -1,5 +1,7 @@
 import Command from '../../structures/Command';
 
+import errorHandler from '../../handlers/errorHandler';
+
 export default class extends Command {
 	constructor(client) {
 		super(client, {
@@ -100,9 +102,13 @@ export default class extends Command {
 	run = async (interaction) => {
 		const subCommand = interaction.options.getSubcommand();
 
-		const { default: subCommandFunction } = await import(
-			`./subcommands/${subCommand}`
-		);
-		await subCommandFunction(this.client, interaction);
+		try {
+			const { default: subCommandFunction } = await import(
+				`./subcommands/${subCommand}`
+			);
+			await subCommandFunction(this.client, interaction);
+		} catch (e) {
+			errorHandler(interaction, e);
+		}
 	};
 }

@@ -3,43 +3,22 @@ import { EmbedBuilder, PermissionsBitField } from 'discord.js';
 import config from '../../../app.config';
 
 export default async (client, interaction, queue) => {
-	const embedMsg = new EmbedBuilder().setTitle('Music queue!');
-
-	if (!queue) {
-		return interaction.reply({
-			embeds: [
-				embedMsg
-					.setColor(config.colors.danger)
-					.setDescription(':x: No songs in the queue!')
-			],
-			ephemeral: true
-		});
-	}
-
-	try {
-		//Check if the user can moderate
-		if (
-			!interaction.member.permissions.has(
-				PermissionsBitField.Flags.ModerateMembers
-			)
+	if (
+		!interaction.member.permissions.has(
+			PermissionsBitField.Flags.ModerateMembers
 		)
-			return await interaction.reply({
-				embeds: [
-					new EmbedBuilder()
-						.setColor(config.colors.danger)
-						.setTitle(":x: You don't have permission to do that!")
-				],
-				ephemeral: true
-			});
+	)
+		throw new Error('no-permission');
 
-		await queue.node.skip();
+	if (!queue) throw new Error('no-songs-queue');
 
-		const skipingMessage = new EmbedBuilder()
-			.setColor(config.colors.success)
-			.setAuthor({ name: 'Forcing the skip of the song' });
+	await queue.node.skip();
 
-		if (!queue.isEmpty()) {
-			skipingMessage
+	await interaction.reply({
+		embeds: [
+			new EmbedBuilder()
+				.setColor(config.colors.success)
+				.setAuthor({ name: 'Forcing the skip of the song' })
 				.setTitle(`:track_next: ${queue.tracks.at(0).title}`)
 				.setURL(`${queue.tracks.at(0).url}`)
 				.setDescription(
@@ -49,17 +28,7 @@ export default async (client, interaction, queue) => {
 								// eslint-disable-next-line no-mixed-spaces-and-tabs
 						  })`
 						: 'There are no more songs in the queue!'
-				);
-		} else {
-			skipingMessage
-				.setTitle(':wave: Bye bye!')
-				.setDescription('No more songs in the queue');
-		}
-
-		return interaction.reply({
-			embeds: [skipingMessage]
-		});
-	} catch (e) {
-		return interaction.reply(`Something went wrong: ${e}`);
-	}
+				)
+		]
+	});
 };

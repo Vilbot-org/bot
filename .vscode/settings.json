@@ -6,6 +6,8 @@
 		"es6",
 		"devDependencies",
 		"playlist",
-		"docker"
+		"docker",
+		"playlist-commands",
+		"info-commands"
 	]
 }

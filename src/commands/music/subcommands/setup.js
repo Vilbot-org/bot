@@ -9,21 +9,12 @@ import {
 import config from '../../../app.config';
 
 export default async (client, interaction) => {
-	//Check if the user can moderate
 	if (
 		!interaction.member.permissions.has(
-			PermissionsBitField.Flags.ModerateMembers ||
-				PermissionsBitField.Flags.ManageChannels
+			PermissionsBitField.Flags.ModerateMembers
 		)
 	)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(":x: You don't have permission to do that!")
-			],
-			ephemeral: true
-		});
+		throw new Error('no-permission');
 
 	const channels = await interaction.guild.channels.fetch();
 
@@ -34,40 +25,19 @@ export default async (client, interaction) => {
 				config.botName.charAt(0).toLowerCase() + config.botName.slice(1)
 			}-music`
 	);
-	//If the channel exist
-	if (existChannel)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(':x: The channel already exists!')
-					.setDescription(
-						`If you want to reset the bot channel please delete the '${config.botName}-music' text channel and run this command again.`
-					)
-			],
-			ephemeral: true
-		});
 
-	const musicChannel = await interaction.guild.channels
-		.create({
-			name: `「🎵」${config.botName}-music`,
-			topic:
-				'Hi! This is the channel text of the music bot, in this channel you can running the commands of the bot to have your server more organized.\nTo view all the music commands run **/music help** or to view all the commands run: **/help**',
-			rateLimitPerUser: 30,
-			reason: 'Channel to view the music in your channel!'
-		})
-		.catch(console.error);
-	//If the channel could not be created it sends an error
-	if (!musicChannel)
-		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(':x: An error occurred while creating the channel')
-					.setDescription('Check the permissions and try again.')
-			],
-			ephemeral: true
-		});
+	//If the channel exist
+	if (existChannel) throw new Error('channel-already-exist');
+
+	const musicChannel = await interaction.guild.channels.create({
+		name: `「🎵」${config.botName}-music`,
+		topic:
+			'Hi! This is the channel text of the music bot, in this channel you can running the commands of the bot to have your server more organized.\nTo view all the music commands run **/music help** or to view all the commands run: **/help**',
+		rateLimitPerUser: 30,
+		reason: 'Channel to view the music in your channel!'
+	});
+
+	if (!musicChannel) throw new Error('creating-channel');
 
 	await interaction.reply({
 		embeds: [
