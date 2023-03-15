@@ -1,116 +1,91 @@
-import { ApplicationCommandOptionType } from 'discord.js';
-import Command from '../../structures/Command';
+import { SlashCommandBuilder } from 'discord.js';
 
 import errorHandler from '../../handlers/errorHandler';
 
-export default class extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'playlist',
-			description: 'Command to manage your playlists.',
-			type: ApplicationCommandOptionType.SubcommandGroup,
-			options: [
-				{
-					name: 'create',
-					description: 'Create a new playlist.',
-					type: ApplicationCommandOptionType.Subcommand,
-					options: [
-						{
-							name: 'name',
-							description: 'The new of your new platlist.',
-							type: ApplicationCommandOptionType.String,
-							required: false
-						}
-					]
-				},
-				{
-					name: 'delete',
-					description: 'Delete a specific playlist.',
-					type: ApplicationCommandOptionType.Subcommand,
-					options: [
-						{
-							name: 'name',
-							description: 'The name of the playlist you want to delete.',
-							type: ApplicationCommandOptionType.String,
-							required: true
-						}
-					]
-				},
-				{
-					name: 'list',
-					description: 'List your saved playlists.',
-					type: ApplicationCommandOptionType.Subcommand
-				},
-				{
-					name: 'show',
-					description: 'Display the songs in a playlist.',
-					type: ApplicationCommandOptionType.Subcommand,
-					options: [
-						{
-							name: 'name',
-							description: 'The name of the playlist to show.',
-							type: ApplicationCommandOptionType.String,
-							required: false
-						}
-					]
-				},
-				{
-					name: 'add',
-					description: 'Add a new song in your playlist.',
-					type: ApplicationCommandOptionType.Subcommand,
-					options: [
-						{
-							name: 'song',
-							description: 'The name or URL of the song to add.',
-							type: ApplicationCommandOptionType.String,
-							required: true
-						},
-						{
-							name: 'playlist',
-							description: 'The playlist you want to add this song.',
-							type: ApplicationCommandOptionType.String,
-							required: false
-						}
-					]
-				},
-				{
-					name: 'remove',
-					description: 'Remove a song in your playlist.',
-					type: ApplicationCommandOptionType.Subcommand,
-					options: [
-						{
-							name: 'song',
-							description: 'The id of the song in your playlist.',
-							type: ApplicationCommandOptionType.String,
-							required: true
-						},
-						{
-							type: ApplicationCommandOptionType.String,
-							name: 'playlist',
-							description: 'The playlist you want to remove this song.',
-							required: false
-						}
-					]
-				},
-				{
-					name: 'help',
-					description: 'Display help about this command.',
-					type: ApplicationCommandOptionType.Subcommand
-				}
-			]
-		});
-	}
+export default {
+	data: new SlashCommandBuilder()
+		.setName('playlist')
+		.setDescription('Command to manage your playlists.')
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('create')
+				.setDescription('Create a new playlist.')
+				.addStringOption((option) =>
+					option.setName('name').setDescription('The new of your new playlist.')
+				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('delete')
+				.setDescription('Delete a specific playlist.')
+				.addStringOption((option) =>
+					option
+						.setName('name')
+						.setDescription('The name of the playlist you want to delete.')
+						.setRequired(true)
+				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand.setName('list').setDescription('List your saved playlists.')
+		)
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('show')
+				.setDescription('Display the songs in a playlist.')
+				.addStringOption((option) =>
+					option
+						.setName('name')
+						.setDescription('The name of the playlist to show.')
+				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('add')
+				.setDescription('Add a new song in your playlist.')
+				.addStringOption((option) =>
+					option
+						.setName('song')
+						.setDescription('The name or URL of the song to add.')
+						.setRequired(true)
+				)
+				.addStringOption((option) =>
+					option
+						.setName('playlist')
+						.setDescription('The playlist you want to add this song.')
+				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('remove')
+				.setDescription('Remove a song in your playlist.')
+				.addStringOption((option) =>
+					option
+						.setName('song')
+						.setDescription('The id of the song in your playlist.')
+						.setRequired(true)
+				)
+				.addStringOption((option) =>
+					option
+						.setName('playlist')
+						.setDescription('The playlist you want to remove this song.')
+				)
+		)
+		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('help')
+				.setDescription('Display help about this command.')
+		),
 
-	run = async (interaction) => {
+	async execute(interaction) {
 		const subCommand = interaction.options.getSubcommand();
 
 		try {
 			const { default: subCommandFunction } = await import(
 				`./subcommands/${subCommand}`
 			);
-			await subCommandFunction(this.client, interaction);
+			await subCommandFunction(interaction);
 		} catch (e) {
 			errorHandler(interaction, e);
 		}
-	};
-}
+	}
+};

@@ -1,14 +1,15 @@
 import { EmbedBuilder } from 'discord.js';
+import { useMasterPlayer as player } from 'discord-player';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	const query = interaction.options.getString('song');
 	const { channel } = interaction.member.voice;
 
 	await interaction.deferReply();
 
-	const { queue, track } = await client.player.play(channel, query, {
+	const { queue, track } = await player().play(channel, query, {
 		nodeOptions: {
 			metadata: interaction,
 			volume: 40

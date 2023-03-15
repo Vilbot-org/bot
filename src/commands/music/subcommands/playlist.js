@@ -1,12 +1,12 @@
 import { EmbedBuilder } from 'discord.js';
+import { useMasterPlayer as player } from 'discord-player';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-
 import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	const { channel } = interaction.member.voice;
 	const playlistQuery = interaction.options.getString('playlist')
 		? interaction.options.getString('playlist')
@@ -25,7 +25,7 @@ export default async (client, interaction) => {
 	if (playlist.length === 0) throw new DeferErrors('playlist-no-songs');
 
 	const getSearchResults = async (track) => {
-		const searchResult = await client.player.search(track.title);
+		const searchResult = await player().search(track.title);
 		return searchResult.tracks[0];
 	};
 
@@ -35,7 +35,7 @@ export default async (client, interaction) => {
 		})
 	);
 
-	const { queue } = await client.player.play(channel, tracks[0], {
+	const { queue } = await player().play(channel, tracks[0], {
 		nodeOptions: {
 			metadata: interaction,
 			volume: 40

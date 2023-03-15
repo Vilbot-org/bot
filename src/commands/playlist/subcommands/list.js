@@ -5,7 +5,7 @@ import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	await interaction.deferReply({ ephemeral: true });
 
 	const playlists = await UserPlaylistModel.find({

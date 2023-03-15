@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 import config from '../../../app.config';
 
-export default async (client, interaction, queue) => {
+export default async (interaction, queue) => {
 	if (!queue) throw new Error('no-songs-queue');
 
 	const progressBar = await queue.node.createProgressBar({

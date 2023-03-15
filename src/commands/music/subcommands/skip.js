@@ -4,7 +4,7 @@ import { EmbedBuilder, ActionRowBuilder, ButtonStyle } from 'discord.js';
 import config from '../../../app.config';
 import errorHandler from '../../../handlers/errorHandler';
 
-export default async (client, interaction, queue) => {
+export default async (interaction, queue) => {
 	if (!queue || queue.isEmpty()) throw new Error('no-songs-queue');
 
 	const skipingMessage = new EmbedBuilder()

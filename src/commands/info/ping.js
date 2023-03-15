@@ -1,26 +1,21 @@
-import { EmbedBuilder } from 'discord.js';
-import Command from '../../structures/Command';
-
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import config from '../../app.config';
 
-export default class PingCommand extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'ping',
-			description: 'Replies with the ping of the bot!'
-		});
-	}
+export default {
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with the ping of the bot.'),
 
-	run = async (interaction) => {
+	async execute(interaction) {
 		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.green)
 					.setTitle('Pong!')
 					.setDescription(
-						`:ping_pong: The ping of the bot are \`${this.client.ws.ping}ms\``
+						`:ping_pong: The ping of the bot are \`${interaction.client.ws.ping}ms\``
 					)
 			]
 		});
-	};
-}
+	}
+};

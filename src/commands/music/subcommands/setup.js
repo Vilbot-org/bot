@@ -8,7 +8,7 @@ import {
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	if (
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers

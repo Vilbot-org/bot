@@ -2,8 +2,7 @@ import { EmbedBuilder } from 'discord.js';
 
 import config from '../app.config';
 
-export default async (client, interaction) => {
-	//Notify to the user and delete the message
+export default async (interaction) => {
 	const interactionReply = await interaction.reply({
 		embeds: [
 			new EmbedBuilder()

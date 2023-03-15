@@ -2,7 +2,7 @@ import { EmbedBuilder, PermissionsBitField } from 'discord.js';
 
 import config from '../../../app.config';
 
-export default async (client, interaction, queue) => {
+export default async (interaction, queue) => {
 	if (
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers
@@ -10,9 +10,9 @@ export default async (client, interaction, queue) => {
 	)
 		throw new Error('no-permission');
 
-	if (!queue) throw new Error('no-songs-queue');
+	if (!queue || queue.getSize() === 0) throw new Error('no-songs-queue');
 
-	await queue.node.skip();
+	queue.node.skip();
 
 	await interaction.reply({
 		embeds: [

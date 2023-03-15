@@ -2,7 +2,7 @@ import { EmbedBuilder } from 'discord.js';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
@@ -38,7 +38,7 @@ export default async (client, interaction) => {
 				.setFooter({
 					text: config.botName
 				})
-				.setThumbnail(client.user.avatarURL())
+				.setThumbnail(interaction.client.user.avatarURL())
 		]
 	});
 };

@@ -1,24 +1,20 @@
-import { EmbedBuilder } from 'discord.js';
-import Command from '../../structures/Command';
+import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 
 import config from '../../app.config';
 import packageInfo from '../../../package.json';
 
-export default class extends Command {
-	constructor(client) {
-		super(client, {
-			name: 'help',
-			description: 'Display more information about the bot!'
-		});
-	}
+export default {
+	data: new SlashCommandBuilder()
+		.setName('help')
+		.setDescription('Display more information about the bot!'),
 
-	run = async (interaction) => {
+	async execute(interaction) {
 		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(config.colors.info)
 					.setTitle(`${config.botName} help`)
-					.setThumbnail(this.client.user.avatarURL())
+					.setThumbnail(interaction.client.user.avatarURL())
 					.setAuthor({ name: 'Vilbot help command' })
 					.setDescription(
 						`Hi! I'm ${config.botName} a awesome discord bot. Current version: v${packageInfo.version}`
@@ -49,5 +45,5 @@ export default class extends Command {
 					.setFooter({ text: `${config.siteURL} by ${packageInfo.author}` })
 			]
 		});
-	};
-}
+	}
+};

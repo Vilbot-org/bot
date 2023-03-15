@@ -5,7 +5,7 @@ import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	const songToRemove = interaction.options.getString('song');
 	const playlist = interaction.options.getString('playlist')
 		? interaction.options.getString('playlist')

@@ -5,7 +5,7 @@ import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	const playlistName = interaction.options.getString('name')
 		? interaction.options.getString('name')
 		: `${interaction.user.username}-playlist`;

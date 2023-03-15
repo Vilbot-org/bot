@@ -1,17 +1,17 @@
-import { ActivityType } from 'discord.js';
-import Event from '../../structures/Event';
+import { ActivityType, Events } from 'discord.js';
+import databaseConnection from '../../functions/databaseConnection';
 
-export default class extends Event {
-	constructor(client) {
-		super(client, { name: 'ready' });
-	}
+export default {
+	name: Events.ClientReady,
 
-	run = async () => {
-		console.log(`${this.client.user.tag} are ready`);
+	once: true,
+
+	async execute(client) {
+		console.log(`${client.user.tag} are ready!`);
+
 		//Register the status of the bot
-		this.client.user.setActivity('/help', { type: ActivityType.Listening });
+		client.user.setActivity('/help', { type: ActivityType.Listening });
 
-		//this.client.registerCommands();
-		await this.client.databaseConnection();
-	};
-}
+		await databaseConnection();
+	}
+};

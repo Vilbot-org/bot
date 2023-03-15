@@ -1,11 +1,12 @@
 import { EmbedBuilder } from 'discord.js';
+import { useMasterPlayer as player } from 'discord-player';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
 import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	const songToAdd = interaction.options.getString('song');
 	const playlist = interaction.options.getString('playlist')
 		? interaction.options.getString('playlist')
@@ -13,7 +14,7 @@ export default async (client, interaction) => {
 
 	await interaction.deferReply({ ephemeral: true });
 
-	const { tracks } = await client.player.search(songToAdd);
+	const { tracks } = await player().search(songToAdd);
 	if (tracks.length === 0) throw new DeferErrors('search-song-not-found');
 
 	const track = tracks[0];

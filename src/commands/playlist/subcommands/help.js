@@ -2,14 +2,14 @@ import { EmbedBuilder } from 'discord.js';
 
 import config from '../../../app.config';
 
-export default async (client, interaction) => {
+export default async (interaction) => {
 	return interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.info)
 				.setAuthor({ name: 'Vilbot help command' })
 				.setTitle('Playlist help')
-				.setThumbnail(client.user.avatarURL())
+				.setThumbnail(interaction.client.user.avatarURL())
 				.setDescription(
 					`With this command you can create awesome playlists with your favortie songs!\nFor more detailed information [visit the website](${config.siteURL}). `
 				)
