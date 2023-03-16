@@ -32,6 +32,11 @@ export default {
 			subcommand.setName('queue').setDescription('See the queue of the bot!')
 		)
 		.addSubcommand((subcommand) =>
+			subcommand
+				.setName('previous')
+				.setDescription('Go back to the previous song!')
+		)
+		.addSubcommand((subcommand) =>
 			subcommand.setName('skip').setDescription('Skip the current song!')
 		)
 		.addSubcommand((subcommand) =>

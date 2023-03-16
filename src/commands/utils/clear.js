@@ -20,8 +20,6 @@ export default {
 			cache: false
 		});
 
-		console.log(allMsgs);
-
 		const msgsToDelete = allMsgs.filter(
 			(msg) => msg.author.id === interaction.client.user.id && !msg.pinned
 		);
