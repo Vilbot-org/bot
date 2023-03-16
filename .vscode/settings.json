@@ -9,6 +9,7 @@
 		"docker",
 		"playlist-commands",
 		"info-commands",
-		"env-file"
+		"env-file",
+		"logs"
 	]
 }

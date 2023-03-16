@@ -11,6 +11,10 @@ README.md
 
 .env.example
 
+# Logs
+
+logs
+
 # Docker files
 
 .dockerignore

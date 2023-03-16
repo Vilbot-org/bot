@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "babel-node .",
-		"dev": "npx nodemon . --exec babel-node",
+		"dev": "npx nodemon . --exec babel-node | pino-pretty",
 		"deploy-commands": "babel-node ./src/functions/deployCommands.js"
 	},
 	"keywords": [],
@@ -28,6 +28,7 @@
 		"libsodium-wrappers": "^0.7.10",
 		"mongoose": "^6.6.4",
 		"opusscript": "^0.0.8",
+		"pino": "^7.0.0-rc.9",
 		"ytdl-core": "^4.11.2"
 	},
 	"devDependencies": {
@@ -37,6 +38,7 @@
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-prettier": "^4.2.1",
 		"nodemon": "^2.0.20",
+		"pino-pretty": "^10.0.0",
 		"prettier": "^2.8.4"
 	}
 }

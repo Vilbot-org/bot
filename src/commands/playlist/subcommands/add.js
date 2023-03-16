@@ -2,7 +2,8 @@ import { EmbedBuilder } from 'discord.js';
 import { useMasterPlayer as player } from 'discord-player';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
+
+import PlaylistError from '../../../errors/PlaylistError';
 
 import config from '../../../app.config';
 
@@ -15,7 +16,7 @@ export default async (interaction) => {
 	await interaction.deferReply({ ephemeral: true });
 
 	const { tracks } = await player().search(songToAdd);
-	if (tracks.length === 0) throw new DeferErrors('search-song-not-found');
+	if (tracks.length === 0) throw new PlaylistError('Song not found!');
 
 	const track = tracks[0];
 
@@ -31,7 +32,7 @@ export default async (interaction) => {
 		}
 	);
 
-	if (!userPlaylist) throw new DeferErrors('no-playlist-exist');
+	if (!userPlaylist) throw new PlaylistError('no-playlist-exist');
 
 	await interaction.followUp({
 		embeds: [

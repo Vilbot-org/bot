@@ -1,8 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
-import DeferError from '../errors/DeferErrors';
-
 import config from '../app.config';
+import logger from '../functions/logger';
 
 const errorConfig = {
 	'in-voice-channel': {
@@ -103,28 +102,21 @@ const errorConfig = {
 };
 
 export default async (interaction, error) => {
-	const { title, description } =
-		errorConfig[error.message] || errorConfig.default;
+	const embedMessage = new EmbedBuilder()
+		.setColor(config.colors.danger)
+		.setTitle(`:x: Oops! ${error.name}!`)
+		.setDescription(error.message);
 
-	if (error instanceof DeferError) {
-		await interaction.followUp({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(`:x: ${title}`)
-					.setDescription(description)
-			],
+	logger.error(`[${error.name}] ${error.message}`);
+
+	if (error.name === 'Error') {
+		await interaction.reply({
+			embeds: [embedMessage],
 			ephemeral: true
 		});
 	} else {
-		await interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setColor(config.colors.danger)
-					.setTitle(`:x: ${title}`)
-					.setDescription(description)
-			],
-			ephemeral: true
+		await interaction.followUp({
+			embeds: [embedMessage]
 		});
 	}
 };

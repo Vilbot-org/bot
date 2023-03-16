@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import logger from './logger';
 
 export default async () => {
 	mongoose.set('strictQuery', true);
@@ -6,5 +7,5 @@ export default async () => {
 		dbName: 'vilbot'
 	});
 
-	console.log(`Success connection to ${db.connection.name} DB`);
+	logger.info(`Success connection to ${db.connection.name} DB`);
 };

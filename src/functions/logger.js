@@ -34,7 +34,7 @@ const logger = pino(
 	{
 		name: config.botName,
 		formatters: {
-			level: (label) => ({ level: label.toUpperCase() })R
+			level: (label) => ({ level: label.toUpperCase() })
 		},
 		timestamp: () => `,"time":"${new Date(Date.now()).toISOString()}"`
 	},

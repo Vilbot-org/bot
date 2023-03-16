@@ -1,5 +1,6 @@
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import logger from '../functions/logger';
 
 export default (client) => {
 	const path = './src/commands';
@@ -18,7 +19,7 @@ export default (client) => {
 
 				client.commands.set(commandObject.data.name, commandObject);
 
-				console.log(
+				logger.info(
 					`Command ${commandObject.data.name} of the category ${category} are load! (${commandObject.data.name})`
 				);
 			})
