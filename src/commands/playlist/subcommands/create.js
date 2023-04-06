@@ -1,9 +1,9 @@
 import { EmbedBuilder } from 'discord.js';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
+import PlaylistError from '../../../errors/PlaylistError';
 
 export default async (interaction) => {
 	const playlistName = interaction.options.getString('name')
@@ -17,7 +17,13 @@ export default async (interaction) => {
 		userId: interaction.user.id,
 		playlistName
 	});
-	if (playlist) throw new DeferErrors('playlist-already-exist');
+	if (playlist)
+		throw new PlaylistError(
+			playlistName === `${interaction.user.username}-playlist`
+				? 'You already have your default playlist created'
+				: 'A playlist with that name already exists',
+			`Create a new playlist or add songs to the exist playlist with \`playlist add ${playlist.playlistName}\`!`
+		);
 
 	//Create new playlist if the user don't have a playlist with that name
 	const newPlaylist = new UserPlaylistModel({
@@ -27,7 +33,7 @@ export default async (interaction) => {
 
 	await newPlaylist.save();
 
-	return interaction.followUp({
+	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)

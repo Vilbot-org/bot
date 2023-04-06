@@ -1,6 +1,7 @@
-export default class Error {
-	constructor(message) {
-		this.message = message;
-		this.name = 'deferErrors';
+export default class extends Error {
+	constructor(title, message, name) {
+		super(message);
+		this.title = title;
+		this.name = name;
 	}
 }

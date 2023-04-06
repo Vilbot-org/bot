@@ -16,7 +16,11 @@ export default async (interaction) => {
 	await interaction.deferReply({ ephemeral: true });
 
 	const { tracks } = await player().search(songToAdd);
-	if (tracks.length === 0) throw new PlaylistError('Song not found!');
+	if (tracks.length === 0)
+		throw new PlaylistError(
+			'Song not found',
+			'Try another specific name or Youtube URL.'
+		);
 
 	const track = tracks[0];
 
@@ -32,7 +36,11 @@ export default async (interaction) => {
 		}
 	);
 
-	if (!userPlaylist) throw new PlaylistError('no-playlist-exist');
+	if (!userPlaylist)
+		throw new PlaylistError(
+			'No playlist with that name found',
+			`Create the playlist first with \`/playlist create ${playlist}\` command and then add your songs!`
+		);
 
 	await interaction.followUp({
 		embeds: [

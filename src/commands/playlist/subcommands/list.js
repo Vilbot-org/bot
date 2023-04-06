@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
+import PlaylistError from '../../../errors/PlaylistError';
 
 import config from '../../../app.config';
 
@@ -12,7 +12,11 @@ export default async (interaction) => {
 		userId: interaction.user.id
 	});
 
-	if (playlists.length === 0) throw new DeferErrors('dont-have-playlist');
+	if (playlists.length === 0)
+		throw new PlaylistError(
+			"You still don't have playlists",
+			'Type `/playlist create <playlist-name>` to create a new playlist.'
+		);
 
 	await interaction.followUp({
 		embeds: [

@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
+import PlaylistError from '../../../errors/PlaylistError';
 
 import config from '../../../app.config';
 
@@ -12,12 +12,15 @@ export default async (interaction) => {
 
 	await interaction.deferReply({ ephemeral: true });
 
-	//Check if this playlist already exist
 	const data = await UserPlaylistModel.findOne({
 		userId: interaction.user.id,
 		playlistName
 	});
-	if (!data) throw new DeferErrors('no-playlist-exist');
+	if (!data)
+		throw new PlaylistError(
+			"You don't have any playlist with this name",
+			'Please check the name with the command `/playlist list` and try again'
+		);
 
 	const embedMsg = new EmbedBuilder()
 		.setColor(config.colors.success)

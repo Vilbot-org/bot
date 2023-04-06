@@ -3,7 +3,7 @@ import { EmbedBuilder } from 'discord.js';
 import config from '../../../app.config';
 
 export default async (interaction) => {
-	return interaction.reply({
+	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.info)

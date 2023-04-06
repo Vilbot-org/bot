@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
+import PlaylistError from '../../../errors/PlaylistError';
 
 import config from '../../../app.config';
 
@@ -14,7 +14,11 @@ export default async (interaction) => {
 	await interaction.deferReply({ ephemeral: true });
 
 	//Check if the number is valid
-	if (songToRemove <= 0) throw new DeferErrors('invalid-song-id');
+	if (songToRemove <= 0)
+		throw new PlaylistError(
+			'Invalid song to remove',
+			'Please enter a valid number song.'
+		);
 
 	const userPlaylist = await UserPlaylistModel.findOneAndUpdate(
 		{
@@ -26,7 +30,11 @@ export default async (interaction) => {
 		{ multi: true }
 	);
 
-	if (!userPlaylist) throw new DeferErrors('song-no-found-playlist');
+	if (!userPlaylist)
+		throw new PlaylistError(
+			'The song you have indicated does not exist in the playlist',
+			'Please check the song and try again.'
+		);
 
 	await interaction.followUp({
 		embeds: [
