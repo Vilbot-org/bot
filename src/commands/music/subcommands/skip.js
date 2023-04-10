@@ -5,7 +5,11 @@ import config from '../../../app.config';
 import errorHandler from '../../../handlers/errorHandler';
 
 export default async (interaction, queue) => {
-	if (!queue || queue.isEmpty()) throw new Error('no-songs-queue');
+	if (!queue || queue.isEmpty())
+		throw new Error(
+			'Music queue',
+			'No songs in the queue, use `/music play <song>` do add songs.'
+		);
 
 	const skipingMessage = new EmbedBuilder()
 		.setColor(config.colors.success)
@@ -71,9 +75,17 @@ export default async (interaction, queue) => {
 
 		try {
 			//Check if the user are in the voice channel
-			if (!memberInVoice) throw new Error('in-voice-channel');
+			if (!memberInVoice)
+				throw new Error(
+					'You need to be in a voice channel',
+					'Enter to any voice channel and try again.'
+				);
 			//Check if the user already voted
-			if (memberAlreadyVoted) throw new Error('already-vote');
+			if (memberAlreadyVoted)
+				throw new Error(
+					'You have already voted',
+					'Wait for the vote to be resolved.'
+				);
 		} catch (e) {
 			errorHandler(i, e);
 		}

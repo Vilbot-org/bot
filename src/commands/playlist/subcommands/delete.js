@@ -1,9 +1,9 @@
 import { EmbedBuilder } from 'discord.js';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
 
 import config from '../../../app.config';
+import PlaylistError from '../../../errors/PlaylistError';
 
 export default async (interaction) => {
 	const playlistName = interaction.options.getString('name');
@@ -15,7 +15,11 @@ export default async (interaction) => {
 		playlistName
 	});
 
-	if (!deletePlaylist) throw new DeferErrors('no-playlist-to-delete');
+	if (!deletePlaylist)
+		throw new PlaylistError(
+			"You don't have any playlist with this name",
+			'Please check the name with the command `/playlist list` and try again'
+		);
 
 	//Check if  exist this playlist
 	await interaction.followUp({

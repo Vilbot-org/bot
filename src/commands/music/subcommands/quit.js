@@ -7,9 +7,16 @@ export default async (interaction, queue) => {
 			PermissionsBitField.Flags.ModerateMembers
 		)
 	)
-		throw new Error('no-permission');
+		throw new Error(
+			'No permissions',
+			'You dont have permissions to exec this command.'
+		);
 
-	if (!queue) throw new Error('no-songs-queue');
+	if (!queue)
+		throw new Error(
+			'Music queue',
+			'No songs in the queue, use `/music play <song>` do add songs.'
+		);
 
 	await queue.delete();
 

@@ -1,5 +1,6 @@
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import logger from '../functions/logger';
 
 export default (client) => {
 	const path = './src/events';
@@ -24,7 +25,7 @@ export default (client) => {
 					);
 				}
 
-				console.log(
+				logger.info(
 					`Event ${eventObject.name} of the category ${category} are load! (${eventObject.name})`
 				);
 			})

@@ -77,7 +77,10 @@ export default {
 				subCommand !== 'clear' &&
 				subCommand !== 'help'
 			)
-				throw new Error('in-voice-channel');
+				throw new Error(
+					'You need to be in a voice channel',
+					'Enter to any voice channel and try again.'
+				);
 
 			const queue = useQueue(interaction.guild.id);
 

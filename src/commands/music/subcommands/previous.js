@@ -6,6 +6,12 @@ import config from '../../../app.config';
 export default async (interaction) => {
 	const history = useHistory(interaction.guild.id);
 
+	if (!history)
+		throw new Error(
+			"Can't go to previous song",
+			'No songs in the previous queue.'
+		);
+
 	await history.previous();
 
 	await interaction.reply({

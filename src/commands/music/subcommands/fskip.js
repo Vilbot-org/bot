@@ -8,9 +8,16 @@ export default async (interaction, queue) => {
 			PermissionsBitField.Flags.ModerateMembers
 		)
 	)
-		throw new Error('no-permission');
+		throw new Error(
+			"You don't have permission to do that",
+			'Only moderators and administrators are allowed to use this command'
+		);
 
-	if (!queue || queue.getSize() === 0) throw new Error('no-songs-queue');
+	if (!queue || queue.getSize() === 0)
+		throw new Error(
+			'Music queue',
+			'No songs in the queue, use `/music play <song>` do add songs.'
+		);
 
 	queue.node.skip();
 

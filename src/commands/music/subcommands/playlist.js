@@ -2,7 +2,7 @@ import { EmbedBuilder } from 'discord.js';
 import { useMasterPlayer as player } from 'discord-player';
 
 import UserPlaylistModel from '../../../models/UserPlaylistModel';
-import DeferErrors from '../../../errors/DeferErrors';
+import MusicErrors from '../../../errors/MusicErrors';
 
 import config from '../../../app.config';
 
@@ -18,11 +18,19 @@ export default async (interaction) => {
 		userId: interaction.user.id,
 		playlistName: playlistQuery
 	});
-	if (!playlist) throw new DeferErrors('playlist-dont-exist');
+	if (!playlist)
+		throw new MusicErrors(
+			"This playlist don't exist!",
+			'Use `/playlist create <playlist>` to create a playlist.'
+		);
 
 	playlist = playlist.playlist;
 
-	if (playlist.length === 0) throw new DeferErrors('playlist-no-songs');
+	if (playlist.length === 0)
+		throw new MusicErrors(
+			"This playlist don't have songs!",
+			`You can add songs to this playlist with the following command: \`/playlist add <song> ${playlist.playlistName}\`.`
+		);
 
 	const getSearchResults = async (track) => {
 		const searchResult = await player().search(track.title);
