@@ -1,13 +1,14 @@
-import { EmbedBuilder } from 'discord.js';
 import { useHistory } from 'discord-player';
+import { EmbedBuilder } from 'discord.js';
 
 import config from '../../../app.config';
+import MusicErrors from '../../../errors/MusicErrors';
 
 export default async (interaction) => {
 	const history = useHistory(interaction.guild.id);
 
 	if (!history)
-		throw new Error(
+		throw new MusicErrors(
 			"Can't go to previous song",
 			'No songs in the previous queue.'
 		);

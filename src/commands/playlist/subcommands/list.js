@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
 import PlaylistError from '../../../errors/PlaylistError';
+import UserPlaylistModel from '../../../models/UserPlaylistModel';
 
 import config from '../../../app.config';
 

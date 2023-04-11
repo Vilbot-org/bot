@@ -1,7 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
 
 import config from '../app.config';
-import DeferErrors from '../errors/DeferErrors';
 import logger from '../functions/logger';
 
 export default async (interaction, error) => {
@@ -13,14 +12,15 @@ export default async (interaction, error) => {
 
 	logger.error(`[${error.name}] ${error.message}`);
 
-	if (error instanceof DeferErrors) {
+	if (interaction.deferred) {
 		await interaction.followUp({
 			embeds: [embedMessage],
 			ephemeral: true
 		});
 	} else {
 		await interaction.reply({
-			embeds: [embedMessage]
+			embeds: [embedMessage],
+			ephemeral: true
 		});
 	}
 };

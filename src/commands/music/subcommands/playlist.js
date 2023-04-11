@@ -1,8 +1,8 @@
-import { EmbedBuilder } from 'discord.js';
 import { useMasterPlayer as player } from 'discord-player';
+import { EmbedBuilder } from 'discord.js';
 
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
 import MusicErrors from '../../../errors/MusicErrors';
+import UserPlaylistModel from '../../../models/UserPlaylistModel';
 
 import config from '../../../app.config';
 

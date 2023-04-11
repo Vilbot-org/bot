@@ -1,12 +1,13 @@
 import { ButtonBuilder } from '@discordjs/builders';
 import {
-	EmbedBuilder,
 	ActionRowBuilder,
 	ButtonStyle,
+	EmbedBuilder,
 	PermissionsBitField
 } from 'discord.js';
 
 import config from '../../../app.config';
+import MusicErrors from '../../../errors/MusicErrors';
 
 export default async (interaction) => {
 	if (
@@ -14,7 +15,7 @@ export default async (interaction) => {
 			PermissionsBitField.Flags.ModerateMembers
 		)
 	)
-		throw new Error(
+		throw new MusicErrors(
 			'No permissions',
 			'You dont have permissions to exec this command.'
 		);
@@ -31,7 +32,7 @@ export default async (interaction) => {
 
 	//If the channel exist
 	if (existChannel)
-		throw new Error(
+		throw new MusicErrors(
 			'The channel already exists!',
 			`If you want to reset the bot channel please delete the '${config.botName}-music' text channel and run this command again.`
 		);
@@ -45,7 +46,7 @@ export default async (interaction) => {
 	});
 
 	if (!musicChannel)
-		throw new Error(
+		throw new MusicErrors(
 			'An error occurred while creating the channel!',
 			'Check the permissions and try again.'
 		);

@@ -1,12 +1,13 @@
 import { ButtonBuilder } from '@discordjs/builders';
-import { EmbedBuilder, ActionRowBuilder, ButtonStyle } from 'discord.js';
+import { ActionRowBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
 
 import config from '../../../app.config';
+import MusicErrors from '../../../errors/MusicErrors';
 import errorHandler from '../../../handlers/errorHandler';
 
 export default async (interaction, queue) => {
 	if (!queue || queue.isEmpty())
-		throw new Error(
+		throw new MusicErrors(
 			'Music queue',
 			'No songs in the queue, use `/music play <song>` do add songs.'
 		);
@@ -76,13 +77,13 @@ export default async (interaction, queue) => {
 		try {
 			//Check if the user are in the voice channel
 			if (!memberInVoice)
-				throw new Error(
+				throw new MusicErrors(
 					'You need to be in a voice channel',
 					'Enter to any voice channel and try again.'
 				);
 			//Check if the user already voted
 			if (memberAlreadyVoted)
-				throw new Error(
+				throw new MusicErrors(
 					'You have already voted',
 					'Wait for the vote to be resolved.'
 				);
