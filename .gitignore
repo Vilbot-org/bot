@@ -1,3 +1,7 @@
 node_modules/
 logs/
 .env
+
+# MongoDB
+data/
+ecosystem.config.js
