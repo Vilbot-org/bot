@@ -1,14 +1,18 @@
-import pino from 'pino';
-import { mkdirSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
-
+import pino from 'pino';
 import config from '../app.config';
 
-if (process.env.APP_ENV === 'prod') mkdirSync('./logs');
-const pinoDestination =
-	process.env.APP_ENV === 'prod'
-		? pino.destination(join(process.cwd(), 'logs', 'app.log'))
-		: null;
+if (process.env.APP_ENV === 'prod' && !existsSync('./logs'))
+	mkdirSync('./logs');
+
+const fileStream = pino.destination(join(process.cwd(), 'logs', 'app.log'));
+const consoleStream = process.stdout;
+
+const streams = pino.multistream([
+	{ stream: fileStream },
+	{ stream: consoleStream }
+]);
 
 const logger = pino(
 	{
@@ -18,7 +22,7 @@ const logger = pino(
 		},
 		timestamp: () => `,"time":"${new Date(Date.now()).toISOString()}"`
 	},
-	pinoDestination
+	streams
 );
 
 export default logger;

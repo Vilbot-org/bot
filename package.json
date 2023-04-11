@@ -28,8 +28,8 @@
 		"libsodium-wrappers": "^0.7.10",
 		"mongoose": "^6.6.4",
 		"opusscript": "^0.0.8",
-		"play-dl": "^1.9.6",
 		"pino": "^7.0.0-rc.9",
+		"play-dl": "^1.9.6",
 		"ytdl-core": "^4.11.2"
 	},
 	"devDependencies": {
