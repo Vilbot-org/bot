@@ -1,5 +1,5 @@
-import { Client, GatewayIntentBits, Collection } from 'discord.js';
 import { Player } from 'discord-player';
+import { Client, Collection, GatewayIntentBits } from 'discord.js';
 
 import commandHandler from './handlers/commandHandler';
 import eventHandler from './handlers/eventHandler';
@@ -21,16 +21,11 @@ client.commands = new Collection();
 commandHandler(client);
 eventHandler(client);
 
-const player = Player.singleton(client, {
+Player.singleton(client, {
 	ytdlOptions: {
 		quality: 'highestaudio',
 		highWaterMark: 1 < 25
 	}
-});
-
-player.events.on('playerStart', (queue, track) => {
-	// we will later define queue.metadata object while creating the queue
-	queue.metadata.channel.send(`Started playing **${track.title}**!`);
 });
 
 export default client;

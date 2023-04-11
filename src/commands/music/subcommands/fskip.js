@@ -22,7 +22,6 @@ export default async (interaction, queue) => {
 
 	queue.node.skip();
 
-	const embedMessage = new EmbedBuilder().setColor(config.colors.success);
 	const { tracks } = queue;
 	const title = !queue.isEmpty()
 		? `:track_next: ${tracks.at(0).title}`
@@ -34,8 +33,16 @@ export default async (interaction, queue) => {
 			: 'There are no more songs in the queue!'
 		: 'No more songs in the queue';
 
-	embedMessage.setTitle(`${title}`);
-	embedMessage.setDescription(`${description}`);
+	const embedMessage = new EmbedBuilder()
+		.setColor(config.colors.success)
+		.setTitle(`${title}`)
+		.setDescription(`${description}`);
+
+	if (!queue.isEmpty()) {
+		embedMessage
+			.setAuthor({ name: 'Forcing the skip of the song' })
+			.setThumbnail(`${tracks.at(0).thumbnail}`);
+	}
 
 	await interaction.reply({
 		embeds: [embedMessage]

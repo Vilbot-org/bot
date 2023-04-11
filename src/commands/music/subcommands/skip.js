@@ -6,25 +6,33 @@ import MusicErrors from '../../../errors/MusicErrors';
 import errorHandler from '../../../handlers/errorHandler';
 
 export default async (interaction, queue) => {
-	if (!queue || queue.isEmpty())
+	if (!queue)
 		throw new MusicErrors(
 			'Music queue',
 			'No songs in the queue, use `/music play <song>` do add songs.'
 		);
 
+	const { tracks } = queue;
+	const title = !queue.isEmpty()
+		? `:track_next: ${tracks.at(0).title}`
+		: ':wave: Bye bye!';
+	// eslint-disable-next-line no-nested-ternary
+	const description = !queue.isEmpty()
+		? queue.getSize() > 1
+			? `The next song is: [${tracks.at(1).title}](${tracks.at(1).url})`
+			: 'There are no more songs in the queue!'
+		: 'No more songs in the queue';
+
 	const skipingMessage = new EmbedBuilder()
 		.setColor(config.colors.success)
-		.setAuthor({ name: 'Skipping the song' })
-		.setTitle(`:track_next: ${queue.tracks.at(0).title}`)
-		.setURL(`${queue.tracks.at(0).url}`)
-		.setDescription(
-			queue.getSize() > 1
-				? `The next song is: [${queue.tracks.at(1).title}](${
-						queue.tracks.at(1).url
-						// eslint-disable-next-line no-mixed-spaces-and-tabs
-				  })`
-				: 'There are no more songs in the queue!'
-		);
+		.setTitle(`${title}`)
+		.setDescription(`${description}`);
+
+	if (!queue.isEmpty()) {
+		skipingMessage
+			.setAuthor({ name: 'Skipping the song' })
+			.setThumbnail(`${tracks.at(0).thumbnail}`);
+	}
 
 	const membersInVoice = interaction.member.voice.channel.members.map(
 		(member) => member.user.id
