@@ -4,7 +4,7 @@
 	"description": "Vilbot is a awesome Discord Bot created by a passionate programmer using the discord.js library with varoious functionalities.",
 	"main": "index.js",
 	"scripts": {
-		"start": "babel-node .",
+		"start": "npm run deploy-commands && babel-node .",
 		"dev": "npx nodemon . --exec babel-node | pino-pretty",
 		"deploy-commands": "babel-node ./src/functions/deployCommands.js"
 	},

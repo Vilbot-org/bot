@@ -1,10 +1,8 @@
 {
 	"conventionalCommits.scopes": [
-		"music.play",
-		"commands-music",
+		"devDependencies",
 		"music-commands",
 		"es6",
-		"devDependencies",
 		"playlist",
 		"docker",
 		"playlist-commands",
