@@ -1,6 +1,7 @@
 import { useMasterPlayer as player } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
+import io from '../../../sockets/socket';
 import config from '../../../app.config';
 import MusicErrors from '../../../errors/MusicErrors';
 
@@ -26,6 +27,8 @@ export default async (interaction) => {
 			volume: 40
 		}
 	});
+
+	io.emit('play', `Playing ${track.title}`);
 
 	await interaction.followUp({
 		embeds: [

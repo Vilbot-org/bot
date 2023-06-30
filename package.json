@@ -30,6 +30,7 @@
 		"opusscript": "^0.0.8",
 		"pino": "^7.0.0-rc.9",
 		"play-dl": "^1.9.6",
+		"socket.io-client": "^4.7.1",
 		"ytdl-core": "^4.11.2"
 	},
 	"devDependencies": {
