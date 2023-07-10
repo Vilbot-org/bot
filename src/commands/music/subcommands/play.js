@@ -1,9 +1,7 @@
-import { useMasterPlayer as player } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
-import io from '../../../sockets/socket';
 import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
+import play from '../../../functions/music/play';
 
 export default async (interaction) => {
 	const query = interaction.options.getString('song');
@@ -11,24 +9,7 @@ export default async (interaction) => {
 
 	await interaction.deferReply();
 
-	const searchResult = await player().search(query, {
-		requestedBy: interaction.user
-	});
-
-	if (!searchResult.hasTracks())
-		throw new MusicErrors(
-			'No results found',
-			'No results were found for that request, try another name or a youtube URL.'
-		);
-
-	const { queue, track } = await player().play(channel, searchResult, {
-		nodeOptions: {
-			metadata: interaction,
-			volume: 40
-		}
-	});
-
-	io.emit('play', `Playing ${track.title}`);
+	const { queue, track } = await play(query, channel);
 
 	await interaction.followUp({
 		embeds: [

@@ -1,6 +1,8 @@
 import { ActivityType, Events } from 'discord.js';
+
 import databaseConnection from '../../functions/databaseConnection';
 import logger from '../../functions/logger';
+import initSocket from '../../sockets/socket';
 
 export default {
 	name: Events.ClientReady,
@@ -15,5 +17,6 @@ export default {
 		client.user.setActivity('/help', { type: ActivityType.Listening });
 
 		await databaseConnection();
+		initSocket();
 	}
 };

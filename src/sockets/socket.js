@@ -1,25 +1,33 @@
 import io from 'socket.io-client';
 import jwt from 'jsonwebtoken';
-import { useMasterPlayer as player } from 'discord-player';
 
-const token = jwt.sign({ user: 'Vilbot' }, 'thisisasecretkey');
+import play from '../functions/music/play';
+import logger from '../functions/logger';
 
-const socket = io('http://localhost:3000/', {
-	auth: {
-		token
-	}
-});
+const token = jwt.sign({ user: 'Vilbot' }, process.env.JWT_SECRET_KEY);
 
-socket.on('bot.playMusic', async (data) => {
-	const searchResult = await player().search(data);
-
-	const { track } = await player().play('1026501495513952349', searchResult, {
-		nodeOptions: {
-			volume: 40
+const initSocket = () => {
+	const socket = io(process.env.SOCKET_URL, {
+		auth: {
+			token
 		}
 	});
 
-	console.log(track.title);
-});
+	logger.info(`Success connection to socket server`);
 
-export default socket;
+	socket.on('bot.playSong', async (query) => {
+		const { track } = await play(query, '1026501495513952349');
+
+		console.log(track.title);
+	});
+
+	/* socket.on('bot.nextSong', async () => {});
+
+	socket.on('bot.prevSong', async () => {});
+
+	socket.on('bot.pauseSong', async () => {});
+
+	socket.on('bot.resumeSong', async () => {}); */
+};
+
+export default initSocket;
