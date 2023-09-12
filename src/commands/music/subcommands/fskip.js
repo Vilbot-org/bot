@@ -1,9 +1,12 @@
 import { EmbedBuilder, PermissionsBitField } from 'discord.js';
 
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
+import config from '@/app.config';
+import MusicErrors from '@/errors/MusicErrors';
+import { fskip } from '@/functions/musicUtils';
 
-export default async (interaction, queue) => {
+export default async (interaction) => {
+	const { channel } = interaction.member.voice;
+
 	if (
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers
@@ -14,15 +17,9 @@ export default async (interaction, queue) => {
 			'Only moderators and administrators are allowed to use this command'
 		);
 
-	if (!queue)
-		throw new MusicErrors(
-			'Music queue',
-			'No songs in the queue, use `/music play <song>` do add songs.'
-		);
-
-	queue.node.skip();
-
+	const queue = await fskip(channel);
 	const { tracks } = queue;
+
 	const title = !queue.isEmpty()
 		? `:track_next: ${tracks.at(0).title}`
 		: ':wave: Bye bye!';

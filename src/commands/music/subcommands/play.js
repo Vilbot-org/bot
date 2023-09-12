@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
-import config from '../../../app.config';
-import play from '../../../functions/music/play';
+import config from '@/app.config';
+import { play } from '@/functions/musicUtils';
 
 export default async (interaction) => {
 	const query = interaction.options.getString('song');
