@@ -19,5 +19,15 @@
 		"no-unused-vars": "warn",
 		"no-console": "off",
 		"spaced-comment": "off"
+	},
+	"settings": {
+		"import/resolver": {
+			"babel-module": {
+				"root": ["./"],
+				"alias": {
+					"@": "./src"
+				}
+			}
+		}
 	}
 }

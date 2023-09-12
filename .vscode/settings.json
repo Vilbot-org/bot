@@ -10,6 +10,7 @@
 		"env-file",
 		"logs",
 		"errorHandler",
-		"socketIO"
+		"socketIO",
+		"babel"
 	]
 }
