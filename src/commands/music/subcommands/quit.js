@@ -1,8 +1,11 @@
 import { EmbedBuilder, PermissionsBitField } from 'discord.js';
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
+import config from '@/app.config';
+import MusicErrors from '@/errors/MusicErrors';
+import { quit } from '@/functions/musicUtils';
 
-export default async (interaction, queue) => {
+export default async (interaction) => {
+	const { channel } = interaction.member.voice;
+
 	if (
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers
@@ -13,13 +16,7 @@ export default async (interaction, queue) => {
 			'You dont have permissions to exec this command.'
 		);
 
-	if (!queue)
-		throw new MusicErrors(
-			'Music queue',
-			'No songs in the queue, use `/music play <song>` do add songs.'
-		);
-
-	await queue.delete();
+	await quit(channel);
 
 	await interaction.reply({
 		embeds: [

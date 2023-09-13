@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
 
-import config from '../../../app.config';
+import config from '@/app.config';
 
 export default async (interaction) => {
 	await interaction.reply({

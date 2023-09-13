@@ -1,9 +1,9 @@
 import { ButtonBuilder } from '@discordjs/builders';
 import { ActionRowBuilder, ButtonStyle, EmbedBuilder } from 'discord.js';
 
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
-import errorHandler from '../../../handlers/errorHandler';
+import config from '@/app.config';
+import MusicErrors from '@/errors/MusicErrors';
+import errorHandler from '@/handlers/errorHandler';
 
 export default async (interaction, queue) => {
 	if (!queue)

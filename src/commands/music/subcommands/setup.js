@@ -6,8 +6,8 @@ import {
 	PermissionsBitField
 } from 'discord.js';
 
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
+import config from '@/app.config';
+import MusicErrors from '@/errors/MusicErrors';
 
 export default async (interaction) => {
 	if (

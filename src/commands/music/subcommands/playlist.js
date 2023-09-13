@@ -1,10 +1,9 @@
 import { useMasterPlayer as player } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
-import MusicErrors from '../../../errors/MusicErrors';
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
-
-import config from '../../../app.config';
+import config from '@/app.config';
+import MusicErrors from '@/errors/MusicErrors';
+import UserPlaylistModel from '@/models/UserPlaylistModel';
 
 export default async (interaction) => {
 	const { channel } = interaction.member.voice;

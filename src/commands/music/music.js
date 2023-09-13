@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { useQueue } from 'discord-player';
-import errorHandler from '../../handlers/errorHandler';
+
+import errorHandler from '@/handlers/errorHandler';
 
 export default {
 	data: new SlashCommandBuilder()
@@ -82,12 +82,10 @@ export default {
 					'Enter to any voice channel and try again.'
 				);
 
-			const queue = useQueue(interaction.guild.id);
-
 			const { default: subCommandFunction } = await import(
 				`./subcommands/${subCommand}`
 			);
-			await subCommandFunction(interaction, queue);
+			await subCommandFunction(interaction);
 		} catch (e) {
 			errorHandler(interaction, e);
 		}

@@ -1,23 +1,12 @@
 import { EmbedBuilder } from 'discord.js';
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
 
-export default async (interaction, queue) => {
-	if (!queue)
-		throw new MusicErrors(
-			'Music queue',
-			'No songs in the queue, use `/music play <song>` do add songs.'
-		);
+import config from '@/app.config';
+import { resume } from '@/functions/musicUtils';
 
-	const isPaused = await queue.node.isPaused();
+export default async (interaction) => {
+	const { channel } = interaction.member.voice;
 
-	if (!isPaused)
-		throw new MusicErrors(
-			'The music in not paused',
-			'Use `/music pause` to pause a song.'
-		);
-
-	await queue.node.resume();
+	await resume(channel);
 
 	await interaction.reply({
 		embeds: [

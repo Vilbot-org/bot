@@ -1,8 +1,8 @@
 import { useHistory } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
+import config from '@/app.config';
+import MusicErrors from '@/errors/MusicErrors';
 
 export default async (interaction) => {
 	const history = useHistory(interaction.guild.id);

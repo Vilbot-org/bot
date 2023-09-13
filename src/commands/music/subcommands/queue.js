@@ -1,14 +1,12 @@
 import { EmbedBuilder } from 'discord.js';
 
-import config from '../../../app.config';
-import MusicErrors from '../../../errors/MusicErrors';
+import config from '@/app.config';
+import { getQueue } from '@/functions/musicUtils';
 
-export default async (interaction, queue) => {
-	if (!queue)
-		throw new MusicErrors(
-			'Music queue',
-			'No songs in the queue, use `/music play <song>` do add songs.'
-		);
+export default async (interaction) => {
+	const { channel } = interaction.member.voice;
+
+	const queue = getQueue(channel);
 
 	const embedMsg = new EmbedBuilder()
 		.setAuthor({ name: 'Music queue!' })
