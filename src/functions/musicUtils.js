@@ -1,5 +1,6 @@
 import { useMasterPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
+import socket from './sockets/socketClient';
 
 const getQueue = (guildChannel) => {
 	const queue = useQueue(guildChannel);
@@ -10,6 +11,8 @@ const getQueue = (guildChannel) => {
 			'No songs in the queue, use `/music play <song>` to add songs.'
 		);
 	}
+
+	socket.emit('bot.queue', { songs: queue.tracks, guild: guildChannel });
 
 	return queue;
 };
@@ -43,8 +46,21 @@ const play = async (query, guildChannel) => {
 		}
 	});
 
+	socket.emit('bot.addedSong', { song: track, guild: guildChannel });
+
 	return { queue, track };
 };
+
+const fskip = handleQueueErrors(async (queue) => {
+	await queue.node.skip();
+
+	socket.emit('bot.skippedSong', {
+		song: queue.currentTrack,
+		guild: queue.channel.id
+	});
+
+	return queue;
+});
 
 const pause = handleQueueErrors(async (queue) => {
 	const isPaused = await queue.node.pause();
@@ -55,6 +71,8 @@ const pause = handleQueueErrors(async (queue) => {
 			'Use `/music resume` to resume a song.'
 		);
 	}
+
+	socket.emit('bot.pausedSong', queue.channel.id);
 
 	return true;
 });
@@ -71,13 +89,9 @@ const resume = handleQueueErrors(async (queue) => {
 
 	await queue.node.resume();
 
+	socket.emit('bot.resumedSong', queue.channel.id);
+
 	return true;
-});
-
-const fskip = handleQueueErrors(async (queue) => {
-	await queue.node.skip();
-
-	return queue;
 });
 
 const quit = handleQueueErrors(async (queue) => {
@@ -86,4 +100,4 @@ const quit = handleQueueErrors(async (queue) => {
 	return true;
 });
 
-export { getQueue, play, resume, pause, fskip, quit };
+export { getQueue, play, fskip, resume, pause, quit };

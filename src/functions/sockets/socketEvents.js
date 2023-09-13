@@ -1,30 +1,43 @@
 import socket from './socketClient';
-import play from '../music/play';
-import logger from '../logger';
+import { fskip, getQueue, pause, play, resume } from '../musicUtils';
+import socketError from './socketFunctions';
 
-socket.on('bot.playSong', async (query) => {
+socket.on('bot.getQueue', async (guild) => {
 	try {
-		const { track } = await play(query, '1026501495513952349');
-
-		console.log(track.title);
+		await getQueue(guild);
 	} catch (error) {
-		console.log(error);
+		socketError(error);
 	}
-	logger.info('play song!');
 });
 
-socket.on('bot.nextSong', async () => {
-	logger.info('next song!');
+socket.on('bot.playSong', async (data) => {
+	try {
+		await play(data.query, data.guild);
+	} catch (error) {
+		socketError(error);
+	}
 });
 
-socket.on('bot.prevSong', async () => {
-	logger.info('prev song!');
+socket.on('bot.nextSong', async (guild) => {
+	try {
+		await fskip(guild);
+	} catch (error) {
+		socketError(error);
+	}
 });
 
-socket.on('bot.pauseSong', async () => {
-	logger.info('pause song!');
+socket.on('bot.pauseSong', async (guild) => {
+	try {
+		await pause(guild);
+	} catch (error) {
+		socketError(error);
+	}
 });
 
-socket.on('bot.resumeSong', async () => {
-	logger.info('resume song');
+socket.on('bot.resumeSong', async (guild) => {
+	try {
+		await resume(guild);
+	} catch (error) {
+		socketError(error);
+	}
 });
