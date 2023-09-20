@@ -9,7 +9,7 @@ export default async (interaction) => {
 
 	await interaction.deferReply();
 
-	const { queue, track } = await play(query, channel);
+	const { queue, track } = await play(query, channel.id);
 
 	await interaction.followUp({
 		embeds: [

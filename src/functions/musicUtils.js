@@ -1,18 +1,16 @@
 import { useMasterPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
+import formatSong from './formatSong';
 import socket from './sockets/socketClient';
 
 const getQueue = (guildChannel) => {
 	const queue = useQueue(guildChannel);
-
 	if (!queue) {
 		throw new MusicErrors(
 			'Music queue',
 			'No songs in the queue, use `/music play <song>` to add songs.'
 		);
 	}
-
-	socket.emit('bot.queue', { songs: queue.tracks, guild: guildChannel });
 
 	return queue;
 };
@@ -46,7 +44,10 @@ const play = async (query, guildChannel) => {
 		}
 	});
 
-	socket.emit('bot.addedSong', { song: track, guild: guildChannel });
+	socket.emit('bot.addedSong', {
+		song: formatSong(track),
+		guild: guildChannel
+	});
 
 	return { queue, track };
 };
@@ -100,4 +101,4 @@ const quit = handleQueueErrors(async (queue) => {
 	return true;
 });
 
-export { getQueue, play, fskip, resume, pause, quit };
+export { fskip, getQueue, pause, play, quit, resume };

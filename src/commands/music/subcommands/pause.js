@@ -6,7 +6,7 @@ import config from '@/app.config';
 export default async (interaction) => {
 	const { channel } = interaction.member.voice;
 
-	await pause(channel);
+	await pause(channel.id);
 
 	await interaction.reply({
 		embeds: [

@@ -1,19 +1,41 @@
+import { useQueue } from 'discord-player';
+import formatSong from '../formatSong';
+import { fskip, pause, play, resume } from '../musicUtils';
 import socket from './socketClient';
-import { fskip, getQueue, pause, play, resume } from '../musicUtils';
 import socketError from './socketFunctions';
 
 socket.on('bot.getQueue', async (guild) => {
 	try {
-		await getQueue(guild);
+		const fetchedQueue = await useQueue(guild);
+
+		if (!fetchedQueue) {
+			socket.emit('bot.queue', { guild, queue: null });
+			return;
+		}
+
+		const data = {
+			guild,
+			queue: {
+				currentSong: {
+					...formatSong(fetchedQueue.currentTrack),
+					playbackTime: fetchedQueue.node.playbackTime
+				},
+				songs: fetchedQueue?.tracks.map((track) => formatSong(track))
+			}
+		};
+
+		socket.emit('bot.queue', data);
 	} catch (error) {
 		socketError(error);
 	}
 });
 
-socket.on('bot.playSong', async (data) => {
+socket.on('bot.playSong', async ({ query, guild }) => {
 	try {
-		await play(data.query, data.guild);
+		console.log(guild);
+		await play(query, guild);
 	} catch (error) {
+		console.log(error);
 		socketError(error);
 	}
 });

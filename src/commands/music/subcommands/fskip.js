@@ -17,7 +17,7 @@ export default async (interaction) => {
 			'Only moderators and administrators are allowed to use this command'
 		);
 
-	const queue = await fskip(channel);
+	const queue = await fskip(channel.id);
 	const { tracks } = queue;
 
 	const title = !queue.isEmpty()

@@ -6,7 +6,7 @@ import { resume } from '@/functions/musicUtils';
 export default async (interaction) => {
 	const { channel } = interaction.member.voice;
 
-	await resume(channel);
+	await resume(channel.id);
 
 	await interaction.reply({
 		embeds: [
