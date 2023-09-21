@@ -1,15 +1,7 @@
-import socket from './socketClient';
-import play from '../music/play';
 import logger from '../logger';
+import socket from './socketClient';
 
-socket.on('bot.playSong', async (query) => {
-	try {
-		const { track } = await play(query, '1026501495513952349');
-
-		console.log(track.title);
-	} catch (error) {
-		console.log(error);
-	}
+socket.on('bot.playSong', async () => {
 	logger.info('play song!');
 });
 
