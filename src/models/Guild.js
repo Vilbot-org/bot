@@ -9,6 +9,10 @@ const schema = new Schema(
 		name: {
 			type: String,
 			required: true
+		},
+		activeVoiceUsers: {
+			type: String,
+			default: '{}'
 		}
 	},
 	{

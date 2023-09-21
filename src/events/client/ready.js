@@ -31,7 +31,7 @@ export default {
 		const registeredGuilds = await Guild.find();
 		const botGuilds = client.guilds.cache;
 
-		if (registeredGuilds.length < botGuilds.length) {
+		if (registeredGuilds.length < botGuilds.size) {
 			const unregisterGuilds = findDifferents(registeredGuilds, botGuilds);
 
 			await Guild.insertMany(unregisterGuilds);
