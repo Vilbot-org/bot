@@ -1,5 +1,9 @@
 import { Schema, model } from 'mongoose';
 
+const toObject = (activeVoiceUsers) => {
+	return JSON.parse(activeVoiceUsers);
+};
+
 const schema = new Schema(
 	{
 		_id: {
@@ -12,7 +16,8 @@ const schema = new Schema(
 		},
 		activeVoiceUsers: {
 			type: String,
-			default: '{}'
+			default: '{}',
+			get: toObject
 		}
 	},
 	{

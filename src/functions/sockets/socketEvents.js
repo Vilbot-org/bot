@@ -1,3 +1,4 @@
+import Guild from '@/models/Guild';
 import { useQueue } from 'discord-player';
 import formatSong from '../formatSong';
 import { fskip, pause, play, resume } from '../musicUtils';
@@ -30,10 +31,23 @@ socket.on('bot.getQueue', async (guild) => {
 	}
 });
 
-socket.on('bot.playSong', async ({ query, guild }) => {
+socket.on('bot.playSong', async ({ query, guild: guildId, user }) => {
 	try {
-		console.log(guild);
-		await play(query, guild);
+		const guild = await Guild.findById(guildId);
+
+		const channelds = Object.keys(guild.activeVoiceUsers);
+
+		const findChannel = channelds.find((channel) => {
+			const users = guild.activeVoiceUsers[channel];
+			return users.includes(user);
+		});
+
+		if (findChannel) {
+			await play(query, guildId, findChannel);
+		} else {
+			//Add error
+			console.log('Error');
+		}
 	} catch (error) {
 		console.log(error);
 		socketError(error);

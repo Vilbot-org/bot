@@ -13,7 +13,7 @@ export default {
 		if (userId !== client.user.id) {
 			const guild = await Guild.findById(guildId);
 
-			const activeVoiceUsers = JSON.parse(guild.activeVoiceUsers) || {};
+			const activeVoiceUsers = guild.activeVoiceUsers || {};
 
 			if (oldChannelID && activeVoiceUsers[oldChannelID] !== undefined) {
 				activeVoiceUsers[oldChannelID] = activeVoiceUsers[oldChannelID].filter(

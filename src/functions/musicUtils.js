@@ -27,7 +27,7 @@ const handleQueueErrors =
 		}
 	};
 
-const play = async (query, guildChannel) => {
+const play = async (query, guild, guildChannel) => {
 	const searchResult = await player().search(query);
 
 	if (!searchResult.hasTracks()) {
@@ -46,7 +46,7 @@ const play = async (query, guildChannel) => {
 
 	socket.emit('bot.addedSong', {
 		song: formatSong(track),
-		guild: guildChannel
+		guild
 	});
 
 	return { queue, track };
