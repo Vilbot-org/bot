@@ -7,7 +7,8 @@ import socketError from './socketFunctions';
 
 socket.on('bot.getQueue', async (guild) => {
 	try {
-		const fetchedQueue = await useQueue(guild);
+		const fetchedQueue = useQueue(guild);
+		const isPaused = fetchedQueue.node.isPaused();
 
 		if (!fetchedQueue) {
 			socket.emit('bot.queue', { guild, queue: null });
@@ -17,6 +18,7 @@ socket.on('bot.getQueue', async (guild) => {
 		const data = {
 			guild,
 			queue: {
+				isPaused,
 				currentSong: {
 					...formatSong(fetchedQueue.currentTrack),
 					playbackTime: fetchedQueue.node.playbackTime

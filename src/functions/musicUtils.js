@@ -71,7 +71,7 @@ const pause = handleQueueErrors(async (queue) => {
 		);
 	}
 
-	socket.emit('bot.pausedSong', queue.channel.id);
+	socket.emit('bot.pausedSong', queue.guild.id);
 
 	return true;
 });
@@ -88,7 +88,7 @@ const resume = handleQueueErrors(async (queue) => {
 
 	await queue.node.resume();
 
-	socket.emit('bot.resumedSong', queue.channel.id);
+	socket.emit('bot.resumedSong', queue.guild.id);
 
 	return true;
 });
