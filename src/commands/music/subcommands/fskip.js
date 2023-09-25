@@ -5,7 +5,7 @@ import MusicErrors from '@/errors/MusicErrors';
 import { fskip } from '@/functions/musicUtils';
 
 export default async (interaction) => {
-	const { channel } = interaction.member.voice;
+	const { guild } = interaction;
 
 	if (
 		!interaction.member.permissions.has(
@@ -17,7 +17,7 @@ export default async (interaction) => {
 			'Only moderators and administrators are allowed to use this command'
 		);
 
-	const queue = await fskip(channel.id);
+	const queue = await fskip(guild.id);
 	const { tracks } = queue;
 
 	const title = !queue.isEmpty()

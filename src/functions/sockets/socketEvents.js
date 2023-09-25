@@ -58,6 +58,7 @@ socket.on('bot.nextSong', async (guild) => {
 	try {
 		await fskip(guild);
 	} catch (error) {
+		console.log(error);
 		socketError(error);
 	}
 });
@@ -66,6 +67,7 @@ socket.on('bot.pauseSong', async (guild) => {
 	try {
 		await pause(guild);
 	} catch (error) {
+		console.log(error);
 		socketError(error);
 	}
 });
@@ -74,6 +76,7 @@ socket.on('bot.resumeSong', async (guild) => {
 	try {
 		await resume(guild);
 	} catch (error) {
+		console.log(error);
 		socketError(error);
 	}
 });

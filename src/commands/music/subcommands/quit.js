@@ -1,10 +1,10 @@
-import { EmbedBuilder, PermissionsBitField } from 'discord.js';
 import config from '@/app.config';
 import MusicErrors from '@/errors/MusicErrors';
 import { quit } from '@/functions/musicUtils';
+import { EmbedBuilder, PermissionsBitField } from 'discord.js';
 
 export default async (interaction) => {
-	const { channel } = interaction.member.voice;
+	const { guild } = interaction;
 
 	if (
 		!interaction.member.permissions.has(
@@ -16,7 +16,7 @@ export default async (interaction) => {
 			'You dont have permissions to exec this command.'
 		);
 
-	await quit(channel);
+	await quit(guild.id);
 
 	await interaction.reply({
 		embeds: [

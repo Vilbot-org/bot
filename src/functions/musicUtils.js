@@ -3,8 +3,9 @@ import MusicErrors from '../errors/MusicErrors';
 import formatSong from './formatSong';
 import socket from './sockets/socketClient';
 
-const getQueue = (guildChannel) => {
-	const queue = useQueue(guildChannel);
+const getQueue = (guild) => {
+	const queue = useQueue(guild);
+
 	if (!queue) {
 		throw new MusicErrors(
 			'Music queue',
@@ -55,10 +56,7 @@ const play = async (query, guild, guildChannel) => {
 const fskip = handleQueueErrors(async (queue) => {
 	await queue.node.skip();
 
-	socket.emit('bot.skippedSong', {
-		song: queue.currentTrack,
-		guild: queue.channel.id
-	});
+	socket.emit('bot.skippedSong', queue.guild.id);
 
 	return queue;
 });

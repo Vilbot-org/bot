@@ -1,12 +1,12 @@
 import { EmbedBuilder } from 'discord.js';
 
-import { pause } from '@/functions/musicUtils';
 import config from '@/app.config';
+import { pause } from '@/functions/musicUtils';
 
 export default async (interaction) => {
-	const { channel } = interaction.member.voice;
+	const { guild } = interaction;
 
-	await pause(channel.id);
+	await pause(guild.id);
 
 	await interaction.reply({
 		embeds: [

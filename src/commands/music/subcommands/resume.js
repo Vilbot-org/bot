@@ -4,9 +4,9 @@ import config from '@/app.config';
 import { resume } from '@/functions/musicUtils';
 
 export default async (interaction) => {
-	const { channel } = interaction.member.voice;
+	const { guild } = interaction;
 
-	await resume(channel.id);
+	await resume(guild.id);
 
 	await interaction.reply({
 		embeds: [
