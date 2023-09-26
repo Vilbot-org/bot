@@ -1,9 +1,8 @@
 import { EmbedBuilder } from 'discord.js';
 
-import PlaylistError from '../../../errors/PlaylistError';
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
-
-import config from '../../../app.config';
+import config from '@/app.config';
+import PlaylistError from '@/errors/PlaylistError';
+import Playlist from '@/models/Playlist';
 
 export default async (interaction) => {
 	const playlistName = interaction.options.getString('name')
@@ -12,11 +11,11 @@ export default async (interaction) => {
 
 	await interaction.deferReply({ ephemeral: true });
 
-	const data = await UserPlaylistModel.findOne({
-		userId: interaction.user.id,
-		playlistName
+	const playlist = await Playlist.findOne({
+		user: interaction.user.id,
+		name: playlistName
 	});
-	if (!data)
+	if (!playlist)
 		throw new PlaylistError(
 			"You don't have any playlist with this name",
 			'Please check the name with the command `/playlist list` and try again'
@@ -25,13 +24,14 @@ export default async (interaction) => {
 	const embedMsg = new EmbedBuilder()
 		.setColor(config.colors.success)
 		.setAuthor({ name: 'Songs list' })
-		.setTitle(data.playlistName);
+		.setTitle(playlist.name);
 
-	if (data.playlist.length > 0) {
+	if (playlist.songs.length > 0) {
 		embedMsg.addFields(
-			data.playlist.map((playlist) => ({
-				name: `ID: ${playlist.id}`,
-				value: `[${playlist.title}](${playlist.url})`
+			playlist.songs.map((song, index) => ({
+				name: `ID: ${index + 1}`,
+				value: song
+				//value: `[${playlist.title}](${playlist.url})`
 			}))
 		);
 	}
@@ -39,12 +39,12 @@ export default async (interaction) => {
 	await interaction.followUp({
 		embeds: [
 			embedMsg
-				.setDescription(`This playlist have ${data.playlist.length} songs`)
+				.setDescription(`This playlist have ${playlist.songs.length} songs`)
 				.setFooter({
 					text:
-						data.playlist.length > 0
-							? `Type \`/music playlist ${playlistName}\` to play your playlist.`
-							: `Type \`/playlist add <song> ${playlistName}\` to add new songs to  your playlist.`
+						playlist.songs.length > 0
+							? `Type \`/music playlist ${playlist.name}\` to play your playlist.`
+							: `Type \`/playlist add <song> ${playlist.name}\` to add new songs to  your playlist.`
 				})
 		],
 		ephemeral: true

@@ -1,15 +1,14 @@
 import { EmbedBuilder } from 'discord.js';
 
-import PlaylistError from '../../../errors/PlaylistError';
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
-
-import config from '../../../app.config';
+import config from '@/app.config';
+import PlaylistError from '@/errors/PlaylistError';
+import Playlist from '@/models/Playlist';
 
 export default async (interaction) => {
 	await interaction.deferReply({ ephemeral: true });
 
-	const playlists = await UserPlaylistModel.find({
-		userId: interaction.user.id
+	const playlists = await Playlist.find({
+		user: interaction.user.id
 	});
 
 	if (playlists.length === 0)
@@ -30,11 +29,11 @@ export default async (interaction) => {
 				})
 				.addFields(
 					playlists.map((playlist) => ({
-						name: `- ${playlist.playlistName}`,
+						name: `- ${playlist.name}`,
 						value:
-							playlist.playlist.length === 0
+							playlist.songs.length === 0
 								? 'Empty playlist'
-								: `${playlist.playlist.length} song`
+								: `${playlist.songs.length} song`
 					}))
 				)
 		],
