@@ -1,7 +1,9 @@
 import { useMasterPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
 import formatSong from './formatSong';
+import logger from './logger';
 import socket from './sockets/socketClient';
+import socketError from './sockets/socketFunctions';
 
 const getQueue = (guild) => {
 	const queue = useQueue(guild);
@@ -19,12 +21,13 @@ const getQueue = (guild) => {
 const handleQueueErrors =
 	(func) =>
 	async (...args) => {
-		// eslint-disable-next-line no-useless-catch
 		try {
 			const queue = getQueue(args[0]);
-			return await func(queue, ...args);
+			return await func(queue, ...args.slice(1));
 		} catch (error) {
-			throw error;
+			logger.error(error);
+			socketError(error);
+			return error;
 		}
 	};
 
@@ -99,4 +102,11 @@ const quit = handleQueueErrors(async (queue) => {
 	return true;
 });
 
-export { fskip, getQueue, pause, play, quit, resume };
+const removeTrack = handleQueueErrors((queue, trackIndex) => {
+	queue.removeTrack(trackIndex);
+
+	socket.emit('bot.removedSong', queue.guild.id, trackIndex);
+	return true;
+});
+
+export { fskip, getQueue, pause, play, quit, removeTrack, resume };

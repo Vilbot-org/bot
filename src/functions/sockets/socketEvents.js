@@ -1,7 +1,7 @@
 import Guild from '@/models/Guild';
 import { useQueue } from 'discord-player';
 import formatSong from '../formatSong';
-import { fskip, pause, play, resume } from '../musicUtils';
+import { fskip, pause, play, removeTrack, resume } from '../musicUtils';
 import socket from './socketClient';
 import socketError from './socketFunctions';
 
@@ -77,6 +77,15 @@ socket.on('bot.pauseSong', async (guild) => {
 socket.on('bot.resumeSong', async (guild) => {
 	try {
 		await resume(guild);
+	} catch (error) {
+		console.log(error);
+		socketError(error);
+	}
+});
+
+socket.on('bot.removeSong', (guild, songIndex) => {
+	try {
+		removeTrack(guild, songIndex);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
