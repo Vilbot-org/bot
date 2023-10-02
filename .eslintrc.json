@@ -17,8 +17,8 @@
 	"rules": {
 		"prettier/prettier": "error",
 		"no-unused-vars": "warn",
-		"no-console": "off",
-		"spaced-comment": "off"
+		"no-console": "warn",
+		"spaced-comment": "error"
 	},
 	"settings": {
 		"import/resolver": {
