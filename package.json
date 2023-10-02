@@ -2,9 +2,10 @@
 	"name": "vilbot",
 	"version": "1.1.0",
 	"description": "Vilbot is a awesome Discord Bot created by a passionate programmer using the discord.js library with varoious functionalities.",
-	"main": "index.js",
+	"main": "src/index.js",
 	"scripts": {
-		"start": "npm run deploy-commands && babel-node .",
+		"start": "npm run deploy-commands && node dist/index.js",
+		"build": "babel src -d dist",
 		"dev": "npx nodemon . --exec babel-node | pino-pretty",
 		"deploy-commands": "babel-node ./src/functions/deployCommands.js",
 		"eslint": "eslint ./src/**"
@@ -13,9 +14,6 @@
 	"author": "GFrancV",
 	"license": "MIT",
 	"dependencies": {
-		"@babel/core": "^7.21.0",
-		"@babel/node": "^7.20.7",
-		"@babel/preset-env": "^7.20.2",
 		"@discord-player/extractor": "^4.1.0",
 		"@discordjs/builders": "^1.2.0",
 		"@discordjs/opus": "^0.9.0",
@@ -30,11 +28,14 @@
 		"jsonwebtoken": "^9.0.0",
 		"libsodium-wrappers": "^0.7.10",
 		"mongoose": "^6.6.4",
-		"opusscript": "^0.0.8",
 		"pino": "^7.0.0-rc.9",
 		"socket.io-client": "^4.7.1"
 	},
 	"devDependencies": {
+		"@babel/cli": "^7.23.0",
+		"@babel/core": "^7.23.0",
+		"@babel/node": "^7.22.19",
+		"@babel/preset-env": "^7.22.20",
 		"eslint": "^8.35.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^8.7.0",
