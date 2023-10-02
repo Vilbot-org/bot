@@ -12,6 +12,8 @@
 		"errorHandler",
 		"socketIO",
 		"babel",
-		"client-events"
+		"client-events",
+		"eslint",
+		"handlers"
 	]
 }
