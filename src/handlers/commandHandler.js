@@ -3,7 +3,7 @@ import { join } from 'path';
 import logger from '../functions/logger';
 
 export default (client) => {
-	const path = './src/commands';
+	const path = `./${process.env.APP_ENV === 'prod' ? 'dist' : 'src'}/commands`;
 	const categories = readdirSync(path);
 
 	categories.map(async (category) => {
