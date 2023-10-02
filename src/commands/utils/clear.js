@@ -1,7 +1,7 @@
 import {
-	SlashCommandBuilder,
+	EmbedBuilder,
 	PermissionFlagsBits,
-	EmbedBuilder
+	SlashCommandBuilder
 } from 'discord.js';
 
 import config from '../../app.config';
