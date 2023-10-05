@@ -11,10 +11,10 @@ jobs:
   lint:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v2
         with:
           node-version: '16.15'
       - name: Install dependencies
@@ -26,12 +26,6 @@ jobs:
     needs: [lint]
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.15'
       - name: Deployment
         if: ${{ github.event_name == 'push' }}
         run: pm2 reload 0
