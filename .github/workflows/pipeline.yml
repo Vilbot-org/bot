@@ -26,9 +26,7 @@ jobs:
     needs: [lint]
     runs-on: self-hosted
     steps:
-      - name: Deployment
-        if: ${{ github.event_name == 'push' }}
-        run: pm2 reload 0
+      - uses: iamsauravsharma/create-dotenv@v2.0.0
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
@@ -36,3 +34,10 @@ jobs:
           DP_FORCE_YTDL_MOD: '@distube/ytdl-core'
           APP_ENV: dev
           APP_NAME: vilbot
+      - name: Create logs folder
+        run: mkdir logs
+      - name: Create logs file
+        run: touch logs/app.log
+      - name: Deployment
+        if: ${{ github.event_name == 'push' }}
+        run: pm2 reload 0
