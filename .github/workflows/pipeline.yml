@@ -8,12 +8,6 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  check-redudance:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action
-
   lint:
     runs-on: ubuntu-18.04
     steps:

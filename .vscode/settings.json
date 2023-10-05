@@ -9,6 +9,7 @@
 		"info-commands",
 		"env-file",
 		"logs",
-		"errorHandler"
+		"errorHandler",
+		"workflow"
 	]
 }
