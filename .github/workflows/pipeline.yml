@@ -9,7 +9,7 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-18.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,8 +32,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.15'
-      - name: Install dependencies
-        run: npm ci
       - name: Deployment
         if: ${{ github.event_name == 'push' }}
         run: pm2 reload 0
