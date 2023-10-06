@@ -56,7 +56,7 @@ const play = async (query, guild, guildChannel) => {
 	return { queue, track };
 };
 
-const fskip = handleQueueErrors(async (queue) => {
+const skip = handleQueueErrors(async (queue) => {
 	await queue.node.skip();
 
 	socket.emit('bot.skippedSong', queue.guild.id);
@@ -109,4 +109,4 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	return true;
 });
 
-export { fskip, getQueue, pause, play, quit, removeTrack, resume };
+export { getQueue, pause, play, quit, removeTrack, resume, skip };
