@@ -76,11 +76,12 @@ export default {
 				subCommand !== 'setup' &&
 				subCommand !== 'clear' &&
 				subCommand !== 'help'
-			)
+			) {
 				throw new Error(
 					'You need to be in a voice channel',
 					'Enter to any voice channel and try again.'
 				);
+			}
 
 			const { default: subCommandFunction } = await import(
 				`./subcommands/${subCommand}`

@@ -11,20 +11,21 @@ export default async (interaction) => {
 
 	await interaction.deferReply({ ephemeral: true });
 
-	//Check if this playlist already exist
+	// Check if this playlist already exist
 	const playlist = await Playlist.findOne({
 		user: interaction.user.id,
 		name: playlistName
 	});
-	if (playlist)
+	if (playlist) {
 		throw new PlaylistError(
 			playlistName === `${interaction.user.username}-playlist`
 				? 'You already have your default playlist created'
 				: 'A playlist with that name already exists',
 			`Create a new playlist or add songs to the exist playlist with \`playlist add ${playlist.playlistName}\`!`
 		);
+	}
 
-	//Create new playlist if the user don't have a playlist with that name
+	// Create new playlist if the user don't have a playlist with that name
 	const newPlaylist = new Playlist({
 		user: interaction.user.id,
 		name: playlistName

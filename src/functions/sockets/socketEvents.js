@@ -47,7 +47,7 @@ socket.on('bot.playSong', async ({ query, guild: guildId, user }) => {
 		if (findChannel) {
 			await play(query, guildId, findChannel);
 		} else {
-			//Add error
+			// Add error
 			console.log('Error');
 		}
 	} catch (error) {

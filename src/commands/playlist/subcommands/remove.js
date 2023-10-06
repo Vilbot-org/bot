@@ -12,29 +12,32 @@ export default async (interaction) => {
 
 	await interaction.deferReply({ ephemeral: true });
 
-	//Check if the number is valid
-	if (songIndex <= 0)
+	// Check if the number is valid
+	if (songIndex <= 0) {
 		throw new PlaylistError(
 			'Invalid song to remove',
 			'Please enter a valid number song.'
 		);
+	}
 
 	const playlist = await Playlist.findOne({
 		user: interaction.user.id,
 		name: playlistName
 	});
 
-	if (!playlist)
+	if (!playlist) {
 		throw new PlaylistError(
 			'The song you have indicated does not exist in the playlist',
 			'Please check the song and try again.'
 		);
+	}
 
-	if (playlist.songs.length <= songIndex - 1)
+	if (playlist.songs.length <= songIndex - 1) {
 		throw new PlaylistError(
 			'Invalid song index',
 			'Please enter a valid song index.'
 		);
+	}
 
 	playlist.songs = playlist.songs.splice(songIndex);
 	await playlist.save();

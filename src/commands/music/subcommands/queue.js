@@ -16,7 +16,7 @@ export default async (interaction) => {
 		.setDescription(`[${queue.currentTrack.title}](${queue.currentTrack.url})`)
 		.setFooter({ text: `There are ${queue.getSize()} songs in the queue` });
 
-	if (!queue.isEmpty())
+	if (!queue.isEmpty()) {
 		embedMsg.addFields(
 			queue.tracks.map((track, key) => ({
 				name: `${key + 1}. ${track.title}`,
@@ -24,6 +24,7 @@ export default async (interaction) => {
 				inline: true
 			}))
 		);
+	}
 
 	await interaction.reply({
 		embeds: [embedMsg]

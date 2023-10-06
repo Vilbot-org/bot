@@ -13,7 +13,7 @@ export default {
 	async execute(client) {
 		logger.info(`${client.user.tag} are ready!`);
 
-		//Register the status of the bot
+		// Register the status of the bot
 		client.user.setActivity('/help', { type: ActivityType.Listening });
 
 		await databaseConnection();

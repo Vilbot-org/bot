@@ -7,7 +7,7 @@ export default async (interaction) => {
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.danger)
-				.setTitle(":x: You can't send that message on this channel!")
+				.setTitle(':x: You cant send that message on this channel!')
 				.setDescription(
 					'This channel is exclusive for music commands, use another channel to send messages!'
 				)

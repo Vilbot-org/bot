@@ -14,11 +14,12 @@ export default async (interaction) => {
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers
 		)
-	)
+	) {
 		throw new MusicErrors(
 			'No permissions',
 			'You dont have permissions to exec this command.'
 		);
+	}
 
 	const channels = await interaction.guild.channels.fetch();
 
@@ -30,12 +31,13 @@ export default async (interaction) => {
 			}-music`
 	);
 
-	//If the channel exist
-	if (existChannel)
+	// If the channel exist
+	if (existChannel) {
 		throw new MusicErrors(
 			'The channel already exists!',
 			`If you want to reset the bot channel please delete the '${config.botName}-music' text channel and run this command again.`
 		);
+	}
 
 	const musicChannel = await interaction.guild.channels.create({
 		name: `「🎵」${config.botName}-music`,
@@ -45,11 +47,12 @@ export default async (interaction) => {
 		reason: 'Channel to view the music in your channel!'
 	});
 
-	if (!musicChannel)
+	if (!musicChannel) {
 		throw new MusicErrors(
 			'An error occurred while creating the channel!',
 			'Check the permissions and try again.'
 		);
+	}
 
 	await interaction.reply({
 		embeds: [

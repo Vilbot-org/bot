@@ -11,11 +11,12 @@ export default async (interaction) => {
 		user: interaction.user.id
 	});
 
-	if (playlists.length === 0)
+	if (playlists.length === 0) {
 		throw new PlaylistError(
-			"You still don't have playlists",
+			'You still dont have playlists',
 			'Type `/playlist create <playlist-name>` to create a new playlist.'
 		);
+	}
 
 	await interaction.followUp({
 		embeds: [

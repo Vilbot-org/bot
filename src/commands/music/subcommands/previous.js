@@ -7,11 +7,12 @@ import MusicErrors from '@/errors/MusicErrors';
 export default async (interaction) => {
 	const history = useHistory(interaction.guild.id);
 
-	if (!history)
+	if (!history) {
 		throw new MusicErrors(
-			"Can't go to previous song",
+			'Cant go to previous song',
 			'No songs in the previous queue.'
 		);
+	}
 
 	await history.previous();
 

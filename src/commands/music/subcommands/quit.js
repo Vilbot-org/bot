@@ -10,11 +10,12 @@ export default async (interaction) => {
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers
 		)
-	)
+	) {
 		throw new MusicErrors(
 			'No permissions',
 			'You dont have permissions to exec this command.'
 		);
+	}
 
 	await quit(guild.id);
 

@@ -29,7 +29,7 @@ export default {
 				embeds: [
 					new EmbedBuilder()
 						.setColor(config.colors.info)
-						.setTitle(`There are no messages to delete!`)
+						.setTitle('There are no messages to delete!')
 				],
 				ephemeral: true
 			});

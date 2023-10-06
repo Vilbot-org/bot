@@ -15,11 +15,12 @@ export default async (interaction) => {
 		user: interaction.user.id,
 		name: playlistName
 	});
-	if (!playlist)
+	if (!playlist) {
 		throw new PlaylistError(
-			"You don't have any playlist with this name",
+			'You dont have any playlist with this name',
 			'Please check the name with the command `/playlist list` and try again'
 		);
+	}
 
 	const embedMsg = new EmbedBuilder()
 		.setColor(config.colors.success)
@@ -31,7 +32,7 @@ export default async (interaction) => {
 			playlist.songs.map((song, index) => ({
 				name: `ID: ${index + 1}`,
 				value: song
-				//value: `[${playlist.title}](${playlist.url})`
+				// value: `[${playlist.title}](${playlist.url})`
 			}))
 		);
 	}

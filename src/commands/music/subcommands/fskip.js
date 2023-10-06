@@ -11,11 +11,12 @@ export default async (interaction) => {
 		!interaction.member.permissions.has(
 			PermissionsBitField.Flags.ModerateMembers
 		)
-	)
+	) {
 		throw new MusicErrors(
-			"You don't have permission to do that",
+			'You dont have permission to do that',
 			'Only moderators and administrators are allowed to use this command'
 		);
+	}
 
 	const queue = await fskip(guild.id);
 	const { tracks } = queue;

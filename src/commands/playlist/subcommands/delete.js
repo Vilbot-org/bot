@@ -14,13 +14,14 @@ export default async (interaction) => {
 		name: playlistName
 	});
 
-	if (!deletePlaylist)
+	if (!deletePlaylist) {
 		throw new PlaylistError(
-			"You don't have any playlist with this name",
+			'You dont have any playlist with this name',
 			'Please check the name with the command `/playlist list` and try again'
 		);
+	}
 
-	//Check if  exist this playlist
+	// Check if  exist this playlist
 	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()
