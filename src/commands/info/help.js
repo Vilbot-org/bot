@@ -1,7 +1,7 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 
-import config from '../../app.config';
 import packageInfo from '../../../package.json';
+import config from '../../app.config';
 
 export default {
 	data: new SlashCommandBuilder()
@@ -17,7 +17,7 @@ export default {
 					.setThumbnail(interaction.client.user.avatarURL())
 					.setAuthor({ name: 'Vilbot help command' })
 					.setDescription(
-						`Hi! I'm ${config.botName} a awesome discord bot. Current version: v${packageInfo.version}`
+						`Hi! I'm ${config.botName} a awesome discord bot. Current version: \`v${packageInfo.version}\``
 					)
 					.addFields(
 						{

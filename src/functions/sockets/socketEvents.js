@@ -1,7 +1,7 @@
 import Guild from '@/models/Guild';
 import { useQueue } from 'discord-player';
 import formatSong from '../formatSong';
-import { fskip, pause, play, removeTrack, resume } from '../musicUtils';
+import { pause, play, removeTrack, resume, skip } from '../musicUtils';
 import socket from './socketClient';
 import socketError from './socketFunctions';
 
@@ -58,7 +58,7 @@ socket.on('bot.playSong', async ({ query, guild: guildId, user }) => {
 
 socket.on('bot.nextSong', async (guild) => {
 	try {
-		await fskip(guild);
+		await skip(guild);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
