@@ -3,7 +3,7 @@ import { EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import MusicErrors from '@/errors/MusicErrors';
-import UserPlaylistModel from '@/models/UserPlaylistModel';
+import Playlist from '@/models/Playlist';
 
 export default async (interaction) => {
 	const { channel } = interaction.member.voice;
@@ -13,46 +13,42 @@ export default async (interaction) => {
 
 	await interaction.deferReply({ ephemeral: true });
 
-	let playlist = await UserPlaylistModel.findOne({
-		userId: interaction.user.id,
-		playlistName: playlistQuery
+	const playlist = await Playlist.findOne({
+		user: interaction.user.id,
+		name: playlistQuery
 	});
-	if (!playlist)
+	if (!playlist) {
 		throw new MusicErrors(
-			"This playlist don't exist!",
+			'This playlist dont exist!',
 			'Use `/playlist create <playlist>` to create a playlist.'
 		);
+	}
 
-	playlist = playlist.playlist;
-
-	if (playlist.length === 0)
+	if (playlist.songs.length === 0) {
 		throw new MusicErrors(
-			"This playlist don't have songs!",
+			'This playlist dont have songs!',
 			`You can add songs to this playlist with the following command: \`/playlist add <song> ${playlist.playlistName}\`.`
 		);
+	}
 
-	const getSearchResults = async (track) => {
-		const searchResult = await player().search(track.title);
-		return searchResult.tracks[0];
-	};
-
-	const tracks = await Promise.all(
-		playlist.map(async (track) => {
-			return getSearchResults(track);
-		})
-	);
-
-	const { queue } = await player().play(channel, tracks[0], {
+	const { queue } = await player().play(channel, playlist.songs[0], {
 		nodeOptions: {
 			metadata: interaction,
 			volume: 40
 		}
 	});
 
-	if (tracks.length > 1)
-		tracks.forEach((track) => {
-			queue.insertTrack(track, queue.getSize());
+	if (playlist.songs.length > 1) {
+		playlist.songs.forEach(async (song, index) => {
+			if (index > 0) {
+				const searchResult = await player().search(song, {
+					requestedBy: interaction.user
+				});
+
+				queue.insertTrack(searchResult.tracks[0], queue.getSize());
+			}
 		});
+	}
 
 	await interaction.followUp({
 		embeds: [
@@ -61,7 +57,7 @@ export default async (interaction) => {
 				.setAuthor({ name: 'Add to the queue' })
 				.setTitle(`The ${playlistQuery} playlist`)
 				.setThumbnail(interaction.user.avatarURL())
-				.setFooter({ text: `${playlist.length} songs added.` })
+				.setFooter({ text: `${playlist.songs.length} songs added.` })
 		]
 	});
 };
