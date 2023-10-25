@@ -1,3 +1,4 @@
+import { useMasterPlayer as player } from 'discord-player';
 import { SlashCommandBuilder } from 'discord.js';
 
 import errorHandler from '@/handlers/errorHandler';
@@ -15,6 +16,7 @@ export default {
 						.setName('song')
 						.setDescription('Enter the name of the song  or the URL.')
 						.setRequired(true)
+						.setAutocomplete(true)
 				)
 		)
 		.addSubcommand((subcommand) =>
@@ -66,6 +68,23 @@ export default {
 				.setName('help')
 				.setDescription('See the main commands and aditional info!')
 		),
+
+	async autocomplete(interaction) {
+		const focusedOption = interaction.options.getFocused(true);
+
+		if (focusedOption.name === 'song') {
+			const searchResult = await player().search(focusedOption.value);
+
+			if (searchResult.hasTracks()) {
+				await interaction.respond(
+					searchResult.tracks.slice(0, 4).map((track) => ({
+						name: track.title,
+						value: track.title
+					}))
+				);
+			}
+		}
+	},
 
 	async execute(interaction) {
 		const subCommand = interaction.options.getSubcommand();
