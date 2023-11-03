@@ -1,7 +1,14 @@
 import Guild from '@/models/Guild';
 import { useQueue } from 'discord-player';
 import formatSong from '../formatSong';
-import { pause, play, removeTrack, resume, skip } from '../musicUtils';
+import {
+	pause,
+	play,
+	playPlaylist,
+	removeTrack,
+	resume,
+	skip
+} from '../musicUtils';
 import socket from './socketClient';
 import socketError from './socketFunctions';
 
@@ -86,6 +93,29 @@ socket.on('bot.resumeSong', async (guild) => {
 socket.on('bot.removeSong', (guild, songIndex) => {
 	try {
 		removeTrack(guild, songIndex);
+	} catch (error) {
+		console.log(error);
+		socketError(error);
+	}
+});
+
+socket.on('bot.playPlaylist', async ({ songs, guild: guildId, user }) => {
+	try {
+		const guild = await Guild.findById(guildId);
+
+		const channelds = Object.keys(guild.activeVoiceUsers);
+
+		const findChannel = channelds.find((channel) => {
+			const users = guild.activeVoiceUsers[channel];
+			return users.includes(user);
+		});
+
+		if (findChannel) {
+			await playPlaylist(songs, guildId, findChannel);
+		} else {
+			// Add error
+			console.log('Error');
+		}
 	} catch (error) {
 		console.log(error);
 		socketError(error);
