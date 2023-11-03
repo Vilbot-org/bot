@@ -1,9 +1,9 @@
-import { useMasterPlayer as player } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import MusicErrors from '@/errors/MusicErrors';
 import Playlist from '@/models/Playlist';
+import { playPlaylist } from '@/functions/musicUtils';
 
 export default async (interaction) => {
 	const { channel } = interaction.member.voice;
@@ -31,24 +31,7 @@ export default async (interaction) => {
 		);
 	}
 
-	const { queue } = await player().play(channel, playlist.songs[0], {
-		nodeOptions: {
-			metadata: interaction,
-			volume: 40
-		}
-	});
-
-	if (playlist.songs.length > 1) {
-		playlist.songs.forEach(async (song, index) => {
-			if (index > 0) {
-				const searchResult = await player().search(song, {
-					requestedBy: interaction.user
-				});
-
-				queue.insertTrack(searchResult.tracks[0], queue.getSize());
-			}
-		});
-	}
+	await playPlaylist(playlist.songs, interaction.guildId, channel.id);
 
 	await interaction.followUp({
 		embeds: [

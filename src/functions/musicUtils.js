@@ -109,4 +109,27 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	return true;
 });
 
-export { getQueue, pause, play, quit, removeTrack, resume, skip };
+const playPlaylist = async (songs, guild, guildChannel) => {
+	const { queue } = await player().play(guildChannel, songs[0], {
+		nodeOptions: {
+			metadata: guildChannel,
+			volume: 40
+		}
+	});
+
+	if (songs.length > 1) {
+		songs.forEach(async (song, index) => {
+			if (index > 0) {
+				const searchResult = await player().search(song);
+
+				queue.insertTrack(searchResult.tracks[0], queue.getSize());
+			}
+		});
+	}
+
+	socket.emit('bot.playedPlaylist', { songs, guild });
+
+	return true;
+};
+
+export { getQueue, pause, play, quit, removeTrack, resume, skip, playPlaylist };
