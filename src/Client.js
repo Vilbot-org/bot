@@ -21,11 +21,8 @@ client.commands = new Collection();
 commandHandler(client);
 eventHandler(client);
 
-Player.singleton(client, {
-	ytdlOptions: {
-		quality: 'highestaudio',
-		highWaterMark: 1 < 25
-	}
-});
+const player = new Player(client);
+
+player.extractors.loadDefault();
 
 export default client;
