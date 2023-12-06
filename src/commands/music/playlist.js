@@ -7,7 +7,7 @@ import Playlist from '@/models/Playlist';
 
 export default {
 	data: new SlashCommandBuilder()
-		.setName('playlist')
+		.setName('play-playlist')
 		.setDescription('Play a playlist in the voice channel!')
 		.addStringOption((option) =>
 			option
@@ -20,8 +20,11 @@ export default {
 	async autocomplete(interaction) {
 		const focusedOption = interaction.options.getFocused(true);
 
-		if (focusedOption.name === 'playlist') {
-			const playlistResult = await Playlist.find({ name: focusedOption.value });
+		if (focusedOption.name === 'playlist' && focusedOption.value !== '') {
+			const playlistResult = await Playlist.find({
+				name: { $regex: new RegExp(focusedOption.value, 'i') },
+				user: interaction.user.id
+			});
 
 			if (playlistResult.length > 0) {
 				await interaction.respond(
@@ -60,7 +63,7 @@ export default {
 			);
 		}
 
-		await playPlaylist(playlist.songs, interaction.guildId, channel.id);
+		await playPlaylist(playlist.songs, interaction.guildId, channel?.id);
 
 		await interaction.followUp({
 			embeds: [

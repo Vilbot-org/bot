@@ -1,7 +1,6 @@
-import { useMasterPlayer as player, useQueue } from 'discord-player';
+import { useMainPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
 import formatSong from './formatSong';
-import logger from './logger';
 import socket from './sockets/socketClient';
 import socketError from './sockets/socketFunctions';
 
@@ -25,13 +24,19 @@ const handleQueueErrors =
 			const queue = getQueue(args[0]);
 			return await func(queue, ...args.slice(1));
 		} catch (error) {
-			logger.error(error);
 			socketError(error);
-			return error;
+			throw new MusicErrors(error.title, error.message);
 		}
 	};
 
 const play = async (query, guild, guildChannel) => {
+	if (!guildChannel) {
+		throw new MusicErrors(
+			'You are not on any voice channel',
+			'You must on voice channel to play music.'
+		);
+	}
+
 	const searchResult = await player().search(query);
 
 	if (!searchResult.hasTracks()) {
@@ -110,6 +115,13 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 });
 
 const playPlaylist = async (songs, guild, guildChannel) => {
+	if (!guildChannel) {
+		throw new MusicErrors(
+			'You are not on any voice channel',
+			'You must on voice channel to play music.'
+		);
+	}
+
 	const { queue } = await player().play(guildChannel, songs[0], {
 		nodeOptions: {
 			metadata: guildChannel,
@@ -132,4 +144,4 @@ const playPlaylist = async (songs, guild, guildChannel) => {
 	return true;
 };
 
-export { getQueue, pause, play, quit, removeTrack, resume, skip, playPlaylist };
+export { getQueue, pause, play, playPlaylist, quit, removeTrack, resume, skip };

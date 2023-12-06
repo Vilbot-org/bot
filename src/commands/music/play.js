@@ -19,7 +19,7 @@ export default {
 	async autocomplete(interaction) {
 		const focusedOption = interaction.options.getFocused(true);
 
-		if (focusedOption.name === 'song') {
+		if (focusedOption.name === 'song' && focusedOption.value !== '') {
 			const searchResult = await player().search(focusedOption.value);
 
 			if (searchResult.hasTracks()) {
@@ -39,7 +39,11 @@ export default {
 
 		await interaction.deferReply();
 
-		const { queue, track } = await play(query, interaction.guildId, channel.id);
+		const { queue, track } = await play(
+			query,
+			interaction.guildId,
+			channel?.id
+		);
 
 		await interaction.followUp({
 			embeds: [
