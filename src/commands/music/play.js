@@ -39,11 +39,7 @@ export default {
 
 		await interaction.deferReply();
 
-		const { queue, track } = await play(
-			query,
-			interaction.guildId,
-			channel?.id
-		);
+		const { queue, track } = await play(query, channel?.id);
 
 		await interaction.followUp({
 			embeds: [

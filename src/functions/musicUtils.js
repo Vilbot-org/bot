@@ -1,7 +1,5 @@
 import { useMainPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
-import formatSong from './formatSong';
-import socket from './sockets/socketClient';
 import socketError from './sockets/socketFunctions';
 
 const getQueue = (guild) => {
@@ -29,7 +27,7 @@ const handleQueueErrors =
 		}
 	};
 
-const play = async (query, guild, guildChannel) => {
+const play = async (query, guildChannel) => {
 	if (!guildChannel) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
@@ -49,13 +47,8 @@ const play = async (query, guild, guildChannel) => {
 	const { queue, track } = await player().play(guildChannel, searchResult, {
 		nodeOptions: {
 			volume: 40,
-			metadata: guildChannel
+			metadata: { channel: guildChannel }
 		}
-	});
-
-	socket.emit('bot.addedSong', {
-		song: formatSong(track),
-		guild
 	});
 
 	return { queue, track };
@@ -63,8 +56,6 @@ const play = async (query, guild, guildChannel) => {
 
 const skip = handleQueueErrors(async (queue) => {
 	await queue.node.skip();
-
-	socket.emit('bot.skippedSong', queue.guild.id);
 
 	return queue;
 });
@@ -78,8 +69,6 @@ const pause = handleQueueErrors(async (queue) => {
 			'Use `/music resume` to resume a song.'
 		);
 	}
-
-	socket.emit('bot.pausedSong', queue.guild.id);
 
 	return true;
 });
@@ -96,8 +85,6 @@ const resume = handleQueueErrors(async (queue) => {
 
 	await queue.node.resume();
 
-	socket.emit('bot.resumedSong', queue.guild.id);
-
 	return true;
 });
 
@@ -110,11 +97,10 @@ const quit = handleQueueErrors(async (queue) => {
 const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	queue.removeTrack(trackIndex);
 
-	socket.emit('bot.removedSong', queue.guild.id, trackIndex);
 	return true;
 });
 
-const playPlaylist = async (songs, guild, guildChannel) => {
+const playPlaylist = async (songs, guildChannel) => {
 	if (!guildChannel) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
@@ -124,8 +110,8 @@ const playPlaylist = async (songs, guild, guildChannel) => {
 
 	const { queue } = await player().play(guildChannel, songs[0], {
 		nodeOptions: {
-			metadata: guildChannel,
-			volume: 40
+			volume: 40,
+			metadata: { channel: guildChannel }
 		}
 	});
 
@@ -138,8 +124,6 @@ const playPlaylist = async (songs, guild, guildChannel) => {
 			}
 		});
 	}
-
-	socket.emit('bot.playedPlaylist', { songs, guild });
 
 	return true;
 };

@@ -52,7 +52,7 @@ socket.on('bot.playSong', async ({ query, guild: guildId, user }) => {
 		});
 
 		if (findChannel) {
-			await play(query, guildId, findChannel);
+			await play(query, findChannel);
 		} else {
 			// Add error
 			console.log('Error');
@@ -99,7 +99,7 @@ socket.on('bot.removeSong', (guild, songIndex) => {
 	}
 });
 
-socket.on('bot.playPlaylist', async ({ songs, guild: guildId, user }) => {
+socket.on('bot.playPlaylist', async ({ songs, guild: guildId, user }, ack) => {
 	try {
 		const guild = await Guild.findById(guildId);
 
@@ -111,10 +111,10 @@ socket.on('bot.playPlaylist', async ({ songs, guild: guildId, user }) => {
 		});
 
 		if (findChannel) {
-			await playPlaylist(songs, guildId, findChannel);
+			await playPlaylist(songs, findChannel);
 		} else {
 			// Add error
-			console.log('Error');
+			ack('Error');
 		}
 	} catch (error) {
 		console.log(error);

@@ -63,7 +63,7 @@ export default {
 			);
 		}
 
-		await playPlaylist(playlist.songs, interaction.guildId, channel?.id);
+		await playPlaylist(playlist.songs, channel?.id);
 
 		await interaction.followUp({
 			embeds: [
