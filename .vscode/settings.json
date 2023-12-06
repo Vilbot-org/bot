@@ -14,6 +14,7 @@
 		"babel",
 		"client-events",
 		"eslint",
-		"handlers"
+		"handlers",
+		"discord-player"
 	]
 }
