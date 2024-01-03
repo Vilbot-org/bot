@@ -1,4 +1,4 @@
-FROM node:16.15
+FROM node:20.10
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ RUN npm install --omit=dev
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "build"]
