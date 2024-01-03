@@ -5,16 +5,16 @@ export default {
 	name: Events.InteractionCreate,
 
 	async execute(interaction) {
-		const command = interaction.client.commands.get(interaction.commandName);
+		try {
+			const command = interaction.client.commands.get(interaction.commandName);
 
-		if (interaction.isChatInputCommand()) {
-			await command.execute(interaction);
-		} else if (interaction.isAutocomplete()) {
-			try {
+			if (interaction.isChatInputCommand()) {
+				await command.execute(interaction);
+			} else if (interaction.isAutocomplete()) {
 				await command.autocomplete(interaction);
-			} catch (e) {
-				errorHandler(interaction, e);
 			}
+		} catch (e) {
+			errorHandler(interaction, e);
 		}
 	}
 };
