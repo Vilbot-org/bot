@@ -15,6 +15,7 @@
 		"client-events",
 		"eslint",
 		"handlers",
-		"discord-player"
+		"discord-player",
+		"deployCommands"
 	]
 }
