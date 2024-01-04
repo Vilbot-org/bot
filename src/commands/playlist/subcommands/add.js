@@ -1,55 +1,52 @@
 import { useMasterPlayer as player } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
-
-import PlaylistError from '../../../errors/PlaylistError';
-
-import config from '../../../app.config';
+import config from '@/app.config';
+import PlaylistError from '@/errors/PlaylistError';
+import Playlist from '@/models/Playlist';
 
 export default async (interaction) => {
 	const songToAdd = interaction.options.getString('song');
-	const playlist = interaction.options.getString('playlist')
+	const playlistName = interaction.options.getString('playlist')
 		? interaction.options.getString('playlist')
 		: `${interaction.user.username}-playlist`;
 
 	await interaction.deferReply({ ephemeral: true });
 
 	const { tracks } = await player().search(songToAdd);
-	if (tracks.length === 0)
+	if (tracks.length === 0) {
 		throw new PlaylistError(
 			'Song not found',
 			'Try another specific name or Youtube URL.'
 		);
+	}
 
 	const track = tracks[0];
 
-	const userPlaylist = await UserPlaylistModel.findOneAndUpdate(
-		{ userId: interaction.user.id, playlistName: playlist },
+	const userPlaylist = await Playlist.findOneAndUpdate(
+		{ user: interaction.user.id, name: playlistName },
 		{
 			$push: {
-				playlist: {
-					id: track.id,
-					title: track.title
-				}
+				songs: track.url
 			}
 		}
 	);
 
-	if (!userPlaylist)
+	if (!userPlaylist) {
 		throw new PlaylistError(
 			'No playlist with that name found',
-			`Create the playlist first with \`/playlist create ${playlist}\` command and then add your songs!`
+			`Create the playlist first with \`/playlist create ${playlistName}\` command and then add your songs!`
 		);
+	}
 
 	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)
 				.setAuthor({ name: 'Added new song to playlist' })
-				.setTitle(`'${track.title}' added to the **${playlist}** playlist`)
+				.setTitle(`'${track.title}' added to the **${playlistName}** playlist`)
 				.setDescription(
-					`Song added successfully.\nType \`/music playlist ${playlist}\` to play your playlist.`
+					`Song added successfully.\nType \`/music playlist ${playlistName}\` to play your playlist.`
 				)
 		],
 		ephemeral: true

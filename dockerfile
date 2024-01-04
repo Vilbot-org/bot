@@ -1,11 +1,13 @@
-FROM node:16.15
+FROM node:20.10
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install --omit=dev
+RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+RUN npm run deploy-commands
+
+CMD ["npm", "run", "build"]

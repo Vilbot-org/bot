@@ -1,7 +1,7 @@
 import { EmbedBuilder } from 'discord.js';
 
+import logger from '@/functions/logger';
 import config from '../app.config';
-import logger from '../functions/logger';
 
 export default async (interaction, error) => {
 	const embedMessage = new EmbedBuilder()

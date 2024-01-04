@@ -10,6 +10,13 @@
 		"env-file",
 		"logs",
 		"errorHandler",
-		"workflow"
+		"workflow",
+		"socketIO",
+		"babel",
+		"client-events",
+		"eslint",
+		"handlers",
+		"discord-player",
+		"deployCommands"
 	]
 }

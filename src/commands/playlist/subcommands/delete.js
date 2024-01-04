@@ -1,27 +1,27 @@
 import { EmbedBuilder } from 'discord.js';
 
-import UserPlaylistModel from '../../../models/UserPlaylistModel';
-
-import config from '../../../app.config';
-import PlaylistError from '../../../errors/PlaylistError';
+import config from '@/app.config';
+import PlaylistError from '@/errors/PlaylistError';
+import Playlist from '@/models/Playlist';
 
 export default async (interaction) => {
 	const playlistName = interaction.options.getString('name');
 
 	await interaction.deferReply({ ephemeral: true });
 
-	const deletePlaylist = await UserPlaylistModel.findOneAndDelete({
-		userId: interaction.user.id,
-		playlistName
+	const deletePlaylist = await Playlist.findOneAndDelete({
+		user: interaction.user.id,
+		name: playlistName
 	});
 
-	if (!deletePlaylist)
+	if (!deletePlaylist) {
 		throw new PlaylistError(
-			"You don't have any playlist with this name",
+			'You dont have any playlist with this name',
 			'Please check the name with the command `/playlist list` and try again'
 		);
+	}
 
-	//Check if  exist this playlist
+	// Check if  exist this playlist
 	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()

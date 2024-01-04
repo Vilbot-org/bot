@@ -1,5 +1,5 @@
-import 'dotenv/config';
 import { REST, Routes } from 'discord.js';
+import 'dotenv/config';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 
@@ -18,7 +18,7 @@ const commandsFiles = categories
 	);
 
 const importCommand = async (commandFile) => {
-	const commandObject = await (
+	const commandObject = (
 		await import(
 			`${join(process.cwd(), path, commandFile.category, commandFile.file)}`
 		)
@@ -60,7 +60,10 @@ const route =
 		console.log(
 			`Successfully reloaded ${data.length} application (/) commands.`
 		);
+
+		process.exit();
 	} catch (e) {
-		console.error(e);
+		console.error(JSON.stringify(e));
+		process.exit(1);
 	}
 })();

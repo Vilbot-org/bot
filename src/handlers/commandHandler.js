@@ -3,19 +3,19 @@ import { join } from 'path';
 import logger from '../functions/logger';
 
 export default (client) => {
-	const path = './src/commands';
+	const path = join(__dirname, '..', 'commands');
 	const categories = readdirSync(path);
 
 	categories.map(async (category) => {
-		const commands = readdirSync(`${path}/${category}`).filter((file) =>
+		const commandsPath = join(path, category);
+		const commands = readdirSync(commandsPath).filter((file) =>
 			file.endsWith('.js')
 		);
 
 		await Promise.all(
 			commands.map(async (command) => {
-				const commandObject = (
-					await import(`${join(process.cwd(), path, category, command)}`)
-				).default;
+				const commandPath = join(commandsPath, command);
+				const commandObject = (await import(commandPath)).default;
 
 				client.commands.set(commandObject.data.name, commandObject);
 

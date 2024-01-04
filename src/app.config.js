@@ -1,10 +1,12 @@
 export default {
 	botName: 'Vilbot',
+	author: 'GFrancV',
+	version: 1.2,
 	colors: {
-		success: '01feff',
-		danger: 'ff0201',
-		info: '8101ff',
-		green: '7FFF01'
+		success: 0x01feff,
+		danger: 0xff0201,
+		info: 0x8101ff,
+		green: 0x7fff01
 	},
 	siteURL: 'https://vilbot-org.github.io'
 };

@@ -2,42 +2,23 @@ name: Deployment Pipeline
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-    types: [opened, synchronize]
+    branches:
+      - main
+      - gh-actions
 
 jobs:
-  lint:
+  eslint:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16.15'
+      - name: List
+        run: ls
       - name: Install dependencies
         run: npm ci
       - name: Lint
         run: npm run eslint
-
-  deploy:
-    needs: [lint]
-    runs-on: self-hosted
-    steps:
-      - uses: iamsauravsharma/create-dotenv@v2.0.0
-        env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          DP_FORCE_YTDL_MOD: '@distube/ytdl-core'
-          APP_ENV: dev
-          APP_NAME: vilbot
-      - name: Create logs folder
-        run: mkdir logs
-      - name: Create logs file
-        run: touch logs/app.log
-      - name: Deployment
-        if: ${{ github.event_name == 'push' }}
-        run: pm2 reload 0
