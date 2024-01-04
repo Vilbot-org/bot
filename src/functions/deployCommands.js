@@ -63,7 +63,7 @@ const route =
 
 		process.exit();
 	} catch (e) {
-		console.error(JSON.stringify(e.rawError.errors, null, 2));
+		console.error(JSON.stringify(e));
 		process.exit(1);
 	}
 })();

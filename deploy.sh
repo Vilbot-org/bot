@@ -1,5 +1,5 @@
 #!/bin/sh
-$CONTAINER_NAME="vilbot-transpiler-container"
+CONTAINER_NAME="vilbot-transpiler-container"
 
 # Transpiler contianer
 docker build -t vilbot-transpiler .
@@ -9,13 +9,17 @@ docker cp $CONTAINER_NAME:/app/dist dist/
 docker rm $CONTAINER_NAME
 
 # Deploy container
-docker build -t Vilbot -f dockerfile.production .
+docker build --no-cache -t vilbot -f dockerfile.production .
 
-if [ "$(docker ps -a | grep -c $CONTAINER)" -gt 0 ]; then
-  docker rm -f Vilbot
+if docker inspect -f '{{.Name}}' vilbot 2>/dev/null; then
+	if docker inspect -f '{{.State.Running}}' vilbot 2>/dev/null; then
+        	docker stop vilbot
+	fi
+
+	docker rm vilbot
 fi
 
-docker run Vilbot
+docker run --name vilbot -d vilbot
 
 rm -R dist/
 
