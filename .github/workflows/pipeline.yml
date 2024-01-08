@@ -9,14 +9,15 @@ on:
 
 jobs:
   avoid_redundancy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
   lint:
-    runs-on: ubuntu-18.04
+    needs: [avoid_redundancy]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
