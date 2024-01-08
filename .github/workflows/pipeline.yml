@@ -67,7 +67,7 @@ jobs:
         run: npm run deploy-commands
 
   deploy:
-    needs: [deploy_command]
+    needs: [deploy_commands]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
