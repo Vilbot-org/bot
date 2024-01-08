@@ -11,6 +11,9 @@
 <a href="https://ko-fi.com/GFrancV">
 	<img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="ko-fi">
 </a>
+
+[![.github/workflows/pipeline.yml](https://github.com/Vilbot-org/bot/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Vilbot-org/bot/actions/workflows/pipeline.yml)
+
 </div>
 
 <p align="center">
