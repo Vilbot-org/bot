@@ -2,22 +2,28 @@ name: Deployment Pipeline
 
 on:
   push:
-    branches:
-      - main
-      - gh-actions
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
-  eslint:
-    runs-on: self-hosted
+  avoid_redundancy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action
+        with:
+          access_token: ${{ github.token }}
+  lint:
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.15'
-      - name: List
-        run: ls
+          node-version: '20.10'
       - name: Install dependencies
         run: npm ci
       - name: Lint
