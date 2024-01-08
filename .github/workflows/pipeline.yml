@@ -50,7 +50,7 @@ jobs:
 
   deploy:
     needs: [lint, build]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
         with:
@@ -64,8 +64,12 @@ jobs:
         with:
           envkey_APP_NAME: vilbot
           envkey_APP_ENV: prod
+          envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          envkey_DP_FORCE_YTDL_MOD: '@distube/ytdl-core'
+          envkey_CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
+          envkey_SOCKET_URL: ${{ secrets.SOCKET_URL }}
+          envkey_JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
           fail_on_empty: true
       - name: Exec deploy.sh script
-        run: ls
-      - name: Cat .env
-        run: cat .env
+        run: ./deploy.sh

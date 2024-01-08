@@ -9,7 +9,7 @@
 # docker rm $CONTAINER_NAME
 
 # Deploy container
-docker build --no-cache -t vilbot -f dockerfile .
+docker build --no-cache -t vilbot -f dockerfile.production .
 
 if docker inspect -f '{{.Name}}' vilbot 2>/dev/null; then
 	if docker inspect -f '{{.State.Running}}' vilbot 2>/dev/null; then
