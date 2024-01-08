@@ -48,8 +48,26 @@ jobs:
           name: dist
           path: dist
 
-  deploy:
+  deploy_commands:
     needs: [lint, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          node-version: '20.10'
+      - name: Install discord.js
+        run: npm ci discord.js
+      - name: Install dotenv
+        run: npm ci dotenv
+      - name: Deploy commands
+        run: npm run deploy-commands
+
+  deploy:
+    needs: [deploy_command]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
