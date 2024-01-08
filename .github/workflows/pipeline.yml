@@ -16,6 +16,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
   lint:
+    needs: [avoid_redundancy]
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v4
