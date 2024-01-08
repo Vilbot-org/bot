@@ -66,10 +66,9 @@ jobs:
           envkey_APP_ENV: prod
           envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-      - name: Install discord.js
-        run: npm ci discord.js
-      - name: Install dotenv
-        run: npm ci dotenv
+          fail_on_empty: true
+      - name: Install dependencies
+        run: npm ci
       - name: Deploy commands
         run: npm run deploy-commands
 
