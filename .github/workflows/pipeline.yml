@@ -59,6 +59,13 @@ jobs:
         with:
           cache: 'npm'
           node-version: '20.10'
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_APP_NAME: vilbot
+          envkey_APP_ENV: prod
+          envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }}
       - name: Install discord.js
         run: npm ci discord.js
       - name: Install dotenv
