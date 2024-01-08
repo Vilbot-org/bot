@@ -49,6 +49,7 @@ jobs:
           path: dist
 
   deploy_commands:
+    if: ${{ github.event_name == 'push'}}
     needs: [lint, build]
     runs-on: ubuntu-latest
     steps:
@@ -77,6 +78,7 @@ jobs:
         run: npm run deploy-commands
 
   deploy:
+    if: ${{ github.event_name == 'push'}}
     needs: [deploy_commands]
     runs-on: self-hosted
     steps:
