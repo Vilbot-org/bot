@@ -17,6 +17,7 @@
 		"eslint",
 		"handlers",
 		"discord-player",
-		"deployCommands"
+		"deployCommands",
+		"guild"
 	]
 }
