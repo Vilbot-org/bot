@@ -1,5 +1,5 @@
 import client from '@/Client';
-import Guild from '@/models/Guild';
+import User from '@/models/User';
 import { Events } from 'discord.js';
 
 export default {
@@ -7,34 +7,28 @@ export default {
 
 	async execute(oldState, newState) {
 		const guildId = newState.guild.id;
-		const { channelId: oldChannelID } = oldState;
-		const { channelId: newChannelID, id: userId } = newState;
+		const { channelId: newChannelVoiceID, id: userId } = newState;
 
 		if (userId !== client.user.id) {
-			const guild = await Guild.findById(guildId);
+			let user = await User.findById(client.user.id);
 
-			const activeVoiceUsers = guild.activeVoiceUsers || {};
-
-			if (oldChannelID && activeVoiceUsers[oldChannelID] !== undefined) {
-				activeVoiceUsers[oldChannelID] = activeVoiceUsers[oldChannelID].filter(
-					(user) => user !== userId
-				);
-
-				if (activeVoiceUsers[oldChannelID].length === 0) {
-					delete activeVoiceUsers[oldChannelID];
-				}
+			if (!user) {
+				user = new User({
+					_id: client.user.id,
+					username: client.user.username
+				});
 			}
 
-			if (newChannelID) {
-				if (activeVoiceUsers[newChannelID] === undefined) {
-					activeVoiceUsers[newChannelID] = [];
-				}
-				activeVoiceUsers[newChannelID].push(userId);
+			if (newChannelVoiceID === null) {
+				user.voiceChannel = null;
+			} else {
+				user.voiceChannel = {
+					guild: guildId,
+					voice: newChannelVoiceID
+				};
 			}
 
-			guild.activeVoiceUsers = JSON.stringify(activeVoiceUsers);
-
-			guild.save();
+			await user.save();
 		}
 	}
 };
