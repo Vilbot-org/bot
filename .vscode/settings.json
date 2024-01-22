@@ -18,6 +18,7 @@
 		"handlers",
 		"discord-player",
 		"deployCommands",
+		"guild",
 		"user"
 	]
 }
