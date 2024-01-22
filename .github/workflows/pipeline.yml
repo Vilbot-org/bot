@@ -16,7 +16,6 @@ jobs:
         with:
           access_token: ${{ github.token }}
   lint:
-    needs: [avoid_redundancy]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +23,83 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
+          cache: 'npm'
           node-version: '20.10'
       - name: Install dependencies
         run: npm ci
       - name: Lint
         run: npm run eslint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          node-version: '20.10'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+  deploy_commands:
+    if: ${{ github.event_name == 'push'}}
+    needs: [lint, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          node-version: '20.10'
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_APP_NAME: vilbot
+          envkey_APP_ENV: prod
+          envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          envkey_DP_FORCE_YTDL_MOD: '@distube/ytdl-core'
+          envkey_CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
+          envkey_SOCKET_URL: ${{ secrets.SOCKET_URL }}
+          envkey_JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          fail_on_empty: true
+      - name: Install dependencies
+        run: npm ci
+      - name: Deploy commands
+        run: npm run deploy-commands
+
+  deploy:
+    if: ${{ github.event_name == 'push'}}
+    needs: [deploy_commands]
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_APP_NAME: vilbot
+          envkey_APP_ENV: prod
+          envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          envkey_DP_FORCE_YTDL_MOD: '@distube/ytdl-core'
+          envkey_CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
+          envkey_SOCKET_URL: ${{ secrets.SOCKET_URL }}
+          envkey_JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          fail_on_empty: true
+      - name: Exec deploy.sh script
+        run: ./deploy.sh
