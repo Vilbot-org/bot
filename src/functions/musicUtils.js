@@ -100,20 +100,15 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	return true;
 });
 
-const playPlaylist = async (songs, guildChannel) => {
-	if (!guildChannel) {
+const playPlaylist = async (songs, voiceChannelID) => {
+	if (!voiceChannelID) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
 			'You must on voice channel to play music.'
 		);
 	}
 
-	const { queue } = await player().play(guildChannel, songs[0], {
-		nodeOptions: {
-			volume: 40,
-			metadata: { channel: guildChannel }
-		}
-	});
+	const { queue } = await play(songs[0], voiceChannelID);
 
 	if (songs.length > 1) {
 		songs.forEach(async (song, index) => {

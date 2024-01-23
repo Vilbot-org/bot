@@ -6,16 +6,16 @@ export default {
 	name: Events.VoiceStateUpdate,
 
 	async execute(oldState, newState) {
-		const guildId = newState.guild.id;
-		const { channelId: newChannelVoiceID, id: userId } = newState;
+		const guildID = newState.guild.id;
+		const { channelId: newChannelVoiceID, id: userID } = newState;
 
-		if (userId !== client.user.id) {
-			let user = await User.findById(client.user.id);
+		if (userID !== client.user.id) {
+			let user = await User.findById(userID);
 
 			if (!user) {
 				user = new User({
-					_id: client.user.id,
-					username: client.user.username
+					_id: userID,
+					username: client.users.cache.get(userID).username
 				});
 			}
 
@@ -23,7 +23,7 @@ export default {
 				user.voiceChannel = null;
 			} else {
 				user.voiceChannel = {
-					guild: guildId,
+					guild: guildID,
 					voice: newChannelVoiceID
 				};
 			}

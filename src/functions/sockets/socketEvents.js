@@ -99,23 +99,9 @@ socket.on('bot.removeSong', (guild, songIndex) => {
 	}
 });
 
-socket.on('bot.playPlaylist', async ({ songs, guild: guildId, user }, ack) => {
+socket.on('bot.playPlaylist', async ({ songs, voiceChannelID, user }) => {
 	try {
-		const guild = await Guild.findById(guildId);
-
-		const channelds = Object.keys(guild.activeVoiceUsers);
-
-		const findChannel = channelds.find((channel) => {
-			const users = guild.activeVoiceUsers[channel];
-			return users.includes(user);
-		});
-
-		if (findChannel) {
-			await playPlaylist(songs, findChannel);
-		} else {
-			// Add error
-			ack('Error');
-		}
+		await playPlaylist(songs, voiceChannelID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
