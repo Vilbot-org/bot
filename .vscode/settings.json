@@ -19,6 +19,7 @@
 		"discord-player",
 		"deployCommands",
 		"guild",
-		"user"
+		"user",
+		"database"
 	]
 }
