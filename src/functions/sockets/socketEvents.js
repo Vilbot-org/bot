@@ -77,7 +77,7 @@ socket.on(
 
 socket.on('server.requestResumeMusicPlayer', async (guildID) => {
 	try {
-		await pause(guildID);
+		await resume(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
@@ -86,7 +86,7 @@ socket.on('server.requestResumeMusicPlayer', async (guildID) => {
 
 socket.on('server.requestPauseMusicPlayer', async (guildID) => {
 	try {
-		await resume(guildID);
+		await pause(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
