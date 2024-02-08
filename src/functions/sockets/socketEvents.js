@@ -1,4 +1,3 @@
-import User from '@/models/User';
 import { useQueue } from 'discord-player';
 import formatSong from '../formatSong';
 import {
@@ -37,19 +36,9 @@ socket.on('server.requestQueue', async (guildID) => {
 	}
 });
 
-socket.on('server.requestPlayTrack', async (trackURL, userID) => {
+socket.on('server.requestPlayTrack', async (trackURL, voiceChannelID, user) => {
 	try {
-		const user = await User.findById(userID);
-		if (!user) {
-			throw new Error('The user is not exist');
-		}
-
-		const { voiceChannel } = user;
-		if (!voiceChannel) {
-			throw new Error('The user is not on any voice channel');
-		}
-
-		await play(trackURL, voiceChannel.voice);
+		await play(trackURL, voiceChannelID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
