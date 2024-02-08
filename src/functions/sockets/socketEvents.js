@@ -12,35 +12,32 @@ import {
 import socket from './socketClient';
 import socketError from './socketFunctions';
 
-socket.on('bot.getQueue', async (guild) => {
+socket.on('server.requestQueue', async (guildID) => {
 	try {
-		const fetchedQueue = useQueue(guild);
+		const fetchedQueue = useQueue(guildID);
 		const isPaused = fetchedQueue.node.isPaused();
 
 		if (!fetchedQueue) {
-			socket.emit('bot.queue', { guild, queue: null });
+			socket.emit('bot.requestedQueue', null, guildID);
 			return;
 		}
 
-		const data = {
-			guild,
-			queue: {
-				isPaused,
-				currentSong: {
-					...formatSong(fetchedQueue.currentTrack),
-					playbackTime: fetchedQueue.node.playbackTime
-				},
-				songs: fetchedQueue?.tracks.map((track) => formatSong(track))
-			}
+		const queue = {
+			isPaused,
+			currentSong: {
+				...formatSong(fetchedQueue.currentTrack),
+				playbackTime: fetchedQueue.node.playbackTime
+			},
+			songs: fetchedQueue?.tracks.map((track) => formatSong(track))
 		};
 
-		socket.emit('bot.queue', data);
+		socket.emit('bot.requestedQueue', queue, guildID);
 	} catch (error) {
 		socketError(error);
 	}
 });
 
-socket.on('bot.playSong', async ({ query, user: userID }) => {
+socket.on('server.requestPlayTrack', async (trackURL, userID) => {
 	try {
 		const user = await User.findById(userID);
 		if (!user) {
@@ -52,52 +49,55 @@ socket.on('bot.playSong', async ({ query, user: userID }) => {
 			throw new Error('The user is not on any voice channel');
 		}
 
-		await play(query, voiceChannel.voice);
+		await play(trackURL, voiceChannel.voice);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.nextSong', async (guild) => {
+socket.on('server.requestSkipTrack', async (guildID) => {
 	try {
-		await skip(guild);
+		await skip(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.pauseSong', async (guild) => {
+socket.on('server.requestRemoveTrack', (trackIndex, guildID) => {
 	try {
-		await pause(guild);
+		removeTrack(guildID, trackIndex);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.resumeSong', async (guild) => {
+socket.on(
+	'server.requestPlayPlaylist',
+	async (tracks, voiceChannelID, user) => {
+		try {
+			await playPlaylist(tracks, voiceChannelID);
+		} catch (error) {
+			console.log(error);
+			socketError(error);
+		}
+	}
+);
+
+socket.on('server.requestResumeMusicPlayer', async (guildID) => {
 	try {
-		await resume(guild);
+		await pause(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.removeSong', (guild, songIndex) => {
+socket.on('server.requestPauseMusicPlayer', async (guildID) => {
 	try {
-		removeTrack(guild, songIndex);
-	} catch (error) {
-		console.log(error);
-		socketError(error);
-	}
-});
-
-socket.on('bot.playPlaylist', async ({ songs, voiceChannelID, user }) => {
-	try {
-		await playPlaylist(songs, voiceChannelID);
+		await resume(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
