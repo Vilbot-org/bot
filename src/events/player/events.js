@@ -26,25 +26,25 @@ player().events.on('playerStart', (queue, track) => {
 });
 
 player().events.on('audioTrackAdd', (queue, track) => {
-	socket.emit('bot.audioTrackAdd', formatSong(track), queue.guild.id);
-});
-
-player().events.on('audioTrackRemove', (queue, track) => {
-	socket.emit('bot.audioTrackRemove', queue.guild.id, track.id);
-});
-
-player().events.on('playerPause', (queue) => {
-	socket.emit('bot.playerPause', queue.guild.id);
-});
-
-player().events.on('playerResume', (queue) => {
-	socket.emit('bot.playerResume', queue.guild.id);
+	socket.emit('bot.playedTrack', formatSong(track), queue.guild.id);
 });
 
 player().events.on('playerSkip', (queue) => {
-	socket.emit('bot.playerSkip', queue.guild.id);
+	socket.emit('bot.skipedTrack', queue.guild.id);
+});
+
+player().events.on('audioTrackRemove', (queue, track) => {
+	socket.emit('bot.removedTrack', track.id, queue.guild.id);
+});
+
+player().events.on('playerResume', (queue) => {
+	socket.emit('bot.resumedMusicPlayer', queue.guild.id);
+});
+
+player().events.on('playerPause', (queue) => {
+	socket.emit('bot.pausedMusicPlayer', queue.guild.id);
 });
 
 player().events.on('queueDelete', (queue) => {
-	socket.emit('bot.queueDelete', queue.guild.id);
+	socket.emit('bot.deletedQueue', queue.guild.id);
 });
