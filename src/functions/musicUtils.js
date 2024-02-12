@@ -1,5 +1,6 @@
 import { useMainPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
+import socket from './sockets/socketClient';
 import socketError from './sockets/socketFunctions';
 
 const getQueue = (guild) => {
@@ -96,6 +97,8 @@ const quit = handleQueueErrors(async (queue) => {
 
 const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	queue.removeTrack(trackIndex);
+
+	socket.emit('bot.removedTrack', trackIndex, queue.guild.id);
 
 	return true;
 });

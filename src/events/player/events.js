@@ -33,10 +33,6 @@ player().events.on('playerSkip', (queue) => {
 	socket.emit('bot.skipedTrack', queue.guild.id);
 });
 
-player().events.on('audioTrackRemove', (queue, track) => {
-	socket.emit('bot.removedTrack', track.id, queue.guild.id);
-});
-
 player().events.on('playerResume', (queue) => {
 	socket.emit('bot.resumedMusicPlayer', queue.guild.id);
 });
