@@ -1,4 +1,4 @@
-import { useMasterPlayer as player } from 'discord-player';
+import { useMainPlayer as player } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
