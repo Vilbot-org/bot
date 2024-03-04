@@ -13,7 +13,7 @@ export default {
 				new EmbedBuilder()
 					.setColor(config.colors.info)
 					.setTitle(`${config.botName} help`)
-					.setThumbnail(interaction.client.user.avatarURL())
+					.setThumbnail(interaction.client.user?.avatarURL())
 					.setAuthor({ name: 'Vilbot help command' })
 					.setDescription(
 						`Hi! I'm ${config.botName} a awesome discord bot. Current version: \`v${config.version}\``
