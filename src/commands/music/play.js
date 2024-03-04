@@ -23,12 +23,19 @@ export default {
 			const searchResult = await player().search(focusedOption.value);
 
 			if (searchResult.hasTracks()) {
-				await interaction.respond(
-					searchResult.tracks.slice(0, 4).map((track) => ({
-						name: track.title,
-						value: track.title
-					}))
-				);
+				const response = searchResult.tracks.slice(0, 4).map((track) => {
+					let name = `${track.title} - ${track.author}`;
+					if (name.length > 100) {
+						name = `${name.substring(0, 97)}...`;
+					}
+
+					return {
+						name,
+						value: track.url
+					};
+				});
+
+				await interaction.respond(response);
 			}
 		}
 	},
