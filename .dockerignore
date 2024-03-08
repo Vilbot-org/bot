@@ -4,12 +4,21 @@ node_modules
 
 # Git files
 
+.github
+.git
 .gitignore
 README.md
+LICENCE
 
-# Example files
+# Project files
 
+.vscode
 .env.example
+.babelrc
+.eslintignore
+.eslintrc.json
+.prettierrc
+deploy.sh
 
 # Logs
 
