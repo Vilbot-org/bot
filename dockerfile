@@ -1,13 +1,17 @@
 FROM node:20.10
 
-WORKDIR /app
+WORKDIR /vilbot
 
 COPY package*.json ./
+COPY jsconfig.json ./
+COPY src/ ./src/
+COPY .env ./
 
-RUN npm install
+RUN npm ci
 
-COPY . .
+RUN npm run build && \
+	rm -rf node_modules && \
+	rm -rf src && \
+	npm ci --omit=dev
 
-RUN npm run deploy-commands
-
-CMD ["npm", "run", "build"]
+CMD ["npm", "run", "start"]
