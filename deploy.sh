@@ -8,6 +8,7 @@ if docker inspect -f '{{.Name}}' vilbot 2>/dev/null; then
 	docker rm vilbot
 fi
 
+docker pull gfrancv/vilbot:latest
 docker run --name vilbot -d --restart always gfrancv/vilbot:latest
 
 exit
