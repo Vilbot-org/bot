@@ -3,7 +3,7 @@ services:
   bot:
     container_name: '${APP_NAME}'
     restart: always
-    image: gfrancv/vilbot
+    build: .
     links:
       - mongoDB
     depends_on:
