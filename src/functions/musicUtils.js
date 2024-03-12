@@ -28,16 +28,15 @@ const handleQueueErrors =
 		}
 	};
 
-const play = async (query, guildChannel) => {
+const play = async (query, guildChannel, user) => {
 	if (!guildChannel) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
-			'You must on voice channel to play music.'
+			'You must be on a voice channel to play music.'
 		);
 	}
 
 	const searchResult = await player().search(query);
-
 	if (!searchResult.hasTracks()) {
 		throw new MusicErrors(
 			'No results found',
@@ -45,6 +44,7 @@ const play = async (query, guildChannel) => {
 		);
 	}
 
+	searchResult.setRequestedBy(user);
 	const { queue, track } = await player().play(guildChannel, searchResult, {
 		nodeOptions: {
 			volume: 40,
