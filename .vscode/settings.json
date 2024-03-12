@@ -20,6 +20,7 @@
 		"deployCommands",
 		"guild",
 		"user",
-		"database"
+		"database",
+		"utils"
 	]
 }

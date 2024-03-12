@@ -2,8 +2,8 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { useMainPlayer as player } from 'discord-player';
 
 import config from '@/app.config';
-import formatSong from '@/functions/formatSong';
 import socket from '@/functions/sockets/socketClient';
+import { formatTrack } from '@/utils/formatMessages';
 import client from '../../Client';
 
 player().events.on('playerStart', (queue, track) => {
@@ -26,7 +26,7 @@ player().events.on('playerStart', (queue, track) => {
 });
 
 player().events.on('audioTrackAdd', (queue, track) => {
-	socket.emit('bot.playedTrack', formatSong(track), queue.guild.id);
+	socket.emit('bot.playedTrack', formatTrack(track), queue.guild.id);
 });
 
 player().events.on('playerSkip', (queue) => {
