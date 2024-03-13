@@ -8,12 +8,9 @@
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
 <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JS">
 <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" alt="docker">
-<a href="https://ko-fi.com/GFrancV">
-	<img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="ko-fi">
-</a>
 <img src="https://img.shields.io/github/v/release/Vilbot-org/bot?style=for-the-badge&color=f984e5" alt="GitHub Release">
 <a href="https://github.com/Vilbot-org/bot/actions/workflows/pipeline.ym">
-	<img src="https://github.com/Vilbot-org/bot/actions/workflows/pipeline.yml/badge.svg" alt="Deploy">
+	<img src="https://img.shields.io/github/actions/workflow/status/Vilbot-org/bot/deployment.yml?style=for-the-badge&label=Deploy" alt="Deploy">
 </a>
 </div>
 
@@ -48,7 +45,7 @@ If you like this project and would like to show your support to the project can 
 
 # Author
 
-- [GFrancV](https://github.com/GFrancV)
+- [@GFrancV](https://github.com/GFrancV)
 
 # License
 
