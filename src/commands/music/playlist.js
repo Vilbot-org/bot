@@ -63,7 +63,11 @@ export default {
 			);
 		}
 
-		await playPlaylist(playlist.songs, channel?.id);
+		const voiceChannel = {
+			guild: interaction.guildId,
+			voice: channel?.id
+		};
+		await playPlaylist(playlist.songs, voiceChannel, interaction.user);
 
 		await interaction.followUp({
 			embeds: [

@@ -63,17 +63,14 @@ socket.on('server.requestRemoveTrack', (trackIndex, guildID) => {
 	}
 });
 
-socket.on(
-	'server.requestPlayPlaylist',
-	async (tracks, voiceChannelID, user) => {
-		try {
-			await playPlaylist(tracks, voiceChannelID);
-		} catch (error) {
-			console.log(error);
-			socketError(error);
-		}
+socket.on('server.requestPlayPlaylist', async (tracks, voiceChannel, user) => {
+	try {
+		await playPlaylist(tracks, voiceChannel, user);
+	} catch (error) {
+		console.log(error);
+		socketError(error);
 	}
-);
+});
 
 socket.on('server.requestResumeMusicPlayer', async (guildID) => {
 	try {

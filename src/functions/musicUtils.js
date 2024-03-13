@@ -103,22 +103,24 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	return true;
 });
 
-const playPlaylist = async (songs, voiceChannelID) => {
-	if (!voiceChannelID) {
+const playPlaylist = async (tracks, voiceChannel, user) => {
+	if (!voiceChannel.voice) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
-			'You must on voice channel to play music.'
+			'You must be on a voice channel to play music.'
 		);
 	}
 
-	const { queue } = await play(songs[0], voiceChannelID);
+	let currentQueue = useQueue(voiceChannel.guild);
+	if (!currentQueue) {
+		const { queue } = await play(tracks[0], voiceChannel.voice, user);
+		currentQueue = queue;
+	}
 
-	if (songs.length > 1) {
-		songs.forEach(async (song, index) => {
+	if (tracks.length > 1) {
+		tracks.forEach(async (track, index) => {
 			if (index > 0) {
-				const searchResult = await player().search(song);
-
-				queue.insertTrack(searchResult.tracks[0], queue.getSize());
+				await play(track, voiceChannel.voice, user);
 			}
 		});
 	}
