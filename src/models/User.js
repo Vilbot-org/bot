@@ -10,7 +10,7 @@ const userSchema = new Schema(
 			type: String,
 			required: true
 		},
-		voiceChannel: {
+		currentVoiceChannel: {
 			type: Object,
 			default: null
 		}

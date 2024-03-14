@@ -28,8 +28,8 @@ const handleQueueErrors =
 		}
 	};
 
-const play = async (query, voiceChannelID, user) => {
-	if (!voiceChannelID) {
+const play = async (query, currentVoiceChannelID, user) => {
+	if (!currentVoiceChannelID) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
 			'You must be on a voice channel to play music.'
@@ -45,12 +45,16 @@ const play = async (query, voiceChannelID, user) => {
 	}
 
 	searchResult.setRequestedBy(user);
-	const { queue, track } = await player().play(voiceChannelID, searchResult, {
-		nodeOptions: {
-			volume: 40,
-			metadata: { channel: voiceChannelID }
+	const { queue, track } = await player().play(
+		currentVoiceChannelID,
+		searchResult,
+		{
+			nodeOptions: {
+				volume: 40,
+				metadata: { channel: currentVoiceChannelID }
+			}
 		}
-	});
+	);
 
 	return { queue, track };
 };
@@ -103,24 +107,24 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	return true;
 });
 
-const playPlaylist = async (tracks, voiceChannel, user) => {
-	if (!voiceChannel.voice) {
+const playPlaylist = async (tracks, currentVoiceChannel, user) => {
+	if (!currentVoiceChannel.voiceId) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
 			'You must be on a voice channel to play music.'
 		);
 	}
 
-	let currentQueue = useQueue(voiceChannel.guild);
+	let currentQueue = useQueue(currentVoiceChannel.guildId);
 	if (!currentQueue) {
-		const { queue } = await play(tracks[0], voiceChannel.voice, user);
+		const { queue } = await play(tracks[0], currentVoiceChannel.voiceId, user);
 		currentQueue = queue;
 	}
 
 	if (tracks.length > 1) {
 		tracks.forEach(async (track, index) => {
 			if (index > 0) {
-				await play(track, voiceChannel.voice, user);
+				await play(track, currentVoiceChannel.voiceId, user);
 			}
 		});
 	}
