@@ -114,10 +114,6 @@ jobs:
     needs: [build_docker_image]
     runs-on: self-hosted
     steps:
-      - name: Cleanup Git
-        run: |
-          git fetch origin +refs/heads/*:refs/remotes/origin/*
-          git remote prune origin
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
