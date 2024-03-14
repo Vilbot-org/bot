@@ -1,9 +1,9 @@
-import { REST, Routes } from 'discord.js';
-import 'dotenv/config';
-import { readdirSync } from 'fs';
-import { join } from 'path';
+require('dotenv').config();
+const { REST, Routes } = require('discord.js');
+const { readdirSync } = require('node:fs');
+const { join } = require('node:path');
 
-const path = './src/commands';
+const path = './dist/commands';
 const categories = readdirSync(path);
 
 const commandsFiles = categories
@@ -18,11 +18,13 @@ const commandsFiles = categories
 	);
 
 const importCommand = async (commandFile) => {
-	const commandObject = (
-		await import(
-			`${join(process.cwd(), path, commandFile.category, commandFile.file)}`
-		)
-	).default;
+	const commandPath = join(
+		process.cwd(),
+		path,
+		commandFile.category,
+		commandFile.file
+	);
+	const commandObject = require(commandPath).default;
 
 	return commandObject.data.toJSON();
 };
