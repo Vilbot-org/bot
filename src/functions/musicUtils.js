@@ -28,16 +28,15 @@ const handleQueueErrors =
 		}
 	};
 
-const play = async (query, guildChannel) => {
-	if (!guildChannel) {
+const play = async (query, currentVoiceChannelID, user) => {
+	if (!currentVoiceChannelID) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
-			'You must on voice channel to play music.'
+			'You must be on a voice channel to play music.'
 		);
 	}
 
 	const searchResult = await player().search(query);
-
 	if (!searchResult.hasTracks()) {
 		throw new MusicErrors(
 			'No results found',
@@ -45,12 +44,17 @@ const play = async (query, guildChannel) => {
 		);
 	}
 
-	const { queue, track } = await player().play(guildChannel, searchResult, {
-		nodeOptions: {
-			volume: 40,
-			metadata: { channel: guildChannel }
+	searchResult.setRequestedBy(user);
+	const { queue, track } = await player().play(
+		currentVoiceChannelID,
+		searchResult,
+		{
+			nodeOptions: {
+				volume: 40,
+				metadata: { channel: currentVoiceChannelID }
+			}
 		}
-	});
+	);
 
 	return { queue, track };
 };
@@ -103,22 +107,24 @@ const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	return true;
 });
 
-const playPlaylist = async (songs, voiceChannelID) => {
-	if (!voiceChannelID) {
+const playPlaylist = async (tracks, currentVoiceChannel, user) => {
+	if (!currentVoiceChannel.voiceId) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
-			'You must on voice channel to play music.'
+			'You must be on a voice channel to play music.'
 		);
 	}
 
-	const { queue } = await play(songs[0], voiceChannelID);
+	let currentQueue = useQueue(currentVoiceChannel.guildId);
+	if (!currentQueue) {
+		const { queue } = await play(tracks[0], currentVoiceChannel.voiceId, user);
+		currentQueue = queue;
+	}
 
-	if (songs.length > 1) {
-		songs.forEach(async (song, index) => {
+	if (tracks.length > 1) {
+		tracks.forEach(async (track, index) => {
 			if (index > 0) {
-				const searchResult = await player().search(song);
-
-				queue.insertTrack(searchResult.tracks[0], queue.getSize());
+				await play(track, currentVoiceChannel.voiceId, user);
 			}
 		});
 	}

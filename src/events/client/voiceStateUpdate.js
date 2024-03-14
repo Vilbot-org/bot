@@ -20,11 +20,11 @@ export default {
 			}
 
 			if (newChannelVoiceID === null) {
-				user.voiceChannel = null;
+				user.currentVoiceChannel = null;
 			} else {
-				user.voiceChannel = {
-					guild: guildID,
-					voice: newChannelVoiceID
+				user.currentVoiceChannel = {
+					guildId: guildID,
+					voiceId: newChannelVoiceID
 				};
 			}
 
