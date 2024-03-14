@@ -79,7 +79,7 @@ jobs:
           tags: gfrancv/vilbot:latest
 
   deploy_commands:
-    needs: [build_docker_image]
+    needs: [build_docker_image, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
