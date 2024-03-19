@@ -62,7 +62,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: gfrancv/vilbot:latest,gfrancv/vilbot:${{ github.ref }}
+          tags: gfrancv/vilbot:latest
 
   deploy_commands:
     needs: [build_docker_image, build]
