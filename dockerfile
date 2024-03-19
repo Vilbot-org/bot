@@ -19,11 +19,11 @@ RUN rm -rf node_modules && \
 
 FROM base as prod
 
-ENV DISCORD_TOKEN=\
-ENV CLIENT_ID=\
-ENV CONNECTION_DB=\
-ENV SOCKET_URL=\
-ENV JWT_SECRET_KEY=\
+ENV DISCORD_TOKEN=empty
+ENV CLIENT_ID=empty
+ENV CONNECTION_DB=empty
+ENV SOCKET_URL=empty
+ENV JWT_SECRET_KEY=empty
 
 COPY package*.json ./
 COPY --from=build /vilbot/node_modules ./node_modules
