@@ -1,11 +1,5 @@
 ARG NODE_VERSION=20.10
 
-ENV DISCORD_TOKEN=\
-ENV CLIENT_ID=\
-ENV CONNECTION_DB=\
-ENV SOCKET_URL=\
-ENV JWT_SECRET_KEY=\
-
 FROM node:${NODE_VERSION}-slim as base
 
 RUN apt-get update && \
@@ -24,6 +18,12 @@ RUN rm -rf node_modules && \
 	npm ci --omit=dev
 
 FROM base as prod
+
+ENV DISCORD_TOKEN=\
+ENV CLIENT_ID=\
+ENV CONNECTION_DB=\
+ENV SOCKET_URL=\
+ENV JWT_SECRET_KEY=\
 
 COPY package*.json ./
 COPY --from=build /vilbot/node_modules ./node_modules
