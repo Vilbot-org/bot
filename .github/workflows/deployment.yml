@@ -67,7 +67,6 @@ jobs:
   deploy_commands:
     needs: [build_docker_image, build]
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - uses: actions/checkout@v4
         with:
