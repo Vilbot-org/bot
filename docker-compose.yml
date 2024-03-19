@@ -8,7 +8,7 @@ services:
       - mongoDB
     depends_on:
       - mongoDB
-    enviroment:
+    environment:
       CLIENT_ID: '${CLIENT_ID}'
       DISCORD_TOKEN: '${DISCORD_TOKEN}'
       CONNECTION_DB: '${CONNECTION_DB}'
