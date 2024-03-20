@@ -3,7 +3,8 @@ import { useMainPlayer as player } from 'discord-player';
 
 import config from '@/app.config';
 import socket from '@/functions/sockets/socketClient';
-import { formatTrack } from '@/utils/formatMessages';
+import { formatQueue } from '@/utils/queueFormatter';
+import { formatTrack } from 'dist/utils/formatMessages';
 import client from '../../Client';
 
 player().events.on('playerStart', (queue, track) => {
@@ -23,6 +24,8 @@ player().events.on('playerStart', (queue, track) => {
 				})
 		]
 	});
+
+	socket.emit('bot.startedPlaying', formatQueue(queue), queue.guild.id);
 });
 
 player().events.on('audioTrackAdd', (queue, track) => {
