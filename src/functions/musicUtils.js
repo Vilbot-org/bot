@@ -115,17 +115,9 @@ const playPlaylist = async (tracks, currentVoiceChannel, user) => {
 		);
 	}
 
-	let currentQueue = useQueue(currentVoiceChannel.guildId);
-	if (!currentQueue) {
-		const { queue } = await play(tracks[0], currentVoiceChannel.voiceId, user);
-		currentQueue = queue;
-	}
-
-	if (tracks.length > 1) {
-		tracks.forEach(async (track, index) => {
-			if (index > 0) {
-				await play(track, currentVoiceChannel.voiceId, user);
-			}
+	if (tracks.length >= 1) {
+		tracks.forEach(async (track) => {
+			await play(track, currentVoiceChannel.voiceId, user);
 		});
 	}
 

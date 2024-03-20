@@ -1,5 +1,5 @@
+import { formatQueue } from '@/utils/queueFormatter';
 import { useQueue } from 'discord-player';
-import { formatTrack } from '../../utils/formatMessages';
 import {
 	pause,
 	play,
@@ -14,23 +14,13 @@ import socketError from './socketFunctions';
 socket.on('server.requestQueue', async (guildID) => {
 	try {
 		const fetchedQueue = useQueue(guildID);
-		const isPaused = fetchedQueue.node.isPaused();
 
 		if (!fetchedQueue) {
 			socket.emit('bot.requestedQueue', null, guildID);
 			return;
 		}
 
-		const queue = {
-			isPaused,
-			currentSong: {
-				...formatTrack(fetchedQueue.currentTrack),
-				playbackTime: fetchedQueue.node.playbackTime
-			},
-			songs: fetchedQueue?.tracks.map((track) => formatTrack(track))
-		};
-
-		socket.emit('bot.requestedQueue', queue, guildID);
+		socket.emit('bot.requestedQueue', formatQueue(fetchedQueue), guildID);
 	} catch (error) {
 		socketError(error);
 	}
