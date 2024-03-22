@@ -47,3 +47,7 @@ player().events.on('playerPause', (queue) => {
 player().events.on('queueDelete', (queue) => {
 	socket.emit('bot.deletedQueue', queue.guild.id);
 });
+
+player().events.on('emptyQueue', (queue) => {
+	socket.emit('bot.emptyQueue', queue.guild.id);
+});
