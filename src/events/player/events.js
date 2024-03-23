@@ -3,8 +3,7 @@ import { useMainPlayer as player } from 'discord-player';
 
 import config from '@/app.config';
 import socket from '@/functions/sockets/socketClient';
-import { formatQueue } from '@/utils/queueFormatter';
-import { formatTrack } from 'dist/utils/formatMessages';
+import { formatQueue, formatTrack } from '@/utils/queueFormatter';
 import client from '../../Client';
 
 player().events.on('playerStart', (queue, track) => {
