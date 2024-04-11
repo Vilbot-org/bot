@@ -47,6 +47,7 @@ const play = async (query, guildChannel) => {
 	const { queue, track } = await player().play(guildChannel, searchResult, {
 		nodeOptions: {
 			volume: 40,
+			leaveOnEndCooldown: 300000,
 			metadata: { channel: guildChannel }
 		}
 	});
