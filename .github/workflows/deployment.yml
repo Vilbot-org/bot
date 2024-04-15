@@ -108,6 +108,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_APP_NAME: vilbot
+          envkey_APP_ENV: prod
           envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           envkey_CLIENT_ID: ${{ vars.CLIENT_ID }}
           envkey_CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
