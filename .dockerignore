@@ -1,22 +1,16 @@
-# Node files
-
+.vscode
+.github
 node_modules
-
-# Git files
-
+.git
 .gitignore
 README.md
-
-# Example files
-
+LICENCE
 .env.example
-
-# Logs
-
+.eslintignore
+.eslintrc.json
+.prettierrc
+deploy.sh
 logs
-
-# Docker files
-
 .dockerignore
 dockerfile
 docker-compose.yml

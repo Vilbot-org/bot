@@ -45,12 +45,14 @@ const play = async (query, currentVoiceChannelID, user) => {
 	}
 
 	searchResult.setRequestedBy(user);
+
 	const { queue, track } = await player().play(
 		currentVoiceChannelID,
 		searchResult,
 		{
 			nodeOptions: {
 				volume: 40,
+				leaveOnEndCooldown: 300000,
 				metadata: { channel: currentVoiceChannelID }
 			}
 		}

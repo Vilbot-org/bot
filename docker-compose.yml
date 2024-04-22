@@ -3,11 +3,17 @@ services:
   bot:
     container_name: '${APP_NAME}'
     restart: always
-    build: .
+    image: gfrancv/vilbot
     links:
       - mongoDB
     depends_on:
       - mongoDB
+    environment:
+      CLIENT_ID: '${CLIENT_ID}'
+      DISCORD_TOKEN: '${DISCORD_TOKEN}'
+      CONNECTION_DB: '${CONNECTION_DB}'
+      SOCKET_URL: '${SOCKET_URL}'
+      JWT_SECRET_KEY: '${JWT_SECRET_KEY}'
   # MongoDB services
   mongoDB:
     container_name: '${APP_NAME}_db'
