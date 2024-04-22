@@ -21,7 +21,8 @@ player().events.on('playerStart', (queue, track) => {
 							? `Next song in the queue: ${queue.tracks.at(0).title}`
 							: 'No more songs queued'
 				})
-		]
+		],
+		flags: [4096]
 	});
 
 	socket.emit('bot.startedPlaying', formatQueue(queue), queue.guild.id);
