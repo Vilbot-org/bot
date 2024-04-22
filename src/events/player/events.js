@@ -51,3 +51,7 @@ player().events.on('queueDelete', (queue) => {
 player().events.on('emptyQueue', (queue) => {
 	socket.emit('bot.emptyQueue', queue.guild.id);
 });
+
+player().events.on('connectionDestroyed', (queue) => {
+	socket.emit('bot.connectionDestroyed', queue.guild.id);
+});
