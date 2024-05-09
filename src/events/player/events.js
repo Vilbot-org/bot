@@ -2,8 +2,8 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { useMainPlayer as player } from 'discord-player';
 
 import config from '@/app.config';
-import formatSong from '@/functions/formatSong';
 import socket from '@/functions/sockets/socketClient';
+import { formatQueue, formatTrack } from '@/utils/queueFormatter';
 import client from '../../Client';
 
 player().events.on('playerStart', (queue, track) => {
@@ -21,30 +21,37 @@ player().events.on('playerStart', (queue, track) => {
 							? `Next song in the queue: ${queue.tracks.at(0).title}`
 							: 'No more songs queued'
 				})
-		]
+		],
+		flags: [4096]
 	});
+
+	socket.emit('bot.startedPlaying', formatQueue(queue), queue.guild.id);
 });
 
 player().events.on('audioTrackAdd', (queue, track) => {
-	socket.emit('bot.audioTrackAdd', formatSong(track), queue.guild.id);
-});
-
-player().events.on('audioTrackRemove', (queue, track) => {
-	socket.emit('bot.audioTrackRemove', queue.guild.id, track.id);
-});
-
-player().events.on('playerPause', (queue) => {
-	socket.emit('bot.playerPause', queue.guild.id);
-});
-
-player().events.on('playerResume', (queue) => {
-	socket.emit('bot.playerResume', queue.guild.id);
+	socket.emit('bot.playedTrack', formatTrack(track), queue.guild.id);
 });
 
 player().events.on('playerSkip', (queue) => {
-	socket.emit('bot.playerSkip', queue.guild.id);
+	socket.emit('bot.skipedTrack', queue.guild.id);
+});
+
+player().events.on('playerResume', (queue) => {
+	socket.emit('bot.resumedMusicPlayer', queue.guild.id);
+});
+
+player().events.on('playerPause', (queue) => {
+	socket.emit('bot.pausedMusicPlayer', queue.guild.id);
 });
 
 player().events.on('queueDelete', (queue) => {
-	socket.emit('bot.queueDelete', queue.guild.id);
+	socket.emit('bot.deletedQueue', queue.guild.id);
+});
+
+player().events.on('emptyQueue', (queue) => {
+	socket.emit('bot.emptyQueue', queue.guild.id);
+});
+
+player().events.on('connectionDestroyed', (queue) => {
+	socket.emit('bot.connectionDestroyed', queue.guild.id);
 });

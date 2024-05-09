@@ -1,6 +1,5 @@
-import Guild from '@/models/Guild';
+import { formatQueue } from '@/utils/queueFormatter';
 import { useQueue } from 'discord-player';
-import formatSong from '../formatSong';
 import {
 	pause,
 	play,
@@ -12,110 +11,69 @@ import {
 import socket from './socketClient';
 import socketError from './socketFunctions';
 
-socket.on('bot.getQueue', async (guild) => {
+socket.on('server.requestQueue', async (guildID) => {
 	try {
-		const fetchedQueue = useQueue(guild);
-		const isPaused = fetchedQueue.node.isPaused();
+		const fetchedQueue = useQueue(guildID);
 
 		if (!fetchedQueue) {
-			socket.emit('bot.queue', { guild, queue: null });
+			socket.emit('bot.requestedQueue', null, guildID);
 			return;
 		}
 
-		const data = {
-			guild,
-			queue: {
-				isPaused,
-				currentSong: {
-					...formatSong(fetchedQueue.currentTrack),
-					playbackTime: fetchedQueue.node.playbackTime
-				},
-				songs: fetchedQueue?.tracks.map((track) => formatSong(track))
-			}
-		};
-
-		socket.emit('bot.queue', data);
+		socket.emit('bot.requestedQueue', formatQueue(fetchedQueue), guildID);
 	} catch (error) {
 		socketError(error);
 	}
 });
 
-socket.on('bot.playSong', async ({ query, guild: guildId, user }) => {
+socket.on('server.requestPlayTrack', async (trackURL, voiceChannelID, user) => {
 	try {
-		const guild = await Guild.findById(guildId);
-
-		const channelds = Object.keys(guild.activeVoiceUsers);
-
-		const findChannel = channelds.find((channel) => {
-			const users = guild.activeVoiceUsers[channel];
-			return users.includes(user);
-		});
-
-		if (findChannel) {
-			await play(query, findChannel);
-		} else {
-			// Add error
-			console.log('Error');
-		}
+		await play(trackURL, voiceChannelID, user);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.nextSong', async (guild) => {
+socket.on('server.requestSkipTrack', async (guildID) => {
 	try {
-		await skip(guild);
+		await skip(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.pauseSong', async (guild) => {
+socket.on('server.requestRemoveTrack', (trackIndex, guildID) => {
 	try {
-		await pause(guild);
+		removeTrack(guildID, trackIndex);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.resumeSong', async (guild) => {
+socket.on('server.requestPlayPlaylist', async (tracks, voiceChannel, user) => {
 	try {
-		await resume(guild);
+		await playPlaylist(tracks, voiceChannel, user);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.removeSong', (guild, songIndex) => {
+socket.on('server.requestResumeMusicPlayer', async (guildID) => {
 	try {
-		removeTrack(guild, songIndex);
+		await resume(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);
 	}
 });
 
-socket.on('bot.playPlaylist', async ({ songs, guild: guildId, user }, ack) => {
+socket.on('server.requestPauseMusicPlayer', async (guildID) => {
 	try {
-		const guild = await Guild.findById(guildId);
-
-		const channelds = Object.keys(guild.activeVoiceUsers);
-
-		const findChannel = channelds.find((channel) => {
-			const users = guild.activeVoiceUsers[channel];
-			return users.includes(user);
-		});
-
-		if (findChannel) {
-			await playPlaylist(songs, findChannel);
-		} else {
-			// Add error
-			ack('Error');
-		}
+		await pause(guildID);
 	} catch (error) {
 		console.log(error);
 		socketError(error);

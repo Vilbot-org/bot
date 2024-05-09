@@ -6,7 +6,6 @@ node_modules
 README.md
 LICENCE
 .env.example
-.babelrc
 .eslintignore
 .eslintrc.json
 .prettierrc

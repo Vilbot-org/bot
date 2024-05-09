@@ -1,5 +1,6 @@
 import { useMainPlayer as player, useQueue } from 'discord-player';
 import MusicErrors from '../errors/MusicErrors';
+import socket from './sockets/socketClient';
 import socketError from './sockets/socketFunctions';
 
 const getQueue = (guild) => {
@@ -27,16 +28,15 @@ const handleQueueErrors =
 		}
 	};
 
-const play = async (query, guildChannel) => {
-	if (!guildChannel) {
+const play = async (query, currentVoiceChannelID, user) => {
+	if (!currentVoiceChannelID) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
-			'You must on voice channel to play music.'
+			'You must be on a voice channel to play music.'
 		);
 	}
 
 	const searchResult = await player().search(query);
-
 	if (!searchResult.hasTracks()) {
 		throw new MusicErrors(
 			'No results found',
@@ -44,12 +44,19 @@ const play = async (query, guildChannel) => {
 		);
 	}
 
-	const { queue, track } = await player().play(guildChannel, searchResult, {
-		nodeOptions: {
-			volume: 40,
-			metadata: { channel: guildChannel }
+	searchResult.setRequestedBy(user);
+
+	const { queue, track } = await player().play(
+		currentVoiceChannelID,
+		searchResult,
+		{
+			nodeOptions: {
+				volume: 40,
+				leaveOnEndCooldown: 300000,
+				metadata: { channel: currentVoiceChannelID }
+			}
 		}
-	});
+	);
 
 	return { queue, track };
 };
@@ -97,31 +104,22 @@ const quit = handleQueueErrors(async (queue) => {
 const removeTrack = handleQueueErrors((queue, trackIndex) => {
 	queue.removeTrack(trackIndex);
 
+	socket.emit('bot.removedTrack', trackIndex, queue.guild.id);
+
 	return true;
 });
 
-const playPlaylist = async (songs, guildChannel) => {
-	if (!guildChannel) {
+const playPlaylist = async (tracks, currentVoiceChannel, user) => {
+	if (!currentVoiceChannel.voiceId) {
 		throw new MusicErrors(
 			'You are not on any voice channel',
-			'You must on voice channel to play music.'
+			'You must be on a voice channel to play music.'
 		);
 	}
 
-	const { queue } = await player().play(guildChannel, songs[0], {
-		nodeOptions: {
-			volume: 40,
-			metadata: { channel: guildChannel }
-		}
-	});
-
-	if (songs.length > 1) {
-		songs.forEach(async (song, index) => {
-			if (index > 0) {
-				const searchResult = await player().search(song);
-
-				queue.insertTrack(searchResult.tracks[0], queue.getSize());
-			}
+	if (tracks.length >= 1) {
+		tracks.forEach(async (track) => {
+			await play(track, currentVoiceChannel.voiceId, user);
 		});
 	}
 
