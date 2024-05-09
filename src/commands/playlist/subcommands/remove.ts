@@ -1,18 +1,19 @@
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
 
-export default async (interaction) => {
-	const songIndex = interaction.options.getString('song');
-	const playlistName = interaction.options.getString('playlist')
-		? interaction.options.getString('playlist')
-		: `${interaction.user.username}-playlist`;
+const removePlaylistCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
+	const songIndex = parseInt(interaction.options.getString('song') as string);
+	const playlistName =
+		interaction.options.getString('playlist') ??
+		`${interaction.user.username}-playlist`;
 
 	await interaction.deferReply({ ephemeral: true });
 
-	// Check if the number is valid
 	if (songIndex <= 0) {
 		throw new PlaylistError(
 			'Invalid song to remove',
@@ -32,14 +33,14 @@ export default async (interaction) => {
 		);
 	}
 
-	if (playlist.songs.length <= songIndex - 1) {
+	if (playlist.tracks.length <= songIndex - 1) {
 		throw new PlaylistError(
 			'Invalid song index',
 			'Please enter a valid song index.'
 		);
 	}
 
-	playlist.songs = playlist.songs.splice(songIndex);
+	playlist.tracks = playlist.tracks.splice(songIndex);
 	await playlist.save();
 
 	await interaction.followUp({
@@ -54,3 +55,5 @@ export default async (interaction) => {
 		ephemeral: true
 	});
 };
+
+export default removePlaylistCommand;

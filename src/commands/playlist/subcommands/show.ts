@@ -1,13 +1,16 @@
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
+import { searchTrack } from '@/utils/musicUtils';
 
-export default async (interaction) => {
-	const playlistName = interaction.options.getString('name')
-		? interaction.options.getString('name')
-		: `${interaction.user.username}-playlist`;
+const showPlaylistSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
+	const playlistName =
+		interaction.options.getString('name') ??
+		`${interaction.user.username}-playlist`;
 
 	await interaction.deferReply({ ephemeral: true });
 
@@ -15,6 +18,7 @@ export default async (interaction) => {
 		user: interaction.user.id,
 		name: playlistName
 	});
+
 	if (!playlist) {
 		throw new PlaylistError(
 			'You dont have any playlist with this name',
@@ -27,23 +31,28 @@ export default async (interaction) => {
 		.setAuthor({ name: 'Songs list' })
 		.setTitle(playlist.name);
 
-	if (playlist.songs.length > 0) {
-		embedMsg.addFields(
-			playlist.songs.map((song, index) => ({
-				name: `ID: ${index + 1}`,
-				value: song
-				// value: `[${playlist.title}](${playlist.url})`
-			}))
+	if (playlist.tracks.length > 0) {
+		const fields = await Promise.all(
+			playlist.tracks.map(async (track, index) => {
+				const { title, url } = await searchTrack(track);
+
+				return {
+					name: `ID: ${index + 1}`,
+					value: `[${title}](${url})`
+				};
+			})
 		);
+
+		embedMsg.addFields(fields);
 	}
 
 	await interaction.followUp({
 		embeds: [
 			embedMsg
-				.setDescription(`This playlist have ${playlist.songs.length} songs`)
+				.setDescription(`This playlist have ${playlist.tracks.length} songs`)
 				.setFooter({
 					text:
-						playlist.songs.length > 0
+						playlist.tracks.length > 0
 							? `Type \`/music playlist ${playlist.name}\` to play your playlist.`
 							: `Type \`/playlist add <song> ${playlist.name}\` to add new songs to  your playlist.`
 				})
@@ -51,3 +60,5 @@ export default async (interaction) => {
 		ephemeral: true
 	});
 };
+
+export default showPlaylistSubCommand;

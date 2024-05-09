@@ -1,10 +1,12 @@
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
 
-export default async (interaction) => {
+const listPlaylistSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
 	await interaction.deferReply({ ephemeral: true });
 
 	const playlists = await Playlist.find({
@@ -26,18 +28,20 @@ export default async (interaction) => {
 				.setTitle(`${interaction.user.username} playlists:`)
 				.setThumbnail(interaction.user.avatarURL())
 				.setFooter({
-					text: 'Type `/music playlist <playlist-name>` to listen to a playlist!'
+					text: 'Type `/music playlist <playlist-name>` to play a playlist!'
 				})
 				.addFields(
 					playlists.map((playlist) => ({
 						name: `- ${playlist.name}`,
 						value:
-							playlist.songs.length === 0
+							playlist.tracks.length === 0
 								? 'Empty playlist'
-								: `${playlist.songs.length} song`
+								: `${playlist.tracks.length} song`
 					}))
 				)
 		],
 		ephemeral: true
 	});
 };
+
+export default listPlaylistSubCommand;

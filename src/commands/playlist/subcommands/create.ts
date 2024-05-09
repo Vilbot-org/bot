@@ -1,31 +1,32 @@
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
-import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
+import PlaylistError from '@/errors/PlaylistError';
 
-export default async (interaction) => {
-	const playlistName = interaction.options.getString('name')
-		? interaction.options.getString('name')
-		: `${interaction.user.username}-playlist`;
+const playlistCreateSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
+	const playlistName =
+		interaction.options.getString('name') ??
+		`${interaction.user.username}-playlist`;
 
 	await interaction.deferReply({ ephemeral: true });
 
-	// Check if this playlist already exist
 	const playlist = await Playlist.findOne({
 		user: interaction.user.id,
 		name: playlistName
 	});
+
 	if (playlist) {
 		throw new PlaylistError(
 			playlistName === `${interaction.user.username}-playlist`
 				? 'You already have your default playlist created'
 				: 'A playlist with that name already exists',
-			`Create a new playlist or add songs to the exist playlist with \`playlist add ${playlist.playlistName}\`!`
+			`Create a new playlist or add songs to the exist playlist with \`playlist add ${playlist.name}\`!`
 		);
 	}
 
-	// Create new playlist if the user don't have a playlist with that name
 	const newPlaylist = new Playlist({
 		user: interaction.user.id,
 		name: playlistName
@@ -47,3 +48,5 @@ export default async (interaction) => {
 		ephemeral: true
 	});
 };
+
+export default playlistCreateSubCommand;

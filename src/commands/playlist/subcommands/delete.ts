@@ -1,27 +1,28 @@
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
 
-export default async (interaction) => {
-	const playlistName = interaction.options.getString('name');
+const deletePlaylistSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
+	const playlistName = interaction.options.getString('name') as string;
 
 	await interaction.deferReply({ ephemeral: true });
 
-	const deletePlaylist = await Playlist.findOneAndDelete({
+	const deletedPlaylist = await Playlist.findOneAndDelete({
 		user: interaction.user.id,
 		name: playlistName
 	});
 
-	if (!deletePlaylist) {
+	if (!deletedPlaylist) {
 		throw new PlaylistError(
 			'You dont have any playlist with this name',
 			'Please check the name with the command `/playlist list` and try again'
 		);
 	}
 
-	// Check if  exist this playlist
 	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()
@@ -33,3 +34,5 @@ export default async (interaction) => {
 		ephemeral: true
 	});
 };
+
+export default deletePlaylistSubCommand;

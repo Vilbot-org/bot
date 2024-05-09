@@ -1,17 +1,18 @@
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
+import appConfig from '@/app.config';
 
-import config from '../../../app.config';
-
-export default async (interaction) => {
+const helpPlaylistSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(config.colors.info)
+				.setColor(appConfig.colors.info)
 				.setAuthor({ name: 'Vilbot help command' })
 				.setTitle('Playlist help')
 				.setThumbnail(interaction.client.user.avatarURL())
 				.setDescription(
-					`With this command you can create awesome playlists with your favortie songs!\nFor more detailed information [visit the website](${config.siteURL}). `
+					`With this command you can create awesome playlists with your favortie songs!\nFor more detailed information [visit the website](${appConfig.siteURL}). `
 				)
 				.addFields(
 					{
@@ -46,3 +47,5 @@ export default async (interaction) => {
 		]
 	});
 };
+
+export default helpPlaylistSubCommand;

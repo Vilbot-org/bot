@@ -1,33 +1,27 @@
-import { useMasterPlayer as player } from 'discord-player';
-import { EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
+import { searchTrack } from '@/utils/musicUtils';
 
-export default async (interaction) => {
-	const songToAdd = interaction.options.getString('song');
-	const playlistName = interaction.options.getString('playlist')
-		? interaction.options.getString('playlist')
-		: `${interaction.user.username}-playlist`;
+const addPlaylistSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
+	const songToAdd = interaction.options.getString('song') as string;
+	const playlistName =
+		interaction.options.getString('playlist') ??
+		`${interaction.user.username}-playlist`;
 
 	await interaction.deferReply({ ephemeral: true });
 
-	const { tracks } = await player().search(songToAdd);
-	if (tracks.length === 0) {
-		throw new PlaylistError(
-			'Song not found',
-			'Try another specific name or Youtube URL.'
-		);
-	}
-
-	const track = tracks[0];
+	const searchResult = await searchTrack(songToAdd);
 
 	const userPlaylist = await Playlist.findOneAndUpdate(
 		{ user: interaction.user.id, name: playlistName },
 		{
 			$push: {
-				songs: track.url
+				tracks: searchResult.url
 			}
 		}
 	);
@@ -44,7 +38,9 @@ export default async (interaction) => {
 			new EmbedBuilder()
 				.setColor(config.colors.green)
 				.setAuthor({ name: 'Added new song to playlist' })
-				.setTitle(`'${track.title}' added to the **${playlistName}** playlist`)
+				.setTitle(
+					`'${searchResult.title}' added to the **${playlistName}** playlist`
+				)
 				.setDescription(
 					`Song added successfully.\nType \`/music playlist ${playlistName}\` to play your playlist.`
 				)
@@ -52,3 +48,5 @@ export default async (interaction) => {
 		ephemeral: true
 	});
 };
+
+export default addPlaylistSubCommand;
