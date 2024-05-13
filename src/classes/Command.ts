@@ -94,6 +94,13 @@ class Command {
 
 	async execute(interaction: ChatInputCommandInteraction) {
 		try {
+			if (!interaction.guild) {
+				throw new BotError(
+					'Invalid interaction',
+					'Invalid interaction',
+					'The commands are only available in a guild'
+				);
+			}
 			const permissionsCheck = await checkPermissions(this, interaction);
 
 			if (!permissionsCheck.result) {
