@@ -1,7 +1,8 @@
 import {
 	ChatInputCommandInteraction,
 	EmbedBuilder,
-	PermissionFlagsBits
+	PermissionFlagsBits,
+	TextChannel
 } from 'discord.js';
 
 import config from '../../app.config';
@@ -19,7 +20,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		(msg) => msg.author.id === interaction.client.user.id && !msg.pinned
 	);
 
-	if (msgsToDelete?.size === 0) {
+	if (msgsToDelete?.size === 0 || !msgsToDelete) {
 		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
@@ -31,7 +32,8 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		return;
 	}
 
-	await interaction.channel?.bulkDelete(msgsToDelete);
+	const channel = interaction.channel as TextChannel;
+	await channel.bulkDelete(msgsToDelete);
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
