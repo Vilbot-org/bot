@@ -1,6 +1,7 @@
+import type { IBotUser } from '@/types/IBot';
 import { Schema, model } from 'mongoose';
 
-const userSchema = new Schema(
+const userSchema: Schema<IBotUser> = new Schema(
 	{
 		_id: {
 			type: String,
