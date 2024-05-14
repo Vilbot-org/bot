@@ -4,29 +4,38 @@ import {
 	ClientOptions,
 	Collection,
 	Events,
-	Guild,
 	Interaction
 } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
+import { Player } from 'discord-player';
+import { Socket } from 'socket.io-client';
 
 import logger from '../utils/logger';
 import Command from './Command';
 import databaseConnection from '@/utils/databaseConnection';
+import {
+	guildCreateEvent,
+	guildDeleteEvent,
+	voiceStateUpdateEvent
+} from '@/events/clientEvents';
+import registerPlayerEvents from '@/events/playerEvents';
 import GuildModel from '@/models/Guild';
-import { Player } from 'discord-player';
-// import socket from '@/sockets';
-import { Socket } from 'socket.io-client';
+import { findDifferents } from '@/utils/guildUtils';
+import { IBotToServerEvents, IServerToBotEvents } from '@/types/ISocket';
+import registerSocketEvents from '@/sockets/socketEvents';
+import socketConnection from '@/sockets/socketConnection';
 
 class BotClient extends Client {
-	public player: Player | null = null;
+	public player: Player;
 	public slashCommandsMap = new Collection<string, Command>();
-	public socket: Socket | null = null;
+	public socket: Socket<IServerToBotEvents, IBotToServerEvents>;
 
 	constructor(options: ClientOptions) {
 		super(options);
 		this.player = new Player(this);
 		this.player.extractors.loadDefault();
+		this.socket = socketConnection();
 	}
 
 	public async start(token: string) {
@@ -36,21 +45,25 @@ class BotClient extends Client {
 	}
 
 	private registerListeners() {
-		this.on(Events.ClientReady, this.onReady);
-		this.on(Events.GuildCreate, this.onGuildCreate);
+		this.once(Events.ClientReady, this.onReady);
 		this.on(Events.InteractionCreate, this.onInteractionCreate);
+		this.on(Events.GuildCreate, guildCreateEvent);
+		this.on(Events.GuildDelete, guildDeleteEvent);
+		this.on(Events.VoiceStateUpdate, voiceStateUpdateEvent);
+		registerPlayerEvents(this);
+		registerSocketEvents(this);
 	}
 
 	private async loadCommands() {
 		try {
-			const path = join(__dirname, '..', 'tsCommands');
+			const path = join(__dirname, '..', 'commands');
 			const categories = readdirSync(path);
 
 			await Promise.all(
 				categories.map(async (category) => {
 					const commandsPath = join(path, category);
-					const commands = readdirSync(commandsPath).filter((file) =>
-						file.endsWith('.ts')
+					const commands = readdirSync(commandsPath).filter(
+						(file) => file.endsWith('.ts') || file.endsWith('.js')
 					);
 
 					await Promise.all(
@@ -74,7 +87,7 @@ class BotClient extends Client {
 				})
 			);
 		} catch (error) {
-			logger.error(`Failed to load events: ${error}`);
+			logger.error(`Failed to load commands: ${error}`);
 		}
 	}
 
@@ -85,21 +98,21 @@ class BotClient extends Client {
 
 			await databaseConnection();
 			this.loadCommands();
-			/* this.socket = socket; */
+
+			const registeredGuilds = await GuildModel.find();
+			const botGuilds = this.guilds.cache.toJSON();
+
+			const unregisterGuilds = findDifferents(registeredGuilds, botGuilds) as {
+				_id: string;
+				name: string;
+			}[];
+
+			if (registeredGuilds.length > 0) {
+				await GuildModel.insertMany(unregisterGuilds);
+			}
 		} catch (error) {
 			logger.error(error);
 		}
-	}
-
-	private async onGuildCreate(guild: Guild) {
-		const newGuild = new GuildModel({
-			_id: guild.id,
-			name: guild.name
-		});
-
-		await newGuild.save();
-
-		logger.info(`The "${newGuild.name}" guild was added.`);
 	}
 
 	private async onInteractionCreate(interaction: Interaction) {
