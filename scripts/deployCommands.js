@@ -18,31 +18,37 @@ const commandsFiles = categories
 	);
 
 const importCommand = async (commandFile) => {
-	const commandPath = join(
-		process.cwd(),
-		path,
-		commandFile.category,
-		commandFile.file
-	);
-	const commandObject = require(commandPath).default;
+	try {
+		const commandPath = join(
+			process.cwd(),
+			path,
+			commandFile.category,
+			commandFile.file
+		);
+		const commandObject = require(commandPath).default;
 
-	return commandObject.data.toJSON();
+		return commandObject.data.toJSON();
+	} catch (e) {
+		console.error(`Failed to import command ${commandFile.file}: ${e}`);
+	}
 };
 
-const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
-const route =
+const getRoute = () =>
 	process.env.APP_ENV === 'dev'
 		? Routes.applicationGuildCommands(
 				process.env.CLIENT_ID,
 				process.env.GUILD_ID
-				// eslint-disable-next-line no-mixed-spaces-and-tabs
 		  )
 		: Routes.applicationCommands(process.env.CLIENT_ID);
 
 (async () => {
-	const commands = await Promise.all(
-		commandsFiles.map(async (commandFile) => importCommand(commandFile))
-	);
+	const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
+	const route = getRoute();
+	const commands = (
+		await Promise.all(
+			commandsFiles.map(async (commandFile) => importCommand(commandFile))
+		)
+	).filter(Boolean);
 
 	console.log(
 		`Deploying commands in ${process.env.APP_ENV} mode for ${
