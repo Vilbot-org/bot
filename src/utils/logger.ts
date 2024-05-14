@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import pino from 'pino';
-import config from '../app.config';
+import env from './validEnv';
 
 if (!existsSync('./logs')) {
 	mkdirSync('./logs');
@@ -17,7 +17,7 @@ const streams = pino.multistream([
 
 const logger = pino(
 	{
-		name: config.botName,
+		name: env.APP_NAME,
 		formatters: {
 			level: (label) => ({ level: label.toUpperCase() })
 		},
