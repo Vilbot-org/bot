@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import type { IPlaylist } from '@/interfaces/IPlaylist';
+import { IPlaylist } from '@/types/IPlaylist';
 
 const playlistSchema: Schema<IPlaylist> = new Schema(
 	{
