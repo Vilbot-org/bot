@@ -1,13 +1,14 @@
-import BotError from '@/errors/BotError';
-import type { ICommandOptions, ISubCommandObject } from '@/interfaces/IBot';
-import { checkPermissions } from '@/utils/checkPermissions';
-import errorHandler from '@/utils/errorHandler';
 import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
 	PermissionResolvable,
 	SlashCommandBuilder
 } from 'discord.js';
+
+import BotError from '@/errors/BotError';
+import { ICommandOptions, ISubCommandObject } from '@/types/IBot';
+import { checkPermissions } from '@/utils/checkPermissions';
+import errorHandler from '@/utils/errorHandler';
 
 class Command {
 	private data: SlashCommandBuilder;
