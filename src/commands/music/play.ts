@@ -39,7 +39,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	await interaction.deferReply();
 
-	const { queue, track } = await play(query, voiceChannel);
+	const { queue, track } = await play(query, voiceChannel, interaction.user);
 
 	await interaction.followUp({
 		embeds: [
