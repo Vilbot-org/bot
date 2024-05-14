@@ -16,12 +16,13 @@ const addPlaylistSubCommand = async (
 	await interaction.deferReply({ ephemeral: true });
 
 	const searchResult = await searchTrack(songToAdd);
+	const firstTrackSearchResult = searchResult.tracks[0];
 
 	const userPlaylist = await Playlist.findOneAndUpdate(
 		{ user: interaction.user.id, name: playlistName },
 		{
 			$push: {
-				tracks: searchResult.url
+				tracks: firstTrackSearchResult.url
 			}
 		}
 	);
@@ -39,7 +40,7 @@ const addPlaylistSubCommand = async (
 				.setColor(config.colors.green)
 				.setAuthor({ name: 'Added new song to playlist' })
 				.setTitle(
-					`'${searchResult.title}' added to the **${playlistName}** playlist`
+					`'${firstTrackSearchResult.title}' added to the **${playlistName}** playlist`
 				)
 				.setDescription(
 					`Song added successfully.\nType \`/music playlist ${playlistName}\` to play your playlist.`
