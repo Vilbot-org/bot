@@ -1,15 +1,20 @@
-import Command from '@/classes/Command';
 import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
+
+import appConfig from '@/app.config';
+import Command from '@/classes/Command';
+import { version as appVersion } from '../../../package.json';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
-				.setColor(0x01feff)
-				.setTitle('Bot help')
+				.setColor(appConfig.colors.info)
+				.setTitle(`${appConfig.botName} help`)
 				.setThumbnail(interaction.client.user.avatarURL())
-				.setAuthor({ name: 'Vilbot help command' })
-				.setDescription('test')
+				.setAuthor({ name: `${appConfig.botName} help command` })
+				.setDescription(
+					`Hi! I'm ${appConfig.botName} a awesome discord bot. Current version: \`v${appVersion}\``
+				)
 				.addFields(
 					{
 						name: 'Full command list',
@@ -34,7 +39,9 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 						inline: true
 					}
 				)
-				.setFooter({ text: 'test by GFrancV' })
+				.setFooter({
+					text: `${appConfig.botName} by ${appConfig.author}`
+				})
 		]
 	});
 };
