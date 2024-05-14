@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import type { IBotGuild } from '@/interfaces/IBot';
+import { IBotGuild } from '@/types/IBot';
 
 const schema: Schema<IBotGuild> = new Schema(
 	{
