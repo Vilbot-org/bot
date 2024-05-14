@@ -4,7 +4,7 @@ import {
 	ButtonStyle,
 	ChatInputCommandInteraction,
 	EmbedBuilder,
-	PermissionsBitField
+	PermissionFlagsBits
 } from 'discord.js';
 
 import MusicError from '@/errors/MusicError';
@@ -12,22 +12,11 @@ import Command from '@/classes/Command';
 import config from '@/app.config';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
-	if (
-		!interaction.member?.permissions.has(
-			PermissionsBitField.Flags.ModerateMembers
-		)
-	) {
-		throw new MusicError(
-			'No permissions',
-			'You dont have permissions to exec this command.'
-		);
-	}
+	const channels = await interaction.guild?.channels.fetch();
 
-	const channels = await interaction.guild.channels.fetch();
-
-	const existChannel = channels.find(
+	const existChannel = channels?.find(
 		(element) =>
-			element.name ===
+			element?.name ===
 			`「🎵」${
 				config.botName.charAt(0).toLowerCase() + config.botName.slice(1)
 			}-music`
@@ -41,7 +30,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		);
 	}
 
-	const musicChannel = await interaction.guild.channels.create({
+	const musicChannel = await interaction.guild?.channels.create({
 		name: `「🎵」${config.botName}-music`,
 		topic:
 			'Hi! This is the channel text of the music bot, in this channel you can running the commands of the bot to have your server more organized.\nTo view all the music commands run **/music help** or to view all the commands run: **/help**',
@@ -68,7 +57,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		]
 	});
 
-	const quickControls = new ActionRowBuilder()
+	const quickControls = new ActionRowBuilder<ButtonBuilder>()
 		.addComponents(
 			new ButtonBuilder()
 				.setCustomId('pausePlayer')
@@ -87,7 +76,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 				.setEmoji({ name: '⏭️' })
 				.setStyle(ButtonStyle.Primary)
 		);
-	const playerInfoControls = new ActionRowBuilder()
+	const playerInfoControls = new ActionRowBuilder<ButtonBuilder>()
 		.addComponents(
 			new ButtonBuilder()
 				.setCustomId('queuePlayer')
@@ -107,7 +96,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 				.setStyle(ButtonStyle.Danger)
 		);
 
-	musicChannel
+	await musicChannel
 		.send({
 			content: 'Quick controls for music',
 			components: [quickControls, playerInfoControls]
@@ -118,7 +107,8 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 const setupCommandOptions = {
 	name: 'setup',
 	description: 'Run this command to setup the bot!',
-	execute: execute
+	execute: execute,
+	permissions: [PermissionFlagsBits.ManageGuild]
 };
 const setupCommand = new Command(setupCommandOptions);
 
