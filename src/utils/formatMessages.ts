@@ -35,6 +35,6 @@ export const formatQueue = (
 			requestedBy: currentTrack.requestedBy,
 			playbackTime: node.playbackTime
 		},
-		tracks: tracks?.toArray()
+		tracks: tracks.map((track) => formatTrack(track))
 	};
 };

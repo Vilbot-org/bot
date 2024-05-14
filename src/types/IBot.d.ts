@@ -1,5 +1,4 @@
-import type { Track } from 'discord-player';
-import type {
+import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction,
 	PermissionResolvable,
@@ -39,7 +38,7 @@ export interface ICurrentTrack extends IBotTrack {
 export interface IBotQueue {
 	isPaused: boolean;
 	currentTrack: ICurrentTrack;
-	tracks: Track[];
+	tracks: IBotTrack[];
 }
 
 export interface ISubCommandObject {
