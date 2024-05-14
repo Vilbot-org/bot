@@ -123,7 +123,10 @@ const registerSocketEvents = (client: BotClient) => {
 	client.socket.on('connect', onConnect);
 	client.socket.on(SocketEvents.ServerRequestQueue, requestQueue);
 	client.socket.on(SocketEvents.ServerRequestPlayTrack, requestPlayTrack);
-	client.socket.on(SocketEvents.ServerRequestSkipTrack, requestPreviousTrack);
+	client.socket.on(
+		SocketEvents.ServerRequestPreviousTrack,
+		requestPreviousTrack
+	);
 	client.socket.on(SocketEvents.ServerRequestSkipTrack, requestSkipTrack);
 	client.socket.on(SocketEvents.ServerRequestRemoveTrack, requestRemoveTrack);
 	client.socket.on(SocketEvents.ServerRequestPlayPlaylist, requestPlayPlaylist);
