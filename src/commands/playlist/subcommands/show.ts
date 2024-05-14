@@ -34,7 +34,8 @@ const showPlaylistSubCommand = async (
 	if (playlist.tracks.length > 0) {
 		const fields = await Promise.all(
 			playlist.tracks.map(async (track, index) => {
-				const { title, url } = await searchTrack(track);
+				const searchResult = await searchTrack(track);
+				const { title, url } = searchResult.tracks[0];
 
 				return {
 					name: `ID: ${index + 1}`,
