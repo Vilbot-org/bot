@@ -24,20 +24,22 @@ const registerSocketEvents = (client: BotClient) => {
 		logger.info('Success connection to socket server');
 	};
 
-	const requestQueue = async (guildID: string) => {
+	const requestQueue = async (guildId: string) => {
 		try {
-			const fetchedQueue = useQueue(guildID);
+			const fetchedQueue = useQueue(guildId);
 
 			if (!fetchedQueue) {
-				client.socket.emit(SocketEvents.BotRequestedQueue, null, guildID);
+				client.socket.emit(SocketEvents.BotRequestedQueue, {
+					queue: null,
+					guildId
+				});
 				return;
 			}
 
-			client.socket.emit(
-				SocketEvents.BotRequestedQueue,
-				formatQueue(fetchedQueue),
-				guildID
-			);
+			client.socket.emit(SocketEvents.BotRequestedQueue, {
+				queue: formatQueue(fetchedQueue),
+				guildId
+			});
 		} catch (error) {
 			socketError(client, error as Error);
 		}
