@@ -30,43 +30,53 @@ const registerPlayerEvents = (client: BotClient) => {
 			]
 		});
 
-		client.socket.emit(
-			SocketEvents.BotStartedPlaying,
-			formatQueue(queue),
-			queue.guild.id
-		);
+		client.socket.emit(SocketEvents.BotStartedPlaying, {
+			queue: formatQueue(queue),
+			guildId: queue.guild.id
+		});
 	};
 
 	const audioTrackAddEvent = (queue: GuildQueue, track: Track) => {
-		client.socket.emit(
-			SocketEvents.BotPlayedTrack,
-			formatTrack(track),
-			queue.guild.id
-		);
+		client.socket.emit(SocketEvents.BotPlayedTrack, {
+			track: formatTrack(track),
+			guildId: queue.guild.id
+		});
 	};
 
 	const playerSkipEvent = (queue: GuildQueue) => {
-		client.socket.emit(SocketEvents.BotSkipedTrack, queue.guild.id);
+		client.socket.emit(SocketEvents.BotSkipedTrack, {
+			guildId: queue.guild.id
+		});
 	};
 
 	const playerResumeEvent = (queue: GuildQueue) => {
-		client.socket.emit(SocketEvents.BotResumedMusicPlayer, queue.guild.id);
+		client.socket.emit(SocketEvents.BotResumedMusicPlayer, {
+			guildId: queue.guild.id
+		});
 	};
 
 	const playerPauseEvent = (queue: GuildQueue) => {
-		client.socket.emit(SocketEvents.BotPausedMusicPlayer, queue.guild.id);
+		client.socket.emit(SocketEvents.BotPausedMusicPlayer, {
+			guildId: queue.guild.id
+		});
 	};
 
 	const queueDeleteEvent = (queue: GuildQueue) => {
-		client.socket.emit(SocketEvents.BotDeletedQueue, queue.guild.id);
+		client.socket.emit(SocketEvents.BotDeletedQueue, {
+			guildId: queue.guild.id
+		});
 	};
 
 	const emptyQueueEvent = (queue: GuildQueue) => {
-		client.socket.emit(SocketEvents.BotEmptyQueue, queue.guild.id);
+		client.socket.emit(SocketEvents.BotEmptyQueue, {
+			guildId: queue.guild.id
+		});
 	};
 
 	const connectionDestroyedEvent = (queue: GuildQueue) => {
-		client.socket.emit(SocketEvents.BotConnectionDestroyed, queue.guild.id);
+		client.socket.emit(SocketEvents.BotConnectionDestroyed, {
+			guildId: queue.guild.id
+		});
 	};
 	const errorEvent = (_queue: GuildQueue, error: Error) => {
 		logger.error(`General player error event: ${error.message}`);

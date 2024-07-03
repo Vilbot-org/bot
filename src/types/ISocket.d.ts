@@ -20,16 +20,35 @@ export interface IServerToBotEvents {
 	'server.requestPauseMusicPlayer': (guildID: string) => void;
 }
 
+interface BotQueuePayload {
+	queue: IBotQueue | null;
+	guildId: string;
+}
+
+interface BotTrackPayload {
+	track: IBotTrack | null;
+	guildId: string;
+}
+
+interface BotGuildPayload {
+	guildId: string;
+}
+
+interface BotTrackIndexPayload {
+	trackIndex: number;
+	guildId: string;
+}
+
 export interface IBotToServerEvents {
-	'bot.requestedQueue': (queue: IBotQueue | null, guildID: string) => void;
-	'bot.playedTrack': (track: IBotTrack, guildID: string) => void;
-	'bot.skipedTrack': (guildID: string) => void;
-	'bot.removedTrack': (trackIndex: number, guild: string) => void;
-	'bot.resumedMusicPlayer': (guildID: string) => void;
-	'bot.pausedMusicPlayer': (guildID: string) => void;
-	'bot.deletedQueue': (guild: string) => void;
-	'bot.startedPlaying': (queue: IBotQueue | null, guildID: string) => void;
-	'bot.emptyQueue': (guildID: string) => void;
-	'bot.connectionDestroyed': (guildID: string) => void;
+	'bot.requestedQueue': (payload: BotQueuePayload) => void;
+	'bot.playedTrack': (payload: BotTrackPayload) => void;
+	'bot.skipedTrack': (payload: BotGuildPayload) => void;
+	'bot.removedTrack': (payload: BotTrackIndexPayload) => void;
+	'bot.resumedMusicPlayer': (payload: BotGuildPayload) => void;
+	'bot.pausedMusicPlayer': (payload: BotGuildPayload) => void;
+	'bot.deletedQueue': (payload: BotGuildPayload) => void;
+	'bot.startedPlaying': (payload: BotQueuePayload) => void;
+	'bot.emptyQueue': (payload: BotGuildPayload) => void;
+	'bot.connectionDestroyed': (payload: BotGuildPayload) => void;
 	'bot.error': (error: object) => void;
 }
