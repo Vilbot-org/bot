@@ -1,7 +1,4 @@
 import { useQueue } from 'discord-player';
-import type { User } from 'discord.js';
-
-import type { ICurrentVoiceChannel } from '@/types/IBot';
 
 import socketError from './socketFunctions';
 import type BotClient from '@/classes/BotClient';
@@ -18,13 +15,19 @@ import {
 	resume,
 	skip
 } from '@/utils/musicUtils';
+import {
+	GuildPayload,
+	ServerPlayTrackPayload,
+	TrackIndexPayload,
+	VoiceChannelPayload
+} from '@/types/ISocket';
 
 const registerSocketEvents = (client: BotClient) => {
 	const onConnect = () => {
 		logger.info('Success connection to socket server');
 	};
 
-	const requestQueue = async (guildId: string) => {
+	const requestQueue = async ({ guildId }: GuildPayload) => {
 		try {
 			const fetchedQueue = useQueue(guildId);
 
@@ -45,20 +48,22 @@ const registerSocketEvents = (client: BotClient) => {
 		}
 	};
 
-	const requestPlayTrack = async (
-		trackURL: string,
-		voiceChannelId: string,
-		user: User
-	) => {
+	const requestPlayTrack = async ({
+		trackUrl,
+		voiceChannelId,
+		user
+	}: ServerPlayTrackPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
-			await play(trackURL, voiceChannel, user);
+			await play(trackUrl, voiceChannel, user);
 		} catch (error) {
 			socketError(client, error as Error);
 		}
 	};
 
-	const requestPreviousTrack = async (voiceChannelId: string) => {
+	const requestPreviousTrack = async ({
+		voiceChannelId
+	}: VoiceChannelPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
 			previous(voiceChannel);
@@ -67,7 +72,7 @@ const registerSocketEvents = (client: BotClient) => {
 		}
 	};
 
-	const requestSkipTrack = async (voiceChannelId: string) => {
+	const requestSkipTrack = async ({ voiceChannelId }: VoiceChannelPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
 			skip(voiceChannel);
@@ -76,10 +81,10 @@ const registerSocketEvents = (client: BotClient) => {
 		}
 	};
 
-	const requestRemoveTrack = async (
-		trackIndex: number,
-		voiceChannelId: string
-	) => {
+	const requestRemoveTrack = async ({
+		trackIndex,
+		voiceChannelId
+	}: TrackIndexPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
 			removeTrack(trackIndex, voiceChannel);
@@ -88,23 +93,22 @@ const registerSocketEvents = (client: BotClient) => {
 		}
 	};
 
-	const requestPlayPlaylist = async (
-		tracks: string[],
-		voiceChannelObject: ICurrentVoiceChannel,
-		user: User
-	) => {
+	const requestPlayPlaylist = async ({
+		tracks,
+		voiceChannelId,
+		user
+	}: ServerPlayTrackPayload & { tracks: string[] }) => {
 		try {
-			const voiceChannel = await getVoiceChannelById(
-				client,
-				voiceChannelObject.voiceId
-			);
+			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
 			await playPlaylist(tracks, voiceChannel, user);
 		} catch (error) {
 			socketError(client, error as Error);
 		}
 	};
 
-	const requestResumeMusicPlayer = async (voiceChannelId: string) => {
+	const requestResumeMusicPlayer = async ({
+		voiceChannelId
+	}: VoiceChannelPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
 			resume(voiceChannel);
@@ -113,7 +117,9 @@ const registerSocketEvents = (client: BotClient) => {
 		}
 	};
 
-	const requestPauseMusicPlayer = async (voiceChannelId: string) => {
+	const requestPauseMusicPlayer = async ({
+		voiceChannelId
+	}: VoiceChannelPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
 			pause(voiceChannel);

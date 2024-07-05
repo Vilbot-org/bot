@@ -1,54 +1,54 @@
 import type { User } from 'discord.js';
-import type { IBotQueue, IBotTrack, ICurrentVoiceChannel } from './IBot';
+import type { IBotQueue, IBotTrack } from './IBot';
+
+interface VoiceChannelPayload {
+	voiceChannelId: string;
+}
+
+interface ServerPlayTrackPayload extends VoiceChannelPayload {
+	trackUrl: string;
+	user: User;
+}
+
+interface GuildPayload {
+	guildId: string;
+}
+
+interface TrackIndexPayload extends VoiceChannelPayload {
+	trackIndex: number;
+}
+
+interface BotTrackPayload extends GuildPayload {
+	track: IBotTrack | null;
+}
+
+interface BotQueuePayload extends GuildPayload {
+	queue: IBotQueue | null;
+}
 
 export interface IServerToBotEvents {
-	'server.requestQueue': (guildID: string) => void;
-	'server.requestPlayTrack': (
-		trackURL: string,
-		voiceChannelID: string,
-		user: User
-	) => void;
-	'server.requestPreviousTrack': (voiceChannelID: string) => void;
-	'server.requestSkipTrack': (voiceChannelID: string) => void;
-	'server.requestRemoveTrack': (trackIndex: number, guildID: string) => void;
+	'server.requestQueue': (payload: GuildPayload) => void;
+	'server.requestPlayTrack': (payload: ServerPlayTrackPayload) => void;
+	'server.requestPreviousTrack': (payload: VoiceChannelPayload) => void;
+	'server.requestSkipTrack': (payload: VoiceChannelPayload) => void;
+	'server.requestRemoveTrack': (payload: TrackIndexPayload) => void;
 	'server.requestPlayPlaylist': (
-		tracks: string[],
-		currentVoiceChannel: ICurrentVoiceChannel,
-		user: User
+		payload: ServerPlayTrackPayload & { tracks: string[] }
 	) => void;
-	'server.requestResumeMusicPlayer': (guildID: string) => void;
-	'server.requestPauseMusicPlayer': (guildID: string) => void;
-}
-
-interface BotQueuePayload {
-	queue: IBotQueue | null;
-	guildId: string;
-}
-
-interface BotTrackPayload {
-	track: IBotTrack | null;
-	guildId: string;
-}
-
-interface BotGuildPayload {
-	guildId: string;
-}
-
-interface BotTrackIndexPayload {
-	trackIndex: number;
-	guildId: string;
+	'server.requestResumeMusicPlayer': (payload: VoiceChannelPayload) => void;
+	'server.requestPauseMusicPlayer': (payload: VoiceChannelPayload) => void;
 }
 
 export interface IBotToServerEvents {
 	'bot.requestedQueue': (payload: BotQueuePayload) => void;
 	'bot.playedTrack': (payload: BotTrackPayload) => void;
-	'bot.skipedTrack': (payload: BotGuildPayload) => void;
+	'bot.skipedTrack': (payload: GuildPayload) => void;
 	'bot.removedTrack': (payload: BotTrackIndexPayload) => void;
-	'bot.resumedMusicPlayer': (payload: BotGuildPayload) => void;
-	'bot.pausedMusicPlayer': (payload: BotGuildPayload) => void;
-	'bot.deletedQueue': (payload: BotGuildPayload) => void;
+	'bot.resumedMusicPlayer': (payload: GuildPayload) => void;
+	'bot.pausedMusicPlayer': (payload: GuildPayload) => void;
+	'bot.deletedQueue': (payload: GuildPayload) => void;
 	'bot.startedPlaying': (payload: BotQueuePayload) => void;
-	'bot.emptyQueue': (payload: BotGuildPayload) => void;
-	'bot.connectionDestroyed': (payload: BotGuildPayload) => void;
+	'bot.emptyQueue': (payload: GuildPayload) => void;
+	'bot.connectionDestroyed': (payload: GuildPayload) => void;
 	'bot.error': (error: object) => void;
 }

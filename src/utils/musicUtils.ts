@@ -114,7 +114,10 @@ export const removeTrack = (
 	const queue = getQueue(voiceChannel);
 	queue.removeTrack(trackIndex);
 
-	bot.socket.emit(SocketEvents.BotRemovedTrack, trackIndex, queue.guild.id);
+	bot.socket.emit(SocketEvents.BotRemovedTrack, {
+		trackIndex,
+		guildId: queue.guild.id
+	});
 
 	return true;
 };
