@@ -11,7 +11,8 @@ const socketConnection = () => {
 		},
 		auth: {
 			token
-		}
+		},
+		autoConnect: true
 	});
 
 	return socket;
