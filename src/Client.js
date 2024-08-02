@@ -1,8 +1,10 @@
-import { Player } from 'discord-player';
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
+import { Player } from 'discord-player';
+import { YoutubeiExtractor } from 'discord-player-youtubei';
 
 import commandHandler from './handlers/commandHandler';
 import eventHandler from './handlers/eventHandler';
+import logger from './functions/logger';
 
 const client = new Client({
 	intents: [
@@ -21,8 +23,24 @@ client.commands = new Collection();
 commandHandler(client);
 eventHandler(client);
 
-const player = new Player(client);
+const ipRotationConfig = {
+	blocks: [],
+	exclude: [],
+	maxRetries: 3
+};
 
-player.extractors.loadDefault();
+const player = new Player(client, {
+	useLegacyFFmpeg: false,
+	skipFFmpeg: false,
+	ipconfig: ipRotationConfig
+});
+
+player.extractors.register(YoutubeiExtractor, {
+	authentication: process.env.YT_EXTRACTOR_AUTH || ''
+});
+
+player.extractors.loadDefault((ext) => !['YouTubeExtractor'].includes(ext));
+
+logger.trace(`discord-player loaded dependencies:\n${player.scanDeps()}`);
 
 export default client;
