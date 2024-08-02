@@ -3,8 +3,9 @@ ARG NODE_VERSION=20.12
 FROM node:${NODE_VERSION}-bookworm-slim as base
 
 RUN apt-get update && \
-    apt-get install -y python3 make build-essential ffmpeg ca-certificates \
-    apt-get clean \
+    apt-get install -y python3 make build-essential ffmpeg ca-certificates &&\
+    apt-get clean &&\
+    apt-get purge -y --auto-remove && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /vilbot
