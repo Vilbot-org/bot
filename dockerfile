@@ -4,7 +4,6 @@ FROM node:${NODE_VERSION}-bookworm-slim as base
 
 RUN apt-get update && \
     apt-get install -y python3 make build-essential ffmpeg ca-certificates \
-    apt-get purge -y --auto-remove && \
     apt-get clean \
     rm -rf /var/lib/apt/lists/*
 
