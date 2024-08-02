@@ -1,9 +1,11 @@
-ARG NODE_VERSION=20.10
+ARG NODE_VERSION=20.12
 
-FROM node:${NODE_VERSION}-slim as base
+FROM node:${NODE_VERSION}-bookworm-slim as base
 
 RUN apt-get update && \
+    apt-get install -y python3 make build-essential ffmpeg ca-certificates \
     apt-get purge -y --auto-remove && \
+    apt-get clean \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /vilbot
@@ -36,5 +38,7 @@ RUN echo "APP_NAME=vilbot" >> .env && \
     echo "CONNECTION_DB=${CONNECTION_DB}" >> .env && \
     echo "SOCKET_URL=${SOCKET_URL}" >> .env && \
     echo "JWT_SECRET_KEY=${JWT_SECRET_KEY}" >> .env
+
+RUN apt-get purge -y python3 && apt-get autoremove -y
 
 CMD ["npm", "run", "start"]
