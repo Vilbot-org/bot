@@ -4,7 +4,7 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"target": "ES6",
+		"target": "ES2020",
 		"moduleResolution": "Node",
 		"resolveJsonModule": true,
 		"module": "commonjs",
@@ -19,7 +19,8 @@
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"skipLibCheck": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"noImplicitAny": false
 	},
-	"exclude": ["jest.config.ts", "./tests/**"]
+	"exclude": ["jest.config.ts", "./tests/**", "node_modules"]
 }
