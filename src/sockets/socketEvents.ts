@@ -55,7 +55,7 @@ const registerSocketEvents = (client: BotClient) => {
 	}: ServerPlayTrackPayload) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
-			await play(trackUrl, voiceChannel, user);
+			await play(trackUrl, voiceChannel, user.id);
 		} catch (error) {
 			socketError(client, error as Error);
 		}
@@ -100,7 +100,7 @@ const registerSocketEvents = (client: BotClient) => {
 	}: ServerPlayTrackPayload & { tracks: string[] }) => {
 		try {
 			const voiceChannel = await getVoiceChannelById(client, voiceChannelId);
-			await playPlaylist(tracks, voiceChannel, user);
+			await playPlaylist(tracks, voiceChannel, user.id);
 		} catch (error) {
 			socketError(client, error as Error);
 		}

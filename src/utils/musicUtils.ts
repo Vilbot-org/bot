@@ -1,6 +1,6 @@
 import { GuildQueue } from 'discord-player';
 import { useMainPlayer as player, useHistory, useQueue } from 'discord-player';
-import { User, VoiceBasedChannel } from 'discord.js';
+import { VoiceBasedChannel } from 'discord.js';
 
 import bot from '@/index';
 import MusicError from '@/errors/MusicError';
@@ -35,11 +35,14 @@ export const searchTrack = async (query: string) => {
 export const play = async (
 	query: string,
 	voiceChannel: VoiceBasedChannel,
-	user: User
+	userId: string
 ) => {
 	const searchResult = await searchTrack(query);
 
-	searchResult.setRequestedBy(user);
+	const user = bot.users.cache.get(userId);
+	if (user) {
+		searchResult.setRequestedBy(user);
+	}
 
 	const { queue, track } = await player().play(voiceChannel, searchResult, {
 		nodeOptions: {
@@ -125,11 +128,11 @@ export const removeTrack = (
 export const playPlaylist = async (
 	tracks: string[],
 	voiceChannel: VoiceBasedChannel,
-	user: User
+	userId: string
 ) => {
 	if (tracks.length >= 1) {
 		for (const track of tracks) {
-			await play(track, voiceChannel, user);
+			await play(track, voiceChannel, userId);
 		}
 	}
 
