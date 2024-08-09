@@ -57,7 +57,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		);
 	}
 
-	await playPlaylist(playlist.tracks, voiceChannel, interaction.user);
+	await playPlaylist(playlist.tracks, voiceChannel, interaction.user.id);
 
 	await interaction.followUp({
 		embeds: [
