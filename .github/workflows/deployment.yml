@@ -87,10 +87,14 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_APP_NAME: vilbot
-          envkey_APP_ENV: production
+          envkey_APP_ENV: deploy
           envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           envkey_CLIENT_ID: ${{ vars.CLIENT_ID }}
           envkey_JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          envkey_DB_NAME: undefined
+          envkey_DB_URI: mongodb://mongoDB/vilbot_db
+          envkey_GUILD_ID: 12345
+          envkey_SOCKET_URL: mongodb://mongoDB/vilbot_db
           fail_on_empty: true
       - name: Install dependencies
         run: npm ci --omit=dev
