@@ -26,6 +26,9 @@ ENV CLIENT_ID=empty
 ENV CONNECTION_DB=empty
 ENV SOCKET_URL=empty
 ENV JWT_SECRET_KEY=empty
+ENV DB_URI=empty
+ENV DB_NAME=empty
+ENV GUILD_ID=12345
 
 COPY package*.json ./
 COPY --from=build /vilbot/node_modules ./node_modules
