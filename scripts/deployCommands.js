@@ -1,4 +1,4 @@
-require('dotenv');
+require('dotenv').config();
 const { REST, Routes } = require('discord.js');
 const { readdirSync } = require('node:fs');
 const { join } = require('node:path');
