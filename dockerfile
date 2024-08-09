@@ -34,6 +34,7 @@ RUN echo "APP_NAME=vilbot" >> .env && \
     echo "APP_ENV=production" >> .env && \
     echo "DISCORD_TOKEN=${DISCORD_TOKEN}" >> .env && \
     echo "CLIENT_ID=${CLIENT_ID}" >> .env && \
+    echo "GUILD_ID=${GUILD_ID}" >> .env && \
     echo "DB_URI=${DB_URI}" >> .env && \
     echo "DB_NAME=${DB_NAME}" >> .env && \
     echo "SOCKET_URL=${SOCKET_URL}" >> .env && \
