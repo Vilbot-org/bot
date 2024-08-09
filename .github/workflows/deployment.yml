@@ -87,7 +87,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_APP_NAME: vilbot
-          envkey_APP_ENV: prod
+          envkey_APP_ENV: production
           envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           envkey_CLIENT_ID: ${{ vars.CLIENT_ID }}
           envkey_JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
@@ -108,11 +108,13 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_APP_NAME: vilbot
-          envkey_APP_ENV: prod
+          envkey_APP_ENV: production
           envkey_DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           envkey_CLIENT_ID: ${{ vars.CLIENT_ID }}
-          envkey_CONNECTION_DB: ${{ secrets.CONNECTION_DB }}
+          envkey_DB_URI: ${{ secrets.DB_URI }}
+          envkey_DB_NAME: ${{ secrets.DB_NAME }}
           envkey_SOCKET_URL: ${{ secrets.SOCKET_URL }}
+          envkey_GUILD_ID: ${{ vars.GUILD_ID }}
           envkey_JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
           envkey_DASHBOARD_DB_USERNAME: ${{ secrets.DASHBOARD_DB_USERNAME }}
           envkey_DASHBOARD_DB_PASSWORD: ${{ secrets.DASHBOARD_DB_PASSWORD }}
