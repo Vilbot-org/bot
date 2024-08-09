@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv');
 const { REST, Routes } = require('discord.js');
 const { readdirSync } = require('node:fs');
 const { join } = require('node:path');
@@ -34,7 +34,7 @@ const importCommand = async (commandFile) => {
 };
 
 const getRoute = () =>
-	process.env.APP_ENV === 'dev'
+	process.env.APP_ENV === 'development'
 		? Routes.applicationGuildCommands(
 				process.env.CLIENT_ID,
 				process.env.GUILD_ID
@@ -52,7 +52,7 @@ const getRoute = () =>
 
 	console.log(
 		`Deploying commands in ${process.env.APP_ENV} mode for ${
-			process.env.APP_ENV === 'dev'
+			process.env.APP_ENV === 'development'
 				? `guild ${process.env.GUILD_ID}`
 				: 'all guilds'
 		}.`
