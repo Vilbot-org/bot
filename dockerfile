@@ -17,7 +17,7 @@ RUN npm ci
 RUN npm run build
 
 RUN rm -rf node_modules && \
-	npm ci --omit=dev
+	  npm ci --omit=dev
 
 FROM base as prod
 
@@ -34,8 +34,8 @@ RUN echo "APP_NAME=vilbot" >> .env && \
     echo "APP_ENV=prod" >> .env && \
     echo "DISCORD_TOKEN=${DISCORD_TOKEN}" >> .env && \
     echo "CLIENT_ID=${CLIENT_ID}" >> .env && \
-    echo "DP_FORCE_YTDL_MOD=@distube/ytdl-core" >> .env && \
-    echo "CONNECTION_DB=${CONNECTION_DB}" >> .env && \
+    echo "DB_URI=${DB_URI}" >> .env && \
+    echo "DB_NAME=${DB_NAME}" >> .env && \
     echo "SOCKET_URL=${SOCKET_URL}" >> .env && \
     echo "JWT_SECRET_KEY=${JWT_SECRET_KEY}" >> .env
 

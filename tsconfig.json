@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"target": "ES2020",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"module": "commonjs",
+		"rootDir": "./src",
+		"typeRoots": ["./src/types", "./node_modules/@types"],
+		"outDir": "./dist",
+		"removeComments": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"noImplicitAny": false
+	},
+	"exclude": ["jest.config.ts", "./tests/**", "node_modules"]
+}
