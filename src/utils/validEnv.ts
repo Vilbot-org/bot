@@ -8,7 +8,7 @@ const env = cleanEnv(process.env, {
 	CLIENT_ID: num(),
 	GUILD_ID: num(),
 	DB_NAME: str(),
-	DB_URI: url(),
+	DB_URI: str(),
 	SOCKET_URL: url(),
 	JWT_SECRET_KEY: str()
 });
