@@ -27,7 +27,7 @@ ENV CONNECTION_DB=empty
 ENV SOCKET_URL=empty
 ENV JWT_SECRET_KEY=empty
 ENV DB_URI=mongodb://mongoDB/vilbot_db
-ENV DB_NAME=empty
+ENV DB_NAME=vilbot
 ENV GUILD_ID=12345
 
 COPY package*.json ./
