@@ -26,7 +26,12 @@ export const voiceStateUpdateEvent = async (
 						}
 				  };
 
+		console.log(update);
+		console.log(await User.find());
 		await User.findOneAndUpdate({ _id: userID }, update, { upsert: true });
+		console.log({
+			_id: userID
+		});
 	}
 };
 
