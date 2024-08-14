@@ -11,7 +11,8 @@ services:
     environment:
       CLIENT_ID: '${CLIENT_ID}'
       DISCORD_TOKEN: '${DISCORD_TOKEN}'
-      CONNECTION_DB: '${CONNECTION_DB}'
+      DB_URI: '{DB_URI}'
+      DB_NAME: '${DB_NAME}'
       SOCKET_URL: '${SOCKET_URL}'
       JWT_SECRET_KEY: '${JWT_SECRET_KEY}'
   # MongoDB services
