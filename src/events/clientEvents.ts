@@ -26,10 +26,12 @@ export const voiceStateUpdateEvent = async (
 						}
 				  };
 
-		const findUser = await User.findByIdAndUpdate({ _id: userID }, update, {
-			new: true
-		});
-		console.log(findUser);
+		const findUser = await User.findById(userID);
+		if (findUser) {
+			findUser.currentVoiceChannel = update.currentVoiceChannel;
+			await findUser.save();
+			console.log(findUser);
+		}
 	}
 };
 
