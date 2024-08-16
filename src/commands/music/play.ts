@@ -1,4 +1,8 @@
-import { useMainPlayer as player } from 'discord-player';
+import {
+	type GuildQueue,
+	useMainPlayer as player,
+	type Track
+} from 'discord-player';
 import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction
@@ -12,6 +16,21 @@ import {
 import Command from '@/classes/Command';
 import { play } from '@/utils/musicUtils';
 import { getVoiceChannel } from '@/utils/guildUtils';
+
+const buildEmbedDescription = (queue: GuildQueue, track: Track) => {
+	const isNowPlaying = queue.currentTrack === track;
+	const statusText = isNowPlaying ? 'Now playing' : 'Added to queue';
+	const statusEmoji = formatEmoji(
+		isNowPlaying ? '1273955433299705877' : '1273961635840524332'
+	);
+	const trackTitle = `[${track.title}](${track.url})`;
+	const trackDuration = `\`${track.duration}\``;
+
+	return `
+  **${statusText}**
+  ${statusEmoji} **${trackTitle}** **${trackDuration}**
+  `.trim();
+};
 
 const autocomplete = async (interaction: AutocompleteInteraction) => {
 	const focusedOption = interaction.options.getFocused(true);
@@ -45,12 +64,6 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	const { queue, track } = await play(query, voiceChannel, interaction.user.id);
 
-	const embedDescription = `
-  **${queue.currentTrack === track ? 'Now playing' : 'Added to queue'}**
-  ${formatEmoji(
-		queue.currentTrack === track ? '1273955433299705877' : '1273961635840524332'
-	)} **[${track.title}](${track.url})** **\`${track.duration}\`**`;
-
 	let embedFooter: EmbedFooterOptions | null = null;
 	if (queue.getSize() >= 1) {
 		embedFooter = { text: `Queue position: ${queue.getSize()}` };
@@ -62,7 +75,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 			name: interaction.user.username,
 			iconURL: interaction.user.displayAvatarURL()
 		})
-		.setDescription(embedDescription)
+		.setDescription(buildEmbedDescription(queue, track))
 		.setThumbnail(track.thumbnail);
 
 	if (embedFooter) {
