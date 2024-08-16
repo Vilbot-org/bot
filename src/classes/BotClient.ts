@@ -8,7 +8,7 @@ import {
 } from 'discord.js';
 import { readdirSync } from 'fs';
 import { join } from 'path';
-import { type IPRotationConfig, Player } from 'discord-player';
+import { Player } from 'discord-player';
 import { Socket } from 'socket.io-client';
 
 import logger from '../utils/logger';
@@ -25,7 +25,7 @@ import { findDifferents } from '@/utils/guildUtils';
 import { IBotToServerEvents, IServerToBotEvents } from '@/types/ISocket';
 import registerSocketEvents from '@/sockets/socketEvents';
 import socketConnection from '@/sockets/socketConnection';
-import { YoutubeiExtractor } from 'discord-player-youtubei';
+import PlayerClient from './PlayerClient';
 
 class BotClient extends Client {
 	public player: Player;
@@ -35,22 +35,15 @@ class BotClient extends Client {
 	constructor(options: ClientOptions) {
 		super(options);
 
-		const ipRotationConfig: IPRotationConfig = {
-			blocks: [],
-			exclude: [],
-			maxRetries: 3
-		};
-		this.player = new Player(this, {
+		this.player = new PlayerClient(this, {
 			useLegacyFFmpeg: false,
 			skipFFmpeg: false,
-			ipconfig: ipRotationConfig
+			ipconfig: {
+				blocks: [],
+				exclude: [],
+				maxRetries: 3
+			}
 		});
-		this.player.extractors.register(YoutubeiExtractor, {
-			authentication: process.env.YT_EXTRACTOR_AUTH || ''
-		});
-		this.player.extractors.loadDefault(
-			(ext) => !['YouTubeExtractor'].includes(ext)
-		);
 
 		this.socket = socketConnection();
 	}
