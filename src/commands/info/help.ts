@@ -1,8 +1,8 @@
+import { version as appVersion } from '../../../package.json';
 import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import appConfig from '@/app.config';
 import Command from '@/classes/Command';
-import { version as appVersion } from '../../../package.json';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
 	await interaction.reply({
