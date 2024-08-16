@@ -16,6 +16,7 @@ import {
 import Command from '@/classes/Command';
 import { play } from '@/utils/musicUtils';
 import { getVoiceChannel } from '@/utils/guildUtils';
+import { formatTrackTitleForEmbed } from '@/utils/interactions';
 
 const buildEmbedDescription = (queue: GuildQueue, track: Track) => {
 	const isNowPlaying = queue.currentTrack === track;
@@ -23,12 +24,10 @@ const buildEmbedDescription = (queue: GuildQueue, track: Track) => {
 	const statusEmoji = formatEmoji(
 		isNowPlaying ? '1273955433299705877' : '1273961635840524332'
 	);
-	const trackTitle = `[${track.title}](${track.url})`;
-	const trackDuration = `\`${track.duration}\``;
 
 	return `
   **${statusText}**
-  ${statusEmoji} **${trackTitle}** **${trackDuration}**
+  ${statusEmoji} ${formatTrackTitleForEmbed(track)}
   `.trim();
 };
 
