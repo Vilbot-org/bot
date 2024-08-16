@@ -3,10 +3,14 @@ import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction
 } from 'discord.js';
+import {
+	EmbedBuilder,
+	type EmbedFooterOptions,
+	formatEmoji
+} from '@discordjs/builders';
 
 import Command from '@/classes/Command';
 import { play } from '@/utils/musicUtils';
-import { EmbedBuilder } from '@discordjs/builders';
 import { getVoiceChannel } from '@/utils/guildUtils';
 
 const autocomplete = async (interaction: AutocompleteInteraction) => {
@@ -41,29 +45,32 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	const { queue, track } = await play(query, voiceChannel, interaction.user.id);
 
+	const embedDescription = `
+  **${queue.currentTrack === track ? 'Now playing' : 'Added to queue'}**
+  ${formatEmoji(
+		queue.currentTrack === track ? '1273955433299705877' : '1273961635840524332'
+	)} **[${track.title}](${track.url})** **\`${track.duration}\`**`;
+
+	let embedFooter: EmbedFooterOptions | null = null;
+	if (queue.getSize() >= 1) {
+		embedFooter = { text: `Queue position: ${queue.getSize()}` };
+	}
+
+	const embed = new EmbedBuilder()
+		.setColor(0x01feff)
+		.setAuthor({
+			name: interaction.user.username,
+			iconURL: interaction.user.displayAvatarURL()
+		})
+		.setDescription(embedDescription)
+		.setThumbnail(track.thumbnail);
+
+	if (embedFooter) {
+		embed.setFooter(embedFooter);
+	}
+
 	await interaction.followUp({
-		embeds: [
-			new EmbedBuilder()
-				.setColor(0x01feff)
-				.setAuthor({ name: 'Add to the queue' })
-				.setTitle(`${track.title}`)
-				.setURL(`${track.url}`)
-				.setThumbnail(`${track.thumbnail}`)
-				.setFields(
-					{ name: 'Duration', value: `${track.duration}`, inline: true },
-					{
-						name: 'Position in the queue',
-						value: `${queue.getSize() > 0 ? queue.getSize() : 'Playing now'}`,
-						inline: true
-					}
-				)
-				.setFooter({
-					text:
-						queue.getSize() > 1
-							? `Next song in the queue: ${queue.tracks.at(0)?.title}`
-							: 'This is the first song in the queue.'
-				})
-		]
+		embeds: [embed]
 	});
 };
 
