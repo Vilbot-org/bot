@@ -7,6 +7,4 @@ on:
 jobs:
   build_docker_image:
     uses: ./.github/workflows/build-docker-image.yml
-    with:
-      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+    secrets: inherit

@@ -52,9 +52,7 @@ jobs:
   build_docker_image:
     needs: [lint]
     uses: ./.github/workflows/build-docker-image.yml
-    with:
-      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+    secrets: inherit
 
   deploy_commands:
     needs: [build_docker_image, build]
