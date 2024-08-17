@@ -33,6 +33,7 @@ ENV GUILD_ID=12345
 COPY package*.json ./
 COPY --from=build /vilbot/node_modules ./node_modules
 COPY --from=build /vilbot/dist ./dist
+
 RUN echo "APP_NAME=vilbot" >> .env && \
     echo "APP_ENV=production" >> .env && \
     echo "DISCORD_TOKEN=${DISCORD_TOKEN}" >> .env && \
@@ -43,6 +44,9 @@ RUN echo "APP_NAME=vilbot" >> .env && \
     echo "SOCKET_URL=${SOCKET_URL}" >> .env && \
     echo "JWT_SECRET_KEY=${JWT_SECRET_KEY}" >> .env
 
-RUN apt-get purge -y python3 && apt-get autoremove -y
+RUN apt-get purge -y python3 && \ 
+    apt-get autoremove -y && \
+    apt-get clean && \ 
+    rm -rf /var/lib/apt/lists/*
 
 CMD ["npm", "run", "start"]
