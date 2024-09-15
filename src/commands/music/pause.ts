@@ -1,5 +1,6 @@
 import appConfig from '@/app.config';
 import Command from '@/classes/Command';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 import { getVoiceChannel } from '@/utils/guildUtils';
 import { pause } from '@/utils/musicUtils';
 import { EmbedBuilder } from '@discordjs/builders';
@@ -10,12 +11,16 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	pause(voiceChannel);
 
+	const embed = new EmbedBuilder()
+		.setColor(appConfig.colors.success)
+		.setAuthor({
+			name: interaction.user.username,
+			iconURL: interaction.user.displayAvatarURL()
+		})
+		.setDescription(`${getEmoji('pause')} **Music paused!**`);
+
 	await interaction.reply({
-		embeds: [
-			new EmbedBuilder()
-				.setColor(appConfig.colors.success)
-				.setTitle(':pause_button: The music has paused!')
-		]
+		embeds: [embed]
 	});
 };
 
