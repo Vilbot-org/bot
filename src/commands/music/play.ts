@@ -7,23 +7,18 @@ import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction
 } from 'discord.js';
-import {
-	EmbedBuilder,
-	type EmbedFooterOptions,
-	formatEmoji
-} from '@discordjs/builders';
+import { EmbedBuilder, type EmbedFooterOptions } from '@discordjs/builders';
 
 import Command from '@/classes/Command';
 import { play } from '@/utils/musicUtils';
 import { getVoiceChannel } from '@/utils/guildUtils';
 import { formatTrackTitleForEmbed } from '@/utils/interactions';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 
 const buildEmbedDescription = (queue: GuildQueue, track: Track) => {
 	const isNowPlaying = queue.currentTrack === track;
 	const statusText = isNowPlaying ? 'Now playing' : 'Added to queue';
-	const statusEmoji = formatEmoji(
-		isNowPlaying ? '1273955433299705877' : '1273961635840524332'
-	);
+	const statusEmoji = isNowPlaying ? getEmoji('playing') : getEmoji('play');
 
 	return `
   **${statusText}**

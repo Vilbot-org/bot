@@ -1,8 +1,4 @@
-import {
-	ChatInputCommandInteraction,
-	EmbedBuilder,
-	formatEmoji
-} from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
 import Command from '@/classes/Command';
@@ -12,6 +8,7 @@ import {
 	formatDurationQueueForEmbed,
 	formatTrackTitleForEmbed
 } from '@/utils/interactions';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
 	const voiceChannel = getVoiceChannel(interaction);
@@ -23,9 +20,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 	if (currentTrack) {
 		embedDescription = `
     Now playing
-    ${formatEmoji('1273955433299705877')} ${formatTrackTitleForEmbed(
-			currentTrack
-		)} 
+    ${getEmoji('playing')} ${formatTrackTitleForEmbed(currentTrack)} 
     Requested by <@${currentTrack?.requestedBy?.id}>`;
 	}
 
