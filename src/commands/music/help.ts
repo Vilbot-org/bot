@@ -9,35 +9,47 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 			new EmbedBuilder()
 				.setColor(config.colors.info)
 				.setTitle(`${config.botName} music help`)
-				.setDescription('Main command list:')
+				.setDescription('Music commands list')
 				.addFields(
 					{
 						name: 'Play your favorite songs in the voice channel.',
-						value: '`/music play <song name or url>`'
-					},
-					{
-						name: 'Play your favorite playlist in the voice channel.',
-						value: '`/music playlist <playlist-name>`'
+						value: '`/play <song name or url>`'
 					},
 					{
 						name: 'Display the info of the currently playin song.',
-						value: '`/music info`'
+						value: '`/info`'
 					},
 					{
-						name: 'Display queue of the bot.',
-						value: '`/music queue`'
+						name: 'Pause the music.',
+						value: '`/pause`'
+					},
+					{
+						name: 'Previous song in the queue.',
+						value: '`/previous`'
 					},
 					{
 						name: 'Init the votation to skip the currently playing song.',
-						value: '`/music skip`'
+						value: '`/skip`'
 					},
 					{
-						name: 'All the commands',
-						value: `To view the full list of music commands type \`/music\` or visit the [oficial site](${config.siteURL}).`
+						name: 'Display queue of the bot.',
+						value: '`/queue`'
+					},
+					{
+						name: 'Resume the music.',
+						value: '`/resume`'
+					},
+					{
+						name: 'Pause the music.',
+						value: '`/pause`'
+					},
+					{
+						name: 'Play your favorite playlist in the voice channel.',
+						value: '`/play-playlist <playlist-name>`'
 					}
 				)
 				.setFooter({
-					text: config.botName
+					text: 'Vilbot by GFrancV'
 				})
 				.setThumbnail(interaction.client.user.avatarURL())
 		]
