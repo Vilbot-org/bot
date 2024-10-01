@@ -1,9 +1,10 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 
 import config from '@/app.config';
-import Command from '@/classes/Command';
 
-const execute = async (interaction: ChatInputCommandInteraction) => {
+const musicHelpSubCommand = async (
+	interaction: ChatInputCommandInteraction
+) => {
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
@@ -56,11 +57,4 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 	});
 };
 
-const helpCommandOptions = {
-	name: 'music-help',
-	description: 'See the main commands and aditional info!',
-	execute: execute
-};
-const helpMusicCommand = new Command(helpCommandOptions);
-
-export default helpMusicCommand;
+export default musicHelpSubCommand;

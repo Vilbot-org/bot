@@ -1,7 +1,9 @@
-import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
-import appConfig from '@/app.config';
+import { ChatInputCommandInteraction } from 'discord.js';
 
-const helpPlaylistSubCommand = async (
+import appConfig from '@/app.config';
+import { EmbedBuilder } from '@discordjs/builders';
+
+const playlistHelpSubCommand = async (
 	interaction: ChatInputCommandInteraction
 ) => {
 	await interaction.reply({
@@ -48,4 +50,4 @@ const helpPlaylistSubCommand = async (
 	});
 };
 
-export default helpPlaylistSubCommand;
+export default playlistHelpSubCommand;
