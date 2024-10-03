@@ -10,6 +10,8 @@ import Command from '@/classes/Command';
 import { getVoiceChannel } from '@/utils/guildUtils';
 import MusicError from '@/errors/MusicError';
 import { playPlaylist } from '@/utils/musicUtils';
+import { formatDurationQueueForEmbed } from '@/utils/interactions';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 
 const autocomplete = async (interaction: AutocompleteInteraction) => {
 	const focusedOption = interaction.options.getFocused(true);
@@ -57,16 +59,34 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		);
 	}
 
-	await playPlaylist(playlist.tracks, voiceChannel, interaction.user.id);
+	const queue = await playPlaylist(
+		playlist.tracks,
+		voiceChannel,
+		interaction.user.id
+	);
 
 	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.success)
-				.setAuthor({ name: 'Add to the queue' })
-				.setTitle(`The ${playlistQuery} playlist`)
-				.setThumbnail(interaction.user.avatarURL())
-				.setFooter({ text: `${playlist.tracks.length} songs added.` })
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
+				})
+				.setThumbnail(queue.currentTrack?.thumbnail ?? null)
+				.setDescription(
+					`
+          **Playing playlist**
+          ${getEmoji('playing')} **${playlistQuery} playlist**
+          `
+				)
+				.setFooter({
+					text: `${
+						playlist.tracks.length
+					} songs added to the queue - Estimated duration: ${formatDurationQueueForEmbed(
+						queue
+					)}`
+				})
 		]
 	});
 };
