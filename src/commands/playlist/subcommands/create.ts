@@ -38,14 +38,17 @@ const playlistCreateSubCommand = async (
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)
-				.setAuthor({ name: 'Create a new playlist' })
-				.setTitle(`A playlist '${playlistName}' has been created sucessfully!`)
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
+				})
 				.setDescription(
-					`Now you can add new song in your playlist with the command: \`/playlist add [song] ${playlistName}\`.`
+					`
+          **${playlistName} playlist**
+          A playlist has been created sucessfully!
+          Now you can add new song in your playlist with the command: \`/playlist add <song> ${playlistName}\`.`
 				)
-				.setFooter({ text: 'Type `/playlist help` to display more info' })
-		],
-		ephemeral: true
+		]
 	});
 };
 
