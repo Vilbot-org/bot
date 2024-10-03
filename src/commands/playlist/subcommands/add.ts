@@ -38,15 +38,18 @@ const addPlaylistSubCommand = async (
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)
-				.setAuthor({ name: 'Added new song to playlist' })
-				.setTitle(
-					`'${firstTrackSearchResult.title}' added to the **${playlistName}** playlist`
-				)
+				.setThumbnail(firstTrackSearchResult.thumbnail ?? null)
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
+				})
 				.setDescription(
-					`Song added successfully.\nType \`/music playlist ${playlistName}\` to play your playlist.`
+					`
+          **${playlistName} playlist**
+          **[${firstTrackSearchResult.title}](${firstTrackSearchResult.url})** added to the playlist.
+          Type \`/play-playlist ${playlistName}\` to play your playlist.`
 				)
-		],
-		ephemeral: true
+		]
 	});
 };
 

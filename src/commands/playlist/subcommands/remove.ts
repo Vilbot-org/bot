@@ -3,6 +3,7 @@ import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
 import config from '@/app.config';
 import PlaylistError from '@/errors/PlaylistError';
 import Playlist from '@/models/Playlist';
+import { searchTrack } from '@/utils/musicUtils';
 
 const removePlaylistCommand = async (
 	interaction: ChatInputCommandInteraction
@@ -40,6 +41,9 @@ const removePlaylistCommand = async (
 		);
 	}
 
+	const searchResult = await searchTrack(playlist.tracks[songIndex]);
+	const firstTrackSearchResult = searchResult.tracks[0];
+
 	playlist.tracks = playlist.tracks.splice(songIndex);
 	await playlist.save();
 
@@ -47,9 +51,15 @@ const removePlaylistCommand = async (
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)
-				.setAuthor({ name: 'Remove song to playlist' })
-				.setTitle(
-					`The song has been success removed to the **${playlistName}** playlist`
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
+				})
+				.setDescription(
+					`
+          **${playlistName} playlist**
+          **[${firstTrackSearchResult.title}](${firstTrackSearchResult.url})** removed from the playlist.
+          Type \`/play-playlist ${playlistName}\` to play your playlist.`
 				)
 		],
 		ephemeral: true

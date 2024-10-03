@@ -24,21 +24,23 @@ const listPlaylistSubCommand = async (
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.info)
-				.setAuthor({ name: 'List of playlist' })
-				.setTitle(`${interaction.user.username} playlists:`)
-				.setThumbnail(interaction.user.avatarURL())
-				.setFooter({
-					text: 'Type `/music playlist <playlist-name>` to play a playlist!'
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
 				})
+				.setTitle('Your playlists:')
 				.addFields(
 					playlists.map((playlist) => ({
 						name: `- ${playlist.name}`,
 						value:
 							playlist.tracks.length === 0
 								? 'Empty playlist'
-								: `${playlist.tracks.length} song`
+								: `${playlist.tracks.length} tracks`
 					}))
 				)
+				.setFooter({
+					text: 'Type `/play-playlist [playlist-name]` to play a playlist!'
+				})
 		],
 		ephemeral: true
 	});

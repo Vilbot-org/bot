@@ -13,8 +13,12 @@ const errorHandler = async (
 		const embedMessage = new EmbedBuilder()
 			.setColor(config.colors.danger)
 			.setAuthor({ name: error.name })
-			.setTitle(`:x: ${error.title || 'Oops! Unexpected error'}!`)
-			.setDescription(error.message || 'Wait a few seconds and try again.');
+			.setDescription(
+				`
+        :exclamation: **${error.title || 'Oops! Unexpected error'}**!
+        ${error.message || 'Wait a few seconds and try again.'}
+        `
+			);
 
 		logger.error(`[${error.name}] ${error.message}`);
 

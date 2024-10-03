@@ -4,6 +4,7 @@ import config from '@/app.config';
 import Command from '@/classes/Command';
 import { resume } from '@/utils/musicUtils';
 import { getVoiceChannel } from '@/utils/guildUtils';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 
 const execute = async (interaction: ChatInputCommandInteraction) => {
 	const voiceChannel = getVoiceChannel(interaction);
@@ -14,7 +15,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.success)
-				.setTitle(':arrow_forward: Resume the music!')
+				.setTitle(`${getEmoji('playing')} **Music resumed!**`)
 		]
 	});
 };

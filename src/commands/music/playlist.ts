@@ -10,6 +10,8 @@ import Command from '@/classes/Command';
 import { getVoiceChannel } from '@/utils/guildUtils';
 import MusicError from '@/errors/MusicError';
 import { playPlaylist } from '@/utils/musicUtils';
+import { formatDurationQueueForEmbed } from '@/utils/interactions';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 
 const autocomplete = async (interaction: AutocompleteInteraction) => {
 	const focusedOption = interaction.options.getFocused(true);
@@ -37,13 +39,12 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		? interaction.options.getString('playlist')
 		: `${interaction.user.username}-playlist`;
 
-	await interaction.deferReply({ ephemeral: true });
-
 	const playlist = await Playlist.findOne({
 		user: interaction.user.id,
 		name: playlistQuery
 	});
 	if (!playlist) {
+		await interaction.deferReply({ ephemeral: true });
 		throw new MusicError(
 			'This playlist dont exist!',
 			'Use `/playlist create <playlist>` to create a playlist.'
@@ -51,22 +52,42 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 	}
 
 	if (playlist.tracks.length === 0) {
+		await interaction.deferReply({ ephemeral: true });
 		throw new MusicError(
 			'This playlist dont have songs!',
 			`You can add songs to this playlist with the following command: \`/playlist add <song> ${playlist.name}\`.`
 		);
 	}
 
-	await playPlaylist(playlist.tracks, voiceChannel, interaction.user.id);
+	await interaction.deferReply();
+	const queue = await playPlaylist(
+		playlist.tracks,
+		voiceChannel,
+		interaction.user.id
+	);
 
 	await interaction.followUp({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.success)
-				.setAuthor({ name: 'Add to the queue' })
-				.setTitle(`The ${playlistQuery} playlist`)
-				.setThumbnail(interaction.user.avatarURL())
-				.setFooter({ text: `${playlist.tracks.length} songs added.` })
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
+				})
+				.setThumbnail(queue.currentTrack?.thumbnail ?? null)
+				.setDescription(
+					`
+          **Playing playlist**
+          ${getEmoji('playing')} **${playlistQuery} playlist**
+          `
+				)
+				.setFooter({
+					text: `${
+						playlist.tracks.length
+					} songs added to the queue - Estimated duration: ${formatDurationQueueForEmbed(
+						queue
+					)}`
+				})
 		]
 	});
 };

@@ -14,10 +14,12 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	await interaction.reply({
 		embeds: [
-			new EmbedBuilder()
-				.setColor(config.colors.success)
-				.setTitle(':wave: The bot has been disconnected!')
-				.setDescription('Bye, bye!')
+			new EmbedBuilder().setColor(config.colors.success).setAuthor({
+				name: interaction.user.username,
+				iconURL: interaction.user.displayAvatarURL()
+			}).setDescription(`
+          **Vilbot has been disconnected!**
+          :wave: Bye, bye!`)
 		]
 	});
 };

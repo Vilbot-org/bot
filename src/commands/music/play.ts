@@ -1,13 +1,30 @@
-import { useMainPlayer as player } from 'discord-player';
+import {
+	type GuildQueue,
+	useMainPlayer as player,
+	type Track
+} from 'discord-player';
 import {
 	AutocompleteInteraction,
 	ChatInputCommandInteraction
 } from 'discord.js';
+import { EmbedBuilder, type EmbedFooterOptions } from '@discordjs/builders';
 
 import Command from '@/classes/Command';
 import { play } from '@/utils/musicUtils';
-import { EmbedBuilder } from '@discordjs/builders';
 import { getVoiceChannel } from '@/utils/guildUtils';
+import { formatTrackTitleForEmbed } from '@/utils/interactions';
+import { getEmoji } from '@/common/utils/EmojiHelper';
+
+const buildEmbedDescription = (queue: GuildQueue, track: Track) => {
+	const isNowPlaying = queue.currentTrack === track;
+	const statusText = isNowPlaying ? 'Now playing' : 'Added to queue';
+	const statusEmoji = isNowPlaying ? getEmoji('playing') : getEmoji('play');
+
+	return `
+  **${statusText}**
+  ${statusEmoji} ${formatTrackTitleForEmbed(track)}
+  `.trim();
+};
 
 const autocomplete = async (interaction: AutocompleteInteraction) => {
 	const focusedOption = interaction.options.getFocused(true);
@@ -41,29 +58,26 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	const { queue, track } = await play(query, voiceChannel, interaction.user.id);
 
+	let embedFooter: EmbedFooterOptions | null = null;
+	if (queue.getSize() >= 1) {
+		embedFooter = { text: `Queue position: ${queue.getSize()}` };
+	}
+
+	const embed = new EmbedBuilder()
+		.setColor(0x01feff)
+		.setAuthor({
+			name: interaction.user.username,
+			iconURL: interaction.user.displayAvatarURL()
+		})
+		.setDescription(buildEmbedDescription(queue, track))
+		.setThumbnail(track.thumbnail);
+
+	if (embedFooter) {
+		embed.setFooter(embedFooter);
+	}
+
 	await interaction.followUp({
-		embeds: [
-			new EmbedBuilder()
-				.setColor(0x01feff)
-				.setAuthor({ name: 'Add to the queue' })
-				.setTitle(`${track.title}`)
-				.setURL(`${track.url}`)
-				.setThumbnail(`${track.thumbnail}`)
-				.setFields(
-					{ name: 'Duration', value: `${track.duration}`, inline: true },
-					{
-						name: 'Position in the queue',
-						value: `${queue.getSize() > 0 ? queue.getSize() : 'Playing now'}`,
-						inline: true
-					}
-				)
-				.setFooter({
-					text:
-						queue.getSize() > 1
-							? `Next song in the queue: ${queue.tracks.at(0)?.title}`
-							: 'This is the first song in the queue.'
-				})
-		]
+		embeds: [embed]
 	});
 };
 

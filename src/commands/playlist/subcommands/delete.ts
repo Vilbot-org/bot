@@ -27,9 +27,16 @@ const deletePlaylistSubCommand = async (
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.green)
-				.setAuthor({ name: 'Delete the playlist' })
-				.setTitle(`A playlist '${playlistName}' has been deleted sucessfully!`)
-				.setFooter({ text: 'Type `/playlist help` to display more info' })
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL()
+				})
+				.setDescription(
+					`
+          **${playlistName} playlist**
+          Playlist has been **deleted** sucessfully!
+          Type \`/playlist list\` to see all your playlists.`
+				)
 		],
 		ephemeral: true
 	});

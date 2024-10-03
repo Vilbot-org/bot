@@ -136,5 +136,5 @@ export const playPlaylist = async (
 		}
 	}
 
-	return true;
+	return getQueue(voiceChannel);
 };

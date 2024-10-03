@@ -62,10 +62,6 @@ const playlistCommandOptions = {
 				description: 'The id of the song in your playlist.',
 				required: true
 			}
-		},
-		{
-			name: 'help',
-			description: 'Display help about this command.'
 		}
 	]
 };
