@@ -1,50 +1,58 @@
 import { ChatInputCommandInteraction } from 'discord.js';
+import { EmbedBuilder } from '@discordjs/builders';
+import { author } from '../../../../package.json';
 
 import appConfig from '@/app.config';
-import { EmbedBuilder } from '@discordjs/builders';
 
 const playlistHelpSubCommand = async (
 	interaction: ChatInputCommandInteraction
 ) => {
+	const botName = interaction.client.user.username;
+
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(appConfig.colors.info)
-				.setAuthor({ name: 'Vilbot help command' })
-				.setTitle('Playlist help')
 				.setThumbnail(interaction.client.user.avatarURL())
 				.setDescription(
-					`With this command you can create awesome playlists with your favortie songs!\nFor more detailed information [visit the website](${appConfig.siteURL}). `
+					`
+          **${botName} playlist help**
+          With this command you can create playlists with your favortie songs!
+          **Note:** The params with [playlist-name] are optional, if no name is provided the bot will use the default name ([username]-playlist, ex: vilbot-playlist).`
 				)
 				.addFields(
 					{
 						name: 'Create playlist',
 						value:
-							'Create your playlist with `/playlist create [playlist-name]`.'
+							'Create your playlist with `/playlist create [playlist-name]`\n'
 					},
 					{
-						name: 'Add songs',
+						name: 'Show playlist lists',
 						value:
-							'Add songs from your playlist with: `/playlist add <song> [playlist-name]`.\n**Note**: The song has be a YouTube URL.'
+							'You can see the name of all of your playlists with: `/playlist list`'
 					},
 					{
-						name: 'Remove songs',
-						value:
-							'Remove songs from your playlist with: `/playlist remove <song-ID> [playlist-name]`.\nTo see the song ID you can use the following command.'
-					},
-					{
-						name: 'Show the songs in a playlist',
+						name: 'Show the songs',
 						value:
 							'To show all the songs in a playlist with: `/playlist show [playlist-name].`'
 					},
 					{
-						name: 'To list all the playlist you have',
+						name: 'Add songs',
 						value:
-							'You can see the name of all of your playlists with: `/playlist list`'
+							'Add songs from your playlist with: `/playlist add <song> [playlist-name]`.\n**Note**: The song has be a Spotify URL.'
+					},
+					{
+						name: 'Remove songs',
+						value:
+							'Remove songs from your playlist with: `/playlist remove <song-ID> [playlist-name]`.\nTo see the song ID you can use playlist show.'
+					},
+					{
+						name: 'Delete playlist',
+						value: 'Delete a playlist with `/playlist delete [playlist-name]`'
 					}
 				)
 				.setFooter({
-					text: 'In all the commands the playlist-name are optional, if no name is provided the bot will use the default name ([username]-playlist, ex: vilbot-playlist).'
+					text: `${botName} by ${author}`
 				})
 		]
 	});

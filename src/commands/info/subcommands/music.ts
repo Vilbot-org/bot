@@ -1,20 +1,28 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
+import { author } from '../../../../package.json';
 
 import config from '@/app.config';
 
 const musicHelpSubCommand = async (
 	interaction: ChatInputCommandInteraction
 ) => {
+	const botName = interaction.client.user.username;
+
 	await interaction.reply({
 		embeds: [
 			new EmbedBuilder()
 				.setColor(config.colors.info)
-				.setTitle(`${config.botName} music help`)
-				.setDescription('Music commands list')
+				.setThumbnail(interaction.client.user.avatarURL())
+				.setDescription(
+					`
+          **${botName} music help**
+          Music commands list`
+				)
 				.addFields(
 					{
-						name: 'Play your favorite songs in the voice channel.',
-						value: '`/play <song name or url>`'
+						name: 'Play music',
+						value:
+							'Play your favorite music from YouTube or Spotify on the voice channel.\n`/play <song name or url>`'
 					},
 					{
 						name: 'Display the info of the currently playin song.',
@@ -29,7 +37,7 @@ const musicHelpSubCommand = async (
 						value: '`/previous`'
 					},
 					{
-						name: 'Init the votation to skip the currently playing song.',
+						name: 'Skip the current song.',
 						value: '`/skip`'
 					},
 					{
@@ -50,9 +58,8 @@ const musicHelpSubCommand = async (
 					}
 				)
 				.setFooter({
-					text: 'Vilbot by GFrancV'
+					text: `${botName} by ${author}`
 				})
-				.setThumbnail(interaction.client.user.avatarURL())
 		]
 	});
 };

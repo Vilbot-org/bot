@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction } from 'discord.js';
 
-import { version as appVersion } from '../../../package.json';
+import { version as appVersion, author } from '../../../package.json';
 import Command from '@/classes/Command';
 import type { ICommandOptions } from '@/types/IBot';
 import musicHelpSubCommand from './subcommands/music';
@@ -16,42 +16,41 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 			await playlistHelpSubCommand(interaction);
 		}
 	} catch {
+		const botName = interaction.client.user.username;
+
 		await interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(appConfig.colors.info)
-					.setTitle(`${appConfig.botName} help`)
 					.setThumbnail(interaction.client.user.avatarURL())
-					.setAuthor({ name: `${appConfig.botName} help command` })
 					.setDescription(
-						`Hi! I'm ${appConfig.botName} a awesome discord bot. Current version: \`v${appVersion}\``
+						`
+            **${botName} help**
+            Hi! I'm ${botName} a awesome discord music bot for your server. Current version: \`v${appVersion}\``
 					)
 					.addFields(
 						{
 							name: 'Full command list',
-							value:
-								'To view full commands list type `/` or visit the [oficial site](https://gfrancv.com) to view a detailed description of all commands.'
+							value: `To view full commands list type \`/\` or visit the [oficial site](${appConfig.siteURL}) to view a detailed description of all commands.`
 						},
-						{ name: 'Categories', value: '\u200B' },
 						{
 							name: 'Music commands',
 							value:
-								'I have a cool music player.\n `/music play` to start to listen music.\n`/music help` to display more info.',
+								'Music commands list\n `/play` to start to listen music.\n`/music help` to display more info.',
 							inline: true
 						},
 						{
 							name: 'Info commands',
 							value:
-								'Useful commands with information about me.\n `/ping` to see the ping of the bot\n`/help` to show more info about me.'
+								'Useful commands with information about the bot.\n `/ping` to see the ping of the bot.'
 						},
 						{
 							name: 'Utils commands',
-							value: 'Usefull commands.\n`/clear` to clear the bot messages.',
-							inline: true
+							value: 'Usefull commands.\n`/clear` to clear the bot messages.'
 						}
 					)
 					.setFooter({
-						text: `${appConfig.botName} by ${appConfig.author}`
+						text: `${botName} by ${author}`
 					})
 			]
 		});
