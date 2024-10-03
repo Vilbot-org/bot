@@ -28,8 +28,10 @@ const showPlaylistSubCommand = async (
 
 	const embedMsg = new EmbedBuilder()
 		.setColor(config.colors.success)
-		.setAuthor({ name: 'Songs list' })
-		.setTitle(playlist.name);
+		.setAuthor({
+			name: interaction.user.username,
+			iconURL: interaction.user.displayAvatarURL()
+		});
 
 	if (playlist.tracks.length > 0) {
 		const fields = await Promise.all(
@@ -50,12 +52,16 @@ const showPlaylistSubCommand = async (
 	await interaction.followUp({
 		embeds: [
 			embedMsg
-				.setDescription(`This playlist have ${playlist.tracks.length} songs`)
+				.setDescription(
+					`
+          **${playlist.name} playlist**
+          This playlist have ${playlist.tracks.length} tracks`
+				)
 				.setFooter({
 					text:
 						playlist.tracks.length > 0
-							? `Type \`/music playlist ${playlist.name}\` to play your playlist.`
-							: `Type \`/playlist add <song> ${playlist.name}\` to add new songs to  your playlist.`
+							? `Type /play-playlist ${playlist.name} to play your playlist.`
+							: `Type /playlist add <song> ${playlist.name} to add new songs to  your playlist.`
 				})
 		],
 		ephemeral: true
