@@ -39,13 +39,12 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 		? interaction.options.getString('playlist')
 		: `${interaction.user.username}-playlist`;
 
-	await interaction.deferReply({ ephemeral: true });
-
 	const playlist = await Playlist.findOne({
 		user: interaction.user.id,
 		name: playlistQuery
 	});
 	if (!playlist) {
+		await interaction.deferReply({ ephemeral: true });
 		throw new MusicError(
 			'This playlist dont exist!',
 			'Use `/playlist create <playlist>` to create a playlist.'
@@ -53,12 +52,14 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 	}
 
 	if (playlist.tracks.length === 0) {
+		await interaction.deferReply({ ephemeral: true });
 		throw new MusicError(
 			'This playlist dont have songs!',
 			`You can add songs to this playlist with the following command: \`/playlist add <song> ${playlist.name}\`.`
 		);
 	}
 
+	await interaction.deferReply();
 	const queue = await playPlaylist(
 		playlist.tracks,
 		voiceChannel,
