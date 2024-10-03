@@ -1,7 +1,14 @@
 import type { GuildQueue, Track } from 'discord-player';
 
-export const formatTrackTitleForEmbed = (track: Track): string =>
-	`**[${track.title}](${track.url})** **\`${track.duration}\`**`;
+export const formatTrackTitleForEmbed = (
+	track: Track | undefined | null
+): string => {
+	if (!track) {
+		return ':warning: Unable to retrieve the track.';
+	}
+
+	return `**[${track.title}](${track.url})** **\`${track.duration}\`**`;
+};
 
 export const formatDurationQueueForEmbed = (queue: GuildQueue): string => {
 	let queueDurationMs: number = queue.estimatedDuration;

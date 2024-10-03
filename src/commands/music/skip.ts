@@ -17,9 +17,7 @@ const execute = async (interaction: ChatInputCommandInteraction) => {
 
 	const embedDescription = queue.isEmpty()
 		? ':wave: No more songs in the queue, Bye bye!'
-		: firstTrack
-		? `${getEmoji('next')} ${formatTrackTitleForEmbed(firstTrack)}`
-		: ':warning: Unable to retrieve the next track.';
+		: `${getEmoji('next')} ${formatTrackTitleForEmbed(firstTrack)}`;
 
 	const embedFooter =
 		!queue.isEmpty() && queue.getSize() > 1
