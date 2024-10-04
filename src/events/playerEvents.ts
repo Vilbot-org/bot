@@ -1,8 +1,10 @@
 import appConfig from '@/app.config';
 import type BotClient from '@/classes/BotClient';
+import { getEmoji } from '@/common/utils/EmojiHelper';
 import { SocketEvents } from '@/enums/Sockets';
 import type { GuildMusicQueueAndVoiceInfo } from '@/types/IMusic';
 import { formatQueue, formatTrack } from '@/utils/formatMessages';
+import { formatTrackTitleForEmbed } from '@/utils/interactions';
 import logger from '@/utils/logger';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { GuildQueue, Track } from 'discord-player';
@@ -13,19 +15,27 @@ const registerPlayerEvents = (client: BotClient) => {
 		queue: GuildMusicQueueAndVoiceInfo,
 		track: Track
 	) => {
+		const embedFooter =
+			queue.getSize() >= 1
+				? `Queue position: ${queue.getSize()}`
+				: 'No more songs queued';
+
 		queue.metadata.channel.send({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(appConfig.colors.info)
-					.setAuthor({ name: 'Started playing' })
-					.setTitle(`${track.title}`)
-					.setURL(`${track.url}`)
+					.setAuthor({
+						name: track.requestedBy?.username ?? 'Unknown',
+						iconURL: track?.requestedBy?.displayAvatarURL()
+					})
 					.setThumbnail(`${track.thumbnail}`)
+					.setDescription(
+						`
+            **Playing**
+            ${getEmoji('playing')} ${formatTrackTitleForEmbed(track)}`
+					)
 					.setFooter({
-						text:
-							queue.getSize() >= 1
-								? `Next song in the queue: ${queue.tracks.at(0)?.title}`
-								: 'No more songs queued'
+						text: embedFooter
 					})
 			]
 		});
