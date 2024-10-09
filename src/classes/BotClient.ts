@@ -11,7 +11,7 @@ import { join } from 'path';
 import { Player } from 'discord-player';
 import { Socket } from 'socket.io-client';
 
-import logger from '../utils/logger';
+import Logger from '../common/services/Logger';
 import Command from './Command';
 import databaseConnection from '@/utils/databaseConnection';
 import {
@@ -31,6 +31,7 @@ class BotClient extends Client {
 	public player: Player;
 	public slashCommandsMap = new Collection<string, Command>();
 	public socket: Socket<IServerToBotEvents, IBotToServerEvents>;
+	private logger: Logger;
 
 	constructor(options: ClientOptions) {
 		super(options);
@@ -46,6 +47,7 @@ class BotClient extends Client {
 		});
 
 		this.socket = socketConnection();
+		this.logger = new Logger('BotClient', 'Vilbot', this.user?.id);
 	}
 
 	public async start(token: string) {
@@ -87,7 +89,7 @@ class BotClient extends Client {
 								commandObject
 							);
 
-							logger.info(
+							this.logger.info(
 								`Command ${
 									commandObject.getCommandData().name
 								} of the category ${category} are load!`
@@ -97,13 +99,13 @@ class BotClient extends Client {
 				})
 			);
 		} catch (error) {
-			logger.error(`Failed to load commands: ${error}`);
+			this.logger.error(`Failed to load commands: ${error}`);
 		}
 	}
 
 	private async onReady() {
 		try {
-			logger.info(`${this.user?.tag} is ready!`);
+			this.logger.info(`${this.user?.tag} is ready!`);
 			this.user?.setActivity('/help', { type: ActivityType.Listening });
 
 			await databaseConnection();
@@ -121,7 +123,7 @@ class BotClient extends Client {
 				await GuildModel.insertMany(unregisterGuilds);
 			}
 		} catch (error) {
-			logger.error(error);
+			this.logger.error(error as string);
 		}
 	}
 
