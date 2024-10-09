@@ -3,7 +3,7 @@ import { Guild, VoiceState } from 'discord.js';
 import bot from '@/index';
 import GuildModel from '@/models/Guild';
 import User from '@/models/User';
-import logger from '@/utils/logger';
+import Logger from '@/common/services/Logger';
 
 export const voiceStateUpdateEvent = async (
 	_oldState: VoiceState,
@@ -38,13 +38,23 @@ export const guildCreateEvent = async (guild: Guild) => {
 
 	await newGuild.save();
 
-	logger.info(`The "${newGuild.name}" guild was added.`);
+	Logger.info(
+		'events',
+		'guildCreateEvent',
+		`The "${newGuild.name}" guild was added.`,
+		guild.id
+	);
 };
 
 export const guildDeleteEvent = async (guild: Guild) => {
 	const deletedGuild = await GuildModel.findByIdAndDelete(guild.id);
 
 	if (deletedGuild) {
-		logger.info(`The "${deletedGuild.name}" guild was removed.`);
+		Logger.info(
+			'events',
+			'guildDeleteEvent',
+			`The "${deletedGuild.name}" guild was removed.`,
+			guild.id
+		);
 	}
 };
