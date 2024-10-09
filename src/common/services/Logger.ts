@@ -1,4 +1,3 @@
-import { randomUUID as uuidv4 } from 'node:crypto';
 import pino, { type LoggerOptions, type Logger as PinoLogger } from 'pino';
 
 import type { TargetOptions } from '@/types/serviceTypes';
@@ -57,16 +56,10 @@ const logLevelConfig: LoggerOptions = {
 export default class Logger {
 	private logger: PinoLogger;
 
-	constructor(
-		module: string,
-		name: string,
-		executionId?: string,
-		guildId?: string
-	) {
+	constructor(module: string, name: string, guildId?: string) {
 		const logger = pino(logLevelConfig, pino.transport({ targets })).child({
 			module,
 			name,
-			executionId: executionId ?? uuidv4(),
 			guildId
 		});
 
@@ -87,5 +80,49 @@ export default class Logger {
 
 	public trace(message: string): void {
 		this.logger.trace(message);
+	}
+
+	public static info(
+		module: string,
+		name: string,
+		message: string,
+		guildId?: string
+	) {
+		const logger = new this(module, name, guildId);
+
+		logger.info(message);
+	}
+
+	public static error(
+		module: string,
+		name: string,
+		message: string,
+		guildId?: string
+	) {
+		const logger = new this(module, name, guildId);
+
+		logger.error(message);
+	}
+
+	public static warn(
+		module: string,
+		name: string,
+		message: string,
+		guildId?: string
+	) {
+		const logger = new this(module, name, guildId);
+
+		logger.warn(message);
+	}
+
+	public static trace(
+		module: string,
+		name: string,
+		message: string,
+		guildId?: string
+	) {
+		const logger = new this(module, name, guildId);
+
+		logger.trace(message);
 	}
 }
