@@ -5,7 +5,7 @@ import { SocketEvents } from '@/enums/Sockets';
 import type { GuildMusicQueueAndVoiceInfo } from '@/types/IMusic';
 import { formatQueue, formatTrack } from '@/utils/formatMessages';
 import { formatTrackTitleForEmbed } from '@/utils/interactions';
-import logger from '@/utils/logger';
+import Logger from '@/common/services/Logger';
 import { EmbedBuilder } from '@discordjs/builders';
 import type { GuildQueue, Track } from 'discord-player';
 import { GuildQueueEvent } from 'discord-player';
@@ -15,6 +15,13 @@ const registerPlayerEvents = (client: BotClient) => {
 		queue: GuildMusicQueueAndVoiceInfo,
 		track: Track
 	) => {
+		Logger.info(
+			'playerEvents',
+			'playerStart',
+			`Started playing ${track.title}`,
+			queue.guild.id
+		);
+
 		const embedFooter =
 			queue.getSize() >= 1
 				? `Queue position: ${queue.getSize()}`
@@ -47,6 +54,13 @@ const registerPlayerEvents = (client: BotClient) => {
 	};
 
 	const audioTrackAddEvent = (queue: GuildQueue, track: Track) => {
+		Logger.info(
+			'playerEvents',
+			'audioTrackAdd',
+			`${track.title} added to the queue`,
+			queue.guild.id
+		);
+
 		client.socket.emit(SocketEvents.BotPlayedTrack, {
 			track: formatTrack(track),
 			guildId: queue.guild.id
@@ -54,46 +68,83 @@ const registerPlayerEvents = (client: BotClient) => {
 	};
 
 	const playerSkipEvent = (queue: GuildQueue) => {
+		Logger.info('playerEvents', 'playerSkip', 'Skipped track', queue.guild.id);
+
 		client.socket.emit(SocketEvents.BotSkipedTrack, {
 			guildId: queue.guild.id
 		});
 	};
 
 	const playerResumeEvent = (queue: GuildQueue) => {
+		Logger.info(
+			'playerEvents',
+			'playerResume',
+			'Resumed music player',
+			queue.guild.id
+		);
+
 		client.socket.emit(SocketEvents.BotResumedMusicPlayer, {
 			guildId: queue.guild.id
 		});
 	};
 
 	const playerPauseEvent = (queue: GuildQueue) => {
+		Logger.info(
+			'playerEvents',
+			'playerPause',
+			'Paused music player',
+			queue.guild.id
+		);
+
 		client.socket.emit(SocketEvents.BotPausedMusicPlayer, {
 			guildId: queue.guild.id
 		});
 	};
 
 	const queueDeleteEvent = (queue: GuildQueue) => {
+		Logger.info('playerEvents', 'queueDelete', 'Deleted queue', queue.guild.id);
+
 		client.socket.emit(SocketEvents.BotDeletedQueue, {
 			guildId: queue.guild.id
 		});
 	};
 
 	const emptyQueueEvent = (queue: GuildQueue) => {
+		Logger.info('playerEvents', 'emptyQueue', 'Empty queue', queue.guild.id);
+
 		client.socket.emit(SocketEvents.BotEmptyQueue, {
 			guildId: queue.guild.id
 		});
 	};
 
 	const connectionDestroyedEvent = (queue: GuildQueue) => {
+		Logger.info(
+			'playerEvents',
+			'connectionDestroyed',
+			'Connection destroyed',
+			queue.guild.id
+		);
+
 		client.socket.emit(SocketEvents.BotConnectionDestroyed, {
 			guildId: queue.guild.id
 		});
 	};
-	const errorEvent = (_queue: GuildQueue, error: Error) => {
-		logger.error(`General player error event: ${error.message}`);
+	const errorEvent = (queue: GuildQueue, error: Error) => {
+		Logger.error(
+			'playerEvents',
+			'error',
+			`General player error event: ${error.message}`,
+			queue.guild.id
+		);
 	};
 
-	const playerErrorEvent = (_queue: GuildQueue, error: Error) => {
-		logger.error(`Player error event: ${error.message}`);
+	const playerErrorEvent = (queue: GuildQueue, error: Error) => {
+		Logger.error(
+			'playerEvents',
+			'playerError',
+			`Player error event: ${error.message}`,
+			queue.guild.id
+		);
 	};
 
 	client.player.events.on(GuildQueueEvent.playerStart, playerStartEvent);

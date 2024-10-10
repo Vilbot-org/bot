@@ -1,9 +1,9 @@
 import type BotClient from '@/classes/BotClient';
 import { SocketEvents } from '@/enums/Sockets';
-import logger from '@/utils/logger';
+import Logger from '@/common/services/Logger';
 
 const socketError = (client: BotClient, error: Error) => {
-	logger.error(error);
+	Logger.error('socketEvents', 'socketError', error.message);
 	client.socket.emit(SocketEvents.BotError, error);
 };
 
