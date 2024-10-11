@@ -41,8 +41,8 @@ jobs:
           node-version: '20.10'
       - name: Create .env file
         run: |
-          echo "APP_NAME=vilbot" > .env ||
-          echo "APP_ENV=test"  >> .env ||
+          echo "APP_NAME=vilbot" > .env &&
+          echo "APP_ENV=test" >> .env
       - name: Install dependencies
         run: npm ci
       - name: Test
