@@ -1,6 +1,6 @@
 import { formatEmoji } from 'discord.js';
 
-import logger from '../../utils/logger';
+import Logger from '@/common/services/Logger';
 
 const emojis = {
 	play: '1284536468093538304',
@@ -12,7 +12,7 @@ const emojis = {
 
 export const getEmoji = (name: keyof typeof emojis): string => {
 	if (!emojis[name]) {
-		logger.warn(`Emoji ${name} not found`);
+		Logger.warn('utils', 'getEmoji', `Emoji ${name} not found`);
 		return formatEmoji(emojis['play']);
 	}
 	return formatEmoji(emojis[name]);
