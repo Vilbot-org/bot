@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20.12
+ARG NODE_VERSION=22.10
 
 FROM node:${NODE_VERSION}-bookworm-slim as base
 
