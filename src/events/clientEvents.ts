@@ -4,6 +4,7 @@ import bot from '@/index';
 import GuildModel from '@/models/Guild';
 import User from '@/models/User';
 import Logger from '@/common/services/Logger';
+import { getQueue, quit } from '@/utils/musicUtils';
 
 export const voiceStateUpdateEvent = async (
 	_oldState: VoiceState,
@@ -56,5 +57,19 @@ export const guildDeleteEvent = async (guild: Guild) => {
 			`The "${deletedGuild.name}" guild was removed.`,
 			guild.id
 		);
+
+		try {
+			const queue = getQueue(guild.voiceStates.cache.get(bot.user?.id)?.channel);
+			if (queue) {
+				quit(guild.voiceStates.cache.get(bot.user?.id)?.channel);
+			}
+		} catch (error) {
+			Logger.error(
+				'events',
+				'guildDeleteEvent',
+				`Failed to clear the song queue for guild "${deletedGuild.name}". Error: ${error}`,
+				guild.id
+			);
+		}
 	}
 };
