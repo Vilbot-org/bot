@@ -25,7 +25,7 @@
 		"envalid": "^8.0.0",
 		"jsonwebtoken": "^9.0.2",
 		"mediaplex": "^0.0.9",
-		"mongoose": "^7.0.0",
+		"mongoose": "^8.8.3",
 		"pino": "^9.3.2",
 		"socket.io-client": "^4.7.1"
 	},
